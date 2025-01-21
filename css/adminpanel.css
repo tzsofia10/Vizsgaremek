@@ -1,0 +1,111 @@
+/* Alapstílusok */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #cad2c5;
+    color: #2f3e46;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+h1 {
+    text-align: center;
+    color: #52796f;
+}
+
+form {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+}
+
+label {
+    font-weight: bold;
+    color: #354f52;
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="email"],
+input[type="password"],
+input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #84a98c;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+input[type="email"],
+input[type="password"] {
+    background-color: #f8f9fa;
+    color: #2f3e46;
+}
+
+input[type="submit"] {
+    background-color: #52796f;
+    color: #ffffff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+    background-color: #354f52;
+}
+
+em {
+    font-size: 14px;
+    color: #2f3e46;
+}
+
+p {
+    margin-bottom: 15px;
+}
+
+/* Hibás üzenet stílus */
+form > p:first-of-type {
+    color: #e63946;
+    font-weight: bold;
+}
+
+/*contents_list.html*/
+.menu-container {
+    text-align: center;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+}
+
+.menu-options {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+}
+.menu-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #52796f;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+.menu-button:hover {
+    background-color: #354f52;
+}

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>{{nav_name}}</title>
+<meta name="description" content="{{description}}">
+<meta name="keywords" content="{{keywords}}">
+<meta name="author" content="Tóth Zsófia, Zsíros Kata">
+<link rel="stylesheet" href="css/style.css">
+<link type="image/x-icon" rel="icon" href="index/favicon.png">
+<link type="image/x-icon" rel="shortcut icon" href="index/favicon.png">
+</head>
+
+<body>
+<div id="befoglalo">
+	<header id="fejlec">
+		<h1>Fejléc</h1>
+	</header>
+
+	<nav id="menu">
+		{{menu}}
+	</nav>
+
+	<aside id="oldalsav">
+		{{sidebar}}
+	</aside>
+
+	<main id="tartalom">
+		<h2>{{nav_name}}</h2>
+		{{content}}
+		<p>Készült: {{creation}}</p>
+	</main>
+
+	<footer id="lablec">
+		<small>Ferkó Farm 2025</small>
+	</footer>
+</div>
+</body>
+</html>

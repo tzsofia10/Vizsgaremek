@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Admin - Új tartalom létrehozása</title>
+<link rel="stylesheet" href="../css/alap.css">
+
+<!-- CKEditor betöltése -->
+<script src="https://cdn.ckeditor.com/4.25.0/standard-all/ckeditor.js"></script>
+</head>
+
+<body>
+<div id="befoglalo">
+    <header id="fejlec">
+        <h1>Új tartalom létrehozása</h1>
+    </header>
+
+    <main id="tartalom">
+        <form method="post" action="letrehozas.php" enctype="multipart/form-data">
+            <p>
+                <label for="alias">Alias:</label><br>
+                <input type="text" id="alias" name="alias" required>
+            </p>
+            <p>
+                <label for="tartalom">Tartalom:</label><br>
+                <textarea name="tartalom" id="tartalom" rows="10" cols="80"></textarea>
+            </p>
+            <button type="submit">Mentés</button>
+        </form>
+    </main>
+</div>
+
+
+    
+<script src="https://cdn.ckeditor.com/4.25.0/standard-all/ckeditor.js"></script>
+<script>
+    CKEDITOR.replace('tartalom', {
+        extraPlugins: 'uploadimage,image2',
+        filebrowserUploadUrl: '../upload.php',
+        filebrowserUploadMethod: 'form',
+        height: 300
+    });
+</script>
+
+	
+</script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html ng-app="CowsApp">
+<head>
+    <meta charset="utf-8">
+    <title>Tehenek Listája</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="../js/angular-file.js"></script>
+</head>
+<body ng-controller="CowsController">
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Ear Tag</th>
+                <th>Gender</th>
+                <th>Mother Ear Tag</th>
+                <th>Father Ear Tag</th>
+                <th>Color</th>
+                <th>Birth Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="cow in cows">
+                <td>{{ cow.id }}</td>
+                <td>{{ cow.ear_tag }}</td>
+                <td>{{ cow.gender }}</td>
+                <td>{{ cow.mother_ear_tag }}</td>
+                <td>{{ cow.father_ear_tag }}</td>
+                <td>{{ cow.color }}</td>
+                <td>{{ cow.birth_date }}</td>
+                <td>
+                    <button>Módosítás</button>
+                    <button>Törlés</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
