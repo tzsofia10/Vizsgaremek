@@ -1,0 +1,62 @@
+/* Az egyedi megerősítő párbeszédablak háttere */
+.confirm-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* A párbeszédablak maga */
+.confirm-dialog {
+    background: #ffffff;
+    padding: 20px 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    max-width: 400px;
+    width: 100%;
+}
+
+/* Párbeszédablak szöveg */
+.confirm-dialog p {
+    font-size: 16px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Gombok közös stílusa */
+.confirm-dialog button {
+    padding: 10px 20px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0 10px;
+    transition: background-color 0.3s ease;
+}
+
+/* Megerősítő gomb (OK) */
+.confirm-dialog .confirm-btn {
+    background-color: #28a745;
+    color: #fff;
+}
+
+.confirm-dialog .confirm-btn:hover {
+    background-color: #218838;
+}
+
+/* Visszavonó gomb (Mégse) */
+.confirm-dialog .cancel-btn {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+.confirm-dialog .cancel-btn:hover {
+    background-color: #c82333;
+}

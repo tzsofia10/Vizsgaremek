@@ -1,13 +1,11 @@
 <?php
 session_start();
-
-// Ellenőrizzük, hogy a felhasználó be van-e jelentkezve
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
     header("Location: index.php");
     exit();
 }
 
-require '../connect.php'; // Az adatbázis kapcsolat betöltése
+require '../connect.php'; 
 
 // SQL lekérdezés
 $sql = "SELECT 
@@ -34,8 +32,10 @@ $result = $dbconn->query($sql);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tehén Lista</title>
-    <script src="../js/translate.js"></script>
     <link rel="stylesheet" href="../css/table.css">
+    <link rel="stylesheet" href="../css/delete.css">
+    <script src="../js/translate.js" defer></script>
+    <script src="../js/delete.js" defer></script>
 </head>
 <body>
     <?php
@@ -70,9 +70,10 @@ $result = $dbconn->query($sql);
                     <td class='color'>" . htmlspecialchars($color) . "</td>
                     <td>" . htmlspecialchars($row['birth_date']) . "</td>
                     <td>
-                        <a href='delete_cow.php?id=" . urlencode($row['cow_id']) . "'>Törlés</a> |
+                        <a href='delete_cow.php?id=" . urlencode($row['cow_id']) . "' ;'>Törlés</a> |
                         <a href='edit_cow.php?id=" . urlencode($row['cow_id']) . "'>Módosítás</a>
                     </td>
+
                   </tr>";
         }
 
@@ -83,5 +84,13 @@ $result = $dbconn->query($sql);
 
     $dbconn->close();
     ?>
+    <div class="confirm-overlay" id="confirmOverlay" style="display: none;">
+    <div class="confirm-dialog">
+        <p>Biztosan törölni szeretné ezt az elemet?</p>
+        <button class="confirm-btn" id="confirmYes">Igen</button>
+        <button class="cancel-btn" id="confirmNo">Mégse</button>
+    </div>
+</div>
+
 </body>
 </html>

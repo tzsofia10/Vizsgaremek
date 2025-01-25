@@ -15,7 +15,16 @@ function translateColors() {
     });
 }
 
-// oldal betöltésénél fusson a fordítást
+function translateColors() {
+    const colorCells = document.querySelectorAll('td.color');
+    colorCells.forEach(cell => {
+        const englishColor = cell.textContent.trim();
+        if (colorTranslations[englishColor]) {
+            cell.textContent = colorTranslations[englishColor];
+        }
+    });
+}
+
 window.addEventListener('DOMContentLoaded', translateColors);
 
 

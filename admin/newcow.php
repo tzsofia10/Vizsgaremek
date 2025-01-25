@@ -1,15 +1,12 @@
 <?php
 session_start();
-
-// Ellenőrizzük, hogy a felhasználó be van-e jelentkezve
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
-    // Ha nincs bejelentkezve, irányítsuk át a bejelentkezési oldalra
     header("Location: index.php");
     exit();
 }
 
 require '../connect.php'; 
-// Ha az űrlapot elküldték
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $ear_tag = $_POST['ear_tag'] ?? '';
     $gender = $_POST['gender'] ?? '';
@@ -17,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $father_ear_tag = $_POST['father_ear_tag'] ?? '';
     $color_id = $_POST['color_id'] ?? '';
     $birth_date = $_POST['birth_date'] ?? '';
-    $picture_path = ''; // Alapértelmezett kép elérési út
+    $picture_path = ''; 
 
     // Ha van kép feltöltve
     if (!empty($_FILES['picture']['name'])) {
@@ -25,7 +22,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $target_file = $target_dir . basename($_FILES['picture']['name']);
         $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 
-        // Bizonyos fájlformátumok engedélyezése
         $allowed_formats = ['jpg', 'jpeg', 'png'];
         if (in_array($imageFileType, $allowed_formats)) {
             if (move_uploaded_file($_FILES['picture']['tmp_name'], $target_file)) {
@@ -38,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    // Adatok beszúrása az adatbázisba
+    
     if ($stmt = $dbconn->prepare("INSERT INTO cows (ear_tag, gender, mother_ear_tag, father_ear_tag, color_id, birth_date, picture) VALUES (?, ?, ?, ?, ?, ?, ?)")) {
         $stmt->bind_param('ssssiss', $ear_tag, $gender, $mother_ear_tag, $father_ear_tag, $color_id, $birth_date, $picture_path);
         if ($stmt->execute()) {
@@ -46,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } else {
             echo "<p>Hiba történt: " . $stmt->error . "</p>";
         }
-        $stmt->close(); // Lekérdezés lezárása
+        $stmt->close();
     } else {
         echo "<p>SQL hiba: " . $dbconn->error . "</p>";
     }
