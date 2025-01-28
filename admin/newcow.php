@@ -64,7 +64,7 @@ $dbconn->close();
 <!DOCTYPE html>
 <html>
 <head>
-    <script src="../js/translate.js"></script>
+    <script src="../js/translate2.js"></script>
     <link rel="stylesheet" href="../css/newcow.css">
     <title>Új tehén hozzáadása</title>
 </head>
@@ -73,7 +73,7 @@ $dbconn->close();
     <div class="container">
         <form method="POST">
             <label for="ear_tag">Füljelző:</label>
-            <input type="text" id="ear_tag" name="ear_tag" required>
+            <input type="text" id="ear_tag" name="ear_tag" required maxlength="13">
             <br>
     
             <label for="gender">Nem:</label>
@@ -85,11 +85,11 @@ $dbconn->close();
             <br>
     
             <label for="mother_ear_tag">Anya füljelzője:</label>
-            <input type="text" id="mother_ear_tag" name="mother_ear_tag">
+            <input type="text" id="mother_ear_tag" name="mother_ear_tag"  maxlength="13">
             <br>
     
             <label for="father_ear_tag">Apa füljelzője:</label>
-            <input type="text" id="father_ear_tag" name="father_ear_tag">
+            <input type="text" id="father_ear_tag" name="father_ear_tag" maxlength="13">
             <br>
     
             <label for="color_id">Szín:</label>
