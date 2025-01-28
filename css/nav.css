@@ -32,3 +32,23 @@ nav a:hover {
 main {
     padding: 1rem;
 }
+/* Logo formázása és elhelyezése*/
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Menüpontok középre igazítása */
+    position: relative;
+    height: 77px; /* Ugyanakkora, mint a logó */
+}
+
+.logo-container {
+    position: absolute;
+    left: 10px; /* Logó balra helyezése */
+}
+
+.logo-container img {
+    width: 80px; /* Logó mérete */
+    height: auto;
+}
+
+
