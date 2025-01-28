@@ -1,0 +1,17 @@
+body{
+    background-color: #fefae0;
+}
+
+h1{
+    text-align: center;
+}
+
+.container{
+    display: flex;
+    justify-content: center;
+}
+
+label, input{
+    margin: 10px;
+}
+
