@@ -12,6 +12,7 @@
 <body>
     <header>
         <h1>Gazdanapló</h1>
+        <img src="../cowPicture/logo.png" alt="Logo">
         <p>Üdvözöljük a gazdálkodók digitális naplójában!</p>
     </header>
 
