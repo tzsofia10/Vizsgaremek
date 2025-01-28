@@ -21,20 +21,7 @@
     </header>
 
     <main>
-        <section id="napi-bejegyzesek">
-            <h2>Napi Bejegyzések</h2>
-            <p>Itt adhatja meg a napi teendőket, jegyzeteket, vagy eseményeket.</p>
-        </section>
-
-        <section id="statisztikak">
-            <h2>Statisztikák</h2>
-            <p>Tekintse meg a gazdaság teljesítményéről szóló statisztikákat és elemzéseket.</p>
-        </section>
-
-        <section id="kapcsolat">
-            <h2>Kapcsolat</h2>
-            <p>Ha bármilyen kérdése van, vegye fel velünk a kapcsolatot.</p>
-        </section>
+        
     </main>
 
     <footer>
