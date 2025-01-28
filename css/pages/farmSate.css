@@ -10,3 +10,12 @@ main{
     margin: auto;   
 }
 
+.pagination{
+    margin: 20px;
+}
+.pagination a {
+    background-color: aliceblue;
+    padding: 10px;
+    color:rgb(0, 51, 102);
+
+}
