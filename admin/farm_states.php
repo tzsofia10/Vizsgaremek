@@ -116,6 +116,12 @@ $result = $dbconn->query($sql);
     
         $dbconn->close();
         ?>
+        <div class="confirm-overlay" id="confirmOverlay" style="display: none;">
+        <div class="confirm-dialog">
+            <p>Biztosan törölni szeretné ezt az elemet?</p>
+            <button class="confirm-btn" id="confirmYes">Igen</button>
+            <button class="cancel-btn" id="confirmNo">Mégse</button>
+        </div>
     </main>
     <footer>
         <?php include '../main/footer.php'; ?>

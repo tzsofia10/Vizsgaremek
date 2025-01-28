@@ -3,20 +3,22 @@ body{
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
+    padding: 0;
 }
 
 main{
     width: 80%;
     text-align: center;
-    margin: auto;   
+    margin: auto;
+    padding: 0;
 }
 
 .pagination{
-    margin: 20px;
+    margin: 10px;
 }
 .pagination a {
     background-color: aliceblue;
-    padding: 10px;
+    padding: 0 10px;
     color:rgb(0, 51, 102);
 
 }
@@ -30,5 +32,4 @@ main{
     background-color: #283618;
     color: white;
 }
-
 
