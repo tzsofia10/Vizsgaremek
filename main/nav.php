@@ -1,5 +1,5 @@
 <nav>
-    <a href="#">Főoldal</a>
+    <a href="../main/index.php">Főoldal</a>
     <a href="../index.php">Napi bejegyzések</a>
     <a href="#statisztikak">Statisztikák</a>
     <a href="#kapcsolat">Kapcsolat</a>
