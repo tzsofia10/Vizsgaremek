@@ -1,0 +1,76 @@
+.slideshow-container {
+    max-width: 1200px;
+    position: relative;
+    margin: auto;
+}
+.slideshow-container h2{
+    padding: 50px 0 10px 0;
+    text-align: center;
+    
+}
+/* Next, previous gomb */
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    margin-top: -22px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+}
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+.prev:hover, .next:hover {
+    background-color: rgba(0,0,0,0.8);
+}
+  
+
+.text {
+    color: rgb(24, 0, 0);
+    background-color: rgba(255, 255, 255, 0.582);
+    font-size: 20px;
+    padding: 8px 12px;
+    position: absolute;
+    bottom: 54px;
+    width: 1176px;
+    text-align: center;
+}
+
+.dot {
+    cursor: pointer;
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+}
+  
+.active, .dot:hover {
+    background-color: #717171;
+}
+  
+/* Fading animation */
+.fade {
+    animation-name: fade;
+    animation-duration: 1.5s;
+}
+.fade img{
+    border-radius: 5px;
+}
+  
+@keyframes fade {
+    from {opacity: .4} 
+    to {opacity: 1}
+}
+@media only screen and (max-width: 300px) {
+    .prev, .next,.text {font-size: 11px}
+}

@@ -36,18 +36,19 @@ main {
 nav {
     display: flex;
     align-items: center;
-    justify-content: center; /* Menüpontok középre igazítása */
+    justify-content: center; 
     position: relative;
-    height: 77px; /* Ugyanakkora, mint a logó */
+    height: 77px; 
 }
 
 .logo-container {
     position: absolute;
-    left: 10px; /* Logó balra helyezése */
+    left: 10px; 
+    top:3px
 }
 
 .logo-container img {
-    width: 80px; /* Logó mérete */
+    width: 100px; 
     height: auto;
 }
 
