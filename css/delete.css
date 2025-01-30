@@ -12,6 +12,13 @@
     z-index: 1000;
 }
 
+/* Gombok konténerének közös stílusa */
+.confirm-dialog .button-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
 /* A párbeszédablak maga */
 .confirm-dialog {
     background: #ffffff;
@@ -32,6 +39,8 @@
 
 /* Gombok közös stílusa */
 .confirm-dialog button {
+    flex: 1;
+    max-width: 100px;
     padding: 10px 20px;
     font-size: 14px;
     border: none;

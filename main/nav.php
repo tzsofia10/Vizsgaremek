@@ -9,8 +9,7 @@
     </div>
     <div class="button-container">
         <button>
-            <a href="../admin/index.php">
-                
+            <a href="../admin/index.php">  
                 Sign up
             </a>
             <div class="arrow-wrapper">
