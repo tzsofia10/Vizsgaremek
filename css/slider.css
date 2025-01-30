@@ -1,8 +1,9 @@
 .slideshow-container {
-    max-width: 1200px;
+    width: 50%;
     position: relative;
     margin: auto;
 }
+
 .slideshow-container h2{
     padding: 50px 0 10px 0;
     text-align: center;
