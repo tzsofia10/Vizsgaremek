@@ -7,19 +7,16 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
 
 require '../connect.php';
 
-$limit = 10; 
-$page = isset($_GET['page']) && is_numeric($_GET['page']) && $_GET['page'] > 0 ? (int)$_GET['page'] : 1; 
-$offset = ($page - 1) * $limit;
+$records_per_page = 5;
 
+$page = isset($_GET['page']) && is_numeric($_GET['page']) ? (int)$_GET['page'] : 1;
+$offset = ($page - 1) * $records_per_page;
 
-$total_sql = "SELECT COUNT(*) AS total FROM cows";
-$total_result = $dbconn->query($total_sql);
-$total_cows = $total_result->fetch_assoc()['total'];
+$total_records_query = "SELECT COUNT(*) AS total FROM cows";
+$total_result = $dbconn->query($total_records_query);
+$total_records = $total_result->fetch_assoc()['total'];
+$total_pages = ceil($total_records / $records_per_page);
 
-// Oldalszám kiszámítása
-$total_pages = ceil($total_cows / $limit);
-
-// SQL lekérdezés lapozással
 $sql = "SELECT 
             cows.id AS cow_id, 
             cows.ear_tag, 
@@ -35,7 +32,7 @@ $sql = "SELECT
         FROM cows
         LEFT JOIN colors ON cows.color_id = colors.id
         ORDER BY cows.id
-        LIMIT $limit OFFSET $offset";
+        LIMIT $records_per_page OFFSET $offset";
 
 $result = $dbconn->query($sql);
 ?>
@@ -116,31 +113,18 @@ $result = $dbconn->query($sql);
         } else {
             echo "<p>Nincs adat a táblázatban.</p>";
         }
+    
+        $dbconn->close();
         ?>
-
-        <!-- Lapozó -->
-        <div class="pagination">
-    <?php if ($page > 1): ?>
-        <a href="?page=<?php echo $page - 1; ?>" class="prev">&laquo; Előző</a>
-    <?php endif; ?>
-
-    <?php for ($i = 1; $i <= $total_pages; $i++): ?>
-        <a href="?page=<?php echo $i; ?>" class="<?php echo $i == $page ? 'active' : ''; ?>">
-            <?php echo $i; ?>
-        </a>
-    <?php endfor; ?>
-
-    <?php if ($page < $total_pages): ?>
-        <a href="?page=<?php echo $page + 1; ?>" class="next">Következő &raquo;</a>
-    <?php endif; ?>
-</div>
-
-        
+        <div class="confirm-overlay" id="confirmOverlay" style="display: none;">
+        <div class="confirm-dialog">
+            <p>Biztosan törölni szeretné ezt az elemet?</p>
+            <button class="confirm-btn" id="confirmYes">Igen</button>
+            <button class="cancel-btn" id="confirmNo">Mégse</button>
+        </div>
     </main>
     <footer>
-        <?php 
-            include '../main/footer.php';
-        ?>
+        <?php include '../main/footer.php'; ?>
     </footer>
 </body>
 </html>
