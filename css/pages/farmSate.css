@@ -83,7 +83,7 @@ main{
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background-color: rgb(20, 20, 20);
+    background-color: rgb(136, 136, 136);
     border: none;
     font-weight: 600;
     display: flex;
@@ -110,7 +110,7 @@ main{
     width: 120px;
     border-radius: 50px;
     transition-duration: 0.3s;
-    background-color: rgb(255, 69, 69);
+    background-color: #A8C27A;
     align-items: center;
   }
   
