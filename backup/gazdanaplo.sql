@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2025. Feb 10. 11:34
+-- Létrehozás ideje: 2025. Feb 10. 11:54
 -- Kiszolgáló verziója: 10.4.28-MariaDB
 -- PHP verzió: 8.2.4
 
@@ -179,6 +179,19 @@ CREATE TABLE `vaccination_types` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
+-- A tábla adatainak kiíratása `vaccination_types`
+--
+
+INSERT INTO `vaccination_types` (`id`, `name`, `description`) VALUES
+(1, 'BVD vakcina', 'Bovine Viral Diarrhea (szarvasmarha vírusos hasmenés) elleni oltás'),
+(2, 'IBR vakcina', 'Infectious Bovine Rhinotracheitis (fertőző szarvasmarha-rhinotracheitis) elleni vakcina'),
+(3, 'Parainfluenza-3 vakcina', 'Parainfluenza-3 vírus okozta légúti fertőzések elleni oltás'),
+(4, 'Pasteurella vakcina', 'Pasteurella multocida és Mannheimia haemolytica baktériumok elleni oltás, tüdőgyulladás megelőzésére'),
+(5, 'Rotavírus vakcina', 'Rotavírus okozta hasmenés elleni vakcina borjak számára'),
+(6, ' Bovilis Nasalgen-C', 'Koronavírus okozta borjak hasmenésének megelőzésére'),
+(7, 'Clostridium vakcina', 'Clostridium baktériumok okozta fertőzések, például lépfene és enterotoxémia megelőzésére');
+
+--
 -- Indexek a kiírt táblákhoz
 --
 
@@ -298,7 +311,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT a táblához `vaccination_types`
 --
 ALTER TABLE `vaccination_types`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Megkötések a kiírt táblákhoz
