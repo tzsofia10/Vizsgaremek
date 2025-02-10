@@ -11,7 +11,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
 require "../connect.php";
 
 // Cikkek lekérdezése az adatbázisból
-$query = "SELECT id, alias, nav_name, creation, states FROM cms_news ORDER BY creation DESC";
+$query = "SELECT id, alias, nav_name, creation, states FROM news ORDER BY creation DESC";
 $result = mysqli_query($dbconn, $query);
 
 if (!$result) {

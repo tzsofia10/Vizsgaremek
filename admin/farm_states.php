@@ -23,16 +23,14 @@ $sql = "SELECT
             cows.gender, 
             cows.mother_ear_tag, 
             cows.father_ear_tag, 
-            colors.black, 
-            colors.brown, 
-            colors.white, 
-            colors.spotted, 
-            cows.birth_date,
+            colors.colors AS color, 
+            cows.birthdate,
             cows.picture
         FROM cows
         LEFT JOIN colors ON cows.color_id = colors.id
         ORDER BY cows.id
         LIMIT $records_per_page OFFSET $offset";
+
 
 $result = $dbconn->query($sql);
 ?>
@@ -73,7 +71,7 @@ $result = $dbconn->query($sql);
                     <tbody>";
     
             while ($row = $result->fetch_assoc()) {
-                $color = $row['black'] ?: ($row['brown'] ?: ($row['white'] ?: ($row['spotted'] ?: 'N/A')));
+                $color = $row['color'] ?? 'N/A';
                 $picture = !empty($row['picture']) ? htmlspecialchars($row['picture']) : '../cowPicture/nopicture.jpg';
     
                 echo "<tr>
