@@ -44,12 +44,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $mother_ear_tag = $_POST['mother_ear_tag'] ?? '';
     $father_ear_tag = $_POST['father_ear_tag'] ?? '';
     $color_id = $_POST['color_id'] ?? '';
-    $birth_date = $_POST['birth_date'] ?? '';
+    $birthdate = $_POST['birthdate'] ?? '';
 
     $updateStmt = $dbconn->prepare(
-        "UPDATE cows SET ear_tag = ?, gender = ?, mother_ear_tag = ?, father_ear_tag = ?, color_id = ?, birth_date = ? WHERE id = ?"
+        "UPDATE cows SET ear_tag = ?, gender = ?, mother_ear_tag = ?, father_ear_tag = ?, color_id = ?, birthdate = ? WHERE id = ?"
     );
-    $updateStmt->bind_param('ssssisi', $ear_tag, $gender, $mother_ear_tag, $father_ear_tag, $color_id, $birth_date, $cow_id);
+    $updateStmt->bind_param('ssssisi', $ear_tag, $gender, $mother_ear_tag, $father_ear_tag, $color_id, $birthdate, $cow_id);
 
     if ($updateStmt->execute()) {
         echo "<p>A tehén adatai sikeresen frissítve!</p>";
@@ -103,8 +103,8 @@ $dbconn->close();
         </select>
         <br>
 
-        <label for="birth_date">Szuletési Dátum:</label>
-        <input type="date" id="birth_date" name="birth_date" value="<?php echo htmlspecialchars($cow['birthdate']); ?>" required>
+        <label for="birthdate">Szuletési Dátum:</label>
+        <input type="date" id="birthdate" name="birthdate" value="<?php echo htmlspecialchars($cow['birthdate']); ?>" required>
         <br>
 
         <button type="submit">Módosítás</button>
