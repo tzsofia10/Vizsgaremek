@@ -72,17 +72,23 @@ $result = $dbconn->query($sql);
     
             while ($row = $result->fetch_assoc()) {
                 $color = $row['color'] ?? 'N/A';
+                if ($row['gender'] == 1) {
+                    $gender = "Hím";
+                } else {
+                    $gender = "Nőstény";
+                }
+
                 $picture = !empty($row['picture']) ? htmlspecialchars($row['picture']) : '../cowPicture/nopicture.jpg';
     
                 echo "<tr>
                         <td>" . htmlspecialchars($row['cow_id']) . "</td>
                         <td><img src='" . $picture . "' alt='Tehén Kép'></td>
                         <td>" . htmlspecialchars($row['ear_tag']) . "</td>
-                        <td>" . htmlspecialchars($row['gender']) . "</td>
+                        <td>" . htmlspecialchars($gender) . "</td>
                         <td>" . htmlspecialchars($row['mother_ear_tag']) . "</td>
                         <td>" . htmlspecialchars($row['father_ear_tag']) . "</td>
                         <td class='color'>" . htmlspecialchars($color) . "</td>
-                        <td>" . htmlspecialchars($row['birth_date']) . "</td>
+                        <td>" . htmlspecialchars($row['birthdate']) . "</td>
 
                         </td>
                         <td class='btn-update borderRight'>

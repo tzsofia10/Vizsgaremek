@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $mother_ear_tag = $_POST['mother_ear_tag'] ?? '';
     $father_ear_tag = $_POST['father_ear_tag'] ?? '';
     $color_id = $_POST['color_id'] ?? '';
-    $birth_date = $_POST['birth_date'] ?? '';
+    $birthdate = $_POST['birthdate'] ?? '';
     $picture_path = ''; 
 
     // Ha van kép feltöltve
@@ -35,8 +35,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     
-    if ($stmt = $dbconn->prepare("INSERT INTO cows (ear_tag, gender, mother_ear_tag, father_ear_tag, color_id, birth_date, picture) VALUES (?, ?, ?, ?, ?, ?, ?)")) {
-        $stmt->bind_param('ssssiss', $ear_tag, $gender, $mother_ear_tag, $father_ear_tag, $color_id, $birth_date, $picture_path);
+    if ($stmt = $dbconn->prepare("INSERT INTO cows (ear_tag, gender, mother_ear_tag, father_ear_tag, color_id, birthdate, picture) VALUES (?, ?, ?, ?, ?, ?, ?)")) {
+        $stmt->bind_param('ssssiss', $ear_tag, $gender, $mother_ear_tag, $father_ear_tag, $color_id, $birthdate, $picture_path);
         if ($stmt->execute()) {
             echo "<p>Új tehén sikeresen hozzáadva!</p>";
         } else {
@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 // Színek lekérdezése az adatbázisból
-$colorsResult = $dbconn->query("SELECT id, COALESCE(black, brown, white, spotted) AS color FROM colors");
+$colorsResult = $dbconn->query("SELECT id, colors AS color FROM colors");
 $colors = [];
 if ($colorsResult->num_rows > 0) {
     while ($row = $colorsResult->fetch_assoc()) {
@@ -79,8 +79,8 @@ $dbconn->close();
             <label for="gender">Nem:</label>
             <select id="gender" name="gender" required>
                 <option value="">Válassz nemet</option>
-                <option value="M">Hím</option>
-                <option value="F">Nőstény</option>
+                <option value="1">Hím</option>
+                <option value="0">Nőstény</option>
             </select>
             <br>
     
@@ -103,8 +103,8 @@ $dbconn->close();
             </select>
             <br>
     
-            <label for="birth_date">Szuletési dátum:</label>
-            <input type="date" id="birth_date" name="birth_date" required>
+            <label for="birthdate">Szuletési dátum:</label>
+            <input type="date" id="birthdate" name="birthdate" required>
             <br>
     
             <label for="picture">Kép feltöltése (nem kötelező):</label>

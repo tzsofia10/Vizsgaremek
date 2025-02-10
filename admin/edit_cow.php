@@ -29,7 +29,7 @@ if (!$cow) {
 }
 
 // Színek lekérdezése
-$colorsResult = $dbconn->query("SELECT id, COALESCE(black, brown, white, spotted) AS color FROM colors");
+$colorsResult = $dbconn->query("SELECT id, colors AS color FROM colors");
 $colors = [];
 if ($colorsResult->num_rows > 0) {
     while ($row = $colorsResult->fetch_assoc()) {
@@ -104,10 +104,11 @@ $dbconn->close();
         <br>
 
         <label for="birth_date">Szuletési Dátum:</label>
-        <input type="date" id="birth_date" name="birth_date" value="<?php echo htmlspecialchars($cow['birth_date']); ?>" required>
+        <input type="date" id="birth_date" name="birth_date" value="<?php echo htmlspecialchars($cow['birthdate']); ?>" required>
         <br>
 
         <button type="submit">Módosítás</button>
+        <button type="submit"><a href="farm_states.php">Vissza a listához</a></button>
     </form>
 </body>
 </html>
