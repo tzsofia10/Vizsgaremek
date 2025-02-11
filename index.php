@@ -5,7 +5,7 @@ function sanitize(string $data): string {
     return htmlspecialchars($data, ENT_QUOTES, 'UTF-8');
 }
 
-$sql = "SELECT id, alias, nav_name FROM cms_news WHERE states = 1 ORDER BY ordering ASC";
+$sql = "SELECT id, alias, nav_name FROM news WHERE states = 1 ORDER BY ordering ASC";
 $result = mysqli_query($dbconn, $sql);
 
 $menu = "<ul>\n";
@@ -15,7 +15,7 @@ while ($row = mysqli_fetch_assoc($result)) {
 $menu .= "</ul>\n";
 
 $alias = isset($_GET['alias']) ? mysqli_real_escape_string($dbconn, $_GET['alias']) : "bemutatkozas";
-$sql = "SELECT nav_name, content, creation, updating, description, keywords FROM cms_news WHERE alias = '$alias' LIMIT 1";
+$sql = "SELECT nav_name, content, creation, updating, description, keywords FROM news WHERE alias = '$alias' LIMIT 1";
 $result = mysqli_query($dbconn, $sql);
 
 if (mysqli_num_rows($result) > 0) {

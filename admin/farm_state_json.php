@@ -16,11 +16,8 @@ $sql = "SELECT
             cows.gender, 
             cows.mother_ear_tag, 
             cows.father_ear_tag, 
-            colors.black, 
-            colors.brown, 
-            colors.white, 
-            colors.spotted, 
-            cows.birth_date 
+            colors.colors AS color, 
+            cows.birthdate 
         FROM cows
         LEFT JOIN colors ON cows.color_id = colors.id
         ORDER BY cows.id";
@@ -32,7 +29,7 @@ $data = [];
 if ($result->num_rows > 0) {
     // Adatok feldolgozása JSON tömbbe
     while ($row = $result->fetch_assoc()) {
-        $color = $row['black'] ?: ($row['brown'] ?: ($row['white'] ?: $row['spotted']));
+        $color = $row['color'] ?? 'N/A';
         $data[] = [
             'id' => $row['cow_id'],
             'ear_tag' => $row['ear_tag'],
@@ -40,7 +37,7 @@ if ($result->num_rows > 0) {
             'mother_ear_tag' => $row['mother_ear_tag'],
             'father_ear_tag' => $row['father_ear_tag'],
             'color' => $color,
-            'birth_date' => $row['birth_date']
+            'birthdate' => $row['birthdate']
         ];
     }
 
