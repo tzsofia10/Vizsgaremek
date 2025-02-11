@@ -14,29 +14,44 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $father_ear_tag = $_POST['father_ear_tag'] ?? '';
     $color_id = $_POST['color_id'] ?? '';
     $birthdate = $_POST['birthdate'] ?? '';
-    $picture_path = ''; 
-
-    // Ha van kép feltöltve
-    if (!empty($_FILES['picture']['name'])) {
-        $target_dir = "uploads/";
-        $target_file = $target_dir . basename($_FILES['picture']['name']);
-        $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-
-        $allowed_formats = ['jpg', 'jpeg', 'png'];
-        if (in_array($imageFileType, $allowed_formats)) {
-            if (move_uploaded_file($_FILES['picture']['tmp_name'], $target_file)) {
-                $picture_path = $target_file; // Útvonal frissítése
-            } else {
-                echo "<p>Hiba történt a kép feltöltésekor.</p>";
-            }
-        } else {
-            echo "<p>Csak JPG, JPEG, vagy PNG fájlok tölthetők fel.</p>";
-        }
+    $picture_path = NULL;
+}
+   // Kép feltöltés kezelése
+if (!empty($_FILES['picture']['name']) && $_FILES['picture']['error'] === 0) {
+    $target_dir = "uploads/";
+    if (!is_dir($target_dir)) {
+        mkdir($target_dir, 0777, true);
     }
 
+    $target_file = $target_dir . basename($_FILES['picture']['name']);
+    $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+    $allowed_formats = ['jpg', 'jpeg', 'png'];
+
+    if (in_array($imageFileType, $allowed_formats)) {
+        // Itt jönne a fájl feltöltésének logikája
+        if (move_uploaded_file($_FILES['picture']['tmp_name'], $target_file)) {
+            $picture_path = $target_file;
+            echo "<p>Kép sikeresen feltöltve!</p>";  // Ellenőrzéshez
+        } else {
+            echo "<p>Hiba történt a kép feltöltésekor.</p>";
+        }
+    } else {
+        echo "<p>Csak JPG, JPEG, vagy PNG fájlok tölthetők fel.</p>";
+    }
+}
+
     
+    // Adatbázisba mentés
     if ($stmt = $dbconn->prepare("INSERT INTO cows (ear_tag, gender, mother_ear_tag, father_ear_tag, color_id, birthdate, picture) VALUES (?, ?, ?, ?, ?, ?, ?)")) {
-        $stmt->bind_param('ssssiss', $ear_tag, $gender, $mother_ear_tag, $father_ear_tag, $color_id, $birthdate, $picture_path);
+        // Kép mentése az adatbázisba
+        if ($picture_path === NULL) {
+            // Ha nincs kép, akkor NULL értéket adunk
+            $stmt->bind_param('ssssiss', $ear_tag, $gender, $mother_ear_tag, $father_ear_tag, $color_id, $birthdate, $picture_path);
+        } else {
+            // Ha van kép, akkor elérési utat tárolunk
+            $stmt->bind_param('ssssiss', $ear_tag, $gender, $mother_ear_tag, $father_ear_tag, $color_id, $birthdate, $picture_path);
+        }
+    
         if ($stmt->execute()) {
             echo "<p>Új tehén sikeresen hozzáadva!</p>";
         } else {
@@ -46,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         echo "<p>SQL hiba: " . $dbconn->error . "</p>";
     }
-}
+    
 
 // Színek lekérdezése az adatbázisból
 $colorsResult = $dbconn->query("SELECT id, colors AS color FROM colors");

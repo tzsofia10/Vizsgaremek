@@ -4,23 +4,60 @@ document.addEventListener("DOMContentLoaded", () => {
     const confirmYes = document.getElementById("confirmYes");
     const confirmNo = document.getElementById("confirmNo");
 
-    let currentLink = null;
+    let currentRow = null;
+    let currentCowId = null;
 
     deleteLinks.forEach(link => {
         link.addEventListener("click", (event) => {
-            event.preventDefault(); // Megakadályozza az alapértelmezett viselkedést
-            currentLink = link; // Elmentjük a linket
+            event.preventDefault(); // Megakadályozzuk az alapértelmezett navigációt
+            currentCowId = new URL(link.href).searchParams.get("id"); // ID kinyerése a linkből
+            currentRow = link.closest("tr"); // A törlendő sor eltárolása
             confirmOverlay.style.display = "flex"; // Megjelenítjük a megerősítő ablakot
         });
     });
 
     confirmYes.addEventListener("click", () => {
-        if (currentLink) {
-            window.location.href = currentLink.href; // Követjük a linket
+        if (currentCowId && currentRow) {
+            confirmOverlay.style.display = "none"; // Elrejtjük a megerősítő ablakot
+            // AJAX kérés küldése a törléshez
+            fetch(`delete_cow.php?id=${currentCowId}`, {
+                method: "GET",
+            })
+            .then(response => response.text())
+            .then(data => {
+                if (data.trim() === "success") {
+                    currentRow.remove(); // Sor törlése a táblázatból
+                    Swal.fire({
+                        title: "Törölve!",
+                        text: "A tehén adatai törlésre kerültek.",
+                        icon: "success",
+                        confirmButtonText: "OK",
+                            customClass: {
+                                confirmButton: "btn btn-success" // Zöld gomb is
+                            }
+                    });
+                } else {
+                    Swal.fire({
+                        title: "Hiba!",
+                        text: "Nem sikerült törölni az elemet.",
+                        icon: "error",
+                        confirmButtonText: "OK"
+                    });
+                }
+            })
+            .catch(error => {
+                console.error("Hiba történt:", error);
+                Swal.fire({
+                    title: "Hiba!",
+                    text: "Hálózati hiba történt.",
+                    icon: "error",
+                    confirmButtonText: "OK"
+                });
+            });
         }
     });
 
     confirmNo.addEventListener("click", () => {
-        confirmOverlay.style.display = "none"; // Elrejtjük az ablakot
+        confirmOverlay.style.display = "none"; // Elrejtjük a megerősítő ablakot
     });
 });

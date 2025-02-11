@@ -19,7 +19,9 @@ main{
 .borderRight{
     border: none;
 }
-
+.borderRight a{
+    text-decoration: none;
+}
 /* törlés gomb */
 .deleteButton {
     margin: auto;
@@ -55,7 +57,7 @@ main{
     transition-duration: .3s;
     background-color: rgb(255, 69, 69);
     align-items: center;
-    }
+}
 
 .deleteButton:hover .svgIcon {
     width: 50px;
@@ -96,26 +98,26 @@ main{
     overflow: hidden;
     position: relative;
     text-decoration: none !important;
-  }
+}
   
-  .edit-svgIcon {
+.edit-svgIcon {
     width: 17px;
     transition-duration: 0.3s;
-  }
+}
   
   .edit-svgIcon path {
     fill: white;
-  }
+}
   
-  .edit-button:hover {
+.edit-button:hover {
     width: 120px;
     border-radius: 50px;
     transition-duration: 0.3s;
     background-color: #A8C27A;
     align-items: center;
-  }
+}
   
-  .edit-button:hover .edit-svgIcon {
+.edit-button:hover .edit-svgIcon {
     width: 20px;
     transition-duration: 0.3s;
     transform: translateY(60%);
@@ -124,24 +126,25 @@ main{
     -o-transform: rotate(360deg);
     -ms-transform: rotate(360deg);
     transform: rotate(360deg);
-  }
+}
   
-  .edit-button::before {
+.edit-button::before {
     display: none;
     content: "Edit";
     color: white;
+    text-decoration: none;
     transition-duration: 0.3s;
     font-size: 2px;
-  }
+}
   
-  .edit-button:hover::before {
+.edit-button:hover::before {
     display: block;
     padding-right: 10px;
     font-size: 13px;
     opacity: 1;
     transform: translateY(0px);
     transition-duration: 0.3s;
-  }
+}
   
 
 
