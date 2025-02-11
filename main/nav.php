@@ -9,12 +9,23 @@
     </div>
     <div class="button-container">
         <button>
-            <a href="../admin/index.php">  
-                Sign up
-            </a>
+            <a href="../admin/index.php">Sign up</a>
             <div class="arrow-wrapper">
                 <div class="arrow"></div>
             </div>
         </button>
     </div>
+    <div class="hamburger" onclick="toggleMenu()">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
 </nav>
+
+<!-- hamburger element e -->
+<script>
+    function toggleMenu() {
+        const navLinks = document.querySelector('.nav-links');
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+            }
+</script>

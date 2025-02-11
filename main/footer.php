@@ -13,24 +13,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ?>
 
 
-<footer>
-    <div class="container">        
-        <h3>Elérhetőségek</h3>
-        <div class="contacts">
-            <p>E-mail</p>
-            <p><a href="mailto:zsiros.kata02@gmail.com">zsiros.kata02@gmail.com</a></p>
-            <p><a href="mailto:tothzsofiaa2016@gmail.com">tothzsofiaa2016@gmail.com</a></p>
-            <p></p>
-        </div>
-        <div class="newsletter">
-            <h4>Feliratkozz a hírlevélre!</h4>
-            <form method="post" action="">
-                <input type="email" name="email" placeholder="E-mail cím" required>
-                <input type="submit" value="Küldés">
-            </form>
-
-        </div>
-        <p class="center">&copy; 2025 Gazdanapló.</p>
+<div class="container">        
+    <div class="contacts">
+    <h3>Elérhetőségek</h3>
+        <p>E-mail</p>
+        <p><a href="mailto:zsiros.kata02@gmail.com">zsiros.kata02@gmail.com</a></p>
+        <p><a href="mailto:tothzsofiaa2016@gmail.com">tothzsofiaa2016@gmail.com</a></p>
+        <p></p>
     </div>
+    <div class="newsletter">
+        <h4>Feliratkozz a hírlevélre!</h4>
+        <form method="post" action="">
+            <input type="email" name="email" placeholder="E-mail cím" required>
+            <input type="submit" value="Küldés">
+        </form>
 
-</footer>
+    </div>
+    <p class="center">&copy; 2025 Gazdanapló.</p>
+</div>

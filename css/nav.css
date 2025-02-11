@@ -15,11 +15,27 @@ header {
 nav {
     display: flex;
     align-items: center;
-    justify-content: center; 
+    justify-content: space-between;
     position: relative;
-    height: 77px; 
+    height: 77px;
     padding: 0 20px;
     background-color: #606c38;
+}
+
+.logo-container {
+    position: absolute;
+    left: 10px;
+}
+
+.logo-container img {
+    width: 100px;
+    height: auto;
+}
+
+.nav-links {
+    display: flex;
+    justify-content: center;
+    flex-grow: 1;
 }
 
 nav a {
@@ -33,103 +49,12 @@ nav a:hover {
     background-color: #575757;
 }
 
-main {
-    padding: 1rem;
-}
-.nav-links {
-    display: flex;
-    justify-content: center;
-    flex-grow: 1;
-}
-/* Logo formázása és elhelyezése*/
-nav {
-    display: flex;
-    align-items: center;
-    justify-content: center; 
-    position: relative;
-    height: 77px; 
-}
-
-.logo-container {
-    position: absolute;
-    left: 10px; 
-    
-}
-
-.logo-container img {
-    width: 100px; 
-    height: auto;
-}
-/*Bejelentkezés gomb*/
-
-button {
+.button-container button {
     --primary-color: #FEFAE0;
-    --secondary-color:#111;
+    --secondary-color: #111;
     --hover-color: #111;
     --arrow-width: 10px;
     --arrow-stroke: 2px;
-    box-sizing: border-box;
-    border: 0;
-    border-radius: 20px;
-    color: var(--secondary-color);
-    padding: 1em 1.8em;
-    background: var(--primary-color);
-    display: flex;
-    transition: 0.2s background;
-    align-items: center;
-    gap: 0.6em;
-    font-weight: bold;
-    margin-left: auto;
-  }
-  
-  button .arrow-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  button .arrow {
-    margin-top: 1px;
-    width: var(--arrow-width);
-    background: var(--primary-color);
-    height: var(--arrow-stroke);
-    position: relative;
-    transition: 0.2s;
-  }
-  
-  button .arrow::before {
-    content: "";
-    box-sizing: border-box;
-    position: absolute;
-    border: solid var(--secondary-color);
-    border-width: 0 var(--arrow-stroke) var(--arrow-stroke) 0;
-    display: inline-block;
-    top: -3px;
-    right: 3px;
-    transition: 0.2s;
-    padding: 3px;
-    transform: rotate(-45deg);
-  }
-  
-  .button-container button:hover {
-    background-color: var(--hover-color);
-}
-  
-  button:hover .arrow {
-    background: var(--secondary-color);
-  }
-  
-  button:hover .arrow:before {
-    right: 0;
-  }
-  /* Bejelentkezés gomb méretének csökkentése és szöveg javítása */
-.button-container button {
-    --primary-color: #FEFAE0; /* Fehér háttér */
-    --secondary-color: #111; /* Szöveg fekete marad */
-    --hover-color: #111; /* Hover szín fekete */
-    --arrow-width: 10px;
-    --arrow-stroke: 2px;
-    
     box-sizing: border-box;
     border: 0;
     border-radius: 20px;
@@ -141,19 +66,92 @@ button {
     font-weight: bold;
     font-size: 0.9rem; /* Kisebb betűméret */
 }
+
 .button-container button a {
     text-decoration: none;
     color: var(--secondary-color);
 }
+
 .button-container button:hover a {
     color: white;
+    background-color: #111;
+ 
+}
+button:hover{
     background-color: #111;
     transition: 0.3s;
 
 }
+
 .button-container button:hover .arrow::before {
     border-color: white;
 }
+
 .button-container button:hover .arrow {
     background: white;
+}
+
+button .arrow-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+button .arrow {
+    margin-top: 1px;
+    width: var(--arrow-width);
+    background: var(--primary-color);
+    height: var(--arrow-stroke);
+    position: relative;
+    transition: 0.2s;
+}
+
+button .arrow::before {
+    content: "";
+    box-sizing: border-box;
+    position: absolute;
+    border: solid var(--secondary-color);
+    border-width: 0 var(--arrow-stroke) var(--arrow-stroke) 0;
+    display: inline-block;
+    top: -3px;
+    right: 3px;
+    transition: 0.2s;
+    padding: 3px;
+    transform: rotate(-45deg);
+}
+
+.hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.hamburger div {
+    width: 30px;
+    height: 4px;
+    background-color: #fff;
+}
+
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        background-color: #606c38;
+        position: absolute;
+        top: 77px;
+        left: 0;
+        padding: 10px 0;
+    }
+
+    .nav-links a {
+        padding: 1rem;
+        text-align: center;
+        width: 100%;
+    }
+
+    .hamburger {
+        display: flex;
+    }
 }
