@@ -7,62 +7,6 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
 
 require '../connect.php'; 
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $ear_tag = $_POST['ear_tag'] ?? '';
-    $gender = $_POST['gender'] ?? '';
-    $mother_ear_tag = $_POST['mother_ear_tag'] ?? '';
-    $father_ear_tag = $_POST['father_ear_tag'] ?? '';
-    $color_id = $_POST['color_id'] ?? '';
-    $birthdate = $_POST['birthdate'] ?? '';
-    $picture_path = NULL;
-}
-   // Kép feltöltés kezelése
-if (!empty($_FILES['picture']['name']) && $_FILES['picture']['error'] === 0) {
-    $target_dir = "uploads/";
-    if (!is_dir($target_dir)) {
-        mkdir($target_dir, 0777, true);
-    }
-
-    $target_file = $target_dir . basename($_FILES['picture']['name']);
-    $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-    $allowed_formats = ['jpg', 'jpeg', 'png'];
-
-    if (in_array($imageFileType, $allowed_formats)) {
-        // Itt jönne a fájl feltöltésének logikája
-        if (move_uploaded_file($_FILES['picture']['tmp_name'], $target_file)) {
-            $picture_path = $target_file;
-            echo "<p>Kép sikeresen feltöltve!</p>";  // Ellenőrzéshez
-        } else {
-            echo "<p>Hiba történt a kép feltöltésekor.</p>";
-        }
-    } else {
-        echo "<p>Csak JPG, JPEG, vagy PNG fájlok tölthetők fel.</p>";
-    }
-}
-
-    
-    // Adatbázisba mentés
-    if ($stmt = $dbconn->prepare("INSERT INTO cows (ear_tag, gender, mother_ear_tag, father_ear_tag, color_id, birthdate, picture) VALUES (?, ?, ?, ?, ?, ?, ?)")) {
-        // Kép mentése az adatbázisba
-        if ($picture_path === NULL) {
-            // Ha nincs kép, akkor NULL értéket adunk
-            $stmt->bind_param('ssssiss', $ear_tag, $gender, $mother_ear_tag, $father_ear_tag, $color_id, $birthdate, $picture_path);
-        } else {
-            // Ha van kép, akkor elérési utat tárolunk
-            $stmt->bind_param('ssssiss', $ear_tag, $gender, $mother_ear_tag, $father_ear_tag, $color_id, $birthdate, $picture_path);
-        }
-    
-        if ($stmt->execute()) {
-            echo "<p>Új tehén sikeresen hozzáadva!</p>";
-        } else {
-            echo "<p>Hiba történt: " . $stmt->error . "</p>";
-        }
-        $stmt->close();
-    } else {
-        echo "<p>SQL hiba: " . $dbconn->error . "</p>";
-    }
-    
-
 // Színek lekérdezése az adatbázisból
 $colorsResult = $dbconn->query("SELECT id, colors AS color FROM colors");
 $colors = [];
@@ -72,7 +16,48 @@ if ($colorsResult->num_rows > 0) {
     }
 }
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $ear_tag = mysqli_real_escape_string($dbconn, $_POST['ear_tag'] ?? '');
+    $gender = $_POST['gender'] ?? '';
+    $mother_ear_tag = $_POST['mother_ear_tag'] ?? '';
+    $father_ear_tag = $_POST['father_ear_tag'] ?? '';
+    $color_id = $_POST['color_id'] ?? '';
+    $birthdate = $_POST['birthdate'] ?? '';
+    $picture = NULL;
 
+    // Kép feltöltés kezelése
+    if (!empty($_FILES['picture']['name']) && $_FILES['picture']['error'] === 0) {
+        $target_dir = "uploads/";
+        if (!is_dir($target_dir)) {
+            mkdir($target_dir, 0777, true);
+        }
+
+        $target_file = $target_dir . basename($_FILES['picture']['name']);
+        $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+        $allowed_formats = ['jpg', 'jpeg', 'png'];
+
+        if (in_array($imageFileType, $allowed_formats)) {
+            if (move_uploaded_file($_FILES['picture']['tmp_name'], $target_file)) {
+                $picture = $target_file;
+            } else {
+                echo "<p>Hiba történt a kép feltöltésekor.</p>";
+            }
+        } else {
+            echo "<p>Csak JPG, JPEG, vagy PNG fájlok tölthetők fel.</p>";
+        }
+    }
+
+    // Adatbázisba mentés
+    $stmt = $dbconn->prepare("INSERT INTO cows (ear_tag, gender, mother_ear_tag, father_ear_tag, color_id, birthdate, picture) VALUES (?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param('ssssiss', $ear_tag, $gender, $mother_ear_tag, $father_ear_tag, $color_id, $birthdate, $picture);
+    
+    if ($stmt->execute()) {
+        echo "<p>Új tehén sikeresen hozzáadva!</p>";
+    } else {
+        echo "<p>Hiba történt: " . $stmt->error . "</p>";
+    }
+    $stmt->close();
+}
 $dbconn->close();
 ?>
 
@@ -86,7 +71,7 @@ $dbconn->close();
 <body>
     <h1>Új tehén hozzáadása</h1>
     <div class="container">
-        <form method="POST">
+        <form method="POST" enctype="multipart/form-data">
             <label for="ear_tag">Füljelző:</label>
             <input type="text" id="ear_tag" name="ear_tag" required maxlength="13">
             <br>
@@ -100,7 +85,7 @@ $dbconn->close();
             <br>
     
             <label for="mother_ear_tag">Anya füljelzője:</label>
-            <input type="text" id="mother_ear_tag" name="mother_ear_tag"  maxlength="13">
+            <input type="text" id="mother_ear_tag" name="mother_ear_tag" maxlength="13">
             <br>
     
             <label for="father_ear_tag">Apa füljelzője:</label>
@@ -118,7 +103,7 @@ $dbconn->close();
             </select>
             <br>
     
-            <label for="birthdate">Szuletési dátum:</label>
+            <label for="birthdate">Születési dátum:</label>
             <input type="date" id="birthdate" name="birthdate" required>
             <br>
     

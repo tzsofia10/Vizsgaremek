@@ -1,3 +1,5 @@
+
+console.log("Delete script loaded"); 
 document.addEventListener("DOMContentLoaded", () => {
     const deleteLinks = document.querySelectorAll("a[href*='delete_cow.php']");
     const confirmOverlay = document.getElementById("confirmOverlay");
