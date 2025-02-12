@@ -10,7 +10,7 @@ table th, table td {
 }
 img {
     max-width: 100px;
-    height: auto;
+    max-height: 110px;
 }
 table th{
     text-align: center;

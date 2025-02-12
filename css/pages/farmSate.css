@@ -22,6 +22,7 @@ main{
 .borderRight a{
     text-decoration: none;
 }
+
 /* törlés gomb */
 .deleteButton {
     margin: auto;
