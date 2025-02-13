@@ -19,14 +19,11 @@ table tr:nth-child(even) {
     background-color: #f2f2f277;
 }
 
-@media only screen and (max-width: 600px) {
+/* kisebb képernyős nézet */
+@media only screen and (max-width: 1000px) {
     table {
         display: block;
         overflow-x: auto;
         white-space: nowrap;
-    }
-    .pagination a {
-        padding: 5px;
-        font-size: 0.9em;
     }
 }
