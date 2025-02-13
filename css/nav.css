@@ -43,10 +43,16 @@ nav a {
     padding: 1rem;
     text-decoration: none;
     text-transform: uppercase;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
 }
 
 nav a:hover {
     background-color: #575757;
+}
+
+.button-container {
+    margin-left: auto; /* Align the button to the right */
 }
 
 .button-container button {
@@ -66,6 +72,12 @@ nav a:hover {
     font-weight: bold;
     font-size: 0.9rem; /* Kisebb betűméret */
 }
+.links{
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin:auto;
+}
 
 .button-container button a {
     text-decoration: none;
@@ -75,12 +87,11 @@ nav a:hover {
 .button-container button:hover a {
     color: white;
     background-color: #111;
- 
 }
-button:hover{
+
+.button-container button:hover{
     background-color: #111;
     transition: 0.3s;
-
 }
 
 .button-container button:hover .arrow::before {
@@ -91,13 +102,13 @@ button:hover{
     background: white;
 }
 
-button .arrow-wrapper {
+.button-container button .arrow-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-button .arrow {
+.button-container button .arrow {
     margin-top: 1px;
     width: var(--arrow-width);
     background: var(--primary-color);
@@ -106,7 +117,7 @@ button .arrow {
     transition: 0.2s;
 }
 
-button .arrow::before {
+.button-container button .arrow::before {
     content: "";
     box-sizing: border-box;
     position: absolute;
@@ -128,6 +139,7 @@ button .arrow::before {
 }
 
 .hamburger div {
+    margin-left: 310px;
     width: 30px;
     height: 4px;
     background-color: #fff;
@@ -153,5 +165,9 @@ button .arrow::before {
 
     .hamburger {
         display: flex;
+    }
+
+    .button-container button{
+        margin-left: 120px;
     }
 }
