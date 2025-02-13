@@ -72,6 +72,7 @@ $dbconn->close();
     <title>Tehén Módosítása</title>
 </head>
 <body>
+    
     <h1>Tehén Módosítása</h1>
     <form method="POST">
         <label for="ear_tag">Füljelző:</label>

@@ -14,10 +14,6 @@
     <header>
         <h1>Gazdanapló</h1>
         <p>Üdvözöljük a gazdálkodók digitális naplójában!</p>
-        
-    </header>
-
-    <header>
         <?php include './nav.php'; ?>
     </header>
 
