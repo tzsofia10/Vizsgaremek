@@ -67,49 +67,64 @@ $dbconn->close();
 ?>
 
 <!DOCTYPE html>
-<html>
-<head>
-    <title>Tehén Módosítása</title>
-</head>
+<html lang="hu">
+ <!-- <head> része-->
+ <?php 
+    $page_title = "Módosítás"; 
+    $custom_css = ["../css/pages/editcow.css"]; // egyedi css fájl hozzáadása
+    $custom_js = ["../js/translate2.js","https://cdn.jsdelivr.net/npm/sweetalert2@11"]; // egyedi js fájlok
+    include '../main/head.php'; 
+?>
+<!-- </head> rész vége-->
+
 <body>
+    <header>
+        <?php include "../main/nav.php";?>
+    </header>
     
-    <h1>Tehén Módosítása</h1>
-    <form method="POST">
-        <label for="ear_tag">Füljelző:</label>
-        <input type="text" id="ear_tag" name="ear_tag" value="<?php echo htmlspecialchars($cow['ear_tag']); ?>" required>
-        <br>
+    <main>
+        <h1>Szarvasmarha Módosítása</h1>
+        <form method="POST">
+            <label for="ear_tag">Füljelző:</label>
+            <input type="text" id="ear_tag" name="ear_tag" value="<?php echo htmlspecialchars($cow['ear_tag']); ?>" required>
+            <br>
+    
+            <label for="gender">Nem:</label>
+            <select id="gender" name="gender" required>
+                <option value="M" <?php echo $cow['gender'] === 'M' ? 'selected' : ''; ?>>Hím</option>
+                <option value="F" <?php echo $cow['gender'] === 'F' ? 'selected' : ''; ?>>Nőstény</option>
+            </select>
+            <br>
+    
+            <label for="mother_ear_tag">Anya Füljelzője:</label>
+            <input type="text" id="mother_ear_tag" name="mother_ear_tag" value="<?php echo htmlspecialchars($cow['mother_ear_tag']); ?>">
+            <br>
+    
+            <label for="father_ear_tag">Apa Füljelzője:</label>
+            <input type="text" id="father_ear_tag" name="father_ear_tag" value="<?php echo htmlspecialchars($cow['father_ear_tag']); ?>">
+            <br>
+    
+            <label for="color_id">Szín:</label>
+            <select id="color_id" name="color_id" required>
+                <?php foreach ($colors as $color): ?>
+                    <option value="<?php echo $color['id']; ?>" <?php echo $cow['color_id'] == $color['id'] ? 'selected' : ''; ?>>
+                        <?php echo htmlspecialchars($color['color']); ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+            <br>
+    
+            <label for="birthdate">Szuletési Dátum:</label>
+            <input type="date" id="birthdate" name="birthdate" value="<?php echo htmlspecialchars($cow['birthdate']); ?>" required>
+            <br>
+    
+            <button type="submit">Módosítás</button>
+            <button type="submit"><a href="farm_states.php">Vissza a listához</a></button>
+        </form>
+    </main>
 
-        <label for="gender">Nem:</label>
-        <select id="gender" name="gender" required>
-            <option value="M" <?php echo $cow['gender'] === 'M' ? 'selected' : ''; ?>>Hím</option>
-            <option value="F" <?php echo $cow['gender'] === 'F' ? 'selected' : ''; ?>>Nőstény</option>
-        </select>
-        <br>
-
-        <label for="mother_ear_tag">Anya Füljelzője:</label>
-        <input type="text" id="mother_ear_tag" name="mother_ear_tag" value="<?php echo htmlspecialchars($cow['mother_ear_tag']); ?>">
-        <br>
-
-        <label for="father_ear_tag">Apa Füljelzője:</label>
-        <input type="text" id="father_ear_tag" name="father_ear_tag" value="<?php echo htmlspecialchars($cow['father_ear_tag']); ?>">
-        <br>
-
-        <label for="color_id">Szín:</label>
-        <select id="color_id" name="color_id" required>
-            <?php foreach ($colors as $color): ?>
-                <option value="<?php echo $color['id']; ?>" <?php echo $cow['color_id'] == $color['id'] ? 'selected' : ''; ?>>
-                    <?php echo htmlspecialchars($color['color']); ?>
-                </option>
-            <?php endforeach; ?>
-        </select>
-        <br>
-
-        <label for="birthdate">Szuletési Dátum:</label>
-        <input type="date" id="birthdate" name="birthdate" value="<?php echo htmlspecialchars($cow['birthdate']); ?>" required>
-        <br>
-
-        <button type="submit">Módosítás</button>
-        <button type="submit"><a href="farm_states.php">Vissza a listához</a></button>
-    </form>
+    <footer>
+        <?php include '../main/footer.php'; ?>
+    </footer>
 </body>
 </html>

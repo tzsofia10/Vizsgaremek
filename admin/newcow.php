@@ -64,16 +64,25 @@ $dbconn->close();
 
 <!DOCTYPE html>
 <html>
-<head>
-    <script src="../js/translate2.js"></script>
-    <link rel="stylesheet" href="../css/newcow.css">
-    <title>Új tehén hozzáadása</title>
-</head>
+
+ <!-- <head> része-->
+<?php 
+    $page_title = "Új szarvasmarha"; 
+    $custom_css = ["../css/pages/editcow.css", "../css/pages/newcow.css"]; // Több CSS fájl hozzáadása
+    $custom_js = ["../js/translate2.js"]; // Egyedi JavaScript fájlok
+    include '../main/head.php'; 
+?>
+<!-- </head> rész vége-->
+
 <body>
     <?php if ($success): ?>
         <script src="../js/newCowAlert.js"></script>
+    
     <?php endif; ?>
-
+    <header>
+        <?php include "../main/nav.php";?>
+    </header>
+    
     <div id="success-message" class="success">
         <div class="success__icon">
         <svg fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path clip-rule="evenodd" d="m12 1c-6.075 0-11 4.925-11 11s4.925 11 11 11 11-4.925 11-11-4.925-11-11-11zm4.768 9.14c.0878-.1004.1546-.21726.1966-.34383.0419-.12657.0581-.26026.0477-.39319-.0105-.13293-.0475-.26242-.1087-.38085-.0613-.11844-.1456-.22342-.2481-.30879-.1024-.08536-.2209-.14938-.3484-.18828s-.2616-.0519-.3942-.03823c-.1327.01366-.2612.05372-.3782.1178-.1169.06409-.2198.15091-.3027.25537l-4.3 5.159-2.225-2.226c-.1886-.1822-.4412-.283-.7034-.2807s-.51301.1075-.69842.2929-.29058.4362-.29285.6984c-.00228.2622.09851.5148.28067.7034l3 3c.0983.0982.2159.1748.3454.2251.1295.0502.2681.0729.4069.0665.1387-.0063.2747-.0414.3991-.1032.1244-.0617.2347-.1487.3236-.2554z" fill="#ffffff" fill-rule="evenodd"></path></svg>
@@ -84,9 +93,8 @@ $dbconn->close();
         </div>
     </div>
 
-
-    <h1>Új tehén hozzáadása</h1>
-    <div class="container">
+    <main>    
+        <h1>Új tehén hozzáadása</h1>
         <form method="POST" enctype="multipart/form-data">
             <label for="ear_tag">Füljelző:</label>
             <input type="text" id="ear_tag" name="ear_tag" required maxlength="13">
@@ -130,11 +138,11 @@ $dbconn->close();
             <button type="submit">Hozzáadás</button>
             <button><a href="contents_list.html">Vissza</a></button>
         </form>
-    </div>
+    </main>
 
     
-
-
-
+    <footer>
+        <?php include '../main/footer.php'; ?>
+    </footer>
 </body>
 </html>
