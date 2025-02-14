@@ -12,9 +12,9 @@
 </head>
 <body>
     <header>
+        <?php include './nav.php'; ?>
         <h1>Gazdanapló</h1>
         <p>Üdvözöljük a gazdálkodók digitális naplójában!</p>
-        <?php include './nav.php'; ?>
     </header>
 
     <main>

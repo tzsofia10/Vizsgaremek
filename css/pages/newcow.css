@@ -46,7 +46,63 @@ label, input{
     cursor: pointer;
     margin-left: auto;
 }
-  
+
 .success__close path {
     fill: #2B641E;
+}
+/* reszponzivitás */
+
+@media (max-width: 600px) {
+    main {
+        padding: 10px;
+    }
+    form {
+        padding: 5px;
+    }
+    h1 {
+        font-size: 18px;
+        text-align: center;
+    }
+
+    label {
+        font-size: 14px;
+    }
+
+    input, select {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    button {
+        font-size: 14px;
+        padding: 10px;
+    }
+}
+
+@media (max-width: 420px) {
+    main {
+        width: 367px;
+    }
+    form {
+        padding: 3px;
+    }
+
+    h1 {
+        font-size: 20px;
+        text-align: center;
+    }
+
+    label {
+        font-size: 15px;
+    }
+
+    input, select {
+        font-size: 12px;
+        padding: 6px;
+    }
+
+    button {
+        font-size: 12px;
+        padding: 8px;
+    }
 }
