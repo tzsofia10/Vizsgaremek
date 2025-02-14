@@ -1,41 +1,44 @@
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #fefaE0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    
+}
+main {
+    transition: margin-top 0.3s ease-in-out;
 }
 
-header {
-    background-color: #283618;
-    color: white;
-    padding: 1rem;
-    text-align: center;
+main.menu-open {
+    margin-top: 320px; 
 }
+
 
 nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: relative;
-    height: 77px;
-    padding: 0 20px;
     background-color: #606c38;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr; 
+    align-items: center;
+    width: 100%;
 }
 
+/* Logo on the left */
 .logo-container {
     position: absolute;
     left: 10px;
 }
-
 .logo-container img {
     width: 100px;
     height: auto;
 }
 
+/* linkek 2. rácselem a gridnek */
 .nav-links {
-    display: flex;
+    display: grid;
+    grid-column: 2;
     justify-content: center;
-    flex-grow: 1;
+}
+.links{
+    display: flex;
+    align-items: center;
+    margin:auto;
 }
 
 nav a {
@@ -51,8 +54,15 @@ nav a:hover {
     background-color: #575757;
 }
 
+/* gomb 3. rácselem a gridnek */
 .button-container {
-    margin-left: auto; /* Align the button to the right */
+    grid-column: 3;
+    justify-self: end;
+}
+
+nav button {
+    margin: 10px 5px 10px 0;
+    border: 0;
 }
 
 .button-container button {
@@ -61,22 +71,12 @@ nav a:hover {
     --hover-color: #111;
     --arrow-width: 10px;
     --arrow-stroke: 2px;
-    box-sizing: border-box;
-    border: 0;
     border-radius: 20px;
     padding: 0.5em 1.2em; /* Kisebb gombméret */
     background: var(--primary-color);
     display: flex;
-    align-items: center;
-    gap: 0.6em;
     font-weight: bold;
-    font-size: 0.9rem; /* Kisebb betűméret */
-}
-.links{
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-    margin:auto;
+    font-size: small;
 }
 
 .button-container button a {
@@ -88,26 +88,21 @@ nav a:hover {
     color: white;
     background-color: #111;
 }
-
 .button-container button:hover{
     background-color: #111;
     transition: 0.3s;
 }
-
 .button-container button:hover .arrow::before {
     border-color: white;
 }
-
 .button-container button:hover .arrow {
     background: white;
 }
-
 .button-container button .arrow-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
 }
-
 .button-container button .arrow {
     margin-top: 1px;
     width: var(--arrow-width);
@@ -116,7 +111,6 @@ nav a:hover {
     position: relative;
     transition: 0.2s;
 }
-
 .button-container button .arrow::before {
     content: "";
     box-sizing: border-box;
@@ -136,38 +130,81 @@ nav a:hover {
     flex-direction: column;
     gap: 5px;
     cursor: pointer;
+    width: 30px;
+    height: 25px;
+    z-index: 10;
+    margin-left: 20px; /* A bal oldali távolság a hamburgernek */
 }
 
 .hamburger div {
-    margin-left: 310px;
     width: 30px;
-    height: 4px;
+    height: 5px;
     background-color: #fff;
+    border-radius: 5px;
+    transition: transform 0.3s ease-in-out;
 }
 
+
 @media (max-width: 768px) {
-    .nav-links {
-        display: none;
-        width: 100%;
-        flex-direction: column;
-        background-color: #606c38;
-        position: absolute;
-        top: 77px;
-        left: 0;
-        padding: 10px 0;
+    nav {
+        grid-template-columns: 1fr ; 
+        grid-template-rows: 80px; 
     }
 
-    .nav-links a {
-        padding: 1rem;
-        text-align: center;
-        width: 100%;
+    .logo-container {
+        position: absolute;
+        left: 10px;
     }
 
     .hamburger {
         display: flex;
+        position: absolute;
+        top: 30px;
+        left: 330px;
+    }
+    
+    .nav-links {
+        position: absolute;
+        top: 77px;
+        left: 0;
+        width: 100%;
+        background-color: #606c38;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+    
+        padding: 10px 0;
+    }
+    .links{
+        flex-direction: column;
     }
 
-    .button-container button{
-        margin-left: 120px;
+    .button-container {
+        justify-self: center;
+        margin-top: 10px;
+    }
+
+    .button-container button {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* PC nézet */
+@media (min-width: 769px) {
+    .button-container {
+        grid-column: 3;  /* A gomb a 3. rácselem legyen */
+        justify-self: end;  /* Jobbra igazítjuk */
+        margin-right: 20px;  /* Kis távolság a jobb oldalról */
+    }
+
+    .nav-links {
+        display: flex;  /* A linkek flex módra váltanak */
+        grid-column: 2;
+        justify-content: center;
+    }
+
+    .hamburger {
+        display: none; /* A hamburger menü el van rejtve PC-n */
     }
 }

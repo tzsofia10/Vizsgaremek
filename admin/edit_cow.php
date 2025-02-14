@@ -118,8 +118,8 @@ $dbconn->close();
             <input type="date" id="birthdate" name="birthdate" value="<?php echo htmlspecialchars($cow['birthdate']); ?>" required>
             <br>
     
-            <button type="submit">Módosítás</button>
-            <button type="submit"><a href="farm_states.php">Vissza a listához</a></button>
+            <button class="button" type="submit">Módosítás</button>
+            <button class="button" type="submit"><a href="farm_states.php">Vissza a listához</a></button>
         </form>
     </main>
 

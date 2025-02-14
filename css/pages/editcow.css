@@ -29,7 +29,7 @@ input, select {
     border-radius: 5px;
 }
 
-button {
+.button {
     margin-top: 15px;
     padding: 10px;
     background-color: #28a745;
@@ -40,12 +40,12 @@ button {
     font-size: 16px;
 }
 
-button a {
+.button a {
     color: white;
     text-decoration: none;
     display: block;
 }
 
-button:hover {
+.button:hover {
     background-color: #218838;
 }

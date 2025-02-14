@@ -135,8 +135,8 @@ $dbconn->close();
             <input type="file" id="picture" name="picture">
             <br>
     
-            <button type="submit">Hozzáadás</button>
-            <button><a href="contents_list.html">Vissza</a></button>
+            <button class="button" type="submit">Hozzáadás</button>
+            <button class="button"><a href="contents_list.html">Vissza</a></button>
         </form>
     </main>
 
