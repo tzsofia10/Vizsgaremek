@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="hu">
 <head>
@@ -20,7 +21,7 @@
         }
     }
     ?>
-
+    <script src="../js/nav.js"></script>
     <!-- egyedi js fájlok betöltése -->
     <?php 
     if (!empty($custom_js)) { 
@@ -31,3 +32,6 @@
     ?>
 </head>
 <body>
+    <!-- Your page content -->
+</body>
+</html>

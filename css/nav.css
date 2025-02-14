@@ -1,7 +1,9 @@
 body {
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     
+    background-color: #fefae0;
 }
+
 main {
     transition: margin-top 0.3s ease-in-out;
 }
@@ -54,7 +56,7 @@ nav a:hover {
     background-color: #575757;
 }
 
-/* gomb 3. rácselem a gridnek */
+
 .button-container {
     grid-column: 3;
     justify-self: end;
@@ -133,7 +135,6 @@ nav button {
     width: 30px;
     height: 25px;
     z-index: 10;
-    margin-left: 20px; /* A bal oldali távolság a hamburgernek */
 }
 
 .hamburger div {

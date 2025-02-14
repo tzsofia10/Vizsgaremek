@@ -24,29 +24,3 @@
         <div></div>
     </div>
 </nav>
-
-<script>
-    function toggleMenu() {
-    const navLinks = document.querySelector('.nav-links');
-    const main = document.querySelector('main');
-
-    if (navLinks.style.display === 'flex') {
-        navLinks.style.display = 'none';
-        main.classList.remove('menu-open'); // Visszahúzza a <main>-t
-    } else {
-        navLinks.style.display = 'flex';
-        main.classList.add('menu-open'); // Letolja a <main>-t
-    }
-}
-
-// Ha az ablak mérete visszavált nagy képernyőre, visszaállítjuk a <main>-t
-window.addEventListener('resize', () => {
-    if (window.innerWidth > 768) {
-        document.querySelector('.nav-links').style.display = 'flex';
-        document.querySelector('main').classList.remove('menu-open');
-    } else {
-        document.querySelector('.nav-links').style.display = 'none';
-    }
-});
-
-</script>
