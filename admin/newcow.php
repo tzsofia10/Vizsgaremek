@@ -97,7 +97,7 @@ $dbconn->close();
         <h1>Új tehén hozzáadása</h1>
         <form method="POST" enctype="multipart/form-data">
             <label for="ear_tag">Füljelző:</label>
-            <input type="text" id="ear_tag" name="ear_tag" required maxlength="13">
+            <input type="text" id="ear_tag" name="ear_tag" required maxlength="15">
             <br>
     
             <label for="gender">Nem:</label>
