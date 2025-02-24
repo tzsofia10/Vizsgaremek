@@ -7,6 +7,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
 
 require '../connect.php'; 
 
+
 // Színek lekérdezése az adatbázisból
 $colorsResult = $dbconn->query("SELECT id, colors AS color FROM colors");
 $colors = [];
@@ -25,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $color_id = $_POST['color_id'] ?? '';
     $birthdate = $_POST['birthdate'] ?? '';
     $picture = NULL;
-
+    
     // Kép feltöltés kezelése
     if (!empty($_FILES['picture']['name']) && $_FILES['picture']['error'] === 0) {
         $target_dir = "uploads/";
@@ -47,7 +48,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo "<p>Csak JPG, JPEG, vagy PNG fájlok tölthetők fel.</p>";
         }
     }
-
+  // Azonosítók ellenőrzése
+  if ($ear_tag === $mother_ear_tag) {
+    echo "<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>";
+    echo "<script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Hiba',
+            text: 'Az állat és az anyja nem lehet azonos azonosítóval!',
+        }).then(() => {
+            window.history.back();
+        });
+    </script>";
+    exit;
+}
     // Adatbázisba mentés
     $stmt = $dbconn->prepare("INSERT INTO cows (ear_tag, gender, mother_ear_tag, father_ear_tag, color_id, birthdate, picture) VALUES (?, ?, ?, ?, ?, ?, ?)");
     $stmt->bind_param('ssssiss', $ear_tag, $gender, $mother_ear_tag, $father_ear_tag, $color_id, $birthdate, $picture);

@@ -1,0 +1,86 @@
+* {
+    box-sizing: border-box;
+}
+
+.carousel {
+    max-width: 1920px;
+    width: 100%;
+    height: 50vh;
+    margin: 40px auto;
+    box-shadow: 0 30px 40px -20px rgba(0, 0, 0, .5);
+    position: relative;
+}
+
+@media(orientation:portrait) {
+    carousel {
+        height: 40vh;
+    }
+}
+
+.carousel div {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-position: center center;
+    background-size: cover;
+    opacity: 0
+}
+
+.carousel div:nth-child(1) {
+    background-image: url('../../cowPicture/slider/header01.jpg');
+}
+
+.carousel div:nth-child(2) {
+    background-image: url('../../cowPicture/slider/header02.jpg');
+    animation-delay: 4s;
+}
+
+.carousel div:nth-child(3) {
+    background-image: url('../../cowPicture/slider/header03.jpg');
+    animation-delay: 8s;
+}
+
+.slider div {
+    left: -100%;
+    animation: slide 12s infinite
+}
+
+@keyframes slide {
+
+    0%,
+    40% {
+        opacity: 0;
+    }
+
+    1% {
+        opacity: 1;
+        left: -100%
+    }
+
+    6%,
+    34.5% {
+        left: 0
+    }
+
+    39.5% {
+        opacity: 1;
+        left: 100%
+    }
+}
+
+.carousel.slider {
+    opacity: 0;
+    animation: carousel-fade-in 2s forwards
+}
+
+@keyframes carousel-fade-in {
+
+    0%,
+    40% {
+        opacity: 0
+    }
+
+    100% {
+        opacity: 1
+    }
+}

@@ -41,6 +41,7 @@ $result = $dbconn->query($sql);
     $page_title = "Lista"; 
     $custom_css = ["../css/pages/farmSate.css", "../css/delete.css", "../css/table.css"]; // egyedi css fájl hozzáadása
     $custom_js = ["../js/translate.js", "../js/delete.js", "https://cdn.jsdelivr.net/npm/sweetalert2@11"]; // egyedi js fájlok
+
     include '../main/head.php'; 
 ?>
 <!-- </head> rész vége-->
@@ -117,16 +118,99 @@ $result = $dbconn->query($sql);
 
             // Lapozó gombok
             echo "<div class='pagination'>";
+
             if ($page > 1) {
                 echo "<a href='?page=" . ($page - 1) . "'>&laquo; Előző</a>";
             }
-            for ($i = 1; $i <= $total_pages; $i++) {
-                echo "<a href='?page=$i'" . ($i === $page ? " class='active'" : "") . ">$i</a>";
+
+            // Ha több mint 5 oldal van, és az aktuális oldal 5-ös vagy annak környékén, jelenítse meg az aktuális logikát
+            if ($total_pages > 5) {
+                if ($page == 1 || $page == 2) {
+                    // Ha az első vagy második oldalon vagyunk, az első 2 oldal és az utolsó oldal
+                    for ($i = 1; $i <= 2; $i++) {
+                        echo "<a href='?page=$i'" . ($i === $page ? " class='active'" : "") . ">$i</a>";
+                    }
+                    
+                    // "..." jelzés
+                    echo "<span class='dots' onclick='showPageInput()'>...</span>";
+                    
+                    // Utolsó oldal
+                    echo "<a href='?page=$total_pages'" . ($total_pages === $page ? " class='active'" : "") . ">$total_pages</a>";
+
+                } elseif ($page == 5) {
+                    // Ha az 5. oldalon vagyunk, első 2 oldal, "..." és 5. és következő oldalak
+                    for ($i = 1; $i <= 2; $i++) {
+                        echo "<a href='?page=$i'" . ($i === $page ? " class='active'" : "") . ">$i</a>";
+                    }
+
+                    // "..." jelzés
+                    echo "<span class='dots' onclick='showPageInput()'>...</span>";
+                    
+                    // Aktuális oldal és a következő oldal (6)
+                    echo "<a href='?page=$page' class='active'>$page</a>";
+                    echo "<a href='?page=" . ($page + 1) . "'>" . ($page + 1) . "</a>";
+                    
+                    // Utolsó oldal
+                    echo "<a href='?page=$total_pages'" . ($total_pages === $page ? " class='active'" : "") . ">$total_pages</a>";
+
+                } else {         
+                    for ($i = 1; $i <= 2; $i++) {
+                        echo "<a href='?page=$i'" . ($i === $page ? " class='active'" : "") . ">$i</a>";
+                    }
+
+                    // "..." jelzés
+                    echo "<span class='dots' onclick='showPageInput()'>...</span>";
+
+                    // Aktuális oldal és a következő két oldal
+                    for ($i = $page; $i <= $page + 1; $i++) {
+                        if ($i > 2 && $i < $total_pages) {
+                            echo "<a href='?page=$i'" . ($i === $page ? " class='active'" : "") . ">$i</a>";
+                        }
+                    }
+
+                    // Utolsó oldal
+                    echo "<a href='?page=$total_pages'" . ($total_pages === $page ? " class='active'" : "") . ">$total_pages</a>";
+                }
+            } else {
+                // Ha kevesebb mint 5 oldal van, mindet megjelenítjük
+                for ($i = 1; $i <= $total_pages; $i++) {
+                    echo "<a href='?page=$i'" . ($i === $page ? " class='active'" : "") . ">$i</a>";
+                }
             }
+
             if ($page < $total_pages) {
                 echo "<a href='?page=" . ($page + 1) . "'>Következő &raquo;</a>";
             }
+
             echo "</div>";
+
+            echo "
+            <script>
+            function showPageInput() {
+                var input = prompt('Írd be, melyik oldalra szeretnél ugrani (1-től $total_pages-ig):');
+                if (input !== null) {
+                    var pageNumber = parseInt(input);
+                    if (pageNumber >= 1 && pageNumber <= $total_pages) {
+                        window.location.href = '?page=' + pageNumber;
+                    } else {
+                        // SweetAlert2 figyelmeztetés
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Érvénytelen oldal!',
+                            text: 'Kérlek válassz egy érvényes oldalszámot 1 és $total_pages között.',
+                            confirmButtonText: 'OK',
+                            confirmButtonColor: '#3085d6',
+                            background: '#f8d7da',
+                            color: '#721c24',
+                        });
+                    }
+                }
+            }
+            </script>
+            ";
+
+
+
         } else {
             echo "<p>Nincs adat a táblázatban.</p>";
         }

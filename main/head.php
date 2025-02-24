@@ -21,8 +21,9 @@
         }
     }
     ?>
+    <!-- sweetalert és az egyedi js fájlok betöltése -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="../js/nav.js"></script>
-    <!-- egyedi js fájlok betöltése -->
     <?php 
     if (!empty($custom_js)) { 
         foreach ($custom_js as $js) {
