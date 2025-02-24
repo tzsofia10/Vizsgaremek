@@ -63,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
         $output .= "</ul>\n";
     } else {
         // Adatok mentése az adatbázisba
-        $query = "INSERT INTO cms_news 
+        $query = "INSERT INTO news 
                   (alias, ordering, nav_name, content, creation, description, keywords, states, img) 
                   VALUES (?, ?, ?, ?, NOW(), ?, ?, ?, ?)";
         $stmt = mysqli_prepare($dbconn, $query);

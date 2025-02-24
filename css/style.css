@@ -11,17 +11,6 @@ body{
     background-color: #f1f1f1;
 }
 
-#fejlec{
-    text-align: center;
-    background-color: rgb(65,22,174);
-    border-bottom: 10px solid #fff;
-}
-
-#fejlec h1{
-    color: #fff;
-    padding:20px;
-    margin: 0;
-}
 
 #menu{
     float:left;
@@ -43,7 +32,7 @@ body{
     text-decoration: none;
     display: block;
     padding: 5px 15px;
-    background-color: rgb(71,22,197);
+    background-color: #41980a;
 }
 
 #menu ul li a:hover{
