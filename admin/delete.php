@@ -5,7 +5,7 @@ if (isset($_GET['id'])) {
     $id = (int)$_GET['id'];
 
     // Cikk törlése az adatbázisból
-    $query = "DELETE FROM cms_news WHERE id = ?";
+    $query = "DELETE FROM news WHERE id = ?";
     $stmt = mysqli_prepare($dbconn, $query);
 
     if ($stmt) {

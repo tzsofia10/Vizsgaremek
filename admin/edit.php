@@ -17,7 +17,7 @@ $id = (int)$_GET['id']; // Az id értékének beolvasása és számként kezelé
 
 
 // Cikk lekérdezése az adatbázisból
-$query = "SELECT alias, ordering, nav_name, content, description, keywords, states, img FROM cms_news WHERE id = ?";
+$query = "SELECT alias, ordering, nav_name, content, description, keywords, states, img FROM news WHERE id = ?";
 // Készítsük elő a lekérdezést a megadott SQL utasítással
 $stmt = mysqli_prepare($dbconn, $query);
 if ($stmt) {
@@ -90,7 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
 
     // Hibák kezelése
     if (empty($errors)) {
-        $query = "UPDATE cms_news SET alias = ?, ordering = ?, nav_name = ?, content = ?, description = ?, keywords = ?, states = ?, img = ? WHERE id = ?";
+        $query = "UPDATE news SET alias = ?, ordering = ?, nav_name = ?, content = ?, description = ?, keywords = ?, states = ?, img = ? WHERE id = ?";
         $stmt = mysqli_prepare($dbconn, $query);
 
         if ($stmt) {
