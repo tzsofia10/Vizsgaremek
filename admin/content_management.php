@@ -138,10 +138,13 @@ $form = <<<FORM
 </script>
 FORM;
 
-/* Sablon megjelenítése */
 $template = file_get_contents("../template.html");
 $template = str_replace("{{menu}}", "", $template);
 $template = str_replace("{{nav_name}}", "Új tartalom létrehozása", $template);
+
+// Linkeld be a külső CSS fájlt a sablonba
+$template = str_replace("</head>", "<link rel='stylesheet' href='../css/pages/content.css'></head>", $template);
+
 $template = str_replace("{{content}}", $form, $template);
 $template = str_replace("{{sidebar}}", "", $template);
 print $template;

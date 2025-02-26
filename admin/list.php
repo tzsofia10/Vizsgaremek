@@ -21,13 +21,15 @@ if (!$result) {
 
 <!DOCTYPE html>
 <html lang="hu">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cikkek listája</title>
-    <link rel="stylesheet" href="../style.css">
-    <link rel="stylesheet" href="../css/nav.css">
-</head>
+     <!-- <head> része-->
+<?php 
+    $page_title = "Új szarvasmarha"; 
+    $custom_css = ["../css/pages/editcow.css", "../css/pages/list.css"]; // Több CSS fájl hozzáadása
+    $custom_js = ["../js/translate2.js"]; 
+    include '../main/head.php'; 
+?>
+<!-- </head> rész vége-->
+
 <body>
     <?php include '../main/nav.php'; ?>
     <h1>Cikkek listája</h1>
