@@ -211,7 +211,7 @@ INSERT INTO `news` (`id`, `alias`, `ordering`, `nav_name`, `content`, `img`, `cr
 CREATE TABLE `sales` (
   `id` int(11) NOT NULL,
   `cow_id` int(11) DEFAULT NULL,
-  `sellers_id` int(11) DEFAULT NULL,
+  `costumer_id` int(11) DEFAULT NULL,
   `sales_date` date DEFAULT NULL,
   `price` decimal(10,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
