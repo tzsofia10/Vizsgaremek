@@ -52,7 +52,6 @@ CREATE TABLE `cows` (
   `id` int(11) NOT NULL,
   `ear_tag` varchar(255) DEFAULT NULL,
   `gender` tinyint(1) DEFAULT NULL,
-  `cows_parents_id` int(11) DEFAULT NULL,
   `color_id` int(11) DEFAULT NULL,
   `birthdate` date DEFAULT NULL,
   `death_date` date DEFAULT NULL,
