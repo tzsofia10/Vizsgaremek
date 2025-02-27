@@ -42,3 +42,4 @@ $template = str_replace("{{description}}", $description, $template);
 $template = str_replace("{{keywords}}", $keywords, $template);
 
 echo $template;
+?>
