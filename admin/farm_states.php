@@ -40,7 +40,7 @@ $result = $dbconn->query($sql);
  <?php 
     $page_title = "Lista"; 
     $custom_css = ["../css/pages/farmSate.css", "../css/delete.css", "../css/table.css"]; // egyedi css fájl hozzáadása
-    $custom_js = ["../js/translate.js", "../js/delete.js", "https://cdn.jsdelivr.net/npm/sweetalert2@11"]; // egyedi js fájlok
+    $custom_js = ["../js/translate.js", "../js/delete.js", "../js/search.js"]; // egyedi js fájlok
 
     include '../main/head.php'; 
 ?>
@@ -53,9 +53,11 @@ $result = $dbconn->query($sql);
     
     <main>
         <h1>Szarvasmarha lista</h1>
+        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
+
         <?php
         if ($result->num_rows > 0) {
-            echo "<table>
+            echo "<table id='myTable'>
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -230,5 +232,7 @@ $result = $dbconn->query($sql);
     <footer>
         <?php include '../main/footer.php'; ?>
     </footer>
+
+
 </body>
 </html>
