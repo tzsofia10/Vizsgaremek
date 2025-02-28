@@ -1,4 +1,3 @@
-
 console.log("Delete script loaded"); 
 document.addEventListener("DOMContentLoaded", () => {
     const deleteLinks = document.querySelectorAll("a[href*='delete_cow.php']");
@@ -61,5 +60,45 @@ document.addEventListener("DOMContentLoaded", () => {
 
     confirmNo.addEventListener("click", () => {
         confirmOverlay.style.display = "none"; // Elrejtjük a megerősítő ablakot
+    });
+
+    // Törlés gombok kezelése
+    document.querySelectorAll('.deleteButton').forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            const deleteLink = this.closest('a');
+            const deleteUrl = deleteLink.href;
+
+            Swal.fire({
+                title: 'Biztosan törölni szeretnéd?',
+                text: "Ezt a műveletet nem lehet visszavonni!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#dc3545',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'Igen, törlöm!',
+                cancelButtonText: 'Mégse',
+                customClass: {
+                    confirmButton: 'btn btn-danger',
+                    cancelButton: 'btn btn-secondary'
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Táblázat elhalványítása
+                    const tbody = document.querySelector('#cowTable tbody');
+                    if (tbody) {
+                        tbody.style.opacity = '0';
+                        tbody.style.transform = 'translateY(-10px)';
+                    }
+                    
+                    // Kis késleltetés után átirányítás a törlés URL-re
+                    setTimeout(() => {
+                        window.location.href = deleteUrl;
+                    }, 300);
+                }
+            });
+        });
     });
 });
