@@ -36,26 +36,25 @@ $result = $dbconn->query($sql);
 ?>
 <!DOCTYPE html>
 <html lang="hu">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tehén Lista</title>
-    <link rel="stylesheet" href="../css/table.css">
-    <link rel="stylesheet" href="../css/delete.css">
-    <link rel="stylesheet" href="../css/footer.css">
-    <link rel="stylesheet" href="../css/pages/farmSate.css">
-    <link rel="stylesheet" href="../css/nav.css">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="../js/translate.js" defer></script>
-    <script src="../js/delete.js" defer></script>
-</head>
+ <!-- <head> része-->
+ <?php 
+    $page_title = "Lista"; 
+    $custom_css = ["../css/pages/farmSate.css", "../css/delete.css", "../css/table.css"]; // egyedi css fájl hozzáadása
+    $custom_js = ["../js/translate.js", "../js/delete.js", "../js/search.js"]; // egyedi js fájlok
+
+    include '../main/head.php'; 
+?>
+<!-- </head> rész vége-->
+
 <body>
     <?php include '../main/nav.php'; ?>
     <main>
         <h1>Szarvasmarha lista</h1>
+        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
+
         <?php
         if ($result->num_rows > 0) {
-            echo "<table>
+            echo "<table id='myTable'>
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -146,5 +145,7 @@ $result = $dbconn->query($sql);
     <footer>
         <?php include '../main/footer.php'; ?>
     </footer>
+
+
 </body>
 </html>
