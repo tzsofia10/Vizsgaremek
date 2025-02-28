@@ -70,7 +70,7 @@ $dbconn->close();
 <html lang="hu">
  <!-- <head> része-->
  <?php 
-    $page_title = "Módosítás"; 
+    $page_title = "Módosítása"; 
     $custom_css = ["../css/pages/editcow.css"]; // egyedi css fájl hozzáadása
     $custom_js = ["../js/translate2.js","https://cdn.jsdelivr.net/npm/sweetalert2@11"]; // egyedi js fájlok
     include '../main/head.php'; 

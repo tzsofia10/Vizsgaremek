@@ -1,33 +1,44 @@
 function toggleMenu() {
     const navLinks = document.querySelector('.nav-links');
     const main = document.querySelector('main');
+    const hamburger = document.querySelector('.hamburger');
 
     // Ha a menü már látszik, elrejtjük
-    if (navLinks.style.display === 'flex') {
-        navLinks.style.display = 'none';
-        main.classList.remove('menu-open'); // Visszahúzza a <main>-t
+    if (navLinks.classList.contains('show')) {
+        navLinks.classList.remove('show');
+        main.classList.remove('menu-open');
+        hamburger.classList.remove('active');
     } else {
-        navLinks.style.display = 'flex';
-        main.classList.add('menu-open'); // Letolja a <main>-t
+        navLinks.classList.add('show');
+        main.classList.add('menu-open');
+        hamburger.classList.add('active');
     }
 }
-
 
 window.addEventListener('resize', () => {
     const navLinks = document.querySelector('.nav-links');
     const main = document.querySelector('main');
+    const hamburger = document.querySelector('.hamburger');
+    
     if (window.innerWidth > 768) {
-        navLinks.style.display = 'flex'; 
+        navLinks.classList.remove('show');
         main.classList.remove('menu-open');
+        hamburger.classList.remove('active');
     } else {
-        navLinks.style.display = 'none'; 
+        navLinks.classList.remove('show');
+        main.classList.remove('menu-open');
+        hamburger.classList.remove('active');
     }
 });
 
-
 window.addEventListener('load', () => {
     if (window.innerWidth <= 768) {
-        // Alapértelmezetten telefonos nézetben rejtve legyen a menü
-        document.querySelector('.nav-links').style.display = 'none';
+        const navLinks = document.querySelector('.nav-links');
+        const main = document.querySelector('main');
+        const hamburger = document.querySelector('.hamburger');
+        
+        navLinks.classList.remove('show');
+        main.classList.remove('menu-open');
+        hamburger.classList.remove('active');
     }
 });

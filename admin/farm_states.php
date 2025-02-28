@@ -40,7 +40,7 @@ $result = $dbconn->query($sql);
  <?php 
     $page_title = "Lista"; 
     $custom_css = ["../css/pages/farmSate.css", "../css/delete.css", "../css/table.css"]; // egyedi css fájl hozzáadása
-    $custom_js = ["../js/translate.js", "../js/delete.js", "../js/search.js"]; // egyedi js fájlok
+    $custom_js = ["../js/translate.js", "../js/delete.js", "../js/search.js", "../js/pagination.js"]; // egyedi js fájlok
 
     include '../main/head.php'; 
 ?>
@@ -50,11 +50,11 @@ $result = $dbconn->query($sql);
     <?php include '../main/nav.php'; ?>
     <main>
         <h1>Szarvasmarha lista</h1>
-        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
+        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Fülszám keresés..." title="Fülszám keresés">
 
         <?php
         if ($result->num_rows > 0) {
-            echo "<table id='myTable'>
+            echo "<table id='cowTable'>
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -115,16 +115,41 @@ $result = $dbconn->query($sql);
             echo "</tbody></table>";
 
             // Lapozó gombok
-            echo "<div class='pagination'>";
+            echo "<div class='pagination' data-max-pages='$total_pages'>";
+            
+            // Előző gomb
             if ($page > 1) {
-                echo "<a href='?page=" . ($page - 1) . "'>&laquo; Előző</a>";
+                echo "<a href='?page=" . ($page - 1) . "#cowTable'>&laquo; Előző</a>";
             }
-            for ($i = 1; $i <= $total_pages; $i++) {
-                echo "<a href='?page=$i'" . ($i === $page ? " class='active'" : "") . ">$i</a>";
+
+            // Első oldal
+            echo "<a href='?page=1#cowTable'" . (1 === $page ? " class='active'" : "") . ">1</a>";
+            
+            // Ha nem az első oldalaknál vagyunk, megjelenítjük a három pontot
+            if ($page > 3) {
+                echo "<a class='dots' href='javascript:void(0)'>...</a>";
             }
+
+            // Aktív oldal körüli oldalak (ha nem az első vagy utolsó)
+            if ($page > 2 && $page < $total_pages - 1) {
+                echo "<a href='?page=$page#cowTable' class='active'>$page</a>";
+            }
+
+            // Ha nem az utolsó oldalaknál vagyunk, megjelenítjük a három pontot
+            if ($page < $total_pages - 2) {
+                echo "<a class='dots' href='javascript:void(0)'>...</a>";
+            }
+
+            // Utolsó oldal
+            if ($total_pages > 1) {
+                echo "<a href='?page=$total_pages#cowTable'" . ($total_pages === $page ? " class='active'" : "") . ">$total_pages</a>";
+            }
+
+            // Következő gomb
             if ($page < $total_pages) {
-                echo "<a href='?page=" . ($page + 1) . "'>Következő &raquo;</a>";
+                echo "<a href='?page=" . ($page + 1) . "#cowTable'>Következő &raquo;</a>";
             }
+            
             echo "</div>";
         } else {
             echo "<p>Nincs adat a táblázatban.</p>";
@@ -146,6 +171,31 @@ $result = $dbconn->query($sql);
         <?php include '../main/footer.php'; ?>
     </footer>
 
+    <?php
+    if (isset($_SESSION['success_message'])) {
+        echo "<script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Sikeres törlés!',
+                text: '" . $_SESSION['success_message'] . "',
+                confirmButtonColor: '#A8C27A'
+            });
+        </script>";
+        unset($_SESSION['success_message']);
+    }
+
+    if (isset($_SESSION['error_message'])) {
+        echo "<script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Hiba!',
+                text: '" . $_SESSION['error_message'] . "',
+                confirmButtonColor: '#dc3545'
+            });
+        </script>";
+        unset($_SESSION['error_message']);
+    }
+    ?>
 
 </body>
 </html>

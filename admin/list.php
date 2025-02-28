@@ -24,7 +24,7 @@ if (!$result) {
      <!-- <head> része-->
 <?php 
     $page_title = "Új szarvasmarha"; 
-    $custom_css = ["../css/pages/editcow.css", "../css/pages/list.css"]; // Több CSS fájl hozzáadása
+    $custom_css = ["../css/pages/editcow.css", "../css/pages/list.css", "../css/nav.css"]; // Több CSS fájl hozzáadása
     $custom_js = ["../js/translate2.js"]; 
     include '../main/head.php'; 
 ?>
