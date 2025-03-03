@@ -83,7 +83,7 @@ $dbconn->close();
 <?php 
     $page_title = "Új szarvasmarha"; 
     $custom_css = ["../css/pages/editcow.css", "../css/pages/newcow.css"]; // Több CSS fájl hozzáadása
-    $custom_js = ["../js/translate2.js"]; 
+    $custom_js = ["../js/translate2.js", "../js/formTest.js"]; 
     include '../main/head.php'; 
 ?>
 <!-- </head> rész vége-->

@@ -22,7 +22,6 @@ $sql = "SELECT
             cows.ear_tag, 
             cows.gender, 
             cows.mother_ear_tag, 
-            cows.father_ear_tag, 
             colors.colors AS color, 
             cows.birthdate,
             cows.picture
@@ -62,7 +61,6 @@ $result = $dbconn->query($sql);
                             <th>Fülszám</th>
                             <th>Nem</th>
                             <th>Anya fülszám</th>
-                            <th>Apa fülszám</th>
                             <th>Szín</th>
                             <th>Születési dátum</th>
                             <th colspan='2'>Műveletek</th>
@@ -86,7 +84,6 @@ $result = $dbconn->query($sql);
                         <td>" . htmlspecialchars($row['ear_tag']) . "</td>
                         <td>" . htmlspecialchars($gender) . "</td>
                         <td>" . htmlspecialchars($row['mother_ear_tag']) . "</td>
-                        <td>" . htmlspecialchars($row['father_ear_tag']) . "</td>
                         <td class='color'>" . htmlspecialchars($color) . "</td>
                         <td>" . htmlspecialchars($row['birthdate']) . "</td>
                         <td class='btn-update borderRight'>

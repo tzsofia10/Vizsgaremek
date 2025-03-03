@@ -16,7 +16,6 @@ if (isset($_GET['search'])) {
                 cows.ear_tag, 
                 cows.gender, 
                 cows.mother_ear_tag, 
-                cows.father_ear_tag, 
                 colors.colors AS color, 
                 cows.birthdate,
                 cows.picture
@@ -44,4 +43,5 @@ if (isset($_GET['search'])) {
 }
 
 $dbconn->close();
+$custom_js = ["../js/translate2.js"];
 ?> 
