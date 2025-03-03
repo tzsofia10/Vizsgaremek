@@ -5,6 +5,7 @@ function sanitize(string $data): string {
     return htmlspecialchars($data, ENT_QUOTES, 'UTF-8');
 }
 
+
 $sql = "SELECT id, alias, nav_name FROM news WHERE states = 1 ORDER BY ordering ASC";
 $result = mysqli_query($dbconn, $sql);
 

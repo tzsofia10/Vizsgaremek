@@ -8,42 +8,52 @@ body{
     width: 80%;
     margin: 10px auto;
     background-color: #f1f1f1;
+    padding: 20px;
+    position: relative;
 }
 
-
 #menu{
-    float:left;
+    position: fixed;
+    left: 0;
+    top: 100px;
     width: 200px;
     text-transform: uppercase;
 }
 
 #menu ul{
-    padding:0
+    padding: 0;
+    margin: 0;
 }
+
 #menu ul li{ 
     list-style-type: none;
-    margin: 2px;
-    display: block;
+    margin: 5px 0;
 }
 
 #menu ul li a{
     color: #000;
     text-decoration: none;
     display: block;
-    padding: 5px 15px;
+    padding: 8px 15px;
     background-color: #41980a;
+    border-radius: 3px;
+    transition: all 0.3s ease;
 }
 
 #menu ul li a:hover{
     color: #fff;
+    transform: translateX(5px);
 }
+
 #menu ul li a.aktiv{
     color: #862023;
     background-color: #000;
 }
+
 #tartalom{
     min-height: 400px;
-    margin:20px 220px
+    margin: 0 220px;
+    padding: 20px;
 }
 
 #tartalom h2{
@@ -55,12 +65,15 @@ body{
 #tartalom p{
     text-align: justify;
     text-indent: 40px;
+    line-height: 1.6;
 }
+
 #oldalsav{
     float:right;
     width: 200px;
     margin-top:20px
 }
+
 #oldalsav h3{
     margin-top:0;
     font-size: 1.2em;
