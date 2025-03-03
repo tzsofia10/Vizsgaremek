@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
-    header("Location: index.php");
+    echo "error";
     exit();
 }
 
@@ -24,15 +24,16 @@ if (isset($_GET['id'])) {
     $stmt->bind_param("i", $id);
     
     if ($stmt->execute()) {
-        $_SESSION['success_message'] = "A(z) " . $cow['ear_tag'] . " fülszámú tehén sikeresen törölve!";
+        echo "success";
     } else {
-        $_SESSION['error_message'] = "Hiba történt a törlés során!";
+        echo "error";
     }
     
     $stmt->close();
     $dbconn->close();
-    
-    header("Location: farm_states.php");
     exit();
 }
+
+echo "error";
+exit();
 ?>

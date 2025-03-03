@@ -116,25 +116,23 @@ $result = $dbconn->query($sql);
             }
 
             // Első oldal
-            echo "<a href='?page=1#cowTable'" . (1 === $page ? " class='active'" : "") . ">1</a>";
-            
-            // Ha nem az első oldalaknál vagyunk, megjelenítjük a három pontot
             if ($page > 3) {
-                echo "<a class='dots' href='javascript:void(0)'>...</a>";
+                echo "<a href='?page=1#cowTable'>1</a>";
+                if ($page > 4) {
+                    echo "<a class='dots' href='javascript:void(0)'>...</a>";
+                }
             }
 
-            // Aktív oldal körüli oldalak (ha nem az első vagy utolsó)
-            if ($page > 2 && $page < $total_pages - 1) {
-                echo "<a href='?page=$page#cowTable' class='active'>$page</a>";
-            }
-
-            // Ha nem az utolsó oldalaknál vagyunk, megjelenítjük a három pontot
-            if ($page < $total_pages - 2) {
-                echo "<a class='dots' href='javascript:void(0)'>...</a>";
+            // Középső oldalak
+            for ($i = max(1, $page - 1); $i <= min($total_pages, $page + 1); $i++) {
+                echo "<a href='?page=$i#cowTable'" . ($i === $page ? " class='active'" : "") . ">$i</a>";
             }
 
             // Utolsó oldal
-            if ($total_pages > 1) {
+            if ($page < $total_pages - 2) {
+                if ($page < $total_pages - 3) {
+                    echo "<a class='dots' href='javascript:void(0)'>...</a>";
+                }
                 echo "<a href='?page=$total_pages#cowTable'" . ($total_pages === $page ? " class='active'" : "") . ">$total_pages</a>";
             }
 
