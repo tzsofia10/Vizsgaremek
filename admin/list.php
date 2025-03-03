@@ -24,7 +24,7 @@ if (!$result) {
      <!-- <head> része-->
 <?php 
     $page_title = "Új szarvasmarha"; 
-    $custom_css = ["../css/pages/editcow.css", "../css/pages/list.css", "../css/nav.css"]; // Több CSS fájl hozzáadása
+    $custom_css = ["../css/pages/editcow.css", "../css/pages/list.css", "../css/nav.css", "../css/footer.css"]; // Több CSS fájl hozzáadása
     $custom_js = ["../js/translate2.js" ]; 
     include '../main/head.php'; 
 ?>
@@ -67,6 +67,10 @@ if (!$result) {
         </tbody>
     </table>
     <p><a href="content_management.php">Új cikk hozzáadása</a></p>
+
+    <footer>
+        <?php include '../main/footer.php'; ?>
+    </footer>
 </body>
 </html>
 
