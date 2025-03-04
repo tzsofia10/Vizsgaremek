@@ -11,7 +11,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "SELECT id, sales_date, sellers_id, price FROM sales";
+$sql = "SELECT id, sales_date, sellers_id, price,cow_id FROM sales";
 $result = $conn->query($sql);
 ?>
 
@@ -47,7 +47,8 @@ $result = $conn->query($sql);
                         <td>" . $row["id"] . "</td>
                         <td>" . $row["sale_date"] . "</td>
                         <td>" . $row["price"] . "</td>
-                        <td>" . $row["buyer"] . "</td>
+                        <td>" . $row["sellers_id"] . "</td>
+                        <td>" . $row["cow_id"] . "</td>
                       </tr>";
             }
         } else {
