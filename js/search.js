@@ -34,7 +34,6 @@ function myFunction() {
                     <td>${cow.ear_tag}</td>
                     <td>${cow.gender}</td>
                     <td>${cow.mother_ear_tag}</td>
-                    <td>${cow.father_ear_tag}</td>
                     <td class="color">${cow.color || 'N/A'}</td>
                     <td>${cow.birthdate}</td>
                     <td class="btn-update borderRight">
