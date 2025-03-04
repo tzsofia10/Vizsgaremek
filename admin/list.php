@@ -23,7 +23,7 @@ if (!$result) {
 <html lang="hu">
 <?php 
     $page_title = "Új szarvasmarha"; 
-    $custom_css = ["../css/pages/editcow.css", "../css/pages/list.css", "../css/nav.css", "../css/footer.css"]; 
+    $custom_css = ["../css/pages/editcow.css", "../css/pages/list.css", "../css/.css", "../css/footer.css"]; 
     $custom_js = ["../js/translate2.js" ]; 
     include '../main/head.php'; 
 ?>

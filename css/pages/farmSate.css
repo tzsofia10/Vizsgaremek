@@ -232,6 +232,8 @@ main h1{
     }
 }
 
+
+
 @media only screen and (max-width: 480px) {
     .pagination {
         gap: 3px;

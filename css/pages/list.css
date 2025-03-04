@@ -1,34 +1,43 @@
 body {
     text-align: center;
+    overflow-x: hidden;
+    width: 100%;
 }
 
 .table-container {
-    width: 100%;
     overflow-x: auto;
     margin: 20px 0;
+    background: #fff;
+    border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 100%;
 }
 
 table {
     width: 100%;
     min-width: 800px;
     border-collapse: collapse;
-    background: white;
-}
-
-table, th, td {
-    border: 1px solid #ddd;
+    margin: 0;
+    border: none;
 }
 
 th, td {
-    padding: 10px;
+    padding: 12px 15px;
     text-align: left;
+    border-bottom: 1px solid #ddd;
+    white-space: nowrap;
 }
 
 th {
     background-color: #007BFF;
     color: white;
-    white-space: nowrap;
+    font-weight: 600;
+    border: none;
+}
+
+tr:hover {
+    background-color: #f5f5f5;
 }
 
 td a {
@@ -48,12 +57,13 @@ h1 {
 
 #article {
     display: inline-block;
-    margin-top: 20px;
-    padding: 10px 15px;
+    padding: 10px 20px;
     background-color: #007BFF;
     color: white;
     text-decoration: none;
-    border-radius: 5px;
+    border-radius: 4px;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
 }
 
 #article:hover {
@@ -78,18 +88,81 @@ footer {
     margin-top: auto;
 }
 
-@media screen and (max-width: 768px) {
+@media only screen and (max-width: 768px) {
     .content-wrapper {
-        padding: 10px;
+        padding: 15px;
+
+        max-width: 96%;
+        overflow-x: hidden;
+    }
+
+    .table-container {
+        overflow-x: auto;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    table {
+        min-width: 100%;
+        display: block;
+        overflow-x: auto;
+    }
+
+    #article {
+        padding: 8px 16px;
+        font-size: 14px;
+        width: 90%;
+        text-align: center;
+        margin: 20px auto;
+        display: block;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .table-container {
+        overflow-x: auto;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    table {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+    }
+
+    #article {
+        padding: 6px 12px;
+        font-size: 13px;
+        width: 80%;
+    }
+
+    h1 {
+        font-size: 20px;
+        text-align: center;
+        margin-bottom: 15px;
+    }
+}
+
+@media only screen and (max-width: 458px) {
+    .content-wrapper, .table-container, table, th, td, h1, #article {
+        max-width: 97%;
     }
     
-    th, td {
-        padding: 8px;
+    .content-wrapper {
+        overflow-x: hidden;
+    }
+    
+    table {
         font-size: 14px;
     }
     
     #article {
-        width: 100%;
-        text-align: center;
+        font-size: 12px;
+        padding: 5px 10px;
+    }
+    
+    h1 {
+        font-size: 18px;
     }
 }
