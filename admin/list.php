@@ -66,11 +66,12 @@ if (!$result) {
             <?php endif; ?>
         </tbody>
     </table>
-    <p><a href="content_management.php">Új cikk hozzáadása</a></p>
+    <p><a id="article" href="content_management.php">Új cikk hozzáadása</a></p>
 
     <footer>
-        <?php include '../main/footer.php'; ?>
+        <?php include '../main/footer.php';?>
     </footer>
+</html>
 </body>
 </html>
 

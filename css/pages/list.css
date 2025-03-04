@@ -20,18 +20,18 @@ th, td {
     text-align: left;
 }
 
-th {
+ th {
     background-color: #007BFF;
     color: white;
 }
 
-td a {
+ td a {
     text-decoration: none;
     color: #007BFF;
     font-weight: bold;
 }
 
-td a:hover {
+ td a:hover {
     text-decoration: underline;
 }
 
@@ -39,7 +39,7 @@ h1 {
     color: #333;
 }
 
-p a {
+#article  {
     display: inline-block;
     margin-top: 20px;
     padding: 10px 15px;
@@ -49,6 +49,6 @@ p a {
     border-radius: 5px;
 }
 
-p a:hover {
+#article:hover {
     background-color: #0056b3;
 }
