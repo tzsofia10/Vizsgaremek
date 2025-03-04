@@ -9,6 +9,7 @@
                 // Ha nincs bejelentkezve, jelenjenek meg a linkek
                 echo '<a href="../index.php">Főoldal</a>';
                 echo '<a href="../main/static.php">Statisztikák</a>';
+                echo '<a href="../main/sell.php">Eladás</a>';
             }
             else {
                 echo '<a href="list.php">Cikkek listája</a>';

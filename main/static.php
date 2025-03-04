@@ -13,10 +13,12 @@
     </style>
 </head>
 <body>
-    <?php include '../main/nav.php'; ?>
+    <?php include '../main/nav.php'; 
+    
+     ?>
     <h2>Szarvasmarhák Halálozási Diagram</h2>
+   
     <canvas id="deathChart"></canvas>
-
     <script>
         // Fetch death data from PHP
         fetch('get_deaths.php')
