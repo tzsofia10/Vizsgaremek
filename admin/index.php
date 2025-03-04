@@ -6,7 +6,7 @@ if (isset($_POST['submit'])) {
     $password = $_POST['password'];
 
     if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $error = "Érvénytelen e-mail cím vagy jelszó!";
+        $error = "<div class='error-message'>Érvénytelen e-mail cím vagy jelszó!</div>";
     } else {
         require "../connect.php";
 	
@@ -24,23 +24,21 @@ if (isset($_POST['submit'])) {
         if ($result->num_rows > 0) {
             $row = $result->fetch_assoc();
             if (password_verify($password, $row['password'])) {
-                echo "Bejelentkezés sikeres!";
                 $_SESSION['logged_in'] = true;
                 $_SESSION['user_id'] = $row['id'];
                 $_SESSION['user_email'] = $row['email'];
                 header("Location: list.php");
                 exit;
             } else {
-                echo "A jelszó nem egyezik!";
+                $error = "<div class='error-message'>A jelszó nem egyezik!</div>";
             }
         } else {
-            echo "Az email nem található az adatbázisban!";
+            $error = "<div class='error-message'>Az email nem található az adatbázisban!</div>";
         }
 
         $stmt->close();
     }
 }
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -48,15 +46,17 @@ if (isset($_POST['submit'])) {
 <meta charset="utf-8">
 <title>Admin Panel Login</title>
 <link href="../css/adminpanel.css" rel="stylesheet">
+
+
 </head>
 
 <body>
 <h1>Login</h1>
 <form method="post" action="">
-    <?php if (isset($error)) echo htmlspecialchars($error, ENT_QUOTES, 'UTF-8'); ?>
+    <?php if (isset($error)) echo $error; ?>
     <p><label for="email">Email:</label><br>
     <input type="email" id="email" name="email" required></p>
-    <p><label for="password">Password:</label><br>
+    <p><label for="password">Jelszó:</label><br>
     <input type="password" id="password" name="password" required></p>
     
     <input type="submit" id="submit" name="submit" value="Belépés">

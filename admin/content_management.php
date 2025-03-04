@@ -96,40 +96,62 @@ $state = $state ?? 1;
 
 /* HTML űrlap */
 $form = <<<FORM
-<form method="post" action="" enctype="multipart/form-data">
-    {$output}
-    <p><label for="alias">Alias:*</label><br>
-    <input type="text" id="alias" name="alias" required pattern="^[a-z-_]+$" value="{$alias}"></p>
-    
-    <p><label for="ordering">Sorrend:</label><br>
-    <input type="number" id="ordering" name="ordering" min="1" value="{$ordering}"></p>
-    
-    <p><label for="nav_name">Navigációs név:*</label><br>
-    <input type="text" id="nav_name" name="nav_name" required value="{$nav_name}"></p>
-    
-    <p><label for="content">Tartalom:</label><br>
-    <textarea id="content" name="content" rows="10" cols="80">{$content}</textarea></p>
-    
-    <p><label for="description">Leírás:</label><br>
-    <textarea id="description" name="description">{$description}</textarea></p>
-    
-    <p><label for="keywords">Kulcsszavak:</label><br>
-    <textarea id="keywords" name="keywords">{$keywords}</textarea></p>
+<div class="form-container">
+    <form method="post" action="" enctype="multipart/form-data">
+        {$output}
+        <div class="form-group">
+            <label for="alias">Alias:*</label>
+            <input type="text" id="alias" name="alias" required pattern="^[a-z-_]+$" value="{$alias}">
+        </div>
+        
+        <div class="form-group">
+            <label for="ordering">Sorrend:</label>
+            <input type="number" id="ordering" name="ordering" min="1" value="{$ordering}">
+        </div>
+        
+        <div class="form-group">
+            <label for="nav_name">Navigációs név:*</label>
+            <input type="text" id="nav_name" name="nav_name" required value="{$nav_name}">
+        </div>
+        
+        <div class="form-group">
+            <label for="content">Tartalom:</label>
+            <textarea id="content" name="content" rows="10" cols="80">{$content}</textarea>
+        </div>
+        
+        <div class="form-group">
+            <label for="description">Leírás:</label>
+            <textarea id="description" name="description">{$description}</textarea>
+        </div>
+        
+        <div class="form-group">
+            <label for="keywords">Kulcsszavak:</label>
+            <textarea id="keywords" name="keywords">{$keywords}</textarea>
+        </div>
 
-    <p><label for="image">Kép:</label><br>
-    <input type="file" id="image" name="image" accept="image/*"></p>
-    
-    <p><label for="state">Állapot:</label><br>
-    <select id="state" name="state">
-        <option value="1" " . ($state === 1 ? "selected" : "") . ">Aktív</option>
-        <option value="0" " . ($state === 0 ? "selected" : "") . ">Inaktív</option>
-    </select></p>
+        <div class="form-group">
+            <label for="image">Kép:</label>
+            <input type="file" id="image" name="image" accept="image/*">
+        </div>
+        
+        <div class="form-group">
+            <label for="state">Állapot:</label>
+            <select id="state" name="state">
+                <option value="1" " . ($state === 1 ? "selected" : "") . ">Aktív</option>
+                <option value="0" " . ($state === 0 ? "selected" : "") . ">Inaktív</option>
+            </select>
+        </div>
 
-    <p><em>A *-gal jelölt mezők kitöltése kötelező!</em></p>
-    <input type="submit" id="submit" name="submit" value="Mentés">
-    <input type="reset" value="Mégse">
-    <p><a href="list.php">Vissza a táblázathoz</a></p>
-</form>
+        <div class="form-actions">
+            <p class="required-fields"><em>A *-gal jelölt mezők kitöltése kötelező!</em></p>
+            <div class="button-group">
+                <input type="submit" id="submit" name="submit" value="Mentés" class="btn btn-primary">
+                <input type="reset" value="Mégse" class="btn btn-secondary">
+            </div>
+            <a href="list.php" class="btn btn-link">Vissza a táblázathoz</a>
+        </div>
+    </form>
+</div>
 
 <!-- CKEditor script betöltése -->
 <script src="https://cdn.ckeditor.com/4.20.0/standard/ckeditor.js"></script>
@@ -144,6 +166,9 @@ $template = str_replace("{{nav_name}}", "Új tartalom létrehozása", $template)
 
 // Linkeld be a külső CSS fájlt a sablonba
 $template = str_replace("</head>", "<link rel='stylesheet' href='../css/pages/content.css'></head>", $template);
+
+// Eltávolítjuk a nav-ot tartalmazó részt a template-ből
+$template = preg_replace('/<nav[^>]*>.*?<\/nav>/s', '', $template);
 
 $template = str_replace("{{content}}", $form, $template);
 $template = str_replace("{{sidebar}}", "", $template);

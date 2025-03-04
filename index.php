@@ -27,10 +27,14 @@ if (mysqli_num_rows($result) > 0) {
     $content = $row['content'];
     $creation = sanitize($row['creation']);
 } else {
-    $description = "";
-    $keywords = "";
-    $nav_name = "Hiba";
-    $content = "<p><em>A keresett oldal nem található...</em></p>";
+    $description = "Hiba - Oldal nem található";
+    $keywords = "404, hiba, nem található";
+    $nav_name = "404 - Oldal nem található";
+    $content = "<div class='error-container'>
+                    <h1>404 - Oldal nem található</h1>
+                    <p>A keresett oldal nem található vagy áthelyezésre került.</p>
+                    <p><a href='./' class='btn btn-primary'>Vissza a főoldalra</a></p>
+                </div>";
     $creation = date("Y-m-d H:i:s");
 }
 
