@@ -14,7 +14,7 @@
             else {
                 echo '<a href="list.php">Cikkek listája</a>';
                 echo '<a href="farm_states.php">Farm állománya</a>';
-                echo '<a href="newcow.php">Új tehén hozzáadása</a>';
+                echo '<a href="newcow.php">Új Szarvasmarha</a>';
             }
             ?>
         </div>

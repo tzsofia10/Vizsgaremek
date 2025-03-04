@@ -6,12 +6,18 @@
     <title><?php echo isset($page_title) ? $page_title : "Alapértelmezett cím"; ?></title>
     <meta name="author" content="Tóth Zsófia, Zsíros Kata">
     
+    <?php 
+    $current_path = $_SERVER['REQUEST_URI'];
+    $base_path = (strpos($current_path, '/admin/') !== false || strpos($current_path, '/main/') !== false) ? '../' : '';
+
+    ?>
+
     <!-- favicon -->
-    <link rel="icon" type="image/x-icon" href="../cowPicture/cowfavicon.png">
+    <link rel="icon" type="image/x-icon" href="<?php echo $base_path; ?>cowPicture/cowfavicon.png">
     
     <!-- alap css fájlok betöltése -->
-    <link rel="stylesheet" href="../css/footer.css">
-    <link rel="stylesheet" href="../css/nav.css">
+    <link rel="stylesheet" href="<?php echo $base_path; ?>css/footer.css">
+    <link rel="stylesheet" href="<?php echo $base_path; ?>css/nav.css">
 
     <!-- egyedi css fájlok betöltése -->
     <?php 
@@ -23,7 +29,7 @@
     ?>
     <!-- sweetalert és az egyedi js fájlok betöltése -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="../js/nav.js"></script>
+    <script src="<?php echo $base_path; ?>js/nav.js"></script>
     <?php 
     if (!empty($custom_js)) { 
         foreach ($custom_js as $js) {
