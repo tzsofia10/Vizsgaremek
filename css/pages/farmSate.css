@@ -52,26 +52,24 @@ main h1{
     position: relative;
 }
 
-.svgIcon {
+.deleteButton .svgIcon {
     width: 12px;
     transition-duration: .3s;
 }
 
-.svgIcon path {
+.deleteButton .svgIcon path {
     fill: white;
 }
 
 .deleteButton:hover {
     width: 100px;
     border-radius: 50px;
-    transition-duration: .3s;
     background-color: rgb(255, 69, 69);
     align-items: center;
 }
 
 .deleteButton:hover .svgIcon {
     width: 50px;
-    transition-duration: .3s;
     transform: translateY(60%);
 }
 
@@ -88,7 +86,6 @@ main h1{
     font-size: 13px;
     opacity: 1;
     transform: translateY(30px);
-    transition-duration: .3s;
 }
 
 /* modosítás button */
@@ -110,32 +107,25 @@ main h1{
     text-decoration: none !important;
 }
   
-.edit-svgIcon {
+.edit-button .edit-svgIcon {
     width: 17px;
     transition-duration: 0.3s;
 }
   
-  .edit-svgIcon path {
+.edit-button .edit-svgIcon path {
     fill: white;
 }
   
 .edit-button:hover {
     width: 120px;
     border-radius: 50px;
-    transition-duration: 0.3s;
     background-color: #A8C27A;
     align-items: center;
 }
   
 .edit-button:hover .edit-svgIcon {
     width: 20px;
-    transition-duration: 0.3s;
-    transform: translateY(60%);
-    -webkit-transform: rotate(360deg);
-    -moz-transform: rotate(360deg);
-    -o-transform: rotate(360deg);
-    -ms-transform: rotate(360deg);
-    transform: rotate(360deg);
+    transform: translateY(60%) rotate(360deg);
 }
   
 .edit-button::before {
@@ -153,7 +143,6 @@ main h1{
     font-size: 13px;
     opacity: 1;
     transform: translateY(0px);
-    transition-duration: 0.3s;
 }
   
 
@@ -228,6 +217,19 @@ main h1{
         min-width: 35px;
         font-size: 14px;
     }
+
+    #myInput {
+        width: 90%;
+        max-width: 300px;
+        font-size: 14px;
+        padding: 10px 15px;
+        margin: 0 auto 20px auto;
+    }
+    
+    #myInput:focus {
+        width: 95%;
+        max-width: 350px;
+    }
 }
 
 @media only screen and (max-width: 480px) {
@@ -244,6 +246,17 @@ main h1{
     .pagination a:first-child,
     .pagination a:last-child {
         min-width: auto;
+    }
+
+    #myInput {
+        width: 85%;
+        font-size: 14px;
+        padding: 8px 15px;
+        margin: 0 auto 15px auto;
+    }
+    
+    #myInput:focus {
+        width: 90%;
     }
 }
 
@@ -285,35 +298,6 @@ main h1{
     font-style: italic;
 }
 
-/* Reszponzív megjelenés */
-@media only screen and (max-width: 768px) {
-    #myInput {
-        width: 90%;
-        max-width: 300px;
-        font-size: 14px;
-        padding: 10px 15px;
-        margin: 0 auto 20px auto;
-    }
-    
-    #myInput:focus {
-        width: 95%;
-        max-width: 350px;
-    }
-}
-
-@media only screen and (max-width: 480px) {
-    #myInput {
-        width: 85%;
-        font-size: 14px;
-        padding: 8px 15px;
-        margin: 0 auto 15px auto;
-    }
-    
-    #myInput:focus {
-        width: 90%;
-    }
-}
-
 /* Táblázat animáció */
 @keyframes fadeIn {
     from {
@@ -337,18 +321,6 @@ main h1{
     .dots {
         transition: none;
         animation: none;
-    }
-}
-
-/* Érintőképernyős optimalizáció */
-@media (hover: none) {
-    .pagination a:not(.active):hover {
-        transform: none;
-    }
-
-    .pagination a:not(.active):active {
-        background-color: #283618;
-        color: white;
     }
 }
 

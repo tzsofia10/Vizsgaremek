@@ -21,57 +21,61 @@ if (!$result) {
 
 <!DOCTYPE html>
 <html lang="hu">
-     <!-- <head> része-->
 <?php 
     $page_title = "Új szarvasmarha"; 
-    $custom_css = ["../css/pages/editcow.css", "../css/pages/list.css", "../css/nav.css", "../css/footer.css"]; // Több CSS fájl hozzáadása
+    $custom_css = ["../css/pages/editcow.css", "../css/pages/list.css", "../css/nav.css", "../css/footer.css"]; 
     $custom_js = ["../js/translate2.js" ]; 
     include '../main/head.php'; 
 ?>
-<!-- </head> rész vége-->
 
 <body>
-    <?php include '../main/nav.php'; ?>
-    <h1>Cikkek listája</h1>
-    <table border="1" cellpadding="10" cellspacing="0">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Alias</th>
-                <th>Navigációs név</th>
-                <th>Létrehozás dátuma</th>
-                <th>Állapot</th>
-                <th>Műveletek</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php if (mysqli_num_rows($result) > 0): ?>
-                <?php while ($row = mysqli_fetch_assoc($result)): ?>
-                    <tr>
-                        <td><?= htmlspecialchars($row['id']) ?></td>
-                        <td><?= htmlspecialchars($row['alias']) ?></td>
-                        <td><?= htmlspecialchars($row['nav_name']) ?></td>
-                        <td><?= htmlspecialchars($row['creation']) ?></td>
-                        <td><?= $row['states'] == 1 ? 'Aktív' : 'Inaktív' ?></td>
-                        <td>
-                            <a href="edit.php?id=<?= $row['id'] ?>">Módosítás</a> |
-                            <a href="delete.php?id=<?= $row['id'] ?>" onclick="return confirm('Biztosan törölni szeretnéd?');">Törlés</a>
-                        </td>
-                    </tr>
-                <?php endwhile; ?>
-            <?php else: ?>
-                <tr>
-                    <td colspan="6">Nincsenek elérhető cikkek.</td>
-                </tr>
-            <?php endif; ?>
-        </tbody>
-    </table>
-    <p><a id="article" href="content_management.php">Új cikk hozzáadása</a></p>
+    <div class="page-container">
+        <?php include '../main/nav.php'; ?>
+        
+        <div class="content-wrapper">
+            <h1>Cikkek listája</h1>
+            <div class="table-container">
+                <table border="1" cellpadding="10" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Alias</th>
+                            <th>Navigációs név</th>
+                            <th>Létrehozás dátuma</th>
+                            <th>Állapot</th>
+                            <th>Műveletek</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php if (mysqli_num_rows($result) > 0): ?>
+                            <?php while ($row = mysqli_fetch_assoc($result)): ?>
+                                <tr>
+                                    <td><?= htmlspecialchars($row['id']) ?></td>
+                                    <td><?= htmlspecialchars($row['alias']) ?></td>
+                                    <td><?= htmlspecialchars($row['nav_name']) ?></td>
+                                    <td><?= htmlspecialchars($row['creation']) ?></td>
+                                    <td><?= $row['states'] == 1 ? 'Aktív' : 'Inaktív' ?></td>
+                                    <td>
+                                        <a href="edit.php?id=<?= $row['id'] ?>">Módosítás</a> |
+                                        <a href="delete.php?id=<?= $row['id'] ?>" onclick="return confirm('Biztosan törölni szeretnéd?');">Törlés</a>
+                                    </td>
+                                </tr>
+                            <?php endwhile; ?>
+                        <?php else: ?>
+                            <tr>
+                                <td colspan="6">Nincsenek elérhető cikkek.</td>
+                            </tr>
+                        <?php endif; ?>
+                    </tbody>
+                </table>
+            </div>
+            <p><a id="article" href="content_management.php">Új cikk hozzáadása</a></p>
+        </div>
 
-    <footer>
-        <?php include '../main/footer.php';?>
-    </footer>
-</html>
+        <footer>
+            <?php include '../main/footer.php';?>
+        </footer>
+    </div>
 </body>
 </html>
 

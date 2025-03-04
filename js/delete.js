@@ -68,80 +68,27 @@ document.addEventListener("DOMContentLoaded", () => {
             e.preventDefault();
             e.stopPropagation();
             
-            const cowId = this.getAttribute('data-id');
-            const currentPage = new URLSearchParams(window.location.search).get('page') || 1;
-            const tbody = document.querySelector('#cowTable tbody');
-            const rowCount = tbody ? tbody.getElementsByTagName('tr').length : 0;
-            const pagination = document.querySelector('.pagination');
-            const maxPages = pagination ? parseInt(pagination.getAttribute('data-max-pages')) : 1;
-
+            const deleteUrl = this.getAttribute('data-delete-url');
+            
             Swal.fire({
                 title: 'Biztosan törölni szeretnéd?',
-                text: "Ezt a műveletet nem lehet visszavonni!",
+                text: "A művelet nem visszafordítható!",
                 icon: 'warning',
                 showCancelButton: true,
-                confirmButtonColor: '#dc3545',
-                cancelButtonColor: '#6c757d',
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
                 confirmButtonText: 'Igen, törlöm!',
-                cancelButtonText: 'Mégse',
+                cancelButtonText: 'Mégsem',
+                background: '#fff',
                 customClass: {
-                    confirmButton: 'btn btn-danger',
-                    cancelButton: 'btn btn-secondary'
+                    popup: 'pagination-popup',
+                    confirmButton: 'pagination-confirm',
+                    cancelButton: 'pagination-cancel'
                 }
             }).then((result) => {
                 if (result.isConfirmed) {
-                    // Táblázat elhalványítása
-                    if (tbody) {
-                        tbody.style.opacity = '0';
-                        tbody.style.transform = 'translateY(-10px)';
-                    }
-                    
-                    // AJAX kérés küldése a törléshez
-                    fetch(`delete_cow.php?id=${cowId}`, {
-                        method: "GET",
-                    })
-                    .then(response => response.text())
-                    .then(data => {
-                        if (data.trim() === "success") {
-                            Swal.fire({
-                                title: "Törölve!",
-                                text: "A tehén adatai törlésre kerültek.",
-                                icon: "success",
-                                confirmButtonText: "OK",
-                                confirmButtonColor: '#28a745'
-                            }).then(() => {
-                                // Ha ez az utolsó elem az oldalon és nem az első oldalon vagyunk
-                                if (rowCount === 1 && currentPage > 1) {
-                                    // Ha az utolsó oldalon vagyunk
-                                    if (currentPage == maxPages) {
-                                        window.location.href = `farm_states.php?page=${currentPage - 1}#cowTable`;
-                                    } else {
-                                        window.location.reload();
-                                    }
-                                } else {
-                                    window.location.reload();
-                                }
-                            });
-                        } else {
-                            Swal.fire({
-                                title: "Hiba!",
-                                text: "Nem sikerült törölni az elemet.",
-                                icon: "error",
-                                confirmButtonText: "OK",
-                                confirmButtonColor: '#dc3545'
-                            });
-                        }
-                    })
-                    .catch(error => {
-                        console.error("Hiba történt:", error);
-                        Swal.fire({
-                            title: "Hiba!",
-                            text: "Hálózati hiba történt.",
-                            icon: "error",
-                            confirmButtonText: "OK",
-                            confirmButtonColor: '#dc3545'
-                        });
-                    });
+                    // Törlés végrehajtása
+                    window.location.href = deleteUrl;
                 }
             });
         });

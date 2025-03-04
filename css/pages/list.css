@@ -1,14 +1,19 @@
 body {
-
     text-align: center;
 }
 
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+    margin: 20px 0;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
 table {
-    width: 80%;
-    margin: 20px auto;
+    width: 100%;
+    min-width: 800px;
     border-collapse: collapse;
     background: white;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 table, th, td {
@@ -20,26 +25,28 @@ th, td {
     text-align: left;
 }
 
- th {
+th {
     background-color: #007BFF;
     color: white;
+    white-space: nowrap;
 }
 
- td a {
+td a {
     text-decoration: none;
     color: #007BFF;
     font-weight: bold;
 }
 
- td a:hover {
+td a:hover {
     text-decoration: underline;
 }
 
 h1 {
     color: #333;
+    margin-bottom: 20px;
 }
 
-#article  {
+#article {
     display: inline-block;
     margin-top: 20px;
     padding: 10px 15px;
@@ -51,4 +58,38 @@ h1 {
 
 #article:hover {
     background-color: #0056b3;
+}
+
+.page-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.content-wrapper {
+    flex: 1;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+footer {
+    margin-top: auto;
+}
+
+@media screen and (max-width: 768px) {
+    .content-wrapper {
+        padding: 10px;
+    }
+    
+    th, td {
+        padding: 8px;
+        font-size: 14px;
+    }
+    
+    #article {
+        width: 100%;
+        text-align: center;
+    }
 }
