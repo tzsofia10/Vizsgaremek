@@ -5,13 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Szarvasmarhák Halálozási Diagram</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="../css/nav.css">
+    <link rel="stylesheet" href="../css/footer.css">
     <style>
         body { font-family: Arial, sans-serif; text-align: center; }
         canvas { max-width: 600px; margin: auto; }
     </style>
 </head>
 <body>
-
+    <?php include '../main/nav.php'; ?>
     <h2>Szarvasmarhák Halálozási Diagram</h2>
     <canvas id="deathChart"></canvas>
 
@@ -45,6 +47,8 @@
             })
             .catch(error => console.error('Hiba a lekérdezés során:', error));
     </script>
-
+  <footer>
+        <?php include '../main/footer.php';?>
+    </footer>
 </body>
 </html>

@@ -8,7 +8,7 @@
             if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === false) {
                 // Ha nincs bejelentkezve, jelenjenek meg a linkek
                 echo '<a href="../index.php">Főoldal</a>';
-                echo '<a href="#statisztikak">Statisztikák</a>';
+                echo '<a href="../main/static.php">Statisztikák</a>';
             }
             else {
                 echo '<a href="list.php">Cikkek listája</a>';
