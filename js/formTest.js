@@ -20,7 +20,6 @@ function autoFillForm() {
     document.getElementById('ear_tag').value = sampleData.ear_tag; 
     document.getElementById('gender').value = sampleData.gender; 
     document.getElementById('mother_ear_tag').value = sampleData.mother_ear_tag;
-    document.getElementById('father_ear_tag').value = sampleData.father_ear_tag;
     document.getElementById('color_id').value = sampleData.color_id; 
     document.getElementById('birthdate').value = sampleData.birthdate; 
 

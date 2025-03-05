@@ -13,9 +13,9 @@ $cows_count_result = $dbconn->query($cows_count_query);
 $cows_count = $cows_count_result->fetch_assoc()['total'];
 
 // Színek számának lekérdezése
-$colors_count_query = "SELECT COUNT(*) as total FROM colors";
-$colors_count_result = $dbconn->query($colors_count_query);
-$colors_count = $colors_count_result->fetch_assoc()['total'];
+$articles_count_query = "SELECT COUNT(*) as total FROM news";
+$articles_count_result = $dbconn->query($articles_count_query);
+$articles_count = $articles_count_result->fetch_assoc()['total'];
 
 // Utolsó 5 hozzáadott szarvasmarha
 $latest_cows_query = "SELECT ear_tag, birthdate, colors.colors as color 
@@ -58,8 +58,8 @@ include '../main/head.php';
                     </svg>
                 </div>
                 <div class="stat-info">
-                    <h3>Elérhető színek</h3>
-                    <p><?php echo $colors_count; ?></p>
+                    <h3>Cikkek</h3>
+                    <p><?php echo $articles_count; ?></p>
                 </div>
             </div>
         </div>

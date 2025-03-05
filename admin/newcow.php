@@ -171,8 +171,7 @@ $dbconn->close();
             <input type="text" id="mother_ear_tag" name="mother_ear_tag" maxlength="13">
             <br>
     
-            <label for="father_ear_tag">Apa füljelzője:</label>
-            <input type="text" id="father_ear_tag" name="father_ear_tag" maxlength="13">
+  
             <br>
     
             <label for="color_id">Szín:</label>
