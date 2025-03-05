@@ -23,7 +23,7 @@
             <?php
             if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                 // Ha be van jelentkezve, csak az admin linkek jelenjenek meg
-                echo '<button><a href="admin/logout.php">Kijelentkezés</a></button>';
+                echo '<button><a href="logout.php">Kijelentkezés</a></button>';
             } else {
                 // Ha nincs bejelentkezve, jelenjen meg a "Bejelentkezés" gomb
                 echo '<button><a href="../admin/index.php">Bejelentkezés</a>
