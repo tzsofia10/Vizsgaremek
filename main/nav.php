@@ -12,7 +12,7 @@
                 echo '<a href="../main/sell.php">Eladás</a>';
             }
             else {
-                echo '<a href="list.php">Cikkek listája</a>';
+                echo '<a href="main.php">Főoldal</a>';
                 echo '<a href="farm_states.php">Farm állománya</a>';
                 echo '<a href="newcow.php">Új Szarvasmarha</a>';
             }
@@ -23,7 +23,7 @@
             <?php
             if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                 // Ha be van jelentkezve, csak az admin linkek jelenjenek meg
-                echo '<button><a href="logout.php">Kijelentkezés</a></button>';
+                echo '<button><a href="admin/logout.php">Kijelentkezés</a></button>';
             } else {
                 // Ha nincs bejelentkezve, jelenjen meg a "Bejelentkezés" gomb
                 echo '<button><a href="../admin/index.php">Bejelentkezés</a>

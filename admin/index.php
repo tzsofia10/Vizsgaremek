@@ -27,7 +27,7 @@ if (isset($_POST['submit'])) {
                 $_SESSION['logged_in'] = true;
                 $_SESSION['user_id'] = $row['id'];
                 $_SESSION['user_email'] = $row['email'];
-                header("Location: list.php");
+                header("Location: main.php");
                 exit;
             } else {
                 $error = "<div class='error-message'>A jelszó nem egyezik!</div>";
