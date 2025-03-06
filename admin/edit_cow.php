@@ -88,7 +88,12 @@ $dbconn->close();
             <label for="ear_tag">Füljelző:</label>
             <input type="text" id="ear_tag" name="ear_tag" value="<?php echo htmlspecialchars($cow['ear_tag']); ?>" required>
             <br>
-    
+            
+            <label for="">Elpusztult?</label>
+            <select id="death" name="death" required>
+               
+            </select>
+
             <label for="gender">Nem:</label>
             <select id="gender" name="gender" required>
                 <option value="M" <?php echo $cow['gender'] === 'M' ? 'selected' : ''; ?>>Hím</option>
