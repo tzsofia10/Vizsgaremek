@@ -1,16 +1,16 @@
-body{
+body {
     background-image: url('../../cowPicture/bg.png');
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
     background-color: #638245 !important;
     padding: 0;
-    min-height: 100vh;
     display: flex;
     flex-direction: column;
+    min-height: 100vh;
 }
 
-main{
+main {
     width: 80%;
     text-align: center;
     margin: 20px auto;
@@ -18,21 +18,23 @@ main{
     flex: 1;
 }
 
-main h1{
+main h1 {
     margin: 50px auto 10px auto;
 }
 
-.btn-update{
+.btn-update {
     width: 130px;
 }
-.borderRight{
+
+.borderRight {
     border: none;
 }
-.borderRight a{
+
+.borderRight a {
     text-decoration: none;
 }
 
-/* törlés gomb */
+/* Törlés gomb */
 .deleteButton {
     margin: auto;
     justify-items: center;
@@ -88,7 +90,8 @@ main h1{
     transform: translateY(30px);
 }
 
-/* modosítás button */
+
+/* Módosítás gomb */
 .edit-button {
     width: 40px;
     height: 40px;
@@ -106,49 +109,54 @@ main h1{
     position: relative;
     text-decoration: none !important;
 }
-  
-.edit-button .edit-svgIcon {
+
+.edit-svgIcon {
     width: 17px;
     transition-duration: 0.3s;
 }
-  
-.edit-button .edit-svgIcon path {
+
+.edit-svgIcon path {
     fill: white;
 }
-  
+
 .edit-button:hover {
     width: 120px;
     border-radius: 50px;
+    transition-duration: 0.3s;
     background-color: #A8C27A;
     align-items: center;
 }
-  
+
 .edit-button:hover .edit-svgIcon {
     width: 20px;
-    transform: translateY(60%) rotate(360deg);
+    transition-duration: 0.3s;
+    transform: translateY(60%);
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    transform: rotate(360deg);
 }
-  
+
 .edit-button::before {
     display: none;
     content: "Módosítás";
     color: white;
-    text-decoration: none;
     transition-duration: 0.3s;
     font-size: 2px;
 }
-  
+
 .edit-button:hover::before {
     display: block;
     padding-right: 10px;
     font-size: 13px;
     opacity: 1;
     transform: translateY(0px);
+    transition-duration: 0.3s;
 }
-  
 
 
-
-/* lapozó */
+/* Lapozó */
 @keyframes pulseActive {
     0% { transform: translateY(-3px) scale(1); }
     50% { transform: translateY(-3px) scale(1.05); }
@@ -174,7 +182,6 @@ main h1{
     gap: 8px;
     flex-wrap: wrap;
     padding: 10px;
-    max-width: 100%;
 }
 
 .pagination a {
@@ -183,7 +190,7 @@ main h1{
     padding: 8px 16px;
     text-decoration: none;
     border-radius: 5px;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: background-color 0.3s, transform 0.3s;
     min-width: 40px;
     text-align: center;
     display: flex;
@@ -195,7 +202,7 @@ main h1{
     background-color: #606c38;
     color: white;
     transform: translateY(-3px);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     animation: pulseActive 2s infinite;
 }
 
@@ -203,6 +210,32 @@ main h1{
     background-color: #283618;
     color: white;
     transform: translateY(-2px);
+}
+
+/* Keresőmező stílusa */
+#myInput {
+    width: 300px;
+    padding: 12px 20px;
+    margin: 0 auto 30px auto;
+    border: 2px solid #A8C27A;
+    border-radius: 25px;
+    font-size: 16px;
+    background-color: rgba(255, 255, 255, 0.9);
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: block;
+}
+
+#myInput:focus {
+    outline: none;
+    border-color: #606c38;
+    box-shadow: 0 0 10px rgba(96, 108, 56, 0.3);
+    width: 350px;
+}
+
+#myInput::placeholder {
+    color: #888;
+    font-style: italic;
 }
 
 /* Reszponzív stílusok */
@@ -225,14 +258,12 @@ main h1{
         padding: 10px 15px;
         margin: 0 auto 20px auto;
     }
-    
+
     #myInput:focus {
         width: 95%;
         max-width: 350px;
     }
 }
-
-
 
 @media only screen and (max-width: 480px) {
     .pagination {
@@ -244,11 +275,6 @@ main h1{
         min-width: 30px;
         font-size: 13px;
     }
-    
-    .pagination a:first-child,
-    .pagination a:last-child {
-        min-width: auto;
-    }
 
     #myInput {
         width: 85%;
@@ -256,48 +282,10 @@ main h1{
         padding: 8px 15px;
         margin: 0 auto 15px auto;
     }
-    
+
     #myInput:focus {
         width: 90%;
     }
-}
-
-/* Érintőképernyős optimalizáció */
-@media (hover: none) {
-    .pagination a:not(.active):hover {
-        transform: none;
-    }
-
-    .pagination a:not(.active):active {
-        background-color: #283618;
-        color: white;
-    }
-}
-
-/* Keresőmező stílusa */
-#myInput {
-    width: 300px;
-    padding: 12px 20px;
-    margin: 0 auto 30px auto;
-    border: 2px solid #A8C27A;
-    border-radius: 25px;
-    font-size: 16px;
-    background-color: rgba(255, 255, 255, 0.9);
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    display: block;
-}
-
-#myInput:focus {
-    outline: none;
-    border-color: #606c38;
-    box-shadow: 0 0 10px rgba(96, 108, 56, 0.3);
-    width: 350px;
-}
-
-#myInput::placeholder {
-    color: #888;
-    font-style: italic;
 }
 
 /* Táblázat animáció */
@@ -319,8 +307,7 @@ main h1{
 /* Animációk finomítása */
 @media (prefers-reduced-motion: reduce) {
     .pagination a,
-    .pagination a.active,
-    .dots {
+    .pagination a.active {
         transition: none;
         animation: none;
     }
@@ -376,6 +363,3 @@ main h1{
     background-color: #c1121f !important;
     transform: translateY(-2px) !important;
 }
-
-
-
