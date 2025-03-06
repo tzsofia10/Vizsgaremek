@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2025. Már 04. 13:59
+-- Létrehozás ideje: 2025. Már 06. 08:31
 -- Kiszolgáló verziója: 10.4.28-MariaDB
 -- PHP verzió: 8.2.4
 
@@ -169,6 +169,17 @@ CREATE TABLE `customer` (
   `house_number` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- A tábla adatainak kiíratása `customer`
+--
+
+INSERT INTO `customer` (`id`, `phone_number`, `name`, `settlemets_id`, `street`, `house_number`) VALUES
+(1, '+36201234567', 'Kovács István', 101, 'Petőfi utca', '12/A'),
+(2, '+36209876543', 'Nagy Katalin', 102, 'Szabadság tér', '5'),
+(3, '+36701239876', 'Tóth Péter', 103, 'Kossuth Lajos utca', '8/B'),
+(4, '+36301235678', 'Szabó Erzsébet', 104, 'Rákóczi út', '24'),
+(5, '+36205556677', 'Varga László', 105, 'Béke utca', '3/C');
+
 -- --------------------------------------------------------
 
 --
@@ -212,10 +223,28 @@ INSERT INTO `news` (`id`, `alias`, `ordering`, `nav_name`, `content`, `img`, `cr
 CREATE TABLE `sales` (
   `id` int(11) NOT NULL,
   `cow_id` int(11) DEFAULT NULL,
-  `sellers_id` int(11) DEFAULT NULL,
+  `customer_id` int(11) DEFAULT NULL,
   `sales_date` date DEFAULT NULL,
   `price` decimal(10,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- A tábla adatainak kiíratása `sales`
+--
+
+INSERT INTO `sales` (`id`, `cow_id`, `customer_id`, `sales_date`, `price`) VALUES
+(1, 2, 1, '2023-06-15', 400000.00),
+(2, 5, 2, '2023-07-01', 420000.00),
+(3, 10, 3, '2023-07-20', 390000.00),
+(4, 17, 4, '2023-08-15', 410000.00),
+(5, 22, 5, '2023-09-10', 395000.00),
+(6, 25, 1, '2023-10-05', 400000.00),
+(7, 30, 2, '2023-10-20', 405000.00),
+(8, 41, 3, '2023-11-02', 398000.00),
+(9, 53, 4, '2023-12-15', 415000.00),
+(10, 65, 5, '2024-01-10', 400000.00),
+(11, 72, 1, '2024-02-05', 410000.00),
+(12, 68, 2, '2024-02-28', 390000.00);
 
 -- --------------------------------------------------------
 
@@ -228,6 +257,17 @@ CREATE TABLE `settlements` (
   `postal_code` varchar(10) DEFAULT NULL,
   `town` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- A tábla adatainak kiíratása `settlements`
+--
+
+INSERT INTO `settlements` (`id`, `postal_code`, `town`) VALUES
+(101, '1011', 'Budapest'),
+(102, '8000', 'Székesfehérvár'),
+(103, '4026', 'Debrecen'),
+(104, '6720', 'Szeged'),
+(105, '7621', 'Pécs');
 
 -- --------------------------------------------------------
 
@@ -306,7 +346,7 @@ ALTER TABLE `news`
 ALTER TABLE `sales`
   ADD PRIMARY KEY (`id`),
   ADD KEY `cow_id` (`cow_id`),
-  ADD KEY `sellers_id` (`sellers_id`);
+  ADD KEY `customer_id` (`customer_id`);
 
 --
 -- A tábla indexei `settlements`
@@ -352,7 +392,7 @@ ALTER TABLE `cow_vaccinations`
 -- AUTO_INCREMENT a táblához `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT a táblához `news`
@@ -361,16 +401,10 @@ ALTER TABLE `news`
   MODIFY `id` tinyint(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT a táblához `sales`
---
-ALTER TABLE `sales`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT a táblához `settlements`
 --
 ALTER TABLE `settlements`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=106;
 
 --
 -- AUTO_INCREMENT a táblához `user`
@@ -411,8 +445,8 @@ ALTER TABLE `customer`
 -- Megkötések a táblához `sales`
 --
 ALTER TABLE `sales`
-  ADD CONSTRAINT `sales_ibfk_1` FOREIGN KEY (`cow_id`) REFERENCES `cows` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `sales_ibfk_2` FOREIGN KEY (`sellers_id`) REFERENCES `customer` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `sales_ibfk_1` FOREIGN KEY (`cow_id`) REFERENCES `cows` (`id`),
+  ADD CONSTRAINT `sales_ibfk_2` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

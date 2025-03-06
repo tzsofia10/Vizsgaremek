@@ -48,3 +48,4 @@ $template = str_replace("{{keywords}}", $keywords, $template);
 
 echo $template;
 ?>
+
