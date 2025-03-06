@@ -13,6 +13,7 @@
             }
             else {
                 echo '<a href="main.php">Főoldal</a>';
+                echo '<a href="list.php">Cikkek</a>';
                 echo '<a href="farm_states.php">Farm állománya</a>';
                 echo '<a href="newcow.php">Új Szarvasmarha</a>';
             }

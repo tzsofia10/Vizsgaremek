@@ -57,10 +57,11 @@ main {
     justify-content: center;
 }
 
-.stat-icon svg {
+.stat-icon img {
     width: 30px;
     height: 30px;
     fill: #2c3e50;
+    
 }
 
 .stat-info h3 {

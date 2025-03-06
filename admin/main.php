@@ -41,9 +41,8 @@ include '../main/head.php';
         <div class="stats-container">
             <div class="stat-card">
                 <div class="stat-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
-                        <path d="M480 48c0-26.5-21.5-48-48-48H336c-26.5 0-48 21.5-48 48V96H224V24c0-13.3-10.7-24-24-24s-24 10.7-24 24V96H112V24c0-13.3-10.7-24-24-24S64 10.7 64 24V96H48C21.5 96 0 117.5 0 144v96V464c0 26.5 21.5 48 48 48H96h64H432h64h48c26.5 0 48-21.5 48-48V240 144c0-26.5-21.5-48-48-48H480V48zM176 192H464V432H176V192zM96 432H48V240H96V432zM592 432H544V240h48V432z"/>
-                    </svg>
+                    <img src="../cowPicture/cow-face-front.svg" alt="">
+              
                 </div>
                 <div class="stat-info">
                     <h3>Összes szarvasmarha</h3>
@@ -53,9 +52,7 @@ include '../main/head.php';
 
             <div class="stat-card">
                 <div class="stat-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                        <path d="M204.3 5C104.9 24.4 24.8 104.3 5.2 203.4c-37 187 131.7 326.4 258.8 306.7C372.9 496.5 504 411.4 504 288c0-123.7-100.3-224-224-224zm101.5 277.8c-4.5 4.5-10.6 7-17 7s-12.5-2.5-17-7L256 209.3l-5.5 5.5c-4.5 4.5-10.6 7-17 7s-12.5-2.5-17-7c-9.4-9.4-9.4-24.6 0-33.9l22.6-22.6c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9z"/>
-                    </svg>
+                  <img src="../cowPicture/article.svg" alt="">
                 </div>
                 <div class="stat-info">
                     <h3>Cikkek</h3>
