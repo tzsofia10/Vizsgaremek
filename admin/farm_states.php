@@ -40,7 +40,7 @@ $result = $dbconn->query($sql);
     $page_title = "Lista"; 
     $custom_css = ["../css/pages/farmSate.css", "../css/delete.css", "../css/table.css"]; // egyedi css fájl hozzáadása
     $custom_js = ["../js/search.js", "../js/delete.js", "../js/translate.js", "../js/pagination.js"]; // egyedi js fájlok
-    $additional_head = "<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>"; // SweetAlert2 CDN
+    $additional_head = "<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>"; 
     include '../main/head.php'; 
 ?>
 <!-- </head> rész vége-->
