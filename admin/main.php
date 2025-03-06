@@ -26,6 +26,7 @@ $latest_cows_query = "SELECT ear_tag, birthdate, colors.colors as color
 $latest_cows_result = $dbconn->query($latest_cows_query);
 
 $page_title = "Főoldal";
+$custom_js = ["../js/translate.js"];
 $custom_css = ["../css/pages/main.css"];
 include '../main/head.php';
 ?>
@@ -103,7 +104,29 @@ include '../main/head.php';
             </div>
         </div>
     </main>
+    <button id="backToTop">⬆ Fel az elejére</button>
 
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+    const backToTopButton = document.getElementById("backToTop");
+
+    window.addEventListener("scroll", function () {
+        if (window.scrollY > 300) {
+            backToTopButton.style.display = "block";
+        } else {
+            backToTopButton.style.display = "none";
+        }
+    });
+
+    backToTopButton.addEventListener("click", function () {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    });
+});
+
+    </script>
     <footer>
         <?php include '../main/footer.php'; ?>
     </footer>
