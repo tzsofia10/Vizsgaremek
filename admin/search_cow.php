@@ -43,5 +43,5 @@ if (isset($_GET['search'])) {
 }
 
 $dbconn->close();
-$custom_js = ["../js/translate2.js"];
+
 ?> 
