@@ -160,6 +160,9 @@ th {
 tr:hover {
     background-color: #f8f9fa;
 }
+tr:nth-child(even) {
+    background-color: #cccccc1e;
+  }
 /*vissza*/
 #backToTop {
     position: fixed;
