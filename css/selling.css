@@ -108,7 +108,273 @@
   .button:hover:before {
     bottom: calc(var(--height) + var(--gap-between-tooltip-to-button));
   }
-  
-  
-  
+  /* Centering the buttons in the table and shrinking the action column */
+table td:last-child {
+  text-align: center;
+  width: 100px; /* Shrinking the "Művelet" column */
+}
+
+.button-wrapper {
+  margin: 0 auto; /* Center the button inside the cell */
+}
+
+button {
+  display: block;
+  margin: 0 auto;
+}
+
+/* Táblázat wrapper középre igazítása */
+.table-wrapper {
+  max-width: 80%;  /* A táblázat szélessége */
+  margin: 20px auto;  /* Középre igazítás */
+  overflow-x: auto;  /* Ha szükséges, engedélyezi a vízszintes görgetést */
+}
+
+/* Az utolsó oszlop (Művelet) szélessége */
+td:last-child {
+  text-align: center;  /* A gombokat középre igazítja */
+  padding: 0;  /* Ne legyen túl nagy padding */
+  width: 150px;  /* Az oszlop szélessége, hogy a gomb elférjen */
+}
+
+/* A gombok középre igazítása a cellában */
+.button-wrapper {
+  display: inline-block;  /* Inline blokk, hogy ne foglaljon el túl nagy helyet */
+  background-color: #4CAF50;  /* Zöld háttér */
+  color: white;
+  padding: 8px 12px;  /* A gomb mérete */
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  text-align: center;  /* Középre igazítja a szöveget */
+  white-space: nowrap;  /* A gomb ne törjön több sorra */
+  max-width: 100%;  /* Ne nyújtózkodjon túl */
+}
+
+.button-wrapper:hover {
+  background-color: #45a049;  /* Hover színváltozás */
+}
+
+/* A táblázat formázása */
+table {
+  width: 100%;  /* A táblázat kitölti a rendelkezésre álló helyet */
+  border-collapse: collapse;  /* A cellák közötti határ vonalak egyesítése */
+  table-layout: fixed;  /* Egyenletes oszlopok */
+}
+
+th, td {
+  text-align: center;  /* Középre igazítás */
+  vertical-align: middle;  /* Függőlegesen is középre igazítás */
+  padding: 8px;  /* Párnázás a cellák körül */
+}
+
+th {
+  background-color: #f2f2f2;  /* Fejléc háttér szín */
+}
+.purchase-button {
+  display: block;
+  width: 100px;
+  margin: 0 auto;
+  padding: 8px 12px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  text-align: center;
+}
+
+.purchase-button:hover {
+  background-color: #45a049;
+}
+/* From Uiverse.io by SSpisso */ 
+/* Body */
+.container {
+  display: grid;
+  grid-template-columns: auto;
+  gap: 0px;
+}
+
+hr {
+  height: 1px;
+  background-color: rgba(16, 86, 82, .75);
+  ;
+  border: none;
+}
+
+.card {
+  width: 400px;
+  background: rgb(255, 250, 235);
+  box-shadow: 0px 187px 75px rgba(0, 0, 0, 0.01), 0px 105px 63px rgba(0, 0, 0, 0.05), 0px 47px 47px rgba(0, 0, 0, 0.09), 0px 12px 26px rgba(0, 0, 0, 0.1), 0px 0px 0px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+  width: 100%;
+  height: 40px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+  border-bottom: 1px solid rgba(16, 86, 82, .75);
+  ;
+  font-weight: 700;
+  font-size: 11px;
+  color: #000000;
+}
+
+/* Cart */
+.cart {
+  border-radius: 19px 19px 0px 0px;
+}
+
+.cart .steps {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.cart .steps .step {
+  display: grid;
+  gap: 10px;
+}
+
+.cart .steps .step span {
+  font-size: 13px;
+  font-weight: 600;
+  color: #000000;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.cart .steps .step p {
+  font-size: 11px;
+  font-weight: 600;
+  color: #000000;
+}
+
+/* Promo */
+.promo form {
+  display: grid;
+  grid-template-columns: 1fr 80px;
+  gap: 10px;
+  padding: 0px;
+}
+
+.input_field {
+  width: auto;
+  height: 36px;
+  padding: 0 0 0 12px;
+  border-radius: 5px;
+  outline: none;
+  border: 1px solid  rgb(16, 86, 82);
+  background-color: rgb(251, 243, 228);
+  transition: all 0.3s cubic-bezier(0.15, 0.83, 0.66, 1);
+}
+
+.input_field:focus {
+  border: 1px solid transparent;
+  box-shadow: 0px 0px 0px 2px rgb(251, 243, 228);
+  background-color: rgb(201, 193, 178);
+}
+
+.promo form button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 18px;
+  gap: 10px;
+  width: 100%;
+  height: 36px;
+  background: rgba(16, 86, 82, .75);
+  box-shadow: 0px 0.5px 0.5px #F3D2C9, 0px 1px 0.5px rgba(239, 239, 239, 0.5);
+  border-radius: 5px;
+  border: 0;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 15px;
+  color: #000000;
+}
+
+/* Checkout */
+.payments .details {
+  display: grid;
+  grid-template-columns: 10fr 1fr;
+  padding: 0px;
+  gap: 5px;
+}
+
+.payments .details span:nth-child(odd) {
+  font-size: 12px;
+  font-weight: 600;
+  color: #000000;
+  margin: auto auto auto 0;
+}
+
+.payments .details span:nth-child(even) {
+  font-size: 13px;
+  font-weight: 600;
+  color: #000000;
+  margin: auto 0 auto auto;
+}
+
+.checkout .footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 10px 10px 20px;
+  background-color: rgba(16, 86, 82, .5);
+}
+
+.price {
+  position: relative;
+  font-size: 22px;
+  color: #2B2B2F;
+  font-weight: 900;
+}
+
+.checkout .checkout-btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 150px;
+  height: 36px;
+  background: rgba(16, 86, 82, .55);
+  box-shadow: 0px 0.5px 0.5px rgba(16, 86, 82, .75), 0px 1px 0.5px rgba(16, 86, 82, .75);
+  ;
+  border-radius: 7px;
+  border: 1px solid rgb(16, 86, 82);
+  ;
+  color: #000000;
+  font-size: 13px;
+  font-weight: 600;
+  transition: all 0.3s cubic-bezier(0.15, 0.83, 0.66, 1);
+}
+
+
+
+/* Reszponzivitás */
+@media (max-width: 768px) {
+  .table-wrapper {
+    max-width: 95%;  /* A táblázat szélessége kisebb képernyőkön */
+  }
+
+  th, td {
+    padding: 6px;
+    font-size: 0.9rem;
+  }
+
+  .button-wrapper {
+    width: 100px;
+    height: 35px;
+  }
+}
+
+
+
+
+
   
