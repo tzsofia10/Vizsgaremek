@@ -80,7 +80,7 @@ include '../main/head.php';
             </div>
         </div>
 
-        <div class="latest-additions">
+        <div class="latest-additions fade-in">
             <h2>Utolsó hozzáadott szarvasmarhák</h2>
             <div class="table-container">
                 <table>

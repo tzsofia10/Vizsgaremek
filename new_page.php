@@ -187,7 +187,7 @@ $popular_articles = mysqli_fetch_all($popular_result, MYSQLI_ASSOC);
             <div class="col-lg-4 sidebar">
                 <div class="card mb-4">
                     <div class="card-header">
-                        <h5>Népszerű cikkek</h5>
+                        <h5>Legújabb cikkek</h5>
                     </div>
                     <ul class="list-group list-group-flush">
                         <?php foreach($popular_articles as $popular): ?>
