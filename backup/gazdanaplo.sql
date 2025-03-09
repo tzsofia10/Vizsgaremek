@@ -52,7 +52,6 @@ CREATE TABLE `cows` (
   `id` int(11) NOT NULL,
   `ear_tag` varchar(255) DEFAULT NULL,
   `gender` tinyint(1) DEFAULT NULL,
-  `cows_parents_id` int(11) DEFAULT NULL,
   `color_id` int(11) DEFAULT NULL,
   `birthdate` date DEFAULT NULL,
   `death_date` date DEFAULT NULL,
@@ -65,44 +64,44 @@ CREATE TABLE `cows` (
 -- A tábla adatainak kiíratása `cows`
 --
 
-INSERT INTO `cows` (`id`, `ear_tag`, `gender`, `cows_parents_id`, `color_id`, `birthdate`, `death_date`, `mother_ear_tag`, `father_ear_tag`, `picture`) VALUES
-(1, 'HU 30688 1202 2', 0, NULL, 2, '2013-01-16', NULL, 'HU 30688 0641 2', '', NULL),
-(2, 'HU 30688 1209 1', 0, NULL, 3, '2013-02-19', NULL, 'HU 30688 0530 1', NULL, NULL),
-(3, 'HU 30688 1210 9', 0, NULL, 3, '2013-02-19', NULL, 'HU 30688 0943 5', NULL, NULL),
-(4, 'HU 30688 1213 0', 0, NULL, 3, '2013-03-17', NULL, 'HU 30688 0575 0', NULL, NULL),
-(5, 'HU 30688 1223 1', 0, NULL, 3, '2013-03-19', NULL, 'HU 33000 0373 5', NULL, NULL),
-(6, 'HU 30688 1224 8', 0, NULL, 3, '2013-03-20', NULL, 'HU 30688 0456 2', NULL, NULL),
-(7, 'HU 30688 1235 6', 0, NULL, 3, '2013-04-27', NULL, 'HU 33000 0345 6', NULL, NULL),
-(8, 'HU 30688 1237 0', 0, NULL, 3, '2013-05-02','2018-03-03', 'HU 30688 0509 1', NULL, NULL),
-(9, 'HU 30688 1238 7', 0, NULL, 3, '2013-05-15','2019-11-30', 'HU 33000 0365 8', NULL, NULL),
-(10, 'HU 30688 1240 2', 0, NULL, 3, '2013-05-20', NULL, 'HU 30688 0493 5', NULL, NULL),
-(11, 'HU 30688 1420 6', 0, NULL, 3, '2014-07-02', NULL, 'HU 33000 0365 8', NULL, NULL),
-(12, 'HU 30688 1421 3', 0, NULL, 3, '2014-07-02', NULL, 'HU 33000 0365 8', NULL, NULL),
-(13, 'HU 30688 1475 6', 0, NULL, 3, '2015-03-01', NULL, 'HU 30688 0944 2', NULL, NULL),
-(14, 'HU 30688 1491 0', 0, NULL, 3, '2015-03-17', NULL, 'HU 30688 0552 7', NULL, NULL),
-(15, 'HU 30688 1496 5', 0, NULL, 3, '2015-03-21', NULL, 'HU 30688 0368 4', NULL, NULL),
-(16, 'HU 30688 1508 3', 0, NULL, 3, '2015-04-02', NULL, 'HU 30688 0575 0', NULL, NULL),
-(17, 'HU 30688 1640 4', 0, NULL, 3, '2016-03-10', NULL, 'HU 30688 0946 6', NULL, NULL),
-(18, 'HU 30688 1646 6', 0, NULL, 3, '2016-03-16', NULL, 'HU 30015 5611 8', NULL, NULL),
-(19, 'HU 30688 1665 1', 0, NULL, 3, '2016-04-07', '2022-06-18', 'HU 30688 0941 1', NULL, NULL),
-(20, 'HU 30688 1698 5', 0, NULL, 3, '2016-05-19', NULL, 'HU 33000 0233 8', NULL, NULL),
-(21, 'HU 30688 1748 3', 0, NULL, 3, '2016-06-26', NULL, 'HU 30688 1238 7', NULL, NULL),
-(22, 'HU 30688 1978 2', 0, NULL, 3, '2018-03-10', NULL, 'HU 30688 0531 8', NULL, NULL),
-(23, 'HU 30688 2419 7', 0, NULL, 3, '2020-03-15', NULL, 'HU 30688 1224 8', NULL, NULL),
-(24, 'HU 30688 2428 1', 0, NULL, 1, '2020-03-16', NULL, 'HU 34314 0196 9', NULL, NULL),
-(25, 'HU 30688 2435 1', 0, NULL, 3, '2020-03-24', NULL, 'HU 30688 1665 1', NULL, NULL),
-(26, 'HU 30688 2463 0', 0, NULL, 3, '2020-04-02', NULL, 'HU 33000 0365 8', NULL, NULL),
-(27, 'HU 30688 2464 7', 0, NULL, 1, '2020-04-22', NULL, 'HU 34314 0188 2', NULL, NULL),
-(28, 'HU 30688 2466 1', 0, NULL, 3, '2020-04-06','2024-10-22', 'HU 30688 0944 2', NULL, NULL),
-(29, 'HU 30688 2471 7', 0, NULL, 3, '2020-04-25', NULL, 'HU 30688 0531 8', NULL, NULL),
-(30, 'HU 30688 2526 0', 0, NULL, 3, '2020-04-28', NULL, 'HU 30688 1421 3', NULL, NULL),
-(31, 'HU 30688 2529 1', 0, NULL, 1, '2020-05-15', NULL, 'HU 34314 0187 5', NULL, NULL),
-(32, 'HU 35514 0090 9', 1, NULL, 3, '2024-03-10', NULL, 'HU 30688 1646 6', NULL, NULL),
-(33, 'HU 35514 0102 7', 1, NULL, 3, '2024-03-13', NULL, 'HU 30688 1224 8', NULL, NULL),
-(34, 'HU 35514 0108 9', 1, NULL, 2, '2024-03-15', NULL, 'HU 30688 1202 2', NULL, NULL),
-(35, 'HU 35514 0113 5', 1, NULL, 1, '2024-03-16', '2025-02-07', 'HU 30688 2464 7', NULL, NULL),
-(36, 'HU 35514 0120 5', 1, NULL, 1, '2024-03-22', '2025-02-07', 'HU 34314 0196 9', NULL, NULL),
-(87, '12345ABC', 0, NULL, 2, '2023-01-01', NULL, '54321DEF', 'undefined', NULL);
+INSERT INTO `cows` (`id`, `ear_tag`, `gender`, `color_id`, `birthdate`, `death_date`, `mother_ear_tag`, `father_ear_tag`, `picture`) VALUES
+(1, 'HU 30688 1202 2', 0, 2, '2013-01-16', NULL, 'HU 30688 0641 2', '', NULL),
+(2, 'HU 30688 1209 1', 0,  3, '2013-02-19', NULL, 'HU 30688 0530 1', NULL, NULL),
+(3, 'HU 30688 1210 9', 0,  3, '2013-02-19', NULL, 'HU 30688 0943 5', NULL, NULL),
+(4, 'HU 30688 1213 0', 0,  3, '2013-03-17', NULL, 'HU 30688 0575 0', NULL, NULL),
+(5, 'HU 30688 1223 1', 0,  3, '2013-03-19', NULL, 'HU 33000 0373 5', NULL, NULL),
+(6, 'HU 30688 1224 8', 0, 3, '2013-03-20', NULL, 'HU 30688 0456 2', NULL, NULL),
+(7, 'HU 30688 1235 6', 0,  3, '2013-04-27', NULL, 'HU 33000 0345 6', NULL, NULL),
+(8, 'HU 30688 1237 0', 0,  3, '2013-05-02','2018-03-03', 'HU 30688 0509 1', NULL, NULL),
+(9, 'HU 30688 1238 7', 0,  3, '2013-05-15','2019-11-30', 'HU 33000 0365 8', NULL, NULL),
+(10, 'HU 30688 1240 2', 0,  3, '2013-05-20', NULL, 'HU 30688 0493 5', NULL, NULL),
+(11, 'HU 30688 1420 6', 0,  3, '2014-07-02', NULL, 'HU 33000 0365 8', NULL, NULL),
+(12, 'HU 30688 1421 3', 0,  3, '2014-07-02', NULL, 'HU 33000 0365 8', NULL, NULL),
+(13, 'HU 30688 1475 6', 0,  3, '2015-03-01', NULL, 'HU 30688 0944 2', NULL, NULL),
+(14, 'HU 30688 1491 0', 0,3, '2015-03-17', NULL, 'HU 30688 0552 7', NULL, NULL),
+(15, 'HU 30688 1496 5', 0,  3, '2015-03-21', NULL, 'HU 30688 0368 4', NULL, NULL),
+(16, 'HU 30688 1508 3', 0,  3, '2015-04-02', NULL, 'HU 30688 0575 0', NULL, NULL),
+(17, 'HU 30688 1640 4', 0,  3, '2016-03-10', NULL, 'HU 30688 0946 6', NULL, NULL),
+(18, 'HU 30688 1646 6', 0,  3, '2016-03-16', NULL, 'HU 30015 5611 8', NULL, NULL),
+(19, 'HU 30688 1665 1', 0,  3, '2016-04-07', '2022-06-18', 'HU 30688 0941 1', NULL, NULL),
+(20, 'HU 30688 1698 5', 0,  3, '2016-05-19', NULL, 'HU 33000 0233 8', NULL, NULL),
+(21, 'HU 30688 1748 3', 0,  3, '2016-06-26', NULL, 'HU 30688 1238 7', NULL, NULL),
+(22, 'HU 30688 1978 2', 0,  3, '2018-03-10', NULL, 'HU 30688 0531 8', NULL, NULL),
+(23, 'HU 30688 2419 7', 0,  3, '2020-03-15', NULL, 'HU 30688 1224 8', NULL, NULL),
+(24, 'HU 30688 2428 1', 0,  1, '2020-03-16', NULL, 'HU 34314 0196 9', NULL, NULL),
+(25, 'HU 30688 2435 1', 0,  3, '2020-03-24', NULL, 'HU 30688 1665 1', NULL, NULL),
+(26, 'HU 30688 2463 0', 0,  3, '2020-04-02', NULL, 'HU 33000 0365 8', NULL, NULL),
+(27, 'HU 30688 2464 7', 0,  1, '2020-04-22', NULL, 'HU 34314 0188 2', NULL, NULL),
+(28, 'HU 30688 2466 1', 0,  3, '2020-04-06','2024-10-22', 'HU 30688 0944 2', NULL, NULL),
+(29, 'HU 30688 2471 7', 0,  3, '2020-04-25', NULL, 'HU 30688 0531 8', NULL, NULL),
+(30, 'HU 30688 2526 0', 0,  3, '2020-04-28', NULL, 'HU 30688 1421 3', NULL, NULL),
+(31, 'HU 30688 2529 1', 0,  1, '2020-05-15', NULL, 'HU 34314 0187 5', NULL, NULL),
+(32, 'HU 35514 0090 9', 1,  3, '2024-03-10', NULL, 'HU 30688 1646 6', NULL, NULL),
+(33, 'HU 35514 0102 7', 1,  3, '2024-03-13', NULL, 'HU 30688 1224 8', NULL, NULL),
+(34, 'HU 35514 0108 9', 1,  2, '2024-03-15', NULL, 'HU 30688 1202 2', NULL, NULL),
+(35, 'HU 35514 0113 5', 1,  1, '2024-03-16', '2025-02-07', 'HU 30688 2464 7', NULL, NULL),
+(36, 'HU 35514 0120 5', 1,  1, '2024-03-22', '2025-02-07', 'HU 34314 0196 9', NULL, NULL),
+(87, '12345ABC', 0,  2, '2023-01-01', NULL, '54321DEF', 'undefined', NULL);
 
 -- --------------------------------------------------------
 
@@ -112,7 +111,7 @@ INSERT INTO `cows` (`id`, `ear_tag`, `gender`, `cows_parents_id`, `color_id`, `b
 
 CREATE TABLE `cow_vaccinations` (
   `id` int(11) NOT NULL,
-  `cow_id` int(11) DEFAULT NULL,
+  `cows_id` int(11) DEFAULT NULL,
   `vaccination_id` int(11) DEFAULT NULL,
   `vaccination_date` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -185,7 +184,7 @@ INSERT INTO `news` (`id`, `alias`, `ordering`, `nav_name`, `content`, `img`, `cr
 
 CREATE TABLE `sales` (
   `id` int(11) NOT NULL,
-  `cow_id` int(11) DEFAULT NULL,
+  `cows_id` int(11) DEFAULT NULL,
   `customer_id` int(11) DEFAULT NULL,
   `sales_date` date DEFAULT NULL,
   `price` decimal(10,2) DEFAULT NULL
@@ -195,7 +194,7 @@ CREATE TABLE `sales` (
 -- A tábla adatainak kiíratása `sales`
 --
 
-INSERT INTO `sales` (`id`, `cow_id`, `customer_id`, `sales_date`, `price`) VALUES
+INSERT INTO `sales` (`id`, `cows_id`, `customer_id`, `sales_date`, `price`) VALUES
 (1, 2, 1, '2023-06-15', 400000.00),
 (2, 5, 2, '2023-07-01', 420000.00),
 (3, 10, 3, '2023-07-20', 390000.00),
@@ -203,11 +202,12 @@ INSERT INTO `sales` (`id`, `cow_id`, `customer_id`, `sales_date`, `price`) VALUE
 (5, 22, 5, '2023-09-10', 395000.00),
 (6, 25, 1, '2023-10-05', 400000.00),
 (7, 30, 2, '2023-10-20', 405000.00),
-(8, 41, 3, '2023-11-02', 398000.00),
-(9, 53, 4, '2023-12-15', 415000.00),
-(10, 65, 5, '2024-01-10', 400000.00),
-(11, 72, 1, '2024-02-05', 410000.00),
-(12, 68, 2, '2024-02-28', 390000.00);
+(8, 19, 3, '2023-11-02', 398000.00),
+(9, 28, 4, '2023-12-15', 415000.00),
+(10, 35, 5, '2024-01-10', 400000.00),
+(11, 12, 1, '2024-02-05', 410000.00),
+(12, 7, 2, '2024-02-28', 390000.00);
+
 
 -- --------------------------------------------------------
 
@@ -287,7 +287,7 @@ ALTER TABLE `cows`
 --
 ALTER TABLE `cow_vaccinations`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `cow_id` (`cow_id`),
+  ADD KEY `cows_id` (`cows_id`),
   ADD KEY `vaccination_id` (`vaccination_id`);
 
 --
@@ -308,7 +308,7 @@ ALTER TABLE `news`
 --
 ALTER TABLE `sales`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `cow_id` (`cow_id`),
+  ADD KEY `cows_id` (`cows_id`),
   ADD KEY `customer_id` (`customer_id`);
 
 --
@@ -395,7 +395,7 @@ ALTER TABLE `cows`
 -- Megkötések a táblához `cow_vaccinations`
 --
 ALTER TABLE `cow_vaccinations`
-  ADD CONSTRAINT `cow_vaccinations_ibfk_1` FOREIGN KEY (`cow_id`) REFERENCES `cows` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `cow_vaccinations_ibfk_1` FOREIGN KEY (`cows_id`) REFERENCES `cows` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `cow_vaccinations_ibfk_2` FOREIGN KEY (`vaccination_id`) REFERENCES `vaccination_types` (`id`) ON DELETE CASCADE;
 
 --
@@ -406,11 +406,9 @@ ALTER TABLE `customer`
 
 --
 -- Megkötések a táblához `sales`
---
-ALTER TABLE `sales`
-  ADD CONSTRAINT `sales_ibfk_1` FOREIGN KEY (`cow_id`) REFERENCES `cows` (`id`),
-  ADD CONSTRAINT `sales_ibfk_2` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`);
-COMMIT;
+ALTER TABLE sales
+  ADD CONSTRAINT sales_ibfk_1 FOREIGN KEY (cows_id) REFERENCES cows (id),
+  ADD CONSTRAINT sales_ibfk_2 FOREIGN KEY (customer_id) REFERENCES customer (id);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
