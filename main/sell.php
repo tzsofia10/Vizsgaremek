@@ -24,6 +24,20 @@ $result = $conn->query($sql);
     <link rel="stylesheet" href="../css/nav.css">
     <link rel="stylesheet" href="../css/footer.css">
     <link rel="stylesheet" href="../css/selling.css">
+    <style>
+        .fizetes {
+            display: none; /* Alapból elrejtve */
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+            background: rgb(255, 250, 235);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+    </style>
 </head>
 <body>
 <?php include '../main/nav.php'; ?>
@@ -57,44 +71,79 @@ $result = $conn->query($sql);
     </table>
 </div>
 <!-- Checkout Container -->
-<div class="container" id="checkout-container">
-        <div class="card cart">
-            <label class="title">CHECKOUT</label>
-            <div class="steps">
-                <div class="step">
-                    <span>SHIPPING</span>
-                    <hr>
-                    <span>PAYMENT</span>
+<div class="fizetes" id="checkout-container">
+    <button class="close-btn" id="close-checkout">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+    </button>
+    <div class="card cart">
+        <label class="title">CHECKOUT</label>
+        <div class="steps">
+            <div class="step">
+                <span>Szállítás</span>
+                <hr>
                     <div class="details">
-                        <span>Ár:</span> <span id="checkout-price">0 HUF</span>
-                    </div>
-                </div>
-            </div>
-        </div>
+                        <label for="name">Név:</label>
+                        <input type="text" id="name" placeholder="Név megadása" required>
+                            <br>
+                        <label for="address">Lakcím:</label>
+                        <input type="text" id="address" placeholder="Lakcím megadása" required>
+                            <br>
+                        <label for="phone">Telefonszám:</label>
+                        <input type="tel" id="phone" placeholder="Telefonszám megadása" required>
 
-        <div class="card checkout">
-            <div class="footer">
-                <button class="checkout-btn">Checkout</button>
+                    <span>Ár:</span> <span id="checkout-price">0 HUF</span>
+            </div>
             </div>
         </div>
     </div>
 
-    <footer>
-        <?php include '../main/footer.php'; ?>
-    </footer>
+    <div class="card checkout">
+        <div class="footer">
+            <button class="checkout-btn">Checkout</button>
+        </div>
+    </div>
+</div>
 
-    <script>
-        // Összes vásárlás gombra eseményfigyelő
-        document.querySelectorAll('.purchase-button').forEach(button => {
-            button.addEventListener('click', function() {
-                let price = this.getAttribute('data-price');
-                document.getElementById('checkout-price').innerText = price + " HUF";
+<footer>
+    <?php include '../main/footer.php'; ?>
+</footer>
 
-                // Fizetési rész megjelenítése
-                document.getElementById('checkout-container').style.display = 'block';
-            });
+<script>
+    // Összes vásárlás gombra eseményfigyelő
+    document.querySelectorAll('.purchase-button').forEach(button => {
+        button.addEventListener('click', function() {
+            let price = this.getAttribute('data-price');
+            document.getElementById('checkout-price').innerText = price + " HUF";
+
+            // Fizetési rész megjelenítése
+            document.getElementById('checkout-container').style.display = 'block';
         });
-    </script>
+        // Bezárás függvény
+        document.getElementById("close-checkout").addEventListener("click", function() {
+    document.getElementById("checkout-container").style.display = "none";
+
+        });
+    });
+    document.querySelectorAll('.purchase-button').forEach(button => {
+    button.addEventListener('click', function() {
+        let price = this.getAttribute('data-price');
+
+        // Tizedesjegyek levágása, ha nincs szükség rá
+        let formattedPrice = parseInt(price).toLocaleString('hu-HU') + " HUF";
+        
+        document.getElementById('checkout-price').innerText = formattedPrice;
+
+        // Fizetési rész megjelenítése
+        document.getElementById('checkout-container').style.display = 'block';
+    });
+});
+
+
+
+</script>
 
 </body>
 </html>
