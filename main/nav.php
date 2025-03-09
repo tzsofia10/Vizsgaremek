@@ -1,6 +1,12 @@
 <nav>
     <div class="logo-container">
-        <img src="../cowPicture/logo.png" alt="Logo">
+        <?php
+        if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === false) {
+            echo '<img src="cowPicture/logo.png" alt="Logo">';
+        } else {
+            echo '<img src="../cowPicture/logo.png" alt="Logo">';
+        }
+        ?>
     </div>
     <div class="nav-links">
         <div class="links">
@@ -10,8 +16,7 @@
                 echo '<a href="../index.php">Főoldal</a>';
                 echo '<a href="../main/static.php">Statisztikák</a>';
                 echo '<a href="../main/sell.php">Eladás</a>';
-            }
-            else {
+            } else {
                 echo '<a href="main.php">Főoldal</a>';
                 echo '<a href="list.php">Cikkek</a>';
                 echo '<a href="farm_states.php">Farm állománya</a>';

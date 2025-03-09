@@ -1,201 +1,125 @@
 <?php
-// Betöltjük a kapcsolódási fájlt
 require_once __DIR__ . '/connect.php';
 
-try {
-    // A $dbconn változó már elérhető a connect.php-ból
-    if (!$dbconn) {
-        throw new Exception("Adatbázis kapcsolódási hiba");
-    }
-
-    // Cikkek lekérése az adatbázisból
-    $sql = "SELECT * FROM news ORDER BY creation DESC";
-    $result = mysqli_query($dbconn, $sql);
-    
-    if (!$result) {
-        throw new Exception("Hiba a lekérdezés során: " . mysqli_error($dbconn));
-    }
-    
-    $articles = mysqli_fetch_all($result, MYSQLI_ASSOC);
-
-} catch(Exception $e) {
-    echo "Hiba: " . $e->getMessage();
-    exit();
-}
-// ... a többi kód változatlan marad ... 
-// Cikkek lekérése az adatbázisból
-$sql = "SELECT * FROM news ORDER BY creation DESC";
+// Menü lekérése
+$sql = "SELECT id, alias, nav_name FROM news WHERE states = 1 ORDER BY ordering ASC";
 $result = mysqli_query($dbconn, $sql);
 
-if (!$result) {
-    throw new Exception("Hiba a lekérdezés során: " . mysqli_error($dbconn));
+$menu_items = [];
+while ($row = mysqli_fetch_assoc($result)) {
+    $menu_items[] = $row;
 }
 
+// Összes cikk lekérése
+$sql = "SELECT * FROM news WHERE states = 1 ORDER BY creation DESC";
+$result = mysqli_query($dbconn, $sql);
 $articles = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
-// Népszerű cikkek lekérése
-$popular_sql = "SELECT * FROM news ORDER BY creation DESC LIMIT 3";
-$popular_result = mysqli_query($dbconn, $popular_sql);
-
-if (!$popular_result) {
-    throw new Exception("Hiba a lekérdezés során: " . mysqli_error($dbconn));
-}
-
-$popular_articles = mysqli_fetch_all($popular_result, MYSQLI_ASSOC);
-
+// Legújabb 3 cikk a sidebar-hoz
+$newest_sql = "SELECT * FROM news WHERE states = 1 ORDER BY creation DESC LIMIT 3";
+$newest_result = mysqli_query($dbconn, $newest_sql); 
+$newest_articles = mysqli_fetch_all($newest_result, MYSQLI_ASSOC);
 ?>
 
 <!DOCTYPE html>
 <html lang="hu">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hírek Oldal</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css">
-    <style>
-        .navbar {
-            background-color: #333;
-            padding: 1rem;
-        }
-
-        .swiper {
-            width: 100%;
-            height: 400px;
-        }
-
-        .swiper-slide img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .article-card {
-            margin-bottom: 20px;
-            transition: transform 0.3s ease;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        .article-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .article-image {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
-
-        .footer {
-            background-color: #333;
-            color: white;
-            padding: 2rem 0;
-            margin-top: 2rem;
-        }
-
-        @media (max-width: 768px) {
-            .swiper {
-                height: 250px;
-            }
-            
-            .sidebar {
-                margin-top: 20px;
-            }
-        }
-    </style>
-</head>
-<?php 
-    $page_title = "Főoldal"; 
-    $custom_css = ["css/pages/newpage.css"]; // egyedi css fájl hozzáadása
-    $additional_head = "<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>"; 
-    include 'main/head.php'; 
+<?php
+$page_title = "Főoldal";
+$custom_js = ["../js/translate.js"];
+$custom_css = ["https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css", "css/pages/newpage.css"];
+include 'main/head.php';
 ?>
-
 
 <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark">
-        <div class="container">
-            <a class="navbar-brand" href="#">Logo</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#">Főoldal</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Hírek</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Rólunk</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Kapcsolat</a>
-                    </li>
-                </ul>
+    <?php include 'main/nav.php'; ?>
+    <!-- Slider (Bootstrap) -->
+    <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="cowPicture/slider/header01.jpg" class="d-block w-100" alt="Slider 1">
+            </div>
+            <div class="carousel-item">
+                <img src="cowPicture/slider/header02.jpg" class="d-block w-100" alt="Slider 2">
+            </div>
+            <div class="carousel-item">
+                <img src="cowPicture/slider/header03.jpg" class="d-block w-100" alt="Slider 3">
             </div>
         </div>
-    </nav>
-
-    <!-- Slider -->
-    <div class="swiper mySwiper">
-        <div class="swiper-wrapper">
-            <div class="swiper-slide">
-                <img src="cowPicture/slider/header01.jpg" alt="Slider 1">
-            </div>
-            <div class="swiper-slide">
-                <img src="cowPicture/slider/header02.jpg" alt="Slider 2">
-            </div>
-            <div class="swiper-slide">
-                <img src="cowPicture/slider/header03.jpg" alt="Slider 3">
-            </div>
-        </div>
-        <div class="swiper-pagination"></div>
-        <div class="swiper-button-next"></div>
-        <div class="swiper-button-prev"></div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Előző</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Következő</span>
+        </button>
     </div>
 
-    <!-- Tartalom -->
-    <div class="container mt-4">
+    <div class="container">
         <div class="row">
-            <!-- Bal oldali cikkek -->
-            <div class="col-lg-8">
-                <?php foreach($articles as $article): ?>
-                <div class="article-card card">
-                    <?php if(!empty($article['image_url'])): ?>
-                    <img src="<?php echo htmlspecialchars($article['image_url']); ?>" 
-                         class="article-image card-img-top" 
-                         alt="<?php echo htmlspecialchars($article['title']); ?>">
-                    <?php endif; ?>
-                    <div class="card-body">
-                        <h5 class="card-title"><?php echo htmlspecialchars($article['nav_name']); ?></h5>
-                        <p class="card-text"><?php echo htmlspecialchars(substr($article['content'], 0, 200)) . '...'; ?></p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <a href="article.php?id=<?php echo $article['id']; ?>" class="btn btn-primary">Tovább olvasom</a>
-                            <small class="text-muted">
-                                <?php echo date('Y.m.d', strtotime($article['creation'])); ?>
-                            </small>
-                        </div>
-                    </div>
+            <!-- Bal oldali menü és cikkek -->
+            <div class="col-3">
+                <div class="menu">
+                    <h5>Menü</h5>
+                    <?php foreach($menu_items as $item): ?>
+                        <a href="?alias=<?php echo htmlspecialchars($item['alias']); ?>">
+                            <?php echo htmlspecialchars($item['nav_name']); ?>
+                        </a>
+                    <?php endforeach; ?>
                 </div>
-                <?php endforeach; ?>
+            </div>
+
+            <!-- Középső tartalom -->
+            <div class="col-6">
+                <?php 
+                $alias = isset($_GET['alias']) ? $_GET['alias'] : null;
+                if ($alias) {
+                    $sql = "SELECT * FROM news WHERE alias = '" . mysqli_real_escape_string($dbconn, $alias) . "' AND states = 1 LIMIT 1";
+                    $result = mysqli_query($dbconn, $sql);
+                    $article = mysqli_fetch_assoc($result);
+                    
+                    if ($article): ?>
+                        <div class="article-card">
+                            <?php if(!empty($article['img'])): ?>
+                                <img src="<?php echo htmlspecialchars($article['img']); ?>" class="article-image" alt="<?php echo htmlspecialchars($article['nav_name']); ?>">
+                            <?php endif; ?>
+                            <h2><?php echo htmlspecialchars($article['nav_name']); ?></h2>
+                            <p><?php echo $article['content']; ?></p>
+                            <div class="text-muted mt-3">
+                                Létrehozva: <?php echo date('Y.m.d', strtotime($article['creation'])); ?>
+                            </div>
+                        </div>
+                    <?php endif;
+                } else {
+                    if (!empty($articles)): 
+                        $article = $articles[0]; ?>
+                        <div class="article-card">
+                            <?php if(!empty($article['img'])): ?>
+                                <img src="<?php echo htmlspecialchars($article['img']); ?>" class="article-image" alt="<?php echo htmlspecialchars($article['nav_name']); ?>">
+                            <?php endif; ?>
+                            <h2><?php echo htmlspecialchars($article['nav_name']); ?></h2>
+                            <p><?php echo $article['content']; ?></p>
+                            <div class="text-muted mt-3">
+                                Létrehozva: <?php echo date('Y.m.d', strtotime($article['creation'])); ?>
+                            </div>
+                        </div>
+                    <?php endif;
+                }
+                ?>
             </div>
 
             <!-- Jobb oldali sidebar -->
-            <div class="col-lg-4 sidebar">
-                <div class="card mb-4">
-                    <div class="card-header">
-                        <h5>Legújabb cikkek</h5>
-                    </div>
-                    <ul class="list-group list-group-flush">
-                        <?php foreach($popular_articles as $popular): ?>
-                        <li class="list-group-item">
-                            <a href="article.php?id=<?php echo $popular['id']; ?>" class="text-decoration-none text-dark">
-                                <?php echo htmlspecialchars($popular['nav_name']); ?>
-                            </a>
-                        </li>
+            <div class="sidebar">
+                <div class="menu">
+                    <h5>Legújabb cikkek</h5>
+                    <ul>
+                        <?php foreach($newest_articles as $news): ?>
+                            <li>
+                                <a href="?alias=<?php echo htmlspecialchars($news['alias']); ?>">
+                                    <?php echo htmlspecialchars($news['nav_name']); ?>
+                                </a>
+                            </li>
                         <?php endforeach; ?>
                     </ul>
                 </div>
@@ -203,29 +127,7 @@ $popular_articles = mysqli_fetch_all($popular_result, MYSQLI_ASSOC);
         </div>
     </div>
 
-    <!-- Footer -->
-    <?php include 'main/footer.php'; ?>
-
-
-    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
-    <script>
-        var swiper = new Swiper(".mySwiper", {
-            slidesPerView: 1,
-            spaceBetween: 30,
-            loop: true,
-            pagination: {
-                el: ".swiper-pagination",
-                clickable: true,
-            },
-            navigation: {
-                nextEl: ".swiper-button-next",
-                prevEl: ".swiper-button-prev",
-            },
-            autoplay: {
-                delay: 3500,
-                disableOnInteraction: false,
-            },
-        });
-    </script>
+    <?php include 'footer.php'; ?>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-</html> 
+</html>
