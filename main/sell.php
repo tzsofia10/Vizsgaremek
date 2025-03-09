@@ -99,7 +99,6 @@ $result = $conn->query($sql);
     </div>
     <div class="content">
         <span class="title">Foglalás megerősítve</span>
-        <p class="message">Köszönjük a vásárlást! A csomagja 2 napon belül kiszállításra kerül.</p>
     </div>
 </div>
 
