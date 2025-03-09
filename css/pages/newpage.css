@@ -1,92 +1,204 @@
 /* General Styles */
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+
+}
+
 .container {
-    width: 90%;
-    margin: 20px auto;
+    width: 100vw;
+    max-width: 100vw;
+    margin: 0;
+    padding: 0;
+
 }
 
 .row {
     display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    gap: 0;
 }
 
+/* Carousel/Slider Styles */
+.carousel {
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+}
+
+.carousel-item img {
+    width: 100vw;
+    height: 600px;
+    object-fit: cover;
+}
+
+/* Bal oldali menü - 10% */
 .col-3 {
-    flex: 1 1 23%;
+    width: 15%;
+    padding: 15px;
+    border-right: 1px solid #ddd;
+    background-color: #c1f376;
 }
 
+/* Középső tartalom - 80% */
 .col-6 {
-    flex: 1 1 48%;
+    width: 70%;
+    padding: 20px;
 }
 
+/* Jobb oldali sidebar - 10% */
 .sidebar {
-    flex: 1 1 23%;
+    width: 15%;
+    padding: 15px;
+    border-left: 1px solid #ddd;
+    background-color: #c1f376;
 }
 
 /* Menu Styles */
 .menu {
-    background-color: #fff;
-    padding: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 10px 0;
+}
+
+.menu h5 {
+    color: #333;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #ddd;
+    font-weight: 600;
+    font-size: 1rem;
 }
 
 .menu a {
     display: block;
-    padding: 10px;
+    padding: 8px;
     text-decoration: none;
-    color: #333;
+    color: #555;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .menu a:hover {
-    background-color: #f4f4f4;
+    background-color: rgba(0, 0, 0, 0.05);
+    color: #007bff;
 }
 
 /* Article Card Styles */
 .article-card {
-    background-color: #fff;
-    padding: 15px;
+    padding: 20px;
     margin-bottom: 20px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
-.article-card:hover {
-    transform: translateY(-5px);
+.article-card h2 {
+    color: #333;
+    margin-bottom: 15px;
+    font-size: 1.8rem;
+}
+
+.article-card p {
+    color: #666;
+    line-height: 1.6;
 }
 
 .article-image {
     width: 100%;
-    height: 200px;
+    max-height: 400px;
     object-fit: cover;
+    margin-bottom: 20px;
+    border-radius: 4px;
 }
 
-/* Slider Styles */
-.swiper {
-    width: 100%;
-    height: 400px;
+/* Sidebar Specific Styles */
+.sidebar .menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
-.swiper-slide img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+.sidebar .menu li {
+    margin-bottom: 8px;
 }
 
-/* Footer Styles */
-.footer {
-    background-color: #333;
-    color: white;
-    text-align: center;
-    padding: 2rem 0;
-    margin-top: 2rem;
+.sidebar .menu li a {
+    padding: 8px;
+    display: block;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-/* Media Queries */
+.text-muted {
+    color: #888 !important;
+    font-size: 0.9rem;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .row {
+        flex-direction: column;
+    }
+
+    .col-3, .col-6, .sidebar {
+        width: 100vw;
+        padding: 15px;
+    }
+
+    .col-3, .sidebar {
+        border: none;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .carousel-item img {
+        height: 400px;
+    }
+
+    .menu a, .sidebar .menu li a {
+        white-space: normal;
+    }
+}
+
 @media (max-width: 768px) {
-    .swiper {
-        height: 250px;
+    .carousel-item img {
+        height: 300px;
     }
 
-    .sidebar {
-        margin-top: 20px;
+    .article-card h2 {
+        font-size: 1.5rem;
     }
+
+    .article-image {
+        max-height: 300px;
+    }
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.article-card {
+    animation: fadeIn 0.5s ease-out;
 }
