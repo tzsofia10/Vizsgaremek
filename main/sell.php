@@ -63,47 +63,43 @@ $result = $conn->query($sql);
                                 </button>
                         </td>
                     </tr>";
-                
             }
         } else {
             echo "<tr><td colspan='4'>Nincs elérhető adat</td></tr>";
         } ?>
     </table>
 </div>
+
 <!-- Checkout Container -->
 <div class="fizetes" id="checkout-container">
-    <button class="close-btn" id="close-checkout">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="18" y1="6" x2="6" y2="18"></line>
-            <line x1="6" y1="6" x2="18" y2="18"></line>
-        </svg>
-    </button>
+    <button class="close-btn" id="close-checkout">×</button>
     <div class="card cart">
-        <label class="title">CHECKOUT</label>
-        <div class="steps">
-            <div class="step">
-                <span>Szállítás</span>
-                <hr>
-                    <div class="details">
-                        <label for="name">Név:</label>
-                        <input type="text" id="name" placeholder="Név megadása" required>
-                            <br>
-                        <label for="address">Lakcím:</label>
-                        <input type="text" id="address" placeholder="Lakcím megadása" required>
-                            <br>
-                        <label for="phone">Telefonszám:</label>
-                        <input type="tel" id="phone" placeholder="Telefonszám megadása" required>
-
-                    <span>Ár:</span> <span id="checkout-price">0 HUF</span>
-            </div>
-            </div>
+        <div class="details">
+            <label for="name">Név:</label>
+            <input type="text" id="name" placeholder="Név megadása" required>
+            <label for="address">Lakcím:</label>
+            <input type="text" id="address" placeholder="Lakcím megadása" required>
+            <label for="phone">Telefonszám:</label>
+            <input type="tel" id="phone" placeholder="Telefonszám megadása" required>
+            <span>Ár:</span> <span id="checkout-price">0 HUF</span>
         </div>
     </div>
-
     <div class="card checkout">
-        <div class="footer">
-            <button class="checkout-btn">Checkout</button>
+        <button class="checkout-btn">Foglalás</button>
+    </div>
+</div>
+
+<!-- Confirmation Message -->
+<div class="confirmation" id="confirmation-box">
+    <button class="dismiss" id="close-confirmation">×</button>
+    <div class="header">
+        <div class="image">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M20 7L9.00004 18L3.99994 13" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
         </div>
+    </div>
+    <div class="content">
+        <span class="title">Foglalás megerősítve</span>
+        <p class="message">Köszönjük a vásárlást! A csomagja 2 napon belül kiszállításra kerül.</p>
     </div>
 </div>
 
@@ -112,39 +108,27 @@ $result = $conn->query($sql);
 </footer>
 
 <script>
-    // Összes vásárlás gombra eseményfigyelő
     document.querySelectorAll('.purchase-button').forEach(button => {
         button.addEventListener('click', function() {
             let price = this.getAttribute('data-price');
-            document.getElementById('checkout-price').innerText = price + " HUF";
-
-            // Fizetési rész megjelenítése
+            document.getElementById('checkout-price').innerText = parseInt(price).toLocaleString('hu-HU') + " HUF";
             document.getElementById('checkout-container').style.display = 'block';
         });
-        // Bezárás függvény
-        document.getElementById("close-checkout").addEventListener("click", function() {
-    document.getElementById("checkout-container").style.display = "none";
-
-        });
     });
-    document.querySelectorAll('.purchase-button').forEach(button => {
-    button.addEventListener('click', function() {
-        let price = this.getAttribute('data-price');
 
-        // Tizedesjegyek levágása, ha nincs szükség rá
-        let formattedPrice = parseInt(price).toLocaleString('hu-HU') + " HUF";
-        
-        document.getElementById('checkout-price').innerText = formattedPrice;
-
-        // Fizetési rész megjelenítése
-        document.getElementById('checkout-container').style.display = 'block';
+    document.getElementById("close-checkout").addEventListener("click", function() {
+        document.getElementById("checkout-container").style.display = "none";
     });
-});
 
+    document.querySelector(".checkout-btn").addEventListener("click", function() {
+        document.getElementById("checkout-container").style.display = "none";
+        document.getElementById("confirmation-box").style.display = "block";
+    });
 
-
+    document.getElementById("close-confirmation").addEventListener("click", function() {
+        document.getElementById("confirmation-box").style.display = "none";
+    });
 </script>
-
 </body>
 </html>
 
