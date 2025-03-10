@@ -522,6 +522,15 @@ hr {
   font-size: 0.875rem;
   line-height: 1.25rem;
 }
+.confirmation {
+  opacity: 1;
+  transition: opacity 1s ease-out;
+}
+
+.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
 
 @keyframes animate {
   from {

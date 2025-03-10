@@ -140,6 +140,24 @@ $result = $conn->query($sql);
       phoneInput.value = phoneInput.value.slice(0, 11);
     }
   });
+  document.addEventListener("DOMContentLoaded", () => {
+    const confirmationBox = document.getElementById("confirmation-box");
+
+    // Ha létezik az elem
+    if (confirmationBox) {
+        // Biztos ami biztos, először visszaállítjuk az átlátszóságot
+        confirmationBox.classList.remove("hidden");
+
+        // 3 mp után szépen elhalványítjuk
+        setTimeout(() => {
+            confirmationBox.classList.add("hidden");
+        }, 3000);
+    }
+});
+
+
+
+
 </script>
 </body>
 </html>
