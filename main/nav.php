@@ -1,11 +1,7 @@
 <nav>
     <div class="logo-container">
         <?php
-        if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === false) {
-            echo '<img src="cowPicture/logo.png" alt="Logo">';
-        } else {
-            echo '<img src="../cowPicture/logo.png" alt="Logo">';
-        }
+            echo '<img src="/vizsgaremek/cowPicture/logo.png" alt="Logo">';
         ?>
     </div>
     <div class="nav-links">
@@ -13,9 +9,9 @@
             <?php
             if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === false) {
                 // Ha nincs bejelentkezve, jelenjenek meg a linkek
-                echo '<a href="../index.php">Főoldal</a>';
-                echo '<a href="../main/static.php">Statisztikák</a>';
-                echo '<a href="../main/sell.php">Eladás</a>';
+                echo '<a href="/vizsgaremek/new_page.php">Főoldal</a>';
+                echo '<a href="/vizsgaremek/main/static.php">Statisztikák</a>';
+                echo '<a href="/vizsgaremek/main/sell.php">Eladás</a>';
             } else {
                 echo '<a href="main.php">Főoldal</a>';
                 echo '<a href="list.php">Cikkek</a>';
