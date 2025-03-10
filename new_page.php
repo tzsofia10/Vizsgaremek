@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/connect.php';
+require_once("connect.php");
 
 // Menü lekérése
 $sql = "SELECT id, alias, nav_name FROM news WHERE states = 1 ORDER BY ordering ASC";
@@ -127,7 +127,9 @@ include 'main/head.php';
         </div>
     </div>
 
-    <?php include 'main/footer.php'; ?>
+    <footer>
+        <?php include 'main/footer.php'; ?>
+    </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

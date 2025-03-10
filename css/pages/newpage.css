@@ -37,26 +37,26 @@ body, html {
     object-fit: cover;
 }
 
-/* Bal oldali menü - 10% */
+/* Bal oldali menü */
 .col-3 {
     width: 15%;
     padding: 15px;
     border-right: 1px solid #ddd;
-    background-color: #c1f376;
+    background-color: #606c389d;
 }
 
-/* Középső tartalom - 80% */
+/* Középső tartalom */
 .col-6 {
     width: 70%;
     padding: 20px;
 }
 
-/* Jobb oldali sidebar - 10% */
+/* Jobb oldali sidebar*/
 .sidebar {
     width: 15%;
     padding: 15px;
     border-left: 1px solid #ddd;
-    background-color: #c1f376;
+    background-color: #606c389d;
 }
 
 /* Menu Styles */
