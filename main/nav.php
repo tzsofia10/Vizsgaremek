@@ -9,7 +9,7 @@
             <?php
             if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === false) {
                 // Ha nincs bejelentkezve, jelenjenek meg a linkek
-                echo '<a href="/vizsgaremek/new_page.php">Főoldal</a>';
+                echo '<a href="/vizsgaremek/index.php">Főoldal</a>';
                 echo '<a href="/vizsgaremek/main/static.php">Statisztikák</a>';
                 echo '<a href="/vizsgaremek/main/sell.php">Eladás</a>';
             } else {
@@ -28,7 +28,7 @@
                 echo '<button><a href="logout.php">Kijelentkezés</a></button>';
             } else {
                 // Ha nincs bejelentkezve, jelenjen meg a "Bejelentkezés" gomb
-                echo '<button><a href="../admin/index.php">Bejelentkezés</a>
+                echo '<button><a href="/vizsgaremek/admin/index.php">Bejelentkezés</a>
                     <div class="arrow-wrapper">
                         <div class="arrow"></div>
                     </div>

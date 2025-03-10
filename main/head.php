@@ -13,7 +13,11 @@
     ?>
 
     <!-- favicon -->
-    <link rel="icon" type="image/x-icon" href="<?php echo $base_path; ?>cowPicture/cowfavicon.png">
+
+
+    <link rel="icon" href="/vizsgaremek/cowPicture/cowfavicon.png" type="image/png">
+    <link rel="shortcut icon" href="/vizsgaremek/cowPicture/cowfavicon.png" type="image/png">
+
     
     <!-- alap css fájlok betöltése -->
     <link rel="stylesheet" href="<?php echo $base_path; ?>css/footer.css">
