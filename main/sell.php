@@ -71,6 +71,7 @@ $result = $conn->query($sql);
 </div>
 
 <!-- Checkout Container -->
+<button class="dismiss" id="close-confirmation">×</button>
 <div class="fizetes" id="checkout-container">
     <button class="close-btn" id="close-checkout">×</button>
     <div class="card cart">
@@ -80,7 +81,9 @@ $result = $conn->query($sql);
             <label for="address">Lakcím:</label>
             <input type="text" id="address" placeholder="Lakcím megadása" required>
             <label for="phone">Telefonszám:</label>
-            <input type="tel" id="phone" placeholder="Telefonszám megadása" required>
+            <input type="tel" id="phone" placeholder="Telefonszám megadása" required 
+             pattern="^(06|36)\d{9}$" title="A telefonszám formátuma: 06302942597 vagy 36302942597" 
+            maxlength="11">
             <span>Ár:</span> <span id="checkout-price">0 HUF</span>
         </div>
     </div>
@@ -91,7 +94,6 @@ $result = $conn->query($sql);
 
 <!-- Confirmation Message -->
 <div class="confirmation" id="confirmation-box">
-    <button class="dismiss" id="close-confirmation">×</button>
     <div class="header">
         <div class="image">
             <svg viewBox="0 0 24 24" fill="none"><path d="M20 7L9.00004 18L3.99994 13" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
@@ -127,6 +129,17 @@ $result = $conn->query($sql);
     document.getElementById("close-confirmation").addEventListener("click", function() {
         document.getElementById("confirmation-box").style.display = "none";
     });
+    document.getElementById("phone").addEventListener("input", function (event) {
+    let phoneInput = event.target;
+
+    // Csak számokat engedélyezünk
+    phoneInput.value = phoneInput.value.replace(/\D/g, "");
+
+    // Max 11 karakter engedélyezése
+    if (phoneInput.value.length > 11) {
+      phoneInput.value = phoneInput.value.slice(0, 11);
+    }
+  });
 </script>
 </body>
 </html>
