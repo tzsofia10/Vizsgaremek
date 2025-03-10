@@ -22,7 +22,7 @@ $newest_articles = mysqli_fetch_all($newest_result, MYSQLI_ASSOC);
 ?>
 
 <!DOCTYPE html>
-<html lang="hu">
+<html lang="hu"> 
 <?php
 $page_title = "Főoldal";
 $custom_js = ["../js/translate.js"];
