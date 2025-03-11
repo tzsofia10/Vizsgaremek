@@ -9,12 +9,9 @@
     <?php 
     $current_path = $_SERVER['REQUEST_URI'];
     $base_path = (strpos($current_path, '/admin/') !== false || strpos($current_path, '/main/') !== false) ? '../' : '';
-
     ?>
 
     <!-- favicon -->
-
-
     <link rel="icon" href="/vizsgaremek/cowPicture/cowfavicon.png" type="image/png">
     <link rel="shortcut icon" href="/vizsgaremek/cowPicture/cowfavicon.png" type="image/png">
 

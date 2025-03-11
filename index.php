@@ -22,11 +22,11 @@ $newest_articles = mysqli_fetch_all($newest_result, MYSQLI_ASSOC);
 ?>
 
 <!DOCTYPE html>
-<html lang="hu">
+<html lang="hu"> 
 <?php
 $page_title = "Főoldal";
 $custom_js = ["../js/translate.js"];
-$custom_css = ["https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css", "css/pages/newpage.css"];
+$custom_css = ["https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css", "css/pages/indexpage.css"];
 include 'main/head.php';
 ?>
 
