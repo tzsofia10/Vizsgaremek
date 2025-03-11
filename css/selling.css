@@ -30,7 +30,12 @@
     bottom: calc(var(--height) + var(--gap-between-tooltip-to-button) + 10px);
     left: calc(50% - var(--tooltip-width) / 2);
   }
-  
+  footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
   .button::after {
     position: absolute;
     content: '';
