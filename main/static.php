@@ -8,17 +8,32 @@
     <link rel="stylesheet" href="../css/nav.css">
     <link rel="stylesheet" href="../css/footer.css">
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; }
-        canvas { max-width: 600px; margin: auto; }
+        body { 
+            font-family: Arial, sans-serif; 
+            text-align: center; 
+            margin: 0; 
+            padding: 20px; 
+        }
+        .chart-container {
+            width: 90%; 
+            max-width: 1200px; /* Nagyobb méret */
+            margin: auto;
+        }
+        canvas { 
+            width: 100% !important; 
+            height: 500px !important; /* Magasság növelése */
+        }
     </style>
 </head>
 <body>
-    <?php include '../main/nav.php'; 
+    <?php include '../main/nav.php'; ?>
     
-     ?>
     <h2>Szarvasmarhák Halálozási Diagram</h2>
    
-    <canvas id="deathChart"></canvas>
+    <div class="chart-container">
+        <canvas id="deathChart"></canvas>
+    </div>
+
     <script>
         // Fetch death data from PHP
         fetch('get_deaths.php')
@@ -41,16 +56,30 @@
                         }]
                     },
                     options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
                         scales: {
-                            y: { beginAtZero: true }
+                            x: {
+                                ticks: { font: { size: 16 } } // X tengely betűméret
+                            },
+                            y: { 
+                                beginAtZero: true,
+                                ticks: { font: { size: 16 } } // Y tengely betűméret
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                labels: { font: { size: 18 } } // Jelmagyarázat mérete
+                            }
                         }
                     }
                 });
             })
             .catch(error => console.error('Hiba a lekérdezés során:', error));
     </script>
-  <footer>
-        <?php include '../main/footer.php';?>
+
+    <footer>
+        <?php include '../main/footer.php'; ?>
     </footer>
 </body>
 </html>

@@ -135,12 +135,10 @@ document.addEventListener("DOMContentLoaded", function () {
     const phoneInput = document.getElementById("phone");
     const saleIdInput = document.getElementById("sale-id");
 
-    // Telefonszám mező - csak számokat enged beírni
     phoneInput.addEventListener("input", function () {
-        this.value = this.value.replace(/\D/g, '');  // Csak számokat enged
+        this.value = this.value.replace(/\D/g, ''); 
     });
 
-    // Ellenőrzi, hogy az összes mező ki van-e töltve
     function validateForm() {
         if (nameInput.value.trim() !== "" && addressInput.value.trim() !== "" && phoneInput.value.trim().length >= 10) {
             checkoutBtn.disabled = false;
@@ -149,7 +147,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    // Figyelünk minden mező változására
     [nameInput, addressInput, phoneInput].forEach(input => {
         input.addEventListener("input", validateForm);
     });
@@ -165,36 +162,47 @@ document.addEventListener("DOMContentLoaded", function () {
             saleIdInput.value = saleId;
             saleIdInput.dataset.rowId = "row-" + saleId;
 
-            validateForm(); // Frissítjük a gomb állapotát
+            validateForm();
         });
     });
 
     checkoutBtn.addEventListener("click", function (event) {
         event.preventDefault();
-        if (checkoutBtn.disabled) return; // Ha nincs kitöltve minden, ne történjen semmi
+        if (checkoutBtn.disabled) return;
 
-        document.getElementById("checkout-container").style.display = "none";
-        confirmationBox.style.display = "block";
-        confirmationBox.style.opacity = "1";
-
+        let saleId = saleIdInput.value;
         const rowId = saleIdInput.dataset.rowId;
         const row = document.getElementById(rowId);
 
-        setTimeout(() => {
-            confirmationBox.style.transition = "opacity 1.5s ease-in-out";
-            confirmationBox.style.opacity = "0";
-        }, 3000);
+        fetch("update_sale_status.php", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: "sale_id=" + saleId
+        })
+        .then(response => response.text())
+        .then(result => {
+            if (result.trim() === "success") {
+                document.getElementById("checkout-container").style.display = "none";
+                confirmationBox.style.display = "block";
+                confirmationBox.style.opacity = "1";
 
-        setTimeout(() => {
-            confirmationBox.style.display = "none";
-
-            if (row) {
-                row.classList.add("fade-out");
                 setTimeout(() => {
-                    row.remove();
-                }, 1500);
+                    confirmationBox.style.transition = "opacity 1.5s ease-in-out";
+                    confirmationBox.style.opacity = "0";
+                }, 3000);
+
+                setTimeout(() => {
+                    confirmationBox.style.display = "none";
+                    if (row) {
+                        row.classList.add("fade-out");
+                        setTimeout(() => { row.remove(); }, 1500);
+                    }
+                }, 4500);
+            } else {
+                alert("Hiba történt a foglalás során. Kérlek, próbáld újra!");
             }
-        }, 4500);
+        })
+        .catch(error => console.error("Hiba:", error));
     });
 
     document.getElementById("close-checkout").addEventListener("click", function () {
@@ -203,19 +211,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
     document.getElementById("close-confirmation").addEventListener("click", function () {
         confirmationBox.style.opacity = "0";
-        setTimeout(() => {
-            confirmationBox.style.display = "none";
-        }, 500);
+        setTimeout(() => { confirmationBox.style.display = "none"; }, 500);
     });
 });
-
-
-
-
-
-
-
 </script>
+
 <footer>
     <?php include '../main/footer.php'; ?>
 </footer>
