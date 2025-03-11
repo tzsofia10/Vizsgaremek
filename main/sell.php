@@ -11,8 +11,22 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "SELECT id, sales_date, customer_id, price, cows_id FROM sales";
+$sql = "SELECT id, sales_date, customer_id, price, cows_id, sale_status FROM sales WHERE sale_status = 'available'";
 $result = $conn->query($sql);
+
+// Ha a foglalás gombot megnyomták, frissítjük a státuszt
+if (isset($_POST['sale_id'])) {
+    $sale_id = $_POST['sale_id'];
+    $update_sql = "UPDATE sales SET sale_status = 'sold' WHERE id = ?";
+    $stmt = $conn->prepare($update_sql);
+    $stmt->bind_param("i", $sale_id);
+    $stmt->execute();
+    $stmt->close();
+    // Redirect, hogy ne küldjön el több kérést
+    header("Location: sell.php");
+    exit;
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -46,24 +60,25 @@ $result = $conn->query($sql);
     <table>
         <tr>
             <th>ID</th>
-            <th>Eladási Dátum</th>
+            <th>Meghirdetési Dátum</th>
             <th>Ár (HUF)</th>
             <th>Művelet</th>
         </tr>
 
         <?php if ($result->num_rows > 0) {
-            while($row = $result->fetch_assoc()) {
-                echo "<tr>
-                        <td>" . $row["id"] . "</td>
-                        <td>" . $row["sales_date"] . "</td>
-                        <td>" . number_format($row["price"]) . " HUF</td>
-                        <td>
-                             <button class='purchase-button' data-price='" . $row["price"] . "'>
-                                    Vásárlás
-                                </button>
-                        </td>
-                    </tr>";
+          while($row = $result->fetch_assoc()) {
+            echo "<tr id='row-" . $row["id"] . "'>
+                    <td>" . $row["id"] . "</td>
+                    <td>" . $row["sales_date"] . "</td>
+                    <td>" . number_format($row["price"]) . " HUF</td>
+                    <td>
+                        <button class='purchase-button' data-price='" . $row["price"] . "' data-sale-id='" . $row["id"] . "'>
+                            Vásárlás
+                        </button>
+                    </td>
+                  </tr>";
             }
+        
         } else {
             echo "<tr><td colspan='4'>Nincs elérhető adat</td></tr>";
         } ?>
@@ -82,13 +97,19 @@ $result = $conn->query($sql);
             <input type="text" id="address" placeholder="Lakcím megadása" required>
             <label for="phone">Telefonszám:</label>
             <input type="tel" id="phone" placeholder="Telefonszám megadása" required 
-             pattern="^(06|36)\d{9}$" title="A telefonszám formátuma: 06302942597 vagy 36302942597" 
-            maxlength="11">
+            pattern="^\d{10}$" 
+            maxlength="11" 
+ title="Csak számokat adjon meg, 10 vagy 11 karakter hosszú telefonszám">
+
             <span>Ár:</span> <span id="checkout-price">0 HUF</span>
         </div>
     </div>
     <div class="card checkout">
-        <button class="checkout-btn">Foglalás</button>
+        <form method="POST" action="">
+            <input type="hidden" id="sale-id" name="sale_id">
+            <button class="checkout-btn" type="submit" disabled>Foglalás</button>
+
+        </form>
     </div>
 </div>
 
@@ -104,61 +125,100 @@ $result = $conn->query($sql);
     </div>
 </div>
 
-<footer>
-    <?php include '../main/footer.php'; ?>
-</footer>
-
 <script>
-    document.querySelectorAll('.purchase-button').forEach(button => {
-        button.addEventListener('click', function() {
-            let price = this.getAttribute('data-price');
-            document.getElementById('checkout-price').innerText = parseInt(price).toLocaleString('hu-HU') + " HUF";
-            document.getElementById('checkout-container').style.display = 'block';
+document.addEventListener("DOMContentLoaded", function () {
+    const purchaseButtons = document.querySelectorAll(".purchase-button");
+    const checkoutBtn = document.querySelector(".checkout-btn");
+    const confirmationBox = document.getElementById("confirmation-box");
+    const nameInput = document.getElementById("name");
+    const addressInput = document.getElementById("address");
+    const phoneInput = document.getElementById("phone");
+    const saleIdInput = document.getElementById("sale-id");
+
+    phoneInput.addEventListener("input", function () {
+        this.value = this.value.replace(/\D/g, ''); 
+    });
+
+    function validateForm() {
+        if (nameInput.value.trim() !== "" && addressInput.value.trim() !== "" && phoneInput.value.trim().length >= 10) {
+            checkoutBtn.disabled = false;
+        } else {
+            checkoutBtn.disabled = true;
+        }
+    }
+
+    [nameInput, addressInput, phoneInput].forEach(input => {
+        input.addEventListener("input", validateForm);
+    });
+
+    purchaseButtons.forEach(button => {
+        button.addEventListener("click", function () {
+            let price = this.getAttribute("data-price");
+            let saleId = this.getAttribute("data-sale-id");
+
+            document.getElementById("checkout-price").innerText = parseInt(price).toLocaleString("hu-HU") + " HUF";
+            document.getElementById("checkout-container").style.display = "block";
+
+            saleIdInput.value = saleId;
+            saleIdInput.dataset.rowId = "row-" + saleId;
+
+            validateForm();
         });
     });
 
-    document.getElementById("close-checkout").addEventListener("click", function() {
+    checkoutBtn.addEventListener("click", function (event) {
+        event.preventDefault();
+        if (checkoutBtn.disabled) return;
+
+        let saleId = saleIdInput.value;
+        const rowId = saleIdInput.dataset.rowId;
+        const row = document.getElementById(rowId);
+
+        fetch("update_sale_status.php", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: "sale_id=" + saleId
+        })
+        .then(response => response.text())
+        .then(result => {
+            if (result.trim() === "success") {
+                document.getElementById("checkout-container").style.display = "none";
+                confirmationBox.style.display = "block";
+                confirmationBox.style.opacity = "1";
+
+                setTimeout(() => {
+                    confirmationBox.style.transition = "opacity 1.5s ease-in-out";
+                    confirmationBox.style.opacity = "0";
+                }, 3000);
+
+                setTimeout(() => {
+                    confirmationBox.style.display = "none";
+                    if (row) {
+                        row.classList.add("fade-out");
+                        setTimeout(() => { row.remove(); }, 1500);
+                    }
+                }, 4500);
+            } else {
+                alert("Hiba történt a foglalás során. Kérlek, próbáld újra!");
+            }
+        })
+        .catch(error => console.error("Hiba:", error));
+    });
+
+    document.getElementById("close-checkout").addEventListener("click", function () {
         document.getElementById("checkout-container").style.display = "none";
     });
 
-    document.querySelector(".checkout-btn").addEventListener("click", function() {
-        document.getElementById("checkout-container").style.display = "none";
-        document.getElementById("confirmation-box").style.display = "block";
+    document.getElementById("close-confirmation").addEventListener("click", function () {
+        confirmationBox.style.opacity = "0";
+        setTimeout(() => { confirmationBox.style.display = "none"; }, 500);
     });
-
-    document.getElementById("close-confirmation").addEventListener("click", function() {
-        document.getElementById("confirmation-box").style.display = "none";
-    });
-    document.getElementById("phone").addEventListener("input", function (event) {
-    let phoneInput = event.target;
-
-    // Csak számokat engedélyezünk
-    phoneInput.value = phoneInput.value.replace(/\D/g, "");
-
-    // Max 11 karakter engedélyezése
-    if (phoneInput.value.length > 11) {
-      phoneInput.value = phoneInput.value.slice(0, 11);
-    }
-  });
-  document.addEventListener("DOMContentLoaded", () => {
-    const confirmationBox = document.getElementById("confirmation-box");
-
-    // Ha létezik az elem
-    if (confirmationBox) {
-        // Biztos ami biztos, először visszaállítjuk az átlátszóságot
-        confirmationBox.classList.remove("hidden");
-
-        // 3 mp után szépen elhalványítjuk
-        setTimeout(() => {
-            confirmationBox.classList.add("hidden");
-        }, 3000);
-    }
 });
-
-
-
-
 </script>
+
+<footer>
+    <?php include '../main/footer.php'; ?>
+</footer>
 </body>
 </html>
 
