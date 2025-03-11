@@ -55,7 +55,7 @@ include 'main/head.php';
             <span class="visually-hidden">Következő</span>
         </button>
     </div>
-
+   <?php $alias = isset($_GET['alias']) ? $_GET['alias'] : null; ?>
     <div class="container">
         <div class="row">
             <!-- Bal oldali menü és cikkek -->
@@ -63,13 +63,13 @@ include 'main/head.php';
                 <div class="menu">
                     <h5>Menü</h5>
                     <?php foreach($menu_items as $item): ?>
-                        <a href="?alias=<?php echo htmlspecialchars($item['alias']); ?>">
+                        <a href="?alias=<?php echo htmlspecialchars($item['alias']); ?>" 
+                        class="<?php echo ($alias === $item['alias']) ? 'active-article' : ''; ?>">
                             <?php echo htmlspecialchars($item['nav_name']); ?>
                         </a>
                     <?php endforeach; ?>
                 </div>
             </div>
-
             <!-- Középső tartalom -->
             <div class="col-6">
                 <?php 
@@ -116,7 +116,7 @@ include 'main/head.php';
                     <ul>
                         <?php foreach($newest_articles as $news): ?>
                             <li>
-                                <a href="?alias=<?php echo htmlspecialchars($news['alias']); ?>">
+                                <a href="?alias=<?php echo htmlspecialchars($news['alias']); ?>" class="<?php echo ($alias === $news['alias']) ? 'active-article' : ''; ?>">
                                     <?php echo htmlspecialchars($news['nav_name']); ?>
                                 </a>
                             </li>
@@ -124,6 +124,7 @@ include 'main/head.php';
                     </ul>
                 </div>
             </div>
+
         </div>
     </div>
 

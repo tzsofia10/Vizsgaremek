@@ -92,6 +92,11 @@ body, html {
 }
 
 /* Article Card Styles */
+.active-article {
+    text-decoration: underline !important;
+    font-weight: bold;
+    
+}
 .article-card {
     padding: 20px;
     margin-bottom: 20px;
