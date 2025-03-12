@@ -10,6 +10,47 @@ function debounce(func, wait) {
     };
 }
 
+let currentPage = 1;
+
+function createPagination(totalPages, currentPage) {
+    const paginationContainer = document.createElement('div');
+    paginationContainer.className = 'pagination';
+    
+    // Előző oldal gomb
+    if (currentPage > 1) {
+        const prevButton = document.createElement('button');
+        prevButton.innerHTML = '&laquo; Előző';
+        prevButton.onclick = () => loadPage(currentPage - 1);
+        paginationContainer.appendChild(prevButton);
+    }
+    
+    // Oldalszámok
+    for (let i = 1; i <= totalPages; i++) {
+        const pageButton = document.createElement('button');
+        pageButton.textContent = i;
+        if (i === currentPage) {
+            pageButton.className = 'active';
+        }
+        pageButton.onclick = () => loadPage(i);
+        paginationContainer.appendChild(pageButton);
+    }
+    
+    // Következő oldal gomb
+    if (currentPage < totalPages) {
+        const nextButton = document.createElement('button');
+        nextButton.innerHTML = 'Következő &raquo;';
+        nextButton.onclick = () => loadPage(currentPage + 1);
+        paginationContainer.appendChild(nextButton);
+    }
+    
+    return paginationContainer;
+}
+
+function loadPage(page) {
+    currentPage = page;
+    myFunction();
+}
+
 function myFunction() {
     const input = document.getElementById("myInput");
     const searchValue = input.value.trim();
@@ -21,12 +62,12 @@ function myFunction() {
         return;
     }
 
-    fetch(`search_cow.php?search=${encodeURIComponent(searchValue)}`)
+    fetch(`search_cow.php?search=${encodeURIComponent(searchValue)}&page=${currentPage}`)
         .then(response => response.json())
         .then(data => {
             tbody.innerHTML = "";
             
-            data.forEach(cow => {
+            data.cows.forEach(cow => {
                 const row = document.createElement("tr");
                 row.innerHTML = `
                     <td>${cow.cow_id}</td>
@@ -46,7 +87,7 @@ function myFunction() {
                         </a>
                     </td>
                     <td class='btn-update borderRight'>
-                        <button class='deleteButton' data-delete-url='delete_cow.php?id=${encodeURIComponent(cow.cow_id)}'>
+                        <button class='deleteButton' onclick="deleteCow(${cow.cow_id})">
                             <svg viewBox='0 0 448 512' class='svgIcon'>
                                 <path d='M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z'></path>
                             </svg>
@@ -56,7 +97,15 @@ function myFunction() {
                 tbody.appendChild(row);
             });
 
-            // Színek fordítása a keresés után
+            // Lapozó létrehozása
+            const existingPagination = document.querySelector('.pagination');
+            if (existingPagination) {
+                existingPagination.remove();
+            }
+            const pagination = createPagination(data.pagination.total_pages, data.pagination.current_page);
+            table.parentNode.appendChild(pagination);
+
+            // Színek fordítása
             if (typeof translateColors === "function") {
                 translateColors();
             }
@@ -66,8 +115,85 @@ function myFunction() {
         });
 }
 
-// Debounce alkalmazása a keresésre, hogy ne küldjünk túl sok kérést
+// Törlés funkció módosítása SweetAlert használatával
+function deleteCow(cowId) {
+    Swal.fire({
+        title: 'Biztos törölni szeretnéd?',
+        text: "Ezt a műveletet nem lehet visszavonni!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: 'rgba(16, 86, 82, 0.8)',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Igen, törlöm!',
+        cancelButtonText: 'Mégse'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            fetch(`delete_cow.php?id=${cowId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    Swal.fire({
+                        title: 'Törölve!',
+                        text: 'A tehén sikeresen törölve lett.',
+                        icon: 'success',
+                        confirmButtonColor: 'rgba(16, 86, 82, 0.8)'
+                    }).then(() => {
+                        myFunction(); // Újratölti a keresési eredményeket
+                    });
+                } else {
+                    throw new Error(data.message || 'Hiba történt a törlés során');
+                }
+            })
+            .catch(error => {
+                console.error('Hiba:', error);
+                Swal.fire({
+                    title: 'Hiba!',
+                    text: error.message || 'A törlés során hiba történt.',
+                    icon: 'error',
+                    confirmButtonColor: '#d33'
+                });
+            });
+        }
+    });
+}
+
+// Debounce alkalmazása a keresésre
 const debouncedSearch = debounce(myFunction, 300);
 
 // Event listener hozzáadása
 document.getElementById("myInput").addEventListener("input", debouncedSearch);
+
+// CSS a lapozóhoz
+const style = document.createElement('style');
+style.textContent = `
+    .pagination {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin: 20px 0;
+    }
+
+    .pagination button {
+        padding: 8px 16px;
+        border: 1px solid #ddd;
+        background-color: white;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .pagination button:hover {
+        background-color: #f0f0f0;
+    }
+
+    .pagination button.active {
+        background-color: rgba(16, 86, 82, 0.8);
+        color: white;
+        border-color: rgba(16, 86, 82, 0.8);
+    }
+`;
+document.head.appendChild(style);

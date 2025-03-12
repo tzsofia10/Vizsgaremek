@@ -2,36 +2,47 @@
 session_start();
 
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
-    header("Location: index.php");
+    header('Content-Type: application/json');
+    echo json_encode(['success' => false, 'message' => 'Unauthorized']);
     exit();
 }
 
 require "../connect.php";
 
-if (isset($_GET['id'])) {
-    $id = (int)$_GET['id'];
+if ($_SERVER['REQUEST_METHOD'] === 'DELETE' || isset($_GET['id'])) {
+    $id = $_GET['id'];
     
-    // Törlés végrehajtása
-    $delete_sql = "DELETE FROM cows WHERE id = ?";
-    $stmt = $dbconn->prepare($delete_sql);
-    $stmt->bind_param("i", $id);
+    // Kép elérési útjának lekérése
+    $sql_select = "SELECT picture FROM cows WHERE id = ?";
+    $stmt_select = $dbconn->prepare($sql_select);
+    $stmt_select->bind_param('i', $id);
+    $stmt_select->execute();
+    $result = $stmt_select->get_result();
+    $cow = $result->fetch_assoc();
     
-    $response = array();
+    // Tehén törlése
+    $sql_delete = "DELETE FROM cows WHERE id = ?";
+    $stmt_delete = $dbconn->prepare($sql_delete);
+    $stmt_delete->bind_param('i', $id);
     
-    if ($stmt->execute()) {
-        $_SESSION['success_message'] = "A tehén sikeresen törölve!";
+    if ($stmt_delete->execute()) {
+        // Ha van kép és nem az alapértelmezett, akkor töröljük
+        if ($cow && $cow['picture'] && $cow['picture'] != '../cowPicture/nopicture.jpg') {
+            if (file_exists($cow['picture'])) {
+                unlink($cow['picture']);
+            }
+        }
+        
+        header('Content-Type: application/json');
+        echo json_encode(['success' => true, 'message' => 'Sikeres törlés']);
     } else {
-        $_SESSION['error_message'] = "Hiba történt a törlés során!";
+        header('Content-Type: application/json');
+        echo json_encode(['success' => false, 'message' => 'Hiba történt a törlés során']);
     }
     
-    $stmt->close();
-    $dbconn->close();
-    
-    header("Location: farm_states.php");
-    exit();
+    $stmt_select->close();
+    $stmt_delete->close();
 }
 
-$_SESSION['error_message'] = "Érvénytelen kérés!";
-header("Location: farm_states.php");
-exit();
+$dbconn->close();
 ?>
