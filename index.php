@@ -35,27 +35,35 @@ include 'main/head.php';
     <?php include 'main/nav.php'; ?>
     <!-- Slider (Bootstrap) -->
     <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img src="cowPicture/slider/header01.jpg" class="d-block w-100" alt="Slider 1">
-            </div>
-            <div class="carousel-item">
-                <img src="cowPicture/slider/header02.jpg" class="d-block w-100" alt="Slider 2">
-            </div>
-            <div class="carousel-item">
-                <img src="cowPicture/slider/header03.jpg" class="d-block w-100" alt="Slider 3">
-            </div>
+    <div class="carousel-inner position-relative">
+        <div class="carousel-item active">
+            <img src="cowPicture/slider/header01.jpg" class="d-block w-100" alt="Slider 1">
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Előző</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Következő</span>
-        </button>
+        <div class="carousel-item">
+            <img src="cowPicture/slider/header02.jpg" class="d-block w-100" alt="Slider 2">
+        </div>
+        <div class="carousel-item">
+            <img src="cowPicture/slider/header03.jpg" class="d-block w-100" alt="Slider 3">
+        </div>
     </div>
-
+    
+    <!-- Navigation buttons -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Előző</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Következő</span>
+    </button>
+    
+    <!-- Constant buttons below the images -->
+    <div class="position-absolute bottom-0 start-50 translate-middle-x mb-3">
+        <button class="btn btn-primary me-2">Gomb 1</button>
+        <button class="btn btn-secondary">Gomb 2</button>
+    </div>
+</div>
+   <?php $alias = isset($_GET['alias']) ? $_GET['alias'] : null; ?>
     <div class="container">
         <div class="row">
             <!-- Bal oldali menü és cikkek -->
@@ -63,13 +71,13 @@ include 'main/head.php';
                 <div class="menu">
                     <h5>Menü</h5>
                     <?php foreach($menu_items as $item): ?>
-                        <a href="?alias=<?php echo htmlspecialchars($item['alias']); ?>">
+                        <a href="?alias=<?php echo htmlspecialchars($item['alias']); ?>" 
+                        class="<?php echo ($alias === $item['alias']) ? 'active-article' : ''; ?>">
                             <?php echo htmlspecialchars($item['nav_name']); ?>
                         </a>
                     <?php endforeach; ?>
                 </div>
             </div>
-
             <!-- Középső tartalom -->
             <div class="col-6">
                 <?php 
@@ -116,7 +124,7 @@ include 'main/head.php';
                     <ul>
                         <?php foreach($newest_articles as $news): ?>
                             <li>
-                                <a href="?alias=<?php echo htmlspecialchars($news['alias']); ?>">
+                                <a href="?alias=<?php echo htmlspecialchars($news['alias']); ?>" class="<?php echo ($alias === $news['alias']) ? 'active-article' : ''; ?>">
                                     <?php echo htmlspecialchars($news['nav_name']); ?>
                                 </a>
                             </li>
@@ -124,6 +132,7 @@ include 'main/head.php';
                     </ul>
                 </div>
             </div>
+
         </div>
     </div>
 

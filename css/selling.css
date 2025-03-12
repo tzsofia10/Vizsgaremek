@@ -1,3 +1,6 @@
+h1{
+  text-align: center;
+}
 /* From Uiverse.io by JaydipPrajapati1910 */ 
 .button {
     --width: 100px;
@@ -30,11 +33,7 @@
     bottom: calc(var(--height) + var(--gap-between-tooltip-to-button) + 10px);
     left: calc(50% - var(--tooltip-width) / 2);
   }
-  footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-}
+
 
   .button::after {
     position: absolute;
@@ -156,26 +155,44 @@ td:last-child {
   max-width: 100%;  /* Ne nyújtózkodjon túl */
 }
 
+
 .button-wrapper:hover {
   background-color: #45a049;  /* Hover színváltozás */
 }
 
 /* A táblázat formázása */
 table {
-  width: 100%;  /* A táblázat kitölti a rendelkezésre álló helyet */
-  border-collapse: collapse;  /* A cellák közötti határ vonalak egyesítése */
   table-layout: fixed;  /* Egyenletes oszlopok */
-}
+  width: 100%;
+  border-collapse: collapse;
+  background: rgba(255, 255, 255, 0.7); /* Enyhén átlátszó fehér háttér */
+  margin-bottom: 50px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 
-th, td {
-  text-align: center;  /* Középre igazítás */
-  vertical-align: middle;  /* Függőlegesen is középre igazítás */
-  padding: 8px;  /* Párnázás a cellák körül */
 }
 
 th {
-  background-color: #f2f2f2;  /* Fejléc háttér szín */
+  background-color: rgba(16, 86, 82, 0.1); /* A meglévő színséma alapján */
+  color: #333;
+  font-weight: bold;
+  padding: 15px;
+  text-align: left;
+  border-bottom: 2px solid rgba(16, 86, 82, 0.2);
+  text-align: center; 
+  vertical-align: middle;
 }
+
+td {
+  padding: 15px;
+  border-bottom: 1px solid rgba(16, 86, 82, 0.1);
+  color: #666;
+  text-align: center; 
+  vertical-align: middle;
+}
+
+
 .purchase-button {
   display: block;
   width: 100px;
@@ -325,7 +342,7 @@ hr {
   margin: auto 0 auto auto;
 }
 
-.checkout .footer {
+.checkout  {
   display: flex;
   align-items: center;
   justify-content: space-between;
