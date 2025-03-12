@@ -21,117 +21,181 @@ $state = 1;
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
     $_POST = array_map("trim", $_POST);
     $alias = strtolower(filter_var($_POST['alias'], FILTER_SANITIZE_STRING));
-    $ordering = (int)($_POST['ordering'] ?? 1);
+    $ordering = isset($_POST['ordering']) ? (int)$_POST['ordering'] : 1;
     $nav_name = filter_var($_POST['nav_name'], FILTER_SANITIZE_STRING);
     $content = $_POST['content'];
     $description = filter_var($_POST['description'], FILTER_SANITIZE_STRING);
     $keywords = filter_var($_POST['keywords'], FILTER_SANITIZE_STRING);
-    $state = (int)($_POST['state'] ?? 1);
+    $state = isset($_POST['state']) ? (int)$_POST['state'] : 1;
     $errors = [];
 
-    if (empty($alias)) {
-        $errors[] = "Az alias mező nem lehet üres!";
-    } elseif (!preg_match("/^[a-z-_]+$/", $alias)) {
-        $errors[] = "Az alias csak kisbetűket, kötőjelet és alulvonást tartalmazhat!";
+    // Ellenőrizzük, hogy létezik-e már ugyanilyen nevű cikk
+    $check_query = "SELECT id FROM news WHERE nav_name = ?";
+    $check_stmt = mysqli_prepare($dbconn, $check_query);
+    if ($check_stmt) {
+        mysqli_stmt_bind_param($check_stmt, "s", $nav_name);
+        mysqli_stmt_execute($check_stmt);
+        mysqli_stmt_store_result($check_stmt);
+        
+        if (mysqli_stmt_num_rows($check_stmt) > 0) {
+            $_SESSION['swal_message'] = [
+                'type' => 'error',
+                'title' => 'Hiba!',
+                'text' => 'Már létezik ilyen nevű cikk!'
+            ];
+            header("Location: content_management.php");
+            exit();
+        }
+        mysqli_stmt_close($check_stmt);
     }
 
+    // Alapvető validációk
+    if (empty($alias)) {
+        $errors[] = "Az alias mező nem lehet üres!";
+    }
+    if (!preg_match("/^[a-z-_]+$/", $alias)) {
+        $errors[] = "Az alias csak kisbetűket, kötőjelet és alulvonást tartalmazhat!";
+    }
     if (empty($nav_name)) {
         $errors[] = "A navigációs név megadása kötelező!";
     }
 
+    // Kép feltöltés kezelése
     $targetFile = null;
     if (!empty($_FILES['image']['name'])) {
         $targetDir = "../uploads/";
         $targetFile = $targetDir . basename($_FILES['image']['name']);
         $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
 
-        if (!in_array($imageFileType, ['jpg', 'jpeg', 'png', 'gif'])) {
+        $allowedTypes = ['jpg', 'jpeg', 'png', 'gif'];
+        if (!in_array($imageFileType, $allowedTypes)) {
             $errors[] = "Csak JPG, JPEG, PNG és GIF fájlok engedélyezettek!";
-        } elseif (!move_uploaded_file($_FILES['image']['tmp_name'], $targetFile)) {
+        }
+
+        if (empty($errors) && !move_uploaded_file($_FILES['image']['tmp_name'], $targetFile)) {
             $errors[] = "Hiba történt a kép feltöltésekor!";
         }
     }
 
-    if ($errors) {
-        $output = '<ul>' . implode('', array_map(fn($e) => "<li>{$e}</li>", $errors)) . '</ul>';
-    } else {
-        $stmt = mysqli_prepare($dbconn, "INSERT INTO news (alias, ordering, nav_name, content, creation, description, keywords, states, img) VALUES (?, ?, ?, ?, NOW(), ?, ?, ?, ?)");
-        $imgPath = $targetFile ? basename($targetFile) : null;
-        mysqli_stmt_bind_param($stmt, "sissssis", $alias, $ordering, $nav_name, $content, $description, $keywords, $state, $imgPath);
+    if (empty($errors)) {
+        $query = "INSERT INTO news (alias, ordering, nav_name, content, description, keywords, states, img, creation) 
+                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW())";
+        $stmt = mysqli_prepare($dbconn, $query);
 
-        if (mysqli_stmt_execute($stmt)) {
-            header("Location: list.php");
-            exit();
+        if ($stmt) {
+            $imgPath = $targetFile ? basename($targetFile) : null;
+            mysqli_stmt_bind_param($stmt, "sissssis", $alias, $ordering, $nav_name, $content, $description, $keywords, $state, $imgPath);
+            
+            if (mysqli_stmt_execute($stmt)) {
+                $_SESSION['swal_message'] = [
+                    'type' => 'success',
+                    'title' => 'Sikeres feltöltés!',
+                    'text' => 'A cikk sikeresen feltöltve!'
+                ];
+                header("Location: list.php");
+                exit();
+            } else {
+                $_SESSION['swal_message'] = [
+                    'type' => 'error',
+                    'title' => 'Hiba!',
+                    'text' => 'A cikk feltöltése sikertelen!'
+                ];
+            }
+            mysqli_stmt_close($stmt);
         } else {
-            $output = "<p>Adatbázis hiba: " . htmlspecialchars(mysqli_stmt_error($stmt), ENT_QUOTES, 'UTF-8') . "</p>";
+            $errors[] = "Hiba történt az adatbázis előkészítésekor: " . mysqli_error($dbconn);
         }
+    }
 
-        mysqli_stmt_close($stmt);
+    if (!empty($errors)) {
+        $_SESSION['swal_message'] = [
+            'type' => 'error',
+            'title' => 'Hiba!',
+            'text' => implode("\n", $errors)
+        ];
     }
 }
 ?>
 <!DOCTYPE html>
 <html lang="hu">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Új tartalom létrehozása</title>
-    <link rel="stylesheet" href="../css/pages/content.css">
-    <style>
-        .form-container { max-width: 600px; margin: auto; padding: 20px; border: 1px solid #ccc; border-radius: 8px; background: #f9f9f9; }
-        .form-group { margin-bottom: 15px; }
-        label { display: block; margin-bottom: 5px; }
-        input, textarea, select { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; }
-        .actions { margin-top: 15px; }
-        .btn { padding: 8px 16px; border: none; border-radius: 4px; cursor: pointer; }
-        .btn-primary { background-color: #007bff; color: white; }
-        .btn-secondary { background-color: #6c757d; color: white; }
-        .btn-link { color: #007bff; text-decoration: none; }
-        ul { color: red; }
-    </style>
-</head>
+<?php 
+    $page_title = "Új cikk"; 
+    $custom_css = ["../css/pages/edit.css"]; 
+    $custom_js = []; 
+    $additional_head = "
+        <script src='https://cdn.ckeditor.com/4.20.0/standard/ckeditor.js'></script>
+        <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+    "; 
+    include '../main/head.php'; 
+?>
 <body>
-<div class="form-container">
-    <h2>Új Tartalom Létrehozása</h2>
-    <?= $output ?>
-    <form method="post" enctype="multipart/form-data">
-        <div class="form-group">
-            <label for="alias">Alias:* <input type="text" id="alias" name="alias" required pattern="^[a-z-_]+$" value="<?= htmlspecialchars($alias) ?>"></label>
-        </div>
-        <div class="form-group">
-            <label for="ordering">Sorrend: <input type="number" id="ordering" name="ordering" min="1" value="<?= $ordering ?>"></label>
-        </div>
-        <div class="form-group">
-            <label for="nav_name">Navigációs név:* <input type="text" id="nav_name" name="nav_name" required value="<?= htmlspecialchars($nav_name) ?>"></label>
-        </div>
-        <div class="form-group">
-            <label for="content">Tartalom: <textarea id="content" name="content"><?= htmlspecialchars($content) ?></textarea></label>
-        </div>
-        <div class="form-group">
-            <label for="description">Leírás: <textarea id="description" name="description"><?= htmlspecialchars($description) ?></textarea></label>
-        </div>
-        <div class="form-group">
-            <label for="keywords">Kulcsszavak: <textarea id="keywords" name="keywords"><?= htmlspecialchars($keywords) ?></textarea></label>
-        </div>
-        <div class="form-group">
-            <label for="image">Kép: <input type="file" id="image" name="image" accept="image/*"></label>
-        </div>
-        <div class="form-group">
-            <label for="state">Állapot:
-                <select id="state" name="state">
-                    <option value="1" <?= $state === 1 ? "selected" : "" ?>>Aktív</option>
-                    <option value="0" <?= $state === 0 ? "selected" : "" ?>>Inaktív</option>
-                </select>
-            </label>
-        </div>
-        <div class="actions">
-            <input type="submit" name="submit" value="Mentés" class="btn btn-primary">
-            <input type="reset" value="Mégse" class="btn btn-secondary">
-            <a href="list.php" class="btn btn-link">Vissza a listához</a>
-        </div>
-    </form>
-</div>
-<script src="https://cdn.ckeditor.com/4.20.0/standard/ckeditor.js"></script>
-<script>CKEDITOR.replace('content');</script>
+    <div class="container">
+        <header>
+            <h1>Új cikk létrehozása</h1>
+        </header>
+
+        <section class="form-container">
+            <?= $output ?>
+            <form method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="alias">Alias:* <input type="text" id="alias" name="alias" required pattern="^[a-z-_]+$" value="<?= htmlspecialchars($alias) ?>"></label>
+                </div>
+                <div class="form-group">
+                    <label for="ordering">Sorrend: <input type="number" id="ordering" name="ordering" min="1" value="<?= $ordering ?>"></label>
+                </div>
+                <div class="form-group">
+                    <label for="nav_name">Navigációs név:* <input type="text" id="nav_name" name="nav_name" required value="<?= htmlspecialchars($nav_name) ?>"></label>
+                </div>
+                <div class="form-group">
+                    <label for="content">Tartalom: <textarea id="content" name="content"><?= htmlspecialchars($content) ?></textarea></label>
+                </div>
+                <div class="form-group">
+                    <label for="description">Leírás: <textarea id="description" name="description"><?= htmlspecialchars($description) ?></textarea></label>
+                </div>
+                <div class="form-group">
+                    <label for="keywords">Kulcsszavak: <textarea id="keywords" name="keywords"><?= htmlspecialchars($keywords) ?></textarea></label>
+                </div>
+                <div class="form-group">
+                    <label for="image">Kép: <input type="file" id="image" name="image" accept="image/*"></label>
+                </div>
+                <div class="form-group">
+                    <label for="state">Állapot:
+                        <select id="state" name="state">
+                            <option value="1" <?= $state === 1 ? "selected" : "" ?>>Aktív</option>
+                            <option value="0" <?= $state === 0 ? "selected" : "" ?>>Inaktív</option>
+                        </select>
+                    </label>
+                </div>
+                <div class="actions">
+                    <input type="submit" name="submit" value="Mentés" class="btn btn-primary">
+                    <input type="reset" value="Mégse" class="btn btn-secondary">
+                    <a href="list.php" class="btn btn-link">Vissza a listához</a>
+                </div>
+            </form>
+        </section>
+    </div>
+
+    <?php
+    if (isset($_SESSION['swal_message'])) {
+        $message = $_SESSION['swal_message'];
+        echo "<script>
+            Swal.fire({
+                icon: '" . $message['type'] . "',
+                title: '" . $message['title'] . "',
+                text: '" . $message['text'] . "',
+                confirmButtonColor: '" . ($message['type'] == 'success' ? '#28a745' : '#dc3545') . "'
+            }).then((result) => {
+                if (result.isConfirmed && '" . $message['type'] . "' === 'success') {
+                    window.location.href = 'list.php';
+                }
+            });
+        </script>";
+        unset($_SESSION['swal_message']);
+    }
+    ?>
+
+    <script>
+        CKEDITOR.replace('content');
+    </script>
 </body>
 </html>

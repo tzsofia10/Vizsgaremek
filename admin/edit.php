@@ -62,6 +62,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
         $errors[] = "A navigációs név megadása kötelező!";
     }
 
+    // Ellenőrizzük, hogy létezik-e már ugyanilyen nevű cikk
+    $check_query = "SELECT id FROM news WHERE nav_name = ? AND id != ?";
+    $check_stmt = mysqli_prepare($dbconn, $check_query);
+    if ($check_stmt) {
+        mysqli_stmt_bind_param($check_stmt, "si", $nav_name, $id);
+        mysqli_stmt_execute($check_stmt);
+        mysqli_stmt_store_result($check_stmt);
+        
+        if (mysqli_stmt_num_rows($check_stmt) > 0) {
+            $errors[] = "Már létezik cikk ezzel a névvel: " . htmlspecialchars($nav_name);
+        }
+        mysqli_stmt_close($check_stmt);
+    }
+
     $targetFile = $img; // Meglévő kép alapértelmezésként
     if (!empty($_FILES['image']['name'])) {
         $targetDir = "../uploads/";
@@ -105,6 +119,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
 }
 
 $output = $output ?? "";
+
+$page_title = "Cikk szerkesztése"; 
+$custom_css = ["../css/pages/edit.css"]; 
+$custom_js = []; 
+$additional_head = "<script src='https://cdn.ckeditor.com/4.20.0/standard/ckeditor.js'></script>";
+include '../main/head.php'; 
 ?>
 
 <!DOCTYPE html>

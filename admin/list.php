@@ -25,6 +25,7 @@ if (!$result) {
     $page_title = "Cikkek"; 
     $custom_css = ["../css/pages/editcow.css", "../css/pages/list.css", "../css/.css", "../css/footer.css"]; 
     $custom_js = ["../js/translate2.js" ]; 
+    $additional_head = "<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>";
     include '../main/head.php'; 
 ?>
 
@@ -57,7 +58,7 @@ if (!$result) {
                                     <td><?= $row['states'] == 1 ? 'Aktív' : 'Inaktív' ?></td>
                                     <td>
                                         <a href="edit.php?id=<?= $row['id'] ?>">Módosítás</a> |
-                                        <a href="delete.php?id=<?= $row['id'] ?>" onclick="return confirm('Biztosan törölni szeretnéd?');">Törlés</a>
+                                        <a href="javascript:void(0)" onclick="confirmDelete(<?= $row['id'] ?>, '<?= htmlspecialchars($row['nav_name'], ENT_QUOTES) ?>')">Törlés</a>
                                     </td>
                                 </tr>
                             <?php endwhile; ?>
@@ -76,6 +77,57 @@ if (!$result) {
             <?php include '../main/footer.php';?>
         </footer>
     </div>
+
+    <script>
+    function confirmDelete(id, name) {
+        Swal.fire({
+            title: 'Biztos törölni szeretnéd?',
+            text: `"${name}" cikk törlése véglegesen megtörténik!`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Igen, törlöm!',
+            cancelButtonText: 'Mégse'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = `delete.php?id=${id}`;
+            }
+        });
+    }
+
+    // Ha van URL paraméterben üzenet, azt is jelenítsük meg
+    document.addEventListener('DOMContentLoaded', function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const message = urlParams.get('message');
+        
+        if (message) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Sikeres művelet!',
+                text: message,
+                confirmButtonColor: '#28a745'
+            });
+        }
+    });
+    </script>
+
+    <?php
+    if (isset($_SESSION['swal_message'])) {
+        $message = $_SESSION['swal_message'];
+        echo "<script>
+            document.addEventListener('DOMContentLoaded', function() {
+                Swal.fire({
+                    icon: '" . $message['type'] . "',
+                    title: '" . $message['title'] . "',
+                    text: '" . $message['text'] . "',
+                    confirmButtonColor: '" . ($message['type'] == 'success' ? '#28a745' : '#dc3545') . "'
+                });
+            });
+        </script>";
+        unset($_SESSION['swal_message']);
+    }
+    ?>
 </body>
 </html>
 

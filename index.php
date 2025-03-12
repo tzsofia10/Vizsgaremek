@@ -1,8 +1,8 @@
 <?php
 require_once("connect.php");
 
-// Menü lekérése
-$sql = "SELECT id, alias, nav_name FROM news WHERE states = 1 ORDER BY ordering ASC";
+// Menü lekérése - abc sorrend a nav_name szerint
+$sql = "SELECT id, alias, nav_name FROM news WHERE states = 1 ORDER BY nav_name ASC";
 $result = mysqli_query($dbconn, $sql);
 
 $menu_items = [];
@@ -15,7 +15,7 @@ $sql = "SELECT * FROM news WHERE states = 1 ORDER BY creation DESC";
 $result = mysqli_query($dbconn, $sql);
 $articles = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
-// Legújabb 3 cikk a sidebar-hoz
+// Legújabb 3 cikk a sidebar-hoz - időrend szerint, a legújabbak elöl
 $newest_sql = "SELECT * FROM news WHERE states = 1 ORDER BY creation DESC LIMIT 3";
 $newest_result = mysqli_query($dbconn, $newest_sql); 
 $newest_articles = mysqli_fetch_all($newest_result, MYSQLI_ASSOC);
