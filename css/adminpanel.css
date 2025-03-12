@@ -1,4 +1,3 @@
-/* Alapstílusok */
 body {
     font-family: Arial, sans-serif;
     background-color: #cad2c5;
@@ -92,36 +91,9 @@ p {
     25% { transform: translateX(-5px); }
     75% { transform: translateX(5px); }
 }
-/*contents_list.html*/
-.menu-container {
-    text-align: center;
-    background-color: #ffffff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    max-width: 400px;
-    width: 100%;
-}
 
-.menu-options {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    margin-top: 20px;
-}
-.menu-button {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #52796f;
-    color: #ffffff;
-    text-decoration: none;
-    font-size: 16px;
-    font-weight: bold;
-    border-radius: 5px;
-    text-align: center;
-    transition: background-color 0.3s ease;
-}
-
-.menu-button:hover {
-    background-color: #354f52;
+@media (max-width: 480px) {
+    form {
+        padding: 15px;
+    }
 }
