@@ -46,8 +46,6 @@ if (isset($_POST['submit'])) {
 <meta charset="utf-8">
 <title>Admin Panel Login</title>
 <link href="../css/adminpanel.css" rel="stylesheet">
-
-
 </head>
 
 <body>

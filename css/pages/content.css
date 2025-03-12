@@ -131,7 +131,6 @@ ul li {
 @media (max-width: 480px) {
     .form-container {
         width: 100%;
-        margin: 20px auto;
         padding: 15px;
         border-radius: 0;
         box-shadow: none;
@@ -142,4 +141,10 @@ ul li {
         font-size: 14px;
         padding: 10px;
     }
+}
+
+@media (max-width: 420px) {
+    .form-container {
+        width: 80%;
+    }  
 }
