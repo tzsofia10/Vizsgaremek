@@ -17,18 +17,38 @@ $content = "";
 $description = "";
 $keywords = "";
 $state = 1;
+$img = "";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
     $_POST = array_map("trim", $_POST);
     $alias = strtolower(filter_var($_POST['alias'], FILTER_SANITIZE_STRING));
-    $ordering = isset($_POST['ordering']) ? (int)$_POST['ordering'] : 1;
+    $ordering = isset($_POST['ordering']) && ctype_digit($_POST['ordering']) ? (int)$_POST['ordering'] : 1;
     $nav_name = filter_var($_POST['nav_name'], FILTER_SANITIZE_STRING);
     $content = $_POST['content'];
     $description = filter_var($_POST['description'], FILTER_SANITIZE_STRING);
     $keywords = filter_var($_POST['keywords'], FILTER_SANITIZE_STRING);
     $state = isset($_POST['state']) ? (int)$_POST['state'] : 1;
-    $errors = [];
 
+    $errors = [];
+    // Ellenőrizzük, hogy létezik-e már ugyanilyen nevű alias
+    $check_alias = "SELECT id FROM news WHERE alias = ?";
+    $check_stmt = mysqli_prepare($dbconn, $check_alias);
+    if ($check_stmt) {
+        mysqli_stmt_bind_param($check_stmt, "s", $alias);
+        mysqli_stmt_execute($check_stmt);
+        mysqli_stmt_store_result($check_stmt);
+        
+        if (mysqli_stmt_num_rows($check_stmt) > 0) {
+            $_SESSION['swal_message'] = [
+                'type' => 'error',
+                'title' => 'Hiba!',
+                'text' => 'Már létezik ilyen nevű alias!'
+            ];
+            header("Location: content_management.php");
+            exit();
+        }
+        mysqli_stmt_close($check_stmt);
+    }
     // Ellenőrizzük, hogy létezik-e már ugyanilyen nevű cikk
     $check_query = "SELECT id FROM news WHERE nav_name = ?";
     $check_stmt = mysqli_prepare($dbconn, $check_query);
@@ -156,7 +176,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
                     <label for="keywords">Kulcsszavak: <textarea id="keywords" name="keywords"><?= htmlspecialchars($keywords) ?></textarea></label>
                 </div>
                 <div class="form-group">
-                    <label for="image">Kép: <input type="file" id="image" name="image" accept="image/*"></label>
+                    <label for="image">Kép:</label>
+                    <input type="file" id="image" name="image" accept="image/*" onchange="previewImage(this);">
+                    <div class="image-preview-container">
+                        <?php if (!empty($img)): ?>
+                            <p class="current-image-text">Jelenlegi kép:</p>
+                            <img src="../uploads/<?php echo htmlspecialchars($img); ?>" alt="Jelenlegi kép" class="uploaded-image">
+                        <?php endif; ?>
+                        <div id="imagePreview"></div>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="state">Állapot:
@@ -195,6 +223,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
 
     <script>
         CKEDITOR.replace('content');
+        function previewImage(input) {
+            const preview = document.getElementById('imagePreview');
+            preview.innerHTML = '';
+            
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                
+                reader.onload = function(e) {
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.className = 'uploaded-image';
+                    preview.appendChild(img);
+                }
+                
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
     </script>
 </body>
 </html>

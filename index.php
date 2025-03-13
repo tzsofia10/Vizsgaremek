@@ -90,7 +90,7 @@ include 'main/head.php';
                     if ($article): ?>
                         <div class="article-card">
                             <?php if(!empty($article['img'])): ?>
-                                <img src="<?php echo htmlspecialchars($article['img']); ?>" class="article-image" alt="<?php echo htmlspecialchars($article['nav_name']); ?>">
+                                <img src="uploads/<?php echo htmlspecialchars($article['img']); ?>" class="article-image" alt="<?php echo htmlspecialchars($article['nav_name']); ?>">
                             <?php endif; ?>
                             <h2><?php echo htmlspecialchars($article['nav_name']); ?></h2>
                             <p><?php echo $article['content']; ?></p>
@@ -104,7 +104,7 @@ include 'main/head.php';
                         $article = $articles[0]; ?>
                         <div class="article-card">
                             <?php if(!empty($article['img'])): ?>
-                                <img src="<?php echo htmlspecialchars($article['img']); ?>" class="article-image" alt="<?php echo htmlspecialchars($article['nav_name']); ?>">
+                                <img src="uploads/<?php echo htmlspecialchars($article['img']); ?>" class="article-image" alt="<?php echo htmlspecialchars($article['nav_name']); ?>">
                             <?php endif; ?>
                             <h2><?php echo htmlspecialchars($article['nav_name']); ?></h2>
                             <p><?php echo $article['content']; ?></p>
