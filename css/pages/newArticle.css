@@ -1,7 +1,7 @@
 .edit-container {
     max-width: 1200px;
     min-width: 1000px;
-    margin: 0 auto;
+    margin: auto;
     padding: 20px;
 }
 
@@ -15,6 +15,7 @@ header h1 {
     font-size: 2em;
 }
 
+/* Űrlap konténer stílusa */
 .form-container {
     background: white;
     padding: 30px;
@@ -22,6 +23,7 @@ header h1 {
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 }
 
+/* Hibás üzenetek */
 .error-messages {
     background: #ffe6e6;
     padding: 15px;
@@ -30,6 +32,7 @@ header h1 {
     color: #d33;
 }
 
+/* Form elemek */
 .form-group {
     margin-bottom: 20px;
 }
@@ -60,12 +63,21 @@ header h1 {
     background-color: white;
 }
 
-.form-actions {
+/* Form gombok */
+.actions{
     display: flex;
     justify-content: center;
     gap: 15px;
     margin-top: 30px;
     padding: 10px;
+}
+.actions input{
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s ease;
 }
 
 .form-actions input[type="submit"],
@@ -78,21 +90,21 @@ header h1 {
     transition: all 0.3s ease;
 }
 
-.form-actions input[type="submit"] {
+.actions input[type="submit"] {
     background-color: #007BFF;
     color: white;
 }
 
-.form-actions input[type="submit"]:hover {
+.actions input[type="submit"]:hover {
     background-color: #0056b3;
 }
 
-.form-actions input[type="reset"] {
+.actions input[type="reset"] {
     background-color: #6c757d;
     color: white;
 }
 
-.form-actions input[type="reset"]:hover {
+.actions input[type="reset"]:hover {
     background-color: #545b62;
 }
 
@@ -111,9 +123,8 @@ a:hover {
 @media (max-width: 768px) {
     .edit-container {
         padding: 10px;
-        min-width: 100%;
-        max-width: 100%;
-        width: 100%;
+        min-width: unset;
+        max-width: unset;
     }
 
     .form-container {
@@ -134,6 +145,7 @@ a:hover {
 }
 
 @media (max-width: 480px) {
+
     .form-group label {
         font-size: 14px;
     }
@@ -150,8 +162,4 @@ a:hover {
         padding: 10px 20px;
         font-size: 14px;
     }
-
-    .edit-container {
-        padding: 10px;
-    }
-} 
+}

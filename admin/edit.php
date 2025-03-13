@@ -119,26 +119,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
 }
 
 $output = $output ?? "";
-
-$page_title = "Cikk szerkesztése"; 
-$custom_css = ["../css/pages/edit.css"]; 
-$custom_js = []; 
-$additional_head = "<script src='https://cdn.ckeditor.com/4.20.0/standard/ckeditor.js'></script>";
-include '../main/head.php'; 
 ?>
 
 <!DOCTYPE html>
 <html lang="hu">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cikk módosítása</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="https://cdn.ckeditor.com/4.20.0/standard/ckeditor.js"></script>
-</head>
+<?php 
+    $page_title = "Cikk szerkesztése"; 
+    $custom_css = ["../css/pages/edit.css"]; 
+    $custom_js = []; 
+    $additional_head = "<script src='https://cdn.ckeditor.com/4.20.0/standard/ckeditor.js'></script>";
+    include '../main/head.php'; 
+?>
 <body>
 
-<div class="container">
+<div class="edit-container">
     <header>
         <h1>Cikk módosítása</h1>
     </header>
@@ -192,11 +186,9 @@ include '../main/head.php';
 
             <div class="form-actions">
                 <input type="submit" id="submit" name="submit" value="Mentés">
-                <input type="reset" value="Mégse">
+                <input type="reset" value="Mégse" onclick="window.location.href='list.php';">
             </div>
         </form>
-
-        <p><a href="list.php">Vissza a listához</a></p>
     </section>
 </div>
 

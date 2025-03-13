@@ -120,7 +120,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
 <html lang="hu">
 <?php 
     $page_title = "Új cikk"; 
-    $custom_css = ["../css/pages/edit.css"]; 
+    $custom_css = ["../css/pages/newArticle.css"]; 
     $custom_js = []; 
     $additional_head = "
         <script src='https://cdn.ckeditor.com/4.20.0/standard/ckeditor.js'></script>
@@ -129,7 +129,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
     include '../main/head.php'; 
 ?>
 <body>
-    <div class="container">
+    <div class="edit-container">
         <header>
             <h1>Új cikk létrehozása</h1>
         </header>
@@ -168,8 +168,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
                 </div>
                 <div class="actions">
                     <input type="submit" name="submit" value="Mentés" class="btn btn-primary">
-                    <input type="reset" value="Mégse" class="btn btn-secondary">
-                    <a href="list.php" class="btn btn-link">Vissza a listához</a>
+                    <input type="reset" value="Mégse" onclick="window.location.href='list.php';">
                 </div>
             </form>
         </section>
