@@ -91,15 +91,21 @@ if (isset($_POST['sale_id'])) {
     <button class="close-btn" id="close-checkout">×</button>
     <div class="card cart">
         <div class="details">
-            <label for="name">Név:</label>
-            <input type="text" id="name" placeholder="Név megadása" required>
-            <label for="address">Lakcím:</label>
-            <input type="text" id="address" placeholder="Lakcím megadása" required>
-            <label for="phone">Telefonszám:</label>
-            <input type="tel" id="phone" placeholder="Telefonszám megadása" required 
-            pattern="^\d{10}$" 
-            maxlength="11" 
- title="Csak számokat adjon meg, 10 vagy 11 karakter hosszú telefonszám">
+        <label for="name">Név:</label>
+<input type="text" id="name" placeholder="Név megadása" required>
+
+<label for="city">Város:</label>
+<input type="text" id="city" placeholder="Város megadása" required>
+
+<label for="address">Utca:</label>
+<input type="text" id="address" placeholder="Utca megadása" required>
+
+<label for="house_number">Házszám:</label>
+<input type="text" id="house_number" placeholder="Házszám megadása" required>
+
+<label for="phone">Telefonszám:</label>
+<input type="tel" id="phone" placeholder="Telefonszám megadása" required pattern="^\d{10,11}$" maxlength="11">
+
 
             <span>Ár:</span> <span id="checkout-price">0 HUF</span>
         </div>
