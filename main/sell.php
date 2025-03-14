@@ -86,32 +86,33 @@ if (isset($_POST['sale_id'])) {
 </div>
 
 <!-- Checkout Container -->
+<form method="POST" action="update:sale_status.php">
 <button class="dismiss" id="close-confirmation">×</button>
 <div class="fizetes" id="checkout-container">
     <button class="close-btn" id="close-checkout">×</button>
     <div class="card cart">
         <div class="details">
         <label for="name">Név:</label>
-<input type="text" id="name" placeholder="Név megadása" required>
+    <input type="text" id="name" placeholder="Név megadása" required>
 
-<label for="city">Város:</label>
-<input type="text" id="city" placeholder="Város megadása" required>
+    <label for="city">Város:</label>
+    <input type="text" id="city" placeholder="Város megadása" required>
 
-<label for="address">Utca:</label>
-<input type="text" id="address" placeholder="Utca megadása" required>
+    <label for="address">Utca:</label>
+    <input type="text" id="address" placeholder="Utca megadása" required>
 
-<label for="house_number">Házszám:</label>
-<input type="text" id="house_number" placeholder="Házszám megadása" required>
+    <label for="house_number">Házszám:</label>
+    <input type="text" id="house_number" placeholder="Házszám megadása" required>
 
-<label for="phone">Telefonszám:</label>
-<input type="tel" id="phone" placeholder="Telefonszám megadása" required pattern="^\d{10,11}$" maxlength="11">
+    <label for="phone">Telefonszám:</label>
+    <input type="tel" id="phone" placeholder="Telefonszám megadása" required pattern="^\d{10,11}$" maxlength="11">
 
 
             <span>Ár:</span> <span id="checkout-price">0 HUF</span>
         </div>
     </div>
     <div class="card checkout">
-        <form method="POST" action="">
+       
             <input type="hidden" id="sale-id" name="sale_id">
             <button class="checkout-btn" type="submit" disabled>Foglalás</button>
 
@@ -138,25 +139,42 @@ document.addEventListener("DOMContentLoaded", function () {
     const confirmationBox = document.getElementById("confirmation-box");
     const nameInput = document.getElementById("name");
     const addressInput = document.getElementById("address");
+    const cityInput = document.getElementById("city");
+    const housenumberInput = document.getElementById("house_number");
     const phoneInput = document.getElementById("phone");
     const saleIdInput = document.getElementById("sale-id");
+    console.log("city:",cityInput,"telefon:",phoneInput)
+    
+    //kitöltés teszt adatokkal
+    nameInput.value = "Kovács István";
+    addressInput.value = "Rákóczi út";
+    cityInput.value = "Egyházasgerge";
+    housenumberInput.value = 55;
+    phoneInput.value = 12345678;
+  
 
+    /* A user kizárólag csak számot tudjon beírni a telefonszá mezőbe ezért az értékeket \D = minden olyan karakter, ami nem számjegy (0-9 kivételével minden más karakter).
+g = globális mód, vagyis az összes találatot lecseréli, nemcsak az elsőt.
+'' (üres string) – A talált nem számjegy karaktereket törli. */ 
     phoneInput.addEventListener("input", function () {
         this.value = this.value.replace(/\D/g, ''); 
+        console.log()
     });
 
     function validateForm() {
-        if (nameInput.value.trim() !== "" && addressInput.value.trim() !== "" && phoneInput.value.trim().length >= 10) {
+        console.log("ValidateForm függvény ezeket az adatokat kapja meg ellenőrzésre: ", nameInput.value, addressInput.value, phoneInput.value, cityInput.value, housenumberInput.value)
+        if (nameInput.value.trim() !== "" && addressInput.value.trim() !== "" && phoneInput.value.trim().length >= 3 && cityInput.value.trim()!=="" && housenumberInput.value.trim()!=="") {
             checkoutBtn.disabled = false;
         } else {
             checkoutBtn.disabled = true;
         }
     }
-
-    [nameInput, addressInput, phoneInput].forEach(input => {
+//ha kitöltésre kerülnek az input mezők akkor meghívásra kerül a validáló függvény
+    [nameInput, addressInput, phoneInput, cityInput, housenumberInput].forEach(input => {
         input.addEventListener("input", validateForm);
-    });
+    }); 
 
+    //
     purchaseButtons.forEach(button => {
         button.addEventListener("click", function () {
             let price = this.getAttribute("data-price");
@@ -172,19 +190,30 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
+    //ha elküldésre kerül a form:
     checkoutBtn.addEventListener("click", function (event) {
+        //böngésző alapértelmezett működésének leállítása
         event.preventDefault();
         if (checkoutBtn.disabled) return;
 
         let saleId = saleIdInput.value;
         const rowId = saleIdInput.dataset.rowId;
         const row = document.getElementById(rowId);
+        console.log("saleId ami küldésre kerül:",saleId)
+
+
+       let formData = new FormData();
+        formData.append("sale_id", saleId);
 
         fetch("update_sale_status.php", {
+    method: "POST",
+    body: formData
+})
+        /*fetch("update_sale_status.php", {
             method: "POST",
             headers: { "Content-Type": "application/x-www-form-urlencoded" },
             body: "sale_id=" + saleId
-        })
+        })*/
         .then(response => response.text())
         .then(result => {
             if (result.trim() === "success") {
@@ -205,7 +234,8 @@ document.addEventListener("DOMContentLoaded", function () {
                     }
                 }, 4500);
             } else {
-                alert("Hiba történt a foglalás során. Kérlek, próbáld újra!");
+                //alert("Hiba történt a foglalás során. Kérlek, próbáld újra!");
+                window.location.href = "update_sale_status.php";
             }
         })
         .catch(error => console.error("Hiba:", error));
