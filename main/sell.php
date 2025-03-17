@@ -144,7 +144,11 @@ document.addEventListener("DOMContentLoaded", function () {
     addressInput.value = "Rákóczi út";
     cityInput.value = "Egyházasgerge";
     housenumberInput.value = 55;
+<<<<<<< HEAD
     phoneInput.value = 10612345678;*/
+=======
+    phoneInput.value = 10612345678;
+>>>>>>> 4bc60b5 (javítva)
   
 
     /* A user kizárólag csak számot tudjon beírni a telefonszá mezőbe ezért az értékeket \D = minden olyan karakter, ami nem számjegy (0-9 kivételével minden más karakter).
@@ -157,7 +161,11 @@ phoneInput.addEventListener("input", function () {
 
     function validateForm() {
        /* console.log("ValidateForm függvény ezeket az adatokat kapja meg ellenőrzésre: ", nameInput.value, addressInput.value, phoneInput.value, cityInput.value, housenumberInput.value)*/
+<<<<<<< HEAD
         if (nameInput.value.trim() !== "" && addressInput.value.trim() !== "" && phoneInput.value.trim().length >= 3 && cityInput.value.trim()!=="" && housenumberInput.value.trim()!=="") {
+=======
+        if (phoneInput.value.trim().length >= 3 && nameInput.value.trim() !== ""  && addressInput.value.trim() !== "" && cityInput.value.trim()!=="" && housenumberInput.value.trim()!=="") {
+>>>>>>> 4bc60b5 (javítva)
             checkoutBtn.disabled = false;
         } else {
             checkoutBtn.disabled = true;
