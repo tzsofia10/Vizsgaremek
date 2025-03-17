@@ -1,24 +1,19 @@
 <?php
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "gazdanaplo";
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
+header("Expires: Thu, 01 Jan 1970 00:00:00 GMT");
 
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
+require_once "../connect.php";
 $sql = "SELECT id, sales_date, customer_id, price, cows_id, sale_status FROM sales WHERE sale_status = 'available'";
-$result = $conn->query($sql);
+$result = $dbconn->query($sql);
 
 // Ha a foglalás gombot megnyomták, frissítjük a státuszt
 if (isset($_POST['sale_id'])) {
     $sale_id = $_POST['sale_id'];
     $update_sql = "UPDATE sales SET sale_status = 'sold' WHERE id = ?";
-    $stmt = $conn->prepare($update_sql);
+    $stmt = $dbconn->prepare($update_sql);
     $stmt->bind_param("i", $sale_id);
     $stmt->execute();
     $stmt->close();
@@ -86,7 +81,7 @@ if (isset($_POST['sale_id'])) {
 </div>
 
 <!-- Checkout Container -->
-<form method="POST" action="update:sale_status.php">
+<form method="POST" action="update:sale_status.php" >
 <button class="dismiss" id="close-confirmation">×</button>
 <div class="fizetes" id="checkout-container">
     <button class="close-btn" id="close-checkout">×</button>
@@ -105,8 +100,7 @@ if (isset($_POST['sale_id'])) {
     <input type="text" id="house_number" placeholder="Házszám megadása" required>
 
     <label for="phone">Telefonszám:</label>
-    <input type="tel" id="phone" placeholder="Telefonszám megadása" required pattern="^\d{10,11}$" maxlength="11">
-
+    <input type="tel" id="phone" placeholder="Telefonszám megadása" >
 
             <span>Ár:</span> <span id="checkout-price">0 HUF</span>
         </div>
@@ -143,26 +137,26 @@ document.addEventListener("DOMContentLoaded", function () {
     const housenumberInput = document.getElementById("house_number");
     const phoneInput = document.getElementById("phone");
     const saleIdInput = document.getElementById("sale-id");
-    console.log("city:",cityInput,"telefon:",phoneInput)
+    console.log("city:",cityInput,"telefon:", phoneInput)
     
     //kitöltés teszt adatokkal
     nameInput.value = "Kovács István";
     addressInput.value = "Rákóczi út";
     cityInput.value = "Egyházasgerge";
     housenumberInput.value = 55;
-    phoneInput.value = 12345678;
+    phoneInput.value = 10612345678;
   
 
     /* A user kizárólag csak számot tudjon beírni a telefonszá mezőbe ezért az értékeket \D = minden olyan karakter, ami nem számjegy (0-9 kivételével minden más karakter).
 g = globális mód, vagyis az összes találatot lecseréli, nemcsak az elsőt.
-'' (üres string) – A talált nem számjegy karaktereket törli. */ 
-    phoneInput.addEventListener("input", function () {
-        this.value = this.value.replace(/\D/g, ''); 
-        console.log()
-    });
+'' (üres string) – A talált nem számjegy karaktereket törli. 
+phoneInput.addEventListener("input", function () {
+    this.value = this.value.replace(/[^\d\+]/g, ''); // Csak számokat és a "+" karaktert engedélyezi
+});
+*/
 
     function validateForm() {
-        console.log("ValidateForm függvény ezeket az adatokat kapja meg ellenőrzésre: ", nameInput.value, addressInput.value, phoneInput.value, cityInput.value, housenumberInput.value)
+       /* console.log("ValidateForm függvény ezeket az adatokat kapja meg ellenőrzésre: ", nameInput.value, addressInput.value, phoneInput.value, cityInput.value, housenumberInput.value)*/
         if (nameInput.value.trim() !== "" && addressInput.value.trim() !== "" && phoneInput.value.trim().length >= 3 && cityInput.value.trim()!=="" && housenumberInput.value.trim()!=="") {
             checkoutBtn.disabled = false;
         } else {
@@ -192,64 +186,56 @@ g = globális mód, vagyis az összes találatot lecseréli, nemcsak az elsőt.
 
     //ha elküldésre kerül a form:
     checkoutBtn.addEventListener("click", function (event) {
-        //böngésző alapértelmezett működésének leállítása
-        event.preventDefault();
-        if (checkoutBtn.disabled) return;
+    event.preventDefault();
+    if (checkoutBtn.disabled) return;
 
-        let saleId = saleIdInput.value;
-        const rowId = saleIdInput.dataset.rowId;
-        const row = document.getElementById(rowId);
-        console.log("saleId ami küldésre kerül:",saleId)
+    let saleId = saleIdInput.value;
+    let formData = new FormData();
+    formData.append("sale_id", saleId);
+    formData.append("name", nameInput.value.trim());
+    formData.append("address", addressInput.value.trim());
+    formData.append("house_number", housenumberInput.value.trim());
+    formData.append("phone", phoneInput.value);
+    console.log(phoneInput.value.trim())
+    formData.append("city", cityInput.value.trim());
 
+    // Adatok kiírása a konzolba
+    console.log("Elküldött adatok:", Object.fromEntries(formData.entries()));
 
-       let formData = new FormData();
-        formData.append("sale_id", saleId);
+    fetch("update_sale_status.php", {
+        method: "POST",
+        body: formData
+    })
+    .then(response => response.text())
+    .then(result => {
+        if (result.trim() === "success") {
+            document.getElementById("checkout-container").style.display = "none";
+            confirmationBox.style.display = "block";
+            confirmationBox.style.opacity = "1";
 
-        fetch("update_sale_status.php", {
-    method: "POST",
-    body: formData
-})
-        /*fetch("update_sale_status.php", {
-            method: "POST",
-            headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            body: "sale_id=" + saleId
-        })*/
-        .then(response => response.text())
-        .then(result => {
-            if (result.trim() === "success") {
-                document.getElementById("checkout-container").style.display = "none";
-                confirmationBox.style.display = "block";
-                confirmationBox.style.opacity = "1";
+            setTimeout(() => {
+                confirmationBox.style.transition = "opacity 1.5s ease-in-out";
+                confirmationBox.style.opacity = "0";
+            }, 3000);
 
-                setTimeout(() => {
-                    confirmationBox.style.transition = "opacity 1.5s ease-in-out";
-                    confirmationBox.style.opacity = "0";
-                }, 3000);
-
-                setTimeout(() => {
-                    confirmationBox.style.display = "none";
-                    if (row) {
-                        row.classList.add("fade-out");
-                        setTimeout(() => { row.remove(); }, 1500);
-                    }
-                }, 4500);
-            } else {
-                //alert("Hiba történt a foglalás során. Kérlek, próbáld újra!");
-                window.location.href = "update_sale_status.php";
-            }
-        })
-        .catch(error => console.error("Hiba:", error));
-    });
-
-    document.getElementById("close-checkout").addEventListener("click", function () {
-        document.getElementById("checkout-container").style.display = "none";
-    });
-
-    document.getElementById("close-confirmation").addEventListener("click", function () {
-        confirmationBox.style.opacity = "0";
-        setTimeout(() => { confirmationBox.style.display = "none"; }, 500);
-    });
+            setTimeout(() => {
+                confirmationBox.style.display = "none";
+                let row = document.getElementById(`row-${saleId}`);
+                if (row) {
+                    row.classList.add("fade-out");
+                    setTimeout(() => { row.remove(); }, 1500);
+                }
+            }, 4500);
+        } else {
+            console.error("Hiba történt:", result);
+           alert("Hiba történt a foglalás során. Kérlek, próbáld újra!");
+           //ezzel nem jó tesztelni átállítja get-re a kérést
+           // window.location = "update_sale_status.php"
+        }
+    })
+    .catch(error => console.error("Hiba:", error));
 });
+})
 </script>
 
 <footer>
@@ -259,5 +245,6 @@ g = globális mód, vagyis az összes találatot lecseréli, nemcsak az elsőt.
 </html>
 
 <?php
-$conn->close();
+$dbconn->close();
 ?>
+
