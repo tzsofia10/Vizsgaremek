@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2025. Már 12. 17:38
--- Kiszolgáló verziója: 10.4.32-MariaDB
--- PHP verzió: 8.2.12
+-- Létrehozás ideje: 2025. Már 17. 11:15
+-- Kiszolgáló verziója: 10.4.28-MariaDB
+-- PHP verzió: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -126,7 +126,7 @@ CREATE TABLE `customer` (
   `id` int(11) NOT NULL,
   `phone_number` varchar(15) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
-  `settlemets_id` int(11) DEFAULT NULL,
+  `settlements_id` int(11) DEFAULT NULL,
   `street` varchar(255) DEFAULT NULL,
   `house_number` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -135,12 +135,15 @@ CREATE TABLE `customer` (
 -- A tábla adatainak kiíratása `customer`
 --
 
-INSERT INTO `customer` (`id`, `phone_number`, `name`, `settlemets_id`, `street`, `house_number`) VALUES
+INSERT INTO `customer` (`id`, `phone_number`, `name`, `settlements_id`, `street`, `house_number`) VALUES
 (1, '+36201234567', 'Kovács István', 101, 'Petőfi utca', '12/A'),
 (2, '+36209876543', 'Nagy Katalin', 102, 'Szabadság tér', '5'),
 (3, '+36701239876', 'Tóth Péter', 103, 'Kossuth Lajos utca', '8/B'),
 (4, '+36301235678', 'Szabó Erzsébet', 104, 'Rákóczi út', '24'),
-(5, '+36205556677', 'Varga László', 105, 'Béke utca', '3/C');
+(5, '+36205556677', 'Varga László', 105, 'Béke utca', '3/C'),
+(6, NULL, 'Kovács István', NULL, NULL, '55'),
+(7, NULL, 'Kovács István', NULL, NULL, '55'),
+(8, NULL, 'Zsófia', NULL, NULL, '23');
 
 -- --------------------------------------------------------
 
@@ -197,9 +200,9 @@ CREATE TABLE `sales` (
 
 INSERT INTO `sales` (`id`, `cows_id`, `customer_id`, `sales_date`, `price`, `sale_status`) VALUES
 (1, 2, 1, '2023-06-15', 400000.00, 1),
-(2, 5, 2, '2023-07-01', 420000.00, 0),
-(3, 10, 3, '2023-07-20', 390000.00, 0),
-(4, 17, 4, '2023-08-15', 410000.00, 0),
+(2, 5, 6, '2023-07-01', 420000.00, 1),
+(3, 10, 7, '2023-07-20', 390000.00, 1),
+(4, 17, 8, '2023-08-15', 410000.00, 1),
 (5, 22, 5, '2023-09-10', 395000.00, 0),
 (6, 25, 1, '2023-10-05', 400000.00, 0),
 (7, 30, 2, '2023-10-20', 405000.00, 0),
@@ -230,7 +233,9 @@ INSERT INTO `settlements` (`id`, `postal_code`, `town`) VALUES
 (102, '8000', 'Székesfehérvár'),
 (103, '4026', 'Debrecen'),
 (104, '6720', 'Szeged'),
-(105, '7621', 'Pécs');
+(105, '7621', 'Pécs'),
+(106, NULL, 'Egyházasgerge'),
+(107, NULL, 'Balassagyarmat');
 
 -- --------------------------------------------------------
 
@@ -295,7 +300,7 @@ ALTER TABLE `cow_vaccinations`
 --
 ALTER TABLE `customer`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `settlemets_id` (`settlemets_id`);
+  ADD KEY `settlemets_id` (`settlements_id`);
 
 --
 -- A tábla indexei `news`
@@ -355,7 +360,7 @@ ALTER TABLE `cow_vaccinations`
 -- AUTO_INCREMENT a táblához `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT a táblához `news`
@@ -367,7 +372,7 @@ ALTER TABLE `news`
 -- AUTO_INCREMENT a táblához `settlements`
 --
 ALTER TABLE `settlements`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=106;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=108;
 
 --
 -- AUTO_INCREMENT a táblához `user`
@@ -402,7 +407,7 @@ ALTER TABLE `cow_vaccinations`
 -- Megkötések a táblához `customer`
 --
 ALTER TABLE `customer`
-  ADD CONSTRAINT `customer_ibfk_1` FOREIGN KEY (`settlemets_id`) REFERENCES `settlements` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `customer_ibfk_1` FOREIGN KEY (`settlements_id`) REFERENCES `settlements` (`id`) ON DELETE CASCADE;
 
 --
 -- Megkötések a táblához `sales`
