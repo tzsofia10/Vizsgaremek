@@ -140,11 +140,11 @@ document.addEventListener("DOMContentLoaded", function () {
     console.log("city:",cityInput,"telefon:", phoneInput)
     
     //kitöltés teszt adatokkal
-    nameInput.value = "Kovács István";
+   /* nameInput.value = "Kovács István";
     addressInput.value = "Rákóczi út";
     cityInput.value = "Egyházasgerge";
     housenumberInput.value = 55;
-    phoneInput.value = 10612345678;
+    phoneInput.value = 10612345678;*/
   
 
     /* A user kizárólag csak számot tudjon beírni a telefonszá mezőbe ezért az értékeket \D = minden olyan karakter, ami nem számjegy (0-9 kivételével minden más karakter).
