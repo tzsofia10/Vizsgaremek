@@ -163,6 +163,13 @@ body, html {
     overflow: hidden;
     text-overflow: ellipsis;
 }
+#vacinationButton{
+    background-color: #F4C095;
+}
+#vacinationButton a{
+    color: black;
+    text-decoration: none;
+}
 
 .text-muted {
     color: #888 !important;
