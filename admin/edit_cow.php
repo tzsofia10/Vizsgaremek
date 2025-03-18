@@ -42,15 +42,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $ear_tag = $_POST['ear_tag'] ?? '';
     $gender = $_POST['gender'] ?? '';
     $mother_ear_tag = $_POST['mother_ear_tag'] ?? '';
-    $father_ear_tag = $_POST['father_ear_tag'] ?? '';
+  
     $color_id = $_POST['color_id'] ?? '';
     $birthdate = $_POST['birthdate'] ?? '';
+    $death_date = !empty($_POST['death_date']) ? $_POST['death_date'] : null;
 
-    $updateStmt = $dbconn->prepare(
-        "UPDATE cows SET ear_tag = ?, gender = ?, mother_ear_tag = ?, father_ear_tag = ?, color_id = ?, birthdate = ? WHERE id = ?"
-    );
-    $updateStmt->bind_param('ssssisi', $ear_tag, $gender, $mother_ear_tag, $father_ear_tag, $color_id, $birthdate, $cow_id);
-
+    
+    if ($death_date === null) {
+        $updateStmt = $dbconn->prepare(
+            "UPDATE cows SET ear_tag = ?, gender = ?, mother_ear_tag = ?, father_ear_tag = ?, color_id = ?, birthdate = ?, death_date = NULL WHERE id = ?"
+        );
+        $updateStmt->bind_param('ssssisi', $ear_tag, $gender, $mother_ear_tag, $father_ear_tag, $color_id, $birthdate, $cow_id);
+    } else {
+        $updateStmt = $dbconn->prepare(
+            "UPDATE cows SET ear_tag = ?, gender = ?, mother_ear_tag = ?, father_ear_tag = ?, color_id = ?, birthdate = ?, death_date = ? WHERE id = ?"
+        );
+        $updateStmt->bind_param('ssssissi', $ear_tag, $gender, $mother_ear_tag, $father_ear_tag, $color_id, $birthdate, $death_date, $cow_id);
+    }
+    
     if ($updateStmt->execute()) {
         echo "<p>A tehén adatai sikeresen frissítve!</p>";
     } else {
@@ -89,9 +98,11 @@ $dbconn->close();
             <input type="text" id="ear_tag" name="ear_tag" value="<?php echo htmlspecialchars($cow['ear_tag']); ?>" required>
             <br>
             
-            <label for="">Elpusztult?</label>
-            <select id="death" name="death" required>
-               
+            <label for="death_date">Elhullás dátuma:</label>
+            <input type="date" id="death_date" name="death_date" value="<?php echo htmlspecialchars($cow['death_date'] ?? ''); ?>">
+            <br>
+
+
             </select>
 
             <label for="gender">Nem:</label>
@@ -103,10 +114,6 @@ $dbconn->close();
     
             <label for="mother_ear_tag">Anya Füljelzője:</label>
             <input type="text" id="mother_ear_tag" name="mother_ear_tag" value="<?php echo htmlspecialchars($cow['mother_ear_tag']); ?>">
-            <br>
-    
-            <label for="father_ear_tag">Apa Füljelzője:</label>
-            <input type="text" id="father_ear_tag" name="father_ear_tag" value="<?php echo htmlspecialchars($cow['father_ear_tag']); ?>">
             <br>
     
             <label for="color_id">Szín:</label>
