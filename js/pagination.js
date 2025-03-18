@@ -1,27 +1,46 @@
-// Oldal betöltés animáció
-document.addEventListener('DOMContentLoaded', function() {
-    // Kiszámoljuk a maximális oldalszámot
-    const maxPages = parseInt(document.querySelector('.pagination').dataset.maxPages) || 10;
+document.addEventListener("DOMContentLoaded", function () {
+    const searchInput = document.getElementById("searchInput");
+    const cowTableBody = document.querySelector("#cowTable tbody");
+    const paginationContainer = document.querySelector(".pagination-container");
 
-    // Minden lapozó linkre feliratkozunk
-    document.querySelectorAll('.pagination a').forEach(link => {
-        if (!link.classList.contains('dots')) {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                const href = this.getAttribute('href');
-                
-                // Táblázat elhalványítása
-                const tbody = document.querySelector('#cowTable tbody');
-                tbody.style.opacity = '0';
-                tbody.style.transform = 'translateY(-10px)';
-                
-                // Kis késleltetés után átirányítás
-                setTimeout(() => {
-                    window.location.href = href;
-                }, 300);
-            });
+    function fetchCows(search = "", page = 1) {
+        fetch(`searchcow.php?search=${encodeURIComponent(search)}&page=${page}`)
+            .then(response => response.json())
+            .then(data => {
+                updateTable(data.cows);
+                updatePagination(data.pagination, search);
+            })
+            .catch(error => console.error("Hiba történt:", error));
+    }
+
+    function updateTable(cows) {
+        cowTableBody.innerHTML = ""; // Tábla ürítése
+        if (cows.length === 0) {
+            cowTableBody.innerHTML = `<tr><td colspan="6">Nincs találat.</td></tr>`;
+            return;
         }
+
+        cows.forEach(cow => {
+            const row = `
+                <tr>
+                    <td>${cow.ear_tag}</td>
+                    <td>${cow.gender}</td>
+                    <td>${cow.mother_ear_tag || '-'}</td>
+                    <td>${cow.color}</td>
+                    <td>${cow.birthdate}</td>
+                    <td><img src="${cow.picture}" alt="Tehén kép" width="50"></td>
+                </tr>`;
+            cowTableBody.innerHTML += row;
+        });
+    }
+
+    // Keresőmező eseménykezelője
+    searchInput.addEventListener("input", function () {
+        fetchCows(this.value);
     });
+
+    // Alapértelmezett betöltés
+    fetchCows();
 
     // Dots elemek kezelése
     document.querySelectorAll('.dots').forEach(dots => {
@@ -38,32 +57,20 @@ document.addEventListener('DOMContentLoaded', function() {
                 cancelButtonText: 'Mégse',
                 inputAttributes: {
                     min: 1,
-                    max: maxPages,
+                    max: paginationContainer.querySelector('.pagination').dataset.maxPages,
                     step: 1
                 },
                 inputValidator: (value) => {
                     if (!value || value < 1) {
                         return 'Kérem adjon meg egy érvényes oldalszámot!';
                     }
-                    if (value > maxPages) {
-                        return `Az oldalszám nem lehet nagyobb mint ${maxPages}!`;
-                    }
-                },
-                customClass: {
-                    container: 'pagination-alert',
-                    popup: 'pagination-popup',
-                    input: 'pagination-input',
-                    confirmButton: 'pagination-confirm',
-                    cancelButton: 'pagination-cancel'
                 }
             }).then((result) => {
                 if (result.isConfirmed) {
                     // Táblázat elhalványítása
                     const tbody = document.querySelector('#cowTable tbody');
-                    if (tbody) {
-                        tbody.style.opacity = '0';
-                        tbody.style.transform = 'translateY(-10px)';
-                    }
+                    tbody.style.opacity = '0';
+                    tbody.style.transform = 'translateY(-10px)';
                     
                     // Kis késleltetés után átirányítás
                     setTimeout(() => {
@@ -75,35 +82,3 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// Eredeti jumpToPage funkció megtartása
-function jumpToPage(currentPage, totalPages) {
-    Swal.fire({
-        title: 'Ugrás oldalra',
-        input: 'number',
-        inputAttributes: {
-            min: 1,
-            max: totalPages,
-            step: 1
-        },
-        inputValue: currentPage,
-        showCancelButton: true,
-        confirmButtonText: 'Ugrás',
-        cancelButtonText: 'Mégse',
-        confirmButtonColor: '#A8C27A',
-        inputValidator: (value) => {
-            if (!value || value < 1 || value > totalPages) {
-                return 'Kérlek adj meg egy számot 1 és ' + totalPages + ' között!';
-            }
-        }
-    }).then((result) => {
-        if (result.isConfirmed) {
-            const tbody = document.querySelector('#cowTable tbody');
-            tbody.style.opacity = '0';
-            tbody.style.transform = 'translateY(-10px)';
-            
-            setTimeout(() => {
-                window.location.href = '?page=' + result.value + '#cowTable';
-            }, 300);
-        }
-    });
-} 
