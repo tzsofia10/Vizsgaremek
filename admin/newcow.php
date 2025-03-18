@@ -194,7 +194,7 @@ $dbconn->close();
             <br>
     
             <button class="button" type="submit">Hozzáadás</button>
-            <button class="button"><a href="contents_list.html">Vissza</a></button>
+            <button class="button"><a href="main.php">Vissza</a></button>
         </form>
     </main>
 
