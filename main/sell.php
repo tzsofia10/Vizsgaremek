@@ -81,7 +81,7 @@ if (isset($_POST['sale_id'])) {
 </div>
 
 <!-- Checkout Container -->
-<form method="POST" action="update:sale_status.php" >
+<form method="POST" action="update_sale_status.php">
 <button class="dismiss" id="close-confirmation">×</button>
 <div class="fizetes" id="checkout-container">
     <button class="close-btn" id="close-checkout">×</button>
