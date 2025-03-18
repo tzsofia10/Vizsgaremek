@@ -80,9 +80,7 @@ include '../main/head.php';
                 </a>
 
                 <a href="farm_states.php" class="action-button">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                        <img src="..\" alt="">
-                    </svg>
+                    <img src="..\cowPicture\\cow-silhouette-icon-character-free-png.png" width="55px" id alt="">
                     <span>Lefoglalt szarvasmarhák</span>
                 </a>
             </div>
