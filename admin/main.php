@@ -79,7 +79,7 @@ include '../main/head.php';
                     <span>Teljes lista</span>
                 </a>
 
-                <a href="farm_states.php" class="action-button">
+                <a href="bookedCows.php" class="action-button">
                     <img src="..\cowPicture\\cow-silhouette-icon-character-free-png.png" width="55px" id alt="">
                     <span>Lefoglalt szarvasmarhák</span>
                 </a>
