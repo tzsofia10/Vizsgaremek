@@ -9,21 +9,7 @@
     <link rel="stylesheet" href="../css/footer.css">
     <link rel="stylesheet" href="../css/staticcss.css">
     <style>
-        body { 
-            font-family: Arial, sans-serif; 
-            text-align: center; 
-            margin: 0; 
-            padding: 20px; 
-        }
-        .chart-container {
-            width: 90%; 
-            max-width: 1200px; /* Nagyobb méret */
-            margin: auto;
-        }
-        canvas { 
-            width: 100% !important; 
-            height: 500px !important; /* Magasság növelése */
-        }
+
     </style>
 </head>
 <body>
