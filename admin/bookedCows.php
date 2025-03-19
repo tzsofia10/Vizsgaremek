@@ -8,9 +8,24 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
 }
 require "../connect.php";
 
-// Lekérdezzük a foglalt teheneket
-$sql = "SELECT * FROM cows WHERE status = 'booked'";
+// Ellenőrizzük az adatbáziskapcsolatot
+if (!$dbconn) {
+    die("Kapcsolódási hiba: " . mysqli_connect_error());
+}
+
+// SQL lekérdezés a foglalt (status = 1) tehenekre
+$sql = "SELECT cows.*, customer.name AS customer_name, customer.phone_number AS customer_phone
+        FROM sales
+        JOIN cows ON sales.cows_id = cows.id
+        JOIN customer ON sales.customer_id = customer.id
+        WHERE sales.sale_status = 1";
+
 $result = $dbconn->query($sql);
+
+// Ha hiba van az SQL-ben, írjuk ki
+if (!$result) {
+    die("SQL hiba: " . $dbconn->error);
+}
 ?>
 
 <!DOCTYPE html>
@@ -48,10 +63,24 @@ $result = $dbconn->query($sql);
         <?php if ($result->num_rows > 0): ?>
             <?php while ($row = $result->fetch_assoc()): ?>
                 <div class="card">
-                    <img src="<?php echo htmlspecialchars($row['image_url']); ?>" alt="<?php echo htmlspecialchars($row['name']); ?>">
-                    <h2><?php echo htmlspecialchars($row['name']); ?></h2>
-                    <p><strong>Kora:</strong> <?php echo htmlspecialchars($row['age']); ?> év</p>
-                    <p><strong>Fajta:</strong> <?php echo htmlspecialchars($row['breed']); ?></p>
+                <p><strong>Foglaló neve:</strong> <?php echo htmlspecialchars($row['customer_name'] ?? 'Ismeretlen'); ?></p>
+                <p><strong>Telefonszám:</strong> <?php echo htmlspecialchars($row['customer_phone'] ?? 'Nincs megadva'); ?></p>
+                    <h2><?php echo htmlspecialchars($row['ear_tag'] ?? 'Név nélküli tehén'); ?></h2>
+                    
+                    <?php 
+                    // Életkor kiszámítása
+                    if (!empty($row['birthdate'])) {
+                        $birthDateObj = new DateTime($row['birthdate']);
+                        $today = new DateTime();
+                        $age = $today->diff($birthDateObj)->y;
+                    } else {
+                        $age = "Ismeretlen";
+                    }
+                    ?>
+                    <p><strong>Kora:</strong> <?php echo $age; ?> év</p>
+                    
+                    <p><strong>Szín:</strong> <?php echo htmlspecialchars($row['color'] ?? 'Ismeretlen szín'); ?></p>
+
                 </div>
             <?php endwhile; ?>
         <?php else: ?>
