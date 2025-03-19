@@ -5,7 +5,7 @@ body {
 .chart-container {
     width: 90%; 
     max-width: 1200px; 
-    margin: auto;
+    margin: 0 auto 40px auto;
 }
 canvas { 
     width: 100% !important; 
