@@ -14,10 +14,11 @@ if (!$dbconn) {
 }
 
 // SQL lekérdezés a foglalt (status = 1) tehenekre
-$sql = "SELECT cows.*, customer.name AS customer_name, customer.phone_number AS customer_phone
+$sql = "SELECT cows.*, customer.name AS customer_name, customer.phone_number AS customer_phone, colors.colors AS color_name
         FROM sales
         JOIN cows ON sales.cows_id = cows.id
         JOIN customer ON sales.customer_id = customer.id
+        JOIN colors ON cows.color_id = colors.id
         WHERE sales.sale_status = 1";
 
 $result = $dbconn->query($sql);
@@ -78,8 +79,7 @@ if (!$result) {
                     }
                     ?>
                     <p><strong>Kora:</strong> <?php echo $age; ?> év</p>
-                    
-                    <p><strong>Szín:</strong> <?php echo htmlspecialchars($row['color'] ?? 'Ismeretlen szín'); ?></p>
+                    <p><strong>Szín:</strong> <span class="color-name"><?php echo htmlspecialchars($row['color_name'] ?? 'Ismeretlen szín'); ?></span></p>
 
                 </div>
             <?php endwhile; ?>
@@ -87,5 +87,35 @@ if (!$result) {
             <p>Nincsenek foglalt tehenek.</p>
         <?php endif; ?>
     </div>
+<script>
+    const colorTranslations = {
+    'Black': 'Fekete',
+    'Brown': 'Barna',
+    'White': 'Fehér',
+    'Spotted': 'Foltos'
+};
+
+function translateColors() {
+    // Fordítás az összes <p> vagy más HTML elemben
+    document.querySelectorAll('.color-name').forEach(element => {
+        const englishColor = element.textContent.trim();
+        if (colorTranslations[englishColor]) {
+            element.textContent = colorTranslations[englishColor];
+        }
+    });
+
+    // Fordítás <option> elemekben is (ha van select mező)
+    document.querySelectorAll('option').forEach(option => {
+        const englishColor = option.textContent.trim();
+        if (colorTranslations[englishColor]) {
+            option.textContent = colorTranslations[englishColor];
+        }
+    });
+}
+
+// Fordítás az oldal betöltésekor
+window.addEventListener('DOMContentLoaded', translateColors);
+
+</script>
 </body>
 </html>
