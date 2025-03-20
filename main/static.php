@@ -24,6 +24,11 @@
             width: 100% !important; 
             height: 500px !important; /* Magasság növelése */
         }
+        footer {
+         position: fixed;
+        bottom: 0;
+        width: 100%;
+                }
     </style>
 </head>
 <body>
