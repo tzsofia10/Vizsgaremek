@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="hu">
-<<<<<<< HEAD
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,38 +8,7 @@
     <link rel="stylesheet" href="../css/nav.css">
     <link rel="stylesheet" href="../css/footer.css">
     <link rel="stylesheet" href="../css/staticcss.css">
-    <style>
-        body { 
-            font-family: Arial, sans-serif; 
-            text-align: center; 
-            margin: 0; 
-            padding: 20px; 
-        }
-        .chart-container {
-            width: 90%; 
-            max-width: 1200px; /* Nagyobb méret */
-            margin: auto;
-        }
-        canvas { 
-            width: 100% !important; 
-            height: 500px !important; /* Magasság növelése */
-        }
-        footer {
-         position: fixed;
-        bottom: 0;
-        width: 100%;
-                }
-    </style>
 </head>
-=======
-<?php
-    $page_title = "Statisztikák";
-    $custom_js = ["https://cdn.jsdelivr.net/npm/chart.js"];
-    $custom_css = ["../css/staticcss.css"];
-    include '../main/head.php';
-?>
-
->>>>>>> 36020f2b371106b81bbe8cb2ef1082fe1d3bc79d
 <body>
     <?php include '../main/nav.php'; ?>
     
