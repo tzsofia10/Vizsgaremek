@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html lang="hu">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Szarvasmarhák Halálozási Diagram</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="stylesheet" href="../css/nav.css">
-    <link rel="stylesheet" href="../css/footer.css">
-    <link rel="stylesheet" href="../css/staticcss.css">
-</head>
+
+<?php
+    $page_title = "Halálozási Diagram";
+    $custom_js = ["https://cdn.jsdelivr.net/npm/chart.js"];
+    $custom_css = ["../css/staticcss.css"];
+    include 'head.php';
+?>
 <body>
     <?php include '../main/nav.php'; ?>
     
