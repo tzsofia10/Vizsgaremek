@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="hu">
+<<<<<<< HEAD
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -31,6 +32,15 @@
                 }
     </style>
 </head>
+=======
+<?php
+    $page_title = "Statisztikák";
+    $custom_js = ["https://cdn.jsdelivr.net/npm/chart.js"];
+    $custom_css = ["../css/staticcss.css"];
+    include '../main/head.php';
+?>
+
+>>>>>>> 36020f2b371106b81bbe8cb2ef1082fe1d3bc79d
 <body>
     <?php include '../main/nav.php'; ?>
     
