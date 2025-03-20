@@ -1,195 +1,124 @@
 h1{
   text-align: center;
 }
-/* From Uiverse.io by JaydipPrajapati1910 */ 
+/* ez amikor rá mennél hogy foglalás */
 .button {
-    --width: 100px;
-    --height: 35px;
-    --tooltip-height: 35px;
-    --tooltip-width: 90px;
-    --gap-between-tooltip-to-button: 18px;
-    --button-color: #222;
-    --tooltip-color: #fff;
-    width: var(--width);
-    height: var(--height);
-    background: var(--button-color);
-    position: relative;
-    text-align: center;
-    border-radius: 0.45em;
-    font-family: "Arial";
-    transition: background 0.3s;
-  }
-  
-  .button::before {
-    position: absolute;
-    content: attr(data-tooltip);
-    width: var(--tooltip-width);
-    height: var(--tooltip-height);
-    background-color: #555;
-    font-size: 0.9rem;
-    color: #fff;
-    border-radius: .25em;
-    line-height: var(--tooltip-height);
-    bottom: calc(var(--height) + var(--gap-between-tooltip-to-button) + 10px);
-    left: calc(50% - var(--tooltip-width) / 2);
-  }
-
-
-  .button::after {
-    position: absolute;
-    content: '';
-    width: 0;
-    height: 0;
-    border: 10px solid transparent;
-    border-top-color: #555;
-    left: calc(50% - 10px);
-    bottom: calc(100% + var(--gap-between-tooltip-to-button) - 10px);
-  }
-  
-  .button::after,.button::before {
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.5s;
-  }
-  
-  .text {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .button-wrapper,.text,.icon {
-    overflow: hidden;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    left: 0;
-    color: #fff;
-  }
-  
-  .text {
-    top: 0
-  }
-  
-  .text,.icon {
-    transition: top 0.5s;
-  }
-  
-  .icon {
-    color: #fff;
-    top: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .icon svg {
-    width: 24px;
-    height: 24px;
-  }
-  
-  .button:hover {
-    background: #222;
-  }
-  
-  .button:hover .text {
-    top: -100%;
-  }
-  
-  .button:hover .icon {
-    top: 0;
-  }
-  
-  .button:hover:before,.button:hover:after {
-    opacity: 1;
-    visibility: visible;
-  }
-  
-  .button:hover:after {
-    bottom: calc(var(--height) + var(--gap-between-tooltip-to-button) - 20px);
-  }
-  
-  .button:hover:before {
-    bottom: calc(var(--height) + var(--gap-between-tooltip-to-button));
-  }
-  /* Centering the buttons in the table and shrinking the action column */
-table td:last-child {
+  --width: 100px;
+  --height: 35px;
+  --tooltip-height: 35px;
+  --tooltip-width: 90px;
+  --gap-between-tooltip-to-button: 18px;
+  --button-color: #222;
+  --tooltip-color: #fff;
+  width: var(--width);
+  height: var(--height);
+  background: var(--button-color);
+  position: relative;
   text-align: center;
-  width: 100px; /* Shrinking the "Művelet" column */
+  border-radius: 0.45em;
+  font-family: "Arial";
+  transition: background 0.3s;
 }
 
-.button-wrapper {
-  margin: 0 auto; /* Center the button inside the cell */
+.button::before {
+  position: absolute;
+  content: attr(data-tooltip);
+  width: var(--tooltip-width);
+  height: var(--tooltip-height);
+  background-color: #555;
+  font-size: 0.9rem;
+  color: #fff;
+  border-radius: .25em;
+  line-height: var(--tooltip-height);
+  bottom: calc(var(--height) + var(--gap-between-tooltip-to-button) + 10px);
+  left: calc(50% - var(--tooltip-width) / 2);
 }
 
-button {
-  display: block;
-  margin: 0 auto;
+
+.button::after {
+  position: absolute;
+  content: '';
+  width: 0;
+  height: 0;
+  border: 10px solid transparent;
+  border-top-color: #555;
+  left: calc(50% - 10px);
+  bottom: calc(100% + var(--gap-between-tooltip-to-button) - 10px);
+}
+  
+.button::after,.button::before {
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.5s;
+} 
+.button:hover {
+  background: #222;
 }
 
-/* Táblázat wrapper középre igazítása */
+
+.button:hover:before,.button:hover:after {
+  opacity: 1;
+  visibility: visible;
+}
+
+.button:hover:after {
+  bottom: calc(var(--height) + var(--gap-between-tooltip-to-button) - 20px);
+}
+
+.button:hover:before {
+  bottom: calc(var(--height) + var(--gap-between-tooltip-to-button));
+}
+
+/* Táblázat */
 .table-wrapper {
-  max-width: 80%;  /* A táblázat szélessége */
-  margin: 20px auto;  /* Középre igazítás */
-  overflow-x: auto;  /* Ha szükséges, engedélyezi a vízszintes görgetést */
+  max-height: 500px; 
+  overflow-y: auto; 
 }
-
-/* Az utolsó oszlop (Művelet) szélessége */
-td:last-child {
-  text-align: center;  /* A gombokat középre igazítja */
-  padding: 0;  /* Ne legyen túl nagy padding */
-  width: 150px;  /* Az oszlop szélessége, hogy a gomb elférjen */
-}
-
-/* A gombok középre igazítása a cellában */
-.button-wrapper {
-  display: inline-block;  /* Inline blokk, hogy ne foglaljon el túl nagy helyet */
-  background-color: #4CAF50;  /* Zöld háttér */
-  color: white;
-  padding: 8px 12px;  /* A gomb mérete */
-  border-radius: 5px;
-  font-weight: bold;
-  cursor: pointer;
-  text-align: center;  /* Középre igazítja a szöveget */
-  white-space: nowrap;  /* A gomb ne törjön több sorra */
-  max-width: 100%;  /* Ne nyújtózkodjon túl */
-}
-
-
-.button-wrapper:hover {
-  background-color: #45a049;  /* Hover színváltozás */
-}
-
-/* A táblázat formázása */
 table {
-  table-layout: fixed;  /* Egyenletes oszlopok */
-  width: 100%;
+  table-layout: fixed;
+  width: 80%;
+  margin: auto;
   border-collapse: collapse;
-  background: rgba(255, 255, 255, 0.7); /* Enyhén átlátszó fehér háttér */
+  background: rgba(255, 255, 255, 0.7);
   margin-bottom: 50px;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
 
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
 }
 
+/* Fejléc */
 th {
-  background-color: rgba(16, 86, 82, 0.1); /* A meglévő színséma alapján */
+  background-color: rgba(16, 86, 82, 0.1);
   color: #333;
   font-weight: bold;
   padding: 15px;
   text-align: left;
   border-bottom: 2px solid rgba(16, 86, 82, 0.2);
-  text-align: center; 
+  text-align: center;
   vertical-align: middle;
 }
 
+/* Adatcellák */
 td {
   padding: 15px;
   border-bottom: 1px solid rgba(16, 86, 82, 0.1);
   color: #666;
-  text-align: center; 
+  text-align: center;
   vertical-align: middle;
+}
+
+/* Utolsó cella */
+table td:last-child {
+  text-align: center;
+  padding: 0;
+  width: 150px;
+  margin-bottom: 0px;
+}
+
+/* Gomb középre igazítása */
+button {
+  display: block;
+  margin: 0 auto;
 }
 
 
@@ -210,21 +139,6 @@ td {
 .purchase-button:hover {
   background-color: #45a049;
 }
-/* From Uiverse.io by SSpisso */ 
-/* Body */
-.container {
-  display: grid;
-  grid-template-columns: auto;
-  gap: 0px;
-}
-
-hr {
-  height: 1px;
-  background-color: rgba(16, 86, 82, .75);
-  ;
-  border: none;
-}
-
 .card {
   width: 400px;
   background: rgb(255, 250, 235);
@@ -239,85 +153,13 @@ hr {
   align-items: center;
   padding-left: 20px;
   border-bottom: 1px solid rgba(16, 86, 82, .75);
-  ;
   font-weight: 700;
   font-size: 11px;
   color: #000000;
 }
 
-/* Cart */
 .cart {
   border-radius: 19px 19px 0px 0px;
-}
-
-.cart .steps {
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
-}
-
-.cart .steps .step {
-  display: grid;
-  gap: 10px;
-}
-
-.cart .steps .step span {
-  font-size: 13px;
-  font-weight: 600;
-  color: #000000;
-  margin-bottom: 8px;
-  display: block;
-}
-
-.cart .steps .step p {
-  font-size: 11px;
-  font-weight: 600;
-  color: #000000;
-}
-
-/* Promo */
-.promo form {
-  display: grid;
-  grid-template-columns: 1fr 80px;
-  gap: 10px;
-  padding: 0px;
-}
-
-.input_field {
-  width: auto;
-  height: 36px;
-  padding: 0 0 0 12px;
-  border-radius: 5px;
-  outline: none;
-  border: 1px solid  rgb(16, 86, 82);
-  background-color: rgb(251, 243, 228);
-  transition: all 0.3s cubic-bezier(0.15, 0.83, 0.66, 1);
-}
-
-.input_field:focus {
-  border: 1px solid transparent;
-  box-shadow: 0px 0px 0px 2px rgb(251, 243, 228);
-  background-color: rgb(201, 193, 178);
-}
-
-.promo form button {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 10px 18px;
-  gap: 10px;
-  width: 100%;
-  height: 36px;
-  background: rgba(16, 86, 82, .75);
-  box-shadow: 0px 0.5px 0.5px #F3D2C9, 0px 1px 0.5px rgba(239, 239, 239, 0.5);
-  border-radius: 5px;
-  border: 0;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 12px;
-  line-height: 15px;
-  color: #000000;
 }
 
 /* Checkout */
@@ -432,7 +274,7 @@ hr {
 
 /* Fizetés ablak középre igazítása */
 .fizetes {
-  display: none;
+  display: none; /* Alapból elrejtve */
   position: fixed;
   top: 50%;
   left: 50%;
@@ -501,31 +343,6 @@ hr {
   color: #fff;
 }
 
-.header {
-  padding: 1.25rem 1rem 1rem 1rem;
-}
-
-.image {
-  display: flex;
-  margin-left: auto;
-  margin-right: auto;
-  background-color: #e2feee;
-  flex-shrink: 0;
-  justify-content: center;
-  align-items: center;
-  width: 3rem;
-  height: 3rem;
-  border-radius: 9999px;
-  animation: animate .6s linear alternate-reverse infinite;
-  transition: .6s ease;
-}
-
-.image svg {
-  color: #0afa2a;
-  width: 2rem;
-  height: 2rem;
-}
-
 .content {
   margin-top: 0.75rem;
   text-align: center;
@@ -536,13 +353,6 @@ hr {
   font-size: 1rem;
   font-weight: 600;
   line-height: 1.5rem;
-}
-
-.message {
-  margin-top: 0.5rem;
-  color: #595b5f;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
 }
 .confirmation {
   position: fixed;
@@ -600,8 +410,7 @@ hr {
   }
 }
 
-
-
-
-
-  
+footer{
+  position: fixed;
+  bottom: 0;
+}

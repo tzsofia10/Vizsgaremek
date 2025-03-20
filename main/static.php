@@ -2,10 +2,10 @@
 <html lang="hu">
 
 <?php
-$page_title = "Halálozási Diagram";
-$custom_js = ["https://cdn.jsdelivr.net/npm/chart.js"];
-$custom_css = ["../css/staticcss.css"];
-include 'head.php';
+    $page_title = "Halálozási Diagram";
+    $custom_js = ["https://cdn.jsdelivr.net/npm/chart.js"];
+    $custom_css = ["../css/staticcss.css"];
+    include 'head.php';
 ?>
 <body>
     <?php include '../main/nav.php'; ?>
