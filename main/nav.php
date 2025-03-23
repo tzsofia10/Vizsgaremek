@@ -11,7 +11,7 @@
                 // Ha nincs bejelentkezve, jelenjenek meg a linkek
                 echo '<a href="/vizsgaremek/index.php">Főoldal</a>';
                 echo '<a href="/vizsgaremek/main/static.php">Statisztikák</a>';
-                echo '<a href="/vizsgaremek/main/sell.php">Eladás</a>';
+                echo '<a href="/vizsgaremek/main/sell.php">Foglalás</a>';
             } else {
                 echo '<a href="main.php">Főoldal</a>';
                 echo '<a href="list.php">Cikkek</a>';
