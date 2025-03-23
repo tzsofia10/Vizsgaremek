@@ -176,6 +176,44 @@ main h1 {
     transition-duration: 0.3s;
 }
 
+.myFunction {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.myFunction button {
+    padding: 8px 16px;
+    margin: 0 5px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #f0f0f0;
+    transition: all 0.3s ease;
+}
+
+.myFunction button:hover {
+    background-color: #e0e0e0;
+}
+
+.myFunction button.active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.search-box {
+    margin: 20px auto;
+    width: 100%;
+    max-width: 300px;
+}
+
+#myInput {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
 
 /* Lapozó */
 @keyframes pulseActive {
@@ -393,4 +431,50 @@ main h1 {
 .pagination-cancel:hover {
     background-color: #c1121f !important;
     transform: translateY(-2px) !important;
+}
+
+/* Szűrő gombok stílusa */
+.filter-buttons {
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.filter-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #f0f0f0;
+    color: #333;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.filter-btn:hover {
+    background-color: #ddd;
+}
+
+.filter-btn.active {
+    background-color: #606c38;
+    color: white;
+}
+
+/* Elhullott tehenek sorainak stílusa */
+.deceased {
+    background-color: rgba(255, 0, 0, 0.1);
+}
+
+/* Reszponzív beállítások */
+@media (max-width: 768px) {
+    .filter-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .filter-btn {
+        width: 100%;
+        max-width: 300px;
+        text-align: center;
+    }
 }

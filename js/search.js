@@ -167,33 +167,62 @@ const debouncedSearch = debounce(myFunction, 300);
 
 // Event listener hozzáadása
 document.getElementById("myInput").addEventListener("input", debouncedSearch);
-
 // CSS a lapozóhoz
 const style = document.createElement('style');
 style.textContent = `
+@keyframes pulseActive {
+    0% { transform: translateY(-3px) scale(1); }
+    50% { transform: translateY(-3px) scale(1.05); }
+    100% { transform: translateY(-3px) scale(1); }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
     .pagination {
+        margin: 20px auto;
         display: flex;
         justify-content: center;
-        gap: 10px;
-        margin: 20px 0;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+        padding: 10px;
     }
 
-    .pagination button {
+    .pagination a {
+        background-color: aliceblue;
+        color: #333;
         padding: 8px 16px;
-        border: 1px solid #ddd;
-        background-color: white;
-        cursor: pointer;
-        transition: all 0.3s ease;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s, transform 0.3s;
+        min-width: 40px;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
-    .pagination button:hover {
-        background-color: #f0f0f0;
-    }
-
-    .pagination button.active {
-        background-color: rgba(16, 86, 82, 0.8);
+    .pagination a.active {
+        background-color: #606c38;
         color: white;
-        border-color: rgba(16, 86, 82, 0.8);
+        transform: translateY(-3px);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        animation: pulseActive 2s infinite;
     }
+
+    .pagination a:not(.active):hover {
+        background-color: #283618;
+        color: white;
+        transform: translateY(-2px);
+    }
+
 `;
 document.head.appendChild(style);

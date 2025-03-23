@@ -7,29 +7,65 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
 
 require '../connect.php';
 
+$filter = isset($_GET['filter']) ? $_GET['filter'] : 'all';
+
 $records_per_page = 5;
 
 $page = isset($_GET['page']) && is_numeric($_GET['page']) ? (int)$_GET['page'] : 1;
 $offset = ($page - 1) * $records_per_page;
 
-$total_records_query = "SELECT COUNT(*) AS total FROM cows";
+if ($filter === 'alive') {
+    $total_records_query = "SELECT COUNT(*) AS total FROM cows WHERE death_date IS NULL";
+    $sql = "SELECT 
+                cows.id AS cow_id, 
+                cows.ear_tag, 
+                cows.gender, 
+                cows.mother_ear_tag, 
+                colors.colors AS color, 
+                cows.birthdate,
+                cows.picture,
+                cows.death_date
+            FROM cows
+            LEFT JOIN colors ON cows.color_id = colors.id
+            WHERE cows.death_date IS NULL
+            ORDER BY cows.id
+            LIMIT $records_per_page OFFSET $offset";
+} elseif ($filter === 'dead') {
+    $total_records_query = "SELECT COUNT(*) AS total FROM cows WHERE death_date IS NOT NULL";
+    $sql = "SELECT 
+                cows.id AS cow_id, 
+                cows.ear_tag, 
+                cows.gender, 
+                cows.mother_ear_tag, 
+                colors.colors AS color, 
+                cows.birthdate,
+                cows.picture,
+                cows.death_date
+            FROM cows
+            LEFT JOIN colors ON cows.color_id = colors.id
+            WHERE cows.death_date IS NOT NULL
+            ORDER BY cows.id
+            LIMIT $records_per_page OFFSET $offset";
+} else {
+    $total_records_query = "SELECT COUNT(*) AS total FROM cows";
+    $sql = "SELECT 
+                cows.id AS cow_id, 
+                cows.ear_tag, 
+                cows.gender, 
+                cows.mother_ear_tag, 
+                colors.colors AS color, 
+                cows.birthdate,
+                cows.picture,
+                cows.death_date
+            FROM cows
+            LEFT JOIN colors ON cows.color_id = colors.id
+            ORDER BY cows.id
+            LIMIT $records_per_page OFFSET $offset";
+}
+
 $total_result = $dbconn->query($total_records_query);
 $total_records = $total_result->fetch_assoc()['total'];
 $total_pages = ceil($total_records / $records_per_page);
-
-$sql = "SELECT 
-            cows.id AS cow_id, 
-            cows.ear_tag, 
-            cows.gender, 
-            cows.mother_ear_tag, 
-            colors.colors AS color, 
-            cows.birthdate,
-            cows.picture
-        FROM cows
-        LEFT JOIN colors ON cows.color_id = colors.id
-        ORDER BY cows.id
-        LIMIT $records_per_page OFFSET $offset";
-
 
 $result = $dbconn->query($sql);
 ?>
@@ -49,8 +85,15 @@ $result = $dbconn->query($sql);
     <?php include '../main/nav.php'; ?>
     <main>
         <h1>Szarvasmarha lista</h1>
-        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Fülszám keresés..." title="Fülszám keresés">
+        <div class="myFunction">
+        <button onclick="myFunction('all')" class="<?php echo $filter === 'all' ? 'active' : ''; ?>">Összes</button>
+        <button onclick="myFunction('alive')" class="<?php echo $filter === 'alive' ? 'active' : ''; ?>">Élők</button>
+        <button onclick="myFunction('deceased')" class="<?php echo $filter === 'deceased' ? 'active' : ''; ?>">Elhullottak</button>
+    </div>
 
+    <div class="search-box">
+        <input type="text" id="myInput" onkeyup="myFunction()"  placeholder="Fülszám keresése...">
+    </div>
         <?php
         if ($result->num_rows > 0) {
             echo "<table id='cowTable'>
@@ -108,37 +151,37 @@ $result = $dbconn->query($sql);
             echo "</tbody></table>";
 
             // Lapozó gombok
-            echo "<div class='pagination' data-max-pages='$total_pages'>";
+            echo "<div class='pagination'>";
             
             // Előző gomb
             if ($page > 1) {
-                echo "<a href='?page=" . ($page - 1) . "#cowTable'>&laquo; Előző</a>";
+                echo "<a href='?filter=$filter&page=" . ($page - 1) . "'>&laquo; Előző</a>";
             }
 
             // Első oldal
             if ($page > 3) {
-                echo "<a href='?page=1#cowTable'>1</a>";
+                echo "<a href='?filter=$filter&page=1'>1</a>";
                 if ($page > 4) {
-                    echo "<a class='dots' href='javascript:void(0)'>...</a>";
+                    echo "<span class='dots'>...</span>";
                 }
             }
 
             // Középső oldalak
             for ($i = max(1, $page - 1); $i <= min($total_pages, $page + 1); $i++) {
-                echo "<a href='?page=$i#cowTable'" . ($i === $page ? " class='active'" : "") . ">$i</a>";
+                echo "<a href='?filter=$filter&page=$i'" . ($i == $page ? " class='active'" : "") . ">$i</a>";
             }
 
             // Utolsó oldal
             if ($page < $total_pages - 2) {
                 if ($page < $total_pages - 3) {
-                    echo "<a class='dots' href='javascript:void(0)'>...</a>";
+                    echo "<span class='dots'>...</span>";
                 }
-                echo "<a href='?page=$total_pages#cowTable'" . ($total_pages === $page ? " class='active'" : "") . ">$total_pages</a>";
+                echo "<a href='?filter=$filter&page=$total_pages'>$total_pages</a>";
             }
 
             // Következő gomb
             if ($page < $total_pages) {
-                echo "<a href='?page=" . ($page + 1) . "#cowTable'>Következő &raquo;</a>";
+                echo "<a href='?filter=$filter&page=" . ($page + 1) . "'>Következő &raquo;</a>";
             }
             
             echo "</div>";
