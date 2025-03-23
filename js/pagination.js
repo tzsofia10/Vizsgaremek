@@ -3,14 +3,17 @@ document.addEventListener("DOMContentLoaded", function () {
     const cowTableBody = document.querySelector("#cowTable tbody");
     const paginationContainer = document.querySelector(".pagination-container");
 
-    function fetchCows(search = "", page = 1) {
-        fetch(`searchcow.php?search=${encodeURIComponent(search)}&page=${page}`)
-            .then(response => response.json())
-            .then(data => {
-                updateTable(data.cows);
-                updatePagination(data.pagination, search);
-            })
-            .catch(error => console.error("Hiba történt:", error));
+    async function fetchCows(search = "", page = 1) {
+        try {
+            const response = await fetch(`searchcow.php?search=${encodeURIComponent(search)}&page=${page}`);
+            if (!response.ok) throw new Error("Hálózati hiba történt!");
+
+            const data = await response.json();
+            updateTable(data.cows);
+            updatePagination(data.pagination, search);
+        } catch (error) {
+            console.error("Hiba történt:", error);
+        }
     }
 
     function updateTable(cows) {
@@ -20,21 +23,29 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        cows.forEach(cow => {
-            const row = `
-                <tr>
-                    <td>${cow.ear_tag}</td>
-                    <td>${cow.gender}</td>
-                    <td>${cow.mother_ear_tag || '-'}</td>
-                    <td>${cow.color}</td>
-                    <td>${cow.birthdate}</td>
-                    <td><img src="${cow.picture}" alt="Tehén kép" width="50"></td>
-                </tr>`;
-            cowTableBody.innerHTML += row;
-        });
+        const rows = cows.map(cow => `
+            <tr>
+                <td>${cow.ear_tag}</td>
+                <td>${cow.gender}</td>
+                <td>${cow.mother_ear_tag || '-'}</td>
+                <td>${cow.color}</td>
+                <td>${cow.birthdate}</td>
+                <td><img src="${cow.picture}" alt="Tehén kép" width="50"></td>
+            </tr>`).join('');
+        
+        cowTableBody.innerHTML = rows;
     }
 
-    // Keresőmező eseménykezelője
+    // Keresőmező animálása
+    searchInput.addEventListener("focus", function () {
+        this.classList.add("active");
+    });
+
+    searchInput.addEventListener("blur", function () {
+        this.classList.remove("active");
+    });
+
+    // Keresés indítása input változásakor
     searchInput.addEventListener("input", function () {
         fetchCows(this.value);
     });
@@ -42,11 +53,11 @@ document.addEventListener("DOMContentLoaded", function () {
     // Alapértelmezett betöltés
     fetchCows();
 
-    // Dots elemek kezelése
+    // Oldalszám megadás kezelése
     document.querySelectorAll('.dots').forEach(dots => {
-        dots.addEventListener('click', function(e) {
+        dots.addEventListener('click', function (e) {
             e.preventDefault();
-            
+
             Swal.fire({
                 title: 'Oldalszám megadása',
                 input: 'number',
@@ -57,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 cancelButtonText: 'Mégse',
                 inputAttributes: {
                     min: 1,
-                    max: paginationContainer.querySelector('.pagination').dataset.maxPages,
+                    max: paginationContainer.querySelector('.pagination').dataset.maxPages || 100,
                     step: 1
                 },
                 inputValidator: (value) => {
@@ -67,12 +78,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
             }).then((result) => {
                 if (result.isConfirmed) {
-                    // Táblázat elhalványítása
                     const tbody = document.querySelector('#cowTable tbody');
                     tbody.style.opacity = '0';
                     tbody.style.transform = 'translateY(-10px)';
-                    
-                    // Kis késleltetés után átirányítás
+
                     setTimeout(() => {
                         window.location.href = `?page=${result.value}`;
                     }, 300);
@@ -81,4 +90,3 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
-
