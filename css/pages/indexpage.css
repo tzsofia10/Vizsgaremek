@@ -247,17 +247,25 @@ body, html {
 .article-card {
     animation: fadeIn 0.5s ease-out;
 }
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px; /* Távolság a gombok között */
+}
+
 
 .moo {
+    padding: 0;
     position: relative;
-    width: 120px;
-    height: 50px;
+    width: 100px;
+    height: 35px;
     border: none;
-    color: white;
+    color: brown;
+    text-align: center;
     font-weight: bold;
     text-align: center;
     line-height: 50px;
-    background-color: transparent !important; /* Mindig átlátszó maradjon */
+    background-color: transparent !important; 
     overflow: hidden;
 }
 
@@ -272,7 +280,7 @@ body, html {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    opacity: 0.3; /* Halvány háttér */
+    opacity: 0.6;
     z-index: -1;
 }
 
