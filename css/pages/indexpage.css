@@ -247,3 +247,36 @@ body, html {
 .article-card {
     animation: fadeIn 0.5s ease-out;
 }
+
+.moo {
+    position: relative;
+    width: 120px;
+    height: 50px;
+    border: none;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    line-height: 50px;
+    background-color: transparent !important; /* Mindig átlátszó maradjon */
+    overflow: hidden;
+}
+
+.moo::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("../../cowPicture/moo.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.3; /* Halvány háttér */
+    z-index: -1;
+}
+
+
+.moo:hover {
+    background-color: transparent !important;
+}

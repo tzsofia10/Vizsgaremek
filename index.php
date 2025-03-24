@@ -60,7 +60,7 @@ include 'main/head.php';
     <!-- Constant buttons below the images -->
     <div class="position-absolute bottom-0 start-50 translate-middle-x mb-3">
         <button class="btn btn-primary me-2" id="vacinationButton"><a href="vacination.php"> Oltások</a> </button>
-        <button id="playSound" class="btn btn-secondary">Múúúú</button>
+        <button id="playSound" class="btn btn-secondary moo">Múúúú</button>
         <audio id="audio" src="./hang mu/cowmu.mp3"></audio> 
         
 
