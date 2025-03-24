@@ -219,12 +219,9 @@
         .catch(error => console.error("Hiba:", error));
     });
     })
-    document.getElementById("close-checkout").addEventListener("click", function () {
-        document.getElementById("checkout-container").style.display = "none";
-    });
-
-    document.getElementById("close-confirmation").addEventListener("click", function () {
-        document.getElementById("confirmation-box").style.display = "none";
+    document.getElementById("close-checkout").addEventListener("click", function (event) {
+        event.preventDefault(); // Megakadályozza az esetleges form submit eseményt
+    document.getElementById("checkout-container").style.display = "none";
     });
 
     </script>

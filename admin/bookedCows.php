@@ -14,10 +14,18 @@ if (!$dbconn) {
 }
 
 // SQL lekérdezés a foglalt (status = 1) tehenekre
-$sql = "SELECT cows.*, customer.name AS customer_name, customer.phone_number AS customer_phone, colors.colors AS color_name
+$sql = "SELECT cows.*, 
+               customer.name AS customer_name, 
+               customer.phone_number AS customer_phone, 
+               customer.street AS customer_street, 
+               customer.house_number AS customer_house_number, 
+               settlements.postal_code AS customer_postal_code, 
+               settlements.town AS customer_town, 
+               colors.colors AS color_name
         FROM sales
         JOIN cows ON sales.cows_id = cows.id
         JOIN customer ON sales.customer_id = customer.id
+        JOIN settlements ON customer.settlements_id = settlements.id
         JOIN colors ON cows.color_id = colors.id
         WHERE sales.sale_status = 1";
 
@@ -66,6 +74,19 @@ if (!$result) {
                 <div class="card">
                 <p><strong>Foglaló neve:</strong> <?php echo htmlspecialchars($row['customer_name'] ?? 'Ismeretlen'); ?></p>
                 <p><strong>Telefonszám:</strong> <?php echo htmlspecialchars($row['customer_phone'] ?? 'Nincs megadva'); ?></p>
+                <p><strong>Cím:</strong> 
+                <?php 
+                    echo htmlspecialchars($row['customer_postal_code'] ?? ''); 
+                    echo ' ';
+                    echo htmlspecialchars($row['customer_town'] ?? 'Nincs megadva'); 
+                    echo ', <br>';
+                    echo htmlspecialchars($row['customer_street'] ?? 'Nincs megadva'); 
+                    echo ' ';
+                    echo htmlspecialchars($row['customer_house_number'] ?? '');
+                ?>
+            </p>
+
+
                     <h2><?php echo htmlspecialchars($row['ear_tag'] ?? 'Név nélküli tehén'); ?></h2>
                     
                     <?php 
