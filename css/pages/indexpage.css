@@ -165,6 +165,7 @@ body, html {
 }
 #vacinationButton{
     background-color: #F4C095;
+    border: 0;
 }
 #vacinationButton a{
     color: black;
