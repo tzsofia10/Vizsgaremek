@@ -170,7 +170,7 @@ $output = $output ?? "";
                 <textarea id="keywords" name="keywords"><?= $keywords ?></textarea>
             </div>
 
-            <div class="form-group">
+            <div class="form-group form-group-grid">
                 <label for="image">Kép feltöltése:</label>
                 <div class="container">
                     <div class="header">
@@ -193,15 +193,16 @@ $output = $output ?? "";
                     </label>
                     <input id="image" name="image" type="file" accept="image/*" onchange="previewImage(this);">
                 </div>
+                
+                <div class="form-group state-container">
+                    <label for="state">Állapot:</label>
+                    <select id="state" name="state">
+                        <option value="1" <?= $state == 1 ? 'selected' : '' ?>>Aktív</option>
+                        <option value="0" <?= $state == 0 ? 'selected' : '' ?>>Inaktív</option>
+                    </select>
+                </div>
             </div>       
  
-            <div class="form-group">
-                <label for="state">Állapot:</label>
-                <select id="state" name="state">
-                    <option value="1" <?= $state == 1 ? 'selected' : '' ?>>Aktív</option>
-                    <option value="0" <?= $state == 0 ? 'selected' : '' ?>>Inaktív</option>
-                </select>
-            </div>
 
             <div class="form-actions">
                 <input type="submit" id="submit" name="submit" value="Mentés">
