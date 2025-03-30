@@ -234,28 +234,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
     }
     ?>
 
-    <script>
-    function previewImage(input) {
-        const fileName = input.files.length > 0 ? input.files[0].name : "Nincs kiválasztott kép";
+<script>
+    // Frissíti a fájlnév megjelenítését, amikor egy fájl ki van választva
+    document.getElementById('image').addEventListener('change', function() {
+        const fileName = this.files.length > 0 ? this.files[0].name : "Nincs kiválasztott kép";
         document.getElementById('file-name').textContent = fileName;
-    }
+    });
 
-        CKEDITOR.replace('content');
-        function previewImage(input) {
-            const preview = document.getElementById('imagePreview');
-            preview.innerHTML = '';
-            
-            if (input.files && input.files[0]) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const img = document.createElement('img');
-                    img.src = e.target.result;
-                    img.className = 'uploaded-image';
-                    preview.appendChild(img);
-                }
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-    </script>
+    // CKEditor inicializálása
+    CKEDITOR.replace('content');
+</script>
+
 </body>
 </html>
