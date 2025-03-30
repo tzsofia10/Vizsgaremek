@@ -152,12 +152,10 @@ $result = $dbconn->query($sql);
 
             // Lapozó gombok
             echo "<div class='pagination'>";
-            
             // Előző gomb
             if ($page > 1) {
                 echo "<a href='?filter=$filter&page=" . ($page - 1) . "'>&laquo; Előző</a>";
             }
-
             // Első oldal
             if ($page > 3) {
                 echo "<a href='?filter=$filter&page=1'>1</a>";
@@ -165,12 +163,10 @@ $result = $dbconn->query($sql);
                     echo "<span class='dots'>...</span>";
                 }
             }
-
             // Középső oldalak
             for ($i = max(1, $page - 1); $i <= min($total_pages, $page + 1); $i++) {
                 echo "<a href='?filter=$filter&page=$i'" . ($i == $page ? " class='active'" : "") . ">$i</a>";
             }
-
             // Utolsó oldal
             if ($page < $total_pages - 2) {
                 if ($page < $total_pages - 3) {
@@ -178,12 +174,10 @@ $result = $dbconn->query($sql);
                 }
                 echo "<a href='?filter=$filter&page=$total_pages'>$total_pages</a>";
             }
-
             // Következő gomb
             if ($page < $total_pages) {
                 echo "<a href='?filter=$filter&page=" . ($page + 1) . "'>Következő &raquo;</a>";
             }
-            
             echo "</div>";
         } else {
             echo "<p>Nincs adat a táblázatban.</p>";
@@ -199,7 +193,6 @@ $result = $dbconn->query($sql);
                 <button id="confirmNo" class="btn btn-danger">Nem, visszavonom</button>
             </div>
         </div>
-
     </main>
     <footer>
         <?php include '../main/footer.php'; ?>

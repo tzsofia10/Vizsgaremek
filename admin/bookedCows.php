@@ -44,34 +44,21 @@ if (!$result) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Foglalások</title>
     <link rel="stylesheet" href="styles.css">
-    <style>
-        .container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            padding: 20px;
-        }
-        .card {
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            padding: 15px;
-            width: 250px;
-            text-align: center;
-            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
-        }
-        .card img {
-            width: 100%;
-            height: auto;
-            border-radius: 10px;
-        }
-    </style>
+
 </head>
+<?php 
+    $page_title = "Foglalások"; 
+    $custom_css = ["../css/pages/bookedCow.css"];
+    $additional_head = "<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>"; 
+    include '../main/head.php'; 
+?>
 <body>
+    <?php include '../main/nav.php'; ?>
     <h1>Foglalások</h1>
-    <div class="container">
+    <div class="card-container">
         <?php if ($result->num_rows > 0): ?>
             <?php while ($row = $result->fetch_assoc()): ?>
-                <div class="card">
+                <div class="cards">
                 <p><strong>Foglaló neve:</strong> <?php echo htmlspecialchars($row['customer_name'] ?? 'Ismeretlen'); ?></p>
                 <p><strong>Telefonszám:</strong> <?php echo htmlspecialchars($row['customer_phone'] ?? 'Nincs megadva'); ?></p>
                 <p><strong>Cím:</strong> 
@@ -108,6 +95,9 @@ if (!$result) {
             <p>Nincsenek foglalt tehenek.</p>
         <?php endif; ?>
     </div>
+    <footer>
+        <?php include '../main/footer.php'; ?>
+    </footer>
 <script>
     const colorTranslations = {
     'Black': 'Fekete',

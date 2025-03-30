@@ -247,14 +247,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
             
             if (input.files && input.files[0]) {
                 const reader = new FileReader();
-                
                 reader.onload = function(e) {
                     const img = document.createElement('img');
                     img.src = e.target.result;
                     img.className = 'uploaded-image';
                     preview.appendChild(img);
                 }
-                
                 reader.readAsDataURL(input.files[0]);
             }
         }
