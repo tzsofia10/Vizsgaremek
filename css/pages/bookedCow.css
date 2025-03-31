@@ -41,3 +41,32 @@ h1::after {
     height: auto;
     border-radius: 10px;
 }
+footer {
+    position: fixed;
+    margin: 0;
+    bottom: 0;
+    width: 100%;
+
+    padding: 10px 0;
+    text-align: center;
+}
+/* Reszponzív módosítások */
+@media (max-width: 1270px) {
+    h1{
+        font-size: 2rem;
+    }
+    html, body {
+        height: 100%;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+    }
+    .content {
+        flex: 1;
+    }
+    footer {
+        text-align: center;
+        padding: 10px;
+        position: static;
+    }
+}
