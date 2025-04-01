@@ -186,43 +186,8 @@ $result = $dbconn->query($sql);
         $dbconn->close();
         ?>
 
-        <div id="confirmOverlay">
-            <div>
-                <h3>Biztosan törölni szeretnéd ezt a tehenet?</h3>
-                <button id="confirmYes" class="btn btn-success">Igen, törlöm!</button>
-                <button id="confirmNo" class="btn btn-danger">Nem, visszavonom</button>
-            </div>
-        </div>
+
     </main>
-    <footer>
-        <?php include '../main/footer.php'; ?>
-    </footer>
-
-    <?php
-    if (isset($_SESSION['success_message'])) {
-        echo "<script>
-            Swal.fire({
-                icon: 'success',
-                title: 'Sikeres törlés!',
-                text: '" . $_SESSION['success_message'] . "',
-                confirmButtonColor: '#A8C27A'
-            });
-        </script>";
-        unset($_SESSION['success_message']);
-    }
-
-    if (isset($_SESSION['error_message'])) {
-        echo "<script>
-            Swal.fire({
-                icon: 'error',
-                title: 'Hiba!',
-                text: '" . $_SESSION['error_message'] . "',
-                confirmButtonColor: '#dc3545'
-            });
-        </script>";
-        unset($_SESSION['error_message']);
-    }
-    ?>
 
 </body>
 </html>
