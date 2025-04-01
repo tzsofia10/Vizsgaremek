@@ -259,8 +259,8 @@ body, html {
     padding: 0;
     position: relative;
     width: 100px;
-    height: 35px;
-    border: none;
+    height: 70px;
+   border: none;
     color: brown;
     text-align: center;
     font-weight: bold;
@@ -277,11 +277,11 @@ body, html {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url("../../cowPicture/calf.png");
-    background-size: cover;
+    background-image: url("../../cowPicture/300.png");
+   background-size:contain; 
     background-position: center;
     background-repeat: no-repeat;
-    opacity: 0.6;
+   
     z-index: -1;
 }
 
