@@ -87,8 +87,9 @@ $result = $dbconn->query($sql);
         <h1>Szarvasmarha lista</h1>
         <div class="myFunction">
         <button onclick="myFunction('all')" class="<?php echo $filter === 'all' ? 'active' : ''; ?>">Összes</button>
-        <button onclick="myFunction('alive')" class="<?php echo $filter === 'alive' ? 'active' : ''; ?>">Élők</button>
-        <button onclick="myFunction('deceased')" class="<?php echo $filter === 'deceased' ? 'active' : ''; ?>">Elhullottak</button>
+<button onclick="myFunction('alive')" class="<?php echo $filter === 'alive' ? 'active' : ''; ?>">Élők</button>
+<button onclick="myFunction('dead')" class="<?php echo $filter === 'dead' ? 'active' : ''; ?>">Elhullottak</button>
+
     </div>
 
     <div class="search-box">
@@ -188,6 +189,14 @@ $result = $dbconn->query($sql);
 
 
     </main>
+
+    <script>
+  function myFunction(filter) {
+    window.location.href = "?filter=" + filter;
+}
+
+
+    </script>
 
 </body>
 </html>
