@@ -187,6 +187,16 @@ a:hover {
   }
 
 /* Reszponzív beállítások */
+@media (min-width: 768px) {
+    .form-group-flex{
+        display: flex;
+        justify-content: space-between;
+    }
+    .state{
+        width: 50%;
+    }
+}
+
 @media (max-width: 768px) {
     .edit-container {
         padding: 10px;
@@ -208,15 +218,7 @@ a:hover {
  
     header h1 {
         font-size: 1.5em;
-    }
-    .form-group-flex{
-        display: flex;
-        justify-content: space-between;
-    }
-    .state{
-        width: 50%;
-    }
-    
+    }    
 }
 
 @media (max-width: 480px) {
