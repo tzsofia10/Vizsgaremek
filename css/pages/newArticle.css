@@ -62,6 +62,14 @@ header h1 {
 .form-group select {
     background-color: white;
 }
+.form-group-flex{
+    display: flex;
+    justify-content: space-between;
+}
+.state{
+    width: 50%;
+    display: flex;
+}
 
 /* Form gombok */
 .actions{
