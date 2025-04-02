@@ -1,45 +1,47 @@
 <?php
-require_once '..\connect.php';
+require_once '../connect.php';
 
-$sql = "SELECT * FROM vaccination_types";
+$sql = "SELECT name, description FROM vaccination_types";
 $result = $dbconn->query($sql);
 ?>
 
 <!DOCTYPE html>
 <html lang="hu">
- <!-- <head> része-->
- <?php 
-    $page_title = "Olt'sok"; 
-    $custom_css = ["../css/vaccination.css"]; // egyedi css fájl hozzáadása
-    include '../main/head.php'; 
-?>
-<!-- </head> rész vége-->
-
+<head>
+    <?php 
+        $page_title = "Oltások"; 
+        $custom_css = ["../css/vaccination.css"]; // Egyedi CSS fájl hozzáadása
+        include '../main/head.php'; 
+    ?>
+</head>
 <body>
     <?php include '../main/nav.php'; ?>
-    <h2>Oltástípusok</h2>
-    <table>
-        <tr><th>ID</th><th>Név</th></tr>
-        <?php
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                echo "<tr onclick=\"toggleDescription({$row['id']})\" style='cursor: pointer;'><td>{$row['id']}</td><td>{$row['name']}</td></tr>";
-                echo "<tr><td class='ajajj' colspan='2'><div id='desc-{$row['id']}' class='description'>{$row['description']}</div></td></tr>";
-            }
-        } else {
-            echo "<tr><td colspan='2'>Nincs elérhető adat</td></tr>";
-        }
-        mysqli_close($dbconn);
-        ?>
-    </table>
-
+    <main>
+        <h1>Oltások</h1>
+        <div class="container">
+            <div class="vaccination-list">
+                <?php while ($row = $result->fetch_assoc()): ?>
+                    <div class="card" onclick="toggleDescription(this)">
+                        <div>
+                            <strong><?php echo htmlspecialchars($row['name']); ?></strong>
+                            <div class="description">
+                                <?php echo htmlspecialchars($row['description']); ?>
+                            </div>
+                        </div>
+                    </div>
+                <?php endwhile; ?>
+            </div>
+        </div>
+    </main>
     <script>
-        function toggleDescription(id) {
-            var desc = document.getElementById('desc-' + id);
-            if (desc.classList.contains('show')) {
-                desc.classList.remove('show');
+        function toggleDescription(element) {
+            let desc = element.querySelector(".description");
+            if (desc.style.display === "none" || desc.style.display === "") {
+                desc.style.display = "block";
+                setTimeout(() => { desc.style.opacity = 1; }, 10);
             } else {
-                desc.classList.add('show');
+                desc.style.opacity = 0;
+                setTimeout(() => { desc.style.display = "none"; }, 300);
             }
         }
     </script>

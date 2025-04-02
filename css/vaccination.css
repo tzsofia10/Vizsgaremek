@@ -1,54 +1,59 @@
 body {
-    background: linear-gradient(135deg, #f9f9f9, #e3f2fd);
-    color: #333;
-    text-align: center;
+    background-image: url('../cowPicture/ChatGPT\ Image\ 2025.\ ápr.\ 2.\ 10_04_31.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+  
+    
 }
-h2 {
-    font-size: 2em;
-}
-table {
-    width: 80%;
-    margin: auto;
-    border-collapse: collapse;
-    background: white;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-    overflow: hidden;
-}
-th, td {
-    border: 1px solid #ddd;
-    padding: 12px;
-    text-align: left;
-}
-th {
-    background: blue;
+h1{
     color: white;
-    font-size: 1.1em;
+    text-align: center;
+    font-size: 2em;
+    margin-bottom: 20px;
 }
-tr:nth-child(even) {
-    background: #f2f2f2;
-    padding:0;
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 60%;
+    margin: 25PX auto;
+    
 }
-tr:hover {
-    background: #d0ebff;
-    transition: 0.3s;
+.vaccination-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
 }
-.ajajj{
-    padding:0;
-}
-.description {
-    display: block;
-    padding: 0px 10px;
-    background: #e3f2fd;
-    border-left: 4px solid #007BFF;
-    margin-top: 5px;
-    max-height: 0;
-    overflow: hidden;
-    opacity: 0;
-    transition: max-height 0.5s ease-out, opacity 0.5s ease-out, padding 0.5s ease-out;
-}
-.description.show {
-    max-height: 300px;
-    opacity: 1;
+
+.card {
+    width: 190px;
+    height: 254px;
+    border-radius: 50px;
+    background: #8FBC8F; /* Természetes zöld árnyalat */
+    box-shadow: 5px 5px 10px #6E8B6E, -2px -2px 5px #A9D0A9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
     padding: 10px;
+    cursor: pointer;
+    transition: transform 0.3s, background 0.3s;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    background: #6E8B6E; /* Sötétebb árnyalat hover esetén */
+}
+
+.description {
+    display: none;
+    padding: 5px;
+    font-style: italic;
+    opacity: 0;
+    transition: opacity 0.3s;
 }
