@@ -83,7 +83,8 @@
         <input type="text" id="house_number" placeholder="Házszám megadása" required>
 
         <label for="phone">Telefonszám:</label>
-        <input type="tel" id="phone" placeholder="Telefonszám megadása" >
+        <input type="tel" id="phone" placeholder="Telefonszám megadása" maxlength="11" pattern="\d{11}" required>
+
 
                 <span>Ár:</span> <span id="checkout-price">0 HUF</span>
             </div>
@@ -223,6 +224,11 @@
         event.preventDefault(); // Megakadályozza az esetleges form submit eseményt
     document.getElementById("checkout-container").style.display = "none";
     });
+    phoneInput.addEventListener("input", function () {
+    // Csak számokat engedélyez és levágja a felesleget, ha több mint 11 karakter
+    this.value = this.value.replace(/\D/g, '').slice(0, 11);
+});
+
 
     </script>
 
