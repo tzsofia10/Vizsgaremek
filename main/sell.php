@@ -89,26 +89,28 @@
                 <span>Ár:</span> <span id="checkout-price">0 HUF</span>
             </div>
         </div>
-        <div class="card checkout">
-        
-                <input type="hidden" id="sale-id" name="sale_id">
-                <button class="checkout-btn" type="submit" disabled>Foglalás</button>
-
-            </form>
-        </div>
+       <div class="card checkout">
+  <form id="checkout-form"> 
+    <input type="hidden" id="sale-id" name="sale_id">
+    <button class="checkout-btn" type="submit" disabled>Foglalás</button>
+  </form>
+</div>
     </div>
 
     <!-- Confirmation Message -->
     <div class="confirmation" id="confirmation-box">
-        <div class="header">
-            <div class="image">
-                <svg viewBox="0 0 24 24" fill="none"><path d="M20 7L9.00004 18L3.99994 13" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-            </div>
-        </div>
-        <div class="content">
-            <span class="title">Foglalás megerősítve</span>
-        </div>
+  <div class="header">
+    <div class="image">
+      <svg viewBox="0 0 24 24" fill="none">
+        <circle cx="12" cy="12" r="8" fill="#c8e6c9" />
+        <path d="M6 12l3 3l9-9" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
     </div>
+  </div>
+  <div class="content">
+    <span class="title">Foglalás megerősítve</span>
+  </div>
+</div>
 
     <script>
     document.addEventListener("DOMContentLoaded", function () {
@@ -193,10 +195,12 @@
         .then(response => response.text())
         .then(result => {
             if (result.trim() === "success") {
+                // Sikeres frissítés
                 document.getElementById("checkout-container").style.display = "none";
                 confirmationBox.style.display = "block";
                 confirmationBox.style.opacity = "1";
 
+                // Azonnali megjelenítés, csak az eltűnés legyen animált
                 setTimeout(() => {
                     confirmationBox.style.transition = "opacity 1.5s ease-in-out";
                     confirmationBox.style.opacity = "0";
@@ -211,10 +215,7 @@
                     }
                 }, 4500);
             } else {
-                console.error("Hiba történt:", result);
-            alert("Hiba történt a foglalás során. Kérlek, próbáld újra!");
-            //ezzel nem jó tesztelni átállítja get-re a kérést
-            // window.location = "update_sale_status.php"
+                // ... (hiba kezelése)
             }
         })
         .catch(error => console.error("Hiba:", error));
@@ -228,6 +229,9 @@
     // Csak számokat engedélyez és levágja a felesleget, ha több mint 11 karakter
     this.value = this.value.replace(/\D/g, '').slice(0, 11);
 });
+setTimeout(function() {
+  document.getElementById('confirmation-box').style.display = 'none';
+}, 3000); // Disappears after 3 seconds
 
 
     </script>

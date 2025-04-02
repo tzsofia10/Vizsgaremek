@@ -274,19 +274,8 @@ button {
 .header {
   padding: 1.25rem 1rem 1rem 1rem;
 }
-.confirmation {
-  display: none;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 1000;
-  background: #fff;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-  text-align: center;
-}
+
+
 image {
   display: flex;
   margin-left: auto;
@@ -353,7 +342,7 @@ image {
 }
 
 .title {
-  color: #066e29;
+ 
   font-size: 1rem;
   font-weight: 600;
   line-height: 1.5rem;
@@ -365,34 +354,31 @@ image {
   transform: translate(-50%, -50%);
   background: white;
   padding: 20px;
-  background-color: green;
   border-radius: 10px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-  opacity: 0;
+  opacity: 0; /* Make it visible by default */
   transition: opacity 1.5s ease-in-out;
   z-index: 1000;
-  display: none;
-}
-.content {
-  text-align: center;
-  font-family: Arial, sans-serif;
+  display: block; /* Make it visible by default */
+  text-align: center; /* Center the content */
 }
 
-.checkmark-container {
-  width: 50px;
-  height: 50px;
-  background-color: green;
-  border-radius: 50%;
-  display: flex;
+.confirmation .header {
+  margin-bottom: 10px;
+}
+
+.confirmation .image {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 10px auto;
+}
+.confirmation .image svg circle {
+  r: 12; /* Növelt kör méret */
 }
 
-.checkmark {
-  color: white;
-  font-size: 24px;
-  font-weight: bold;
+.confirmation .image svg {
+  width: 60px; /* Növelt SVG szélesség */
+  height: 60px; /* Növelt SVG magasság */
 }
 
 
