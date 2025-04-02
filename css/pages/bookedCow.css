@@ -1,3 +1,31 @@
+body {
+    background-image: url('../../cowPicture/ChatGPT\ Image\ 2025.\ ápr.\ 1.\ 10_04_55.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed; /* Fix háttérkép */
+    
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    position: relative;
+}
+
+/* Háttérkép kezelése */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../../cowPicture/ChatGPT\ Image\ 2025.\ ápr.\ 1.\ 10_04_55.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    z-index: -1;
+}
+
 h1 {
     margin: 0;
     background: linear-gradient(white, #f4e1c6);
@@ -40,15 +68,7 @@ h1::after {
     height: auto;
     border-radius: 10px;
 }
-footer {
-    position: fixed;
-    margin: 0;
-    bottom: 0;
-    width: 100%;
 
-    padding: 10px 0;
-    text-align: center;
-}
 /* Reszponzív módosítások */
 @media (max-width: 1270px) {
     h1{
