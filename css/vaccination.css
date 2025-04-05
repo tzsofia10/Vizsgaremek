@@ -15,7 +15,12 @@ h1{
     color: white;
     text-align: center;
     font-size: 2em;
-    margin-bottom: 20px;
+    margin-top: 80px;
+    background: linear-gradient(#606c38, #d8c18b4b);
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    padding: 10px;
+   
 }
 .container {
     display: flex;

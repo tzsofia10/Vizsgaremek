@@ -4,7 +4,6 @@ body {
     background-position: center;
     background-size: cover;
     background-attachment: fixed; /* Fix háttérkép */
-    
     display: flex;
     flex-direction: column;
     min-height: 100vh;

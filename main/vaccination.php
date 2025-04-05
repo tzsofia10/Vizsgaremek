@@ -17,7 +17,7 @@ $result = $dbconn->query($sql);
 <body>
     <?php include '../main/nav.php'; ?>
     <main>
-        <h1>Oltások</h1>
+        <h1>💉 Oltások 💉</h1>
         <div class="container">
             <div class="vaccination-list">
                 <?php while ($row = $result->fetch_assoc()): ?>
