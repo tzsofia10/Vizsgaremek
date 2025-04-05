@@ -193,9 +193,9 @@ $result = $dbconn->query($sql);
   function myFunction(filter) {
     window.location.href = "?filter=" + filter;
 }
-
-
     </script>
-
+    <footer>
+        <?php include '../main/footer.php'; ?>
+    </footer>
 </body>
 </html>

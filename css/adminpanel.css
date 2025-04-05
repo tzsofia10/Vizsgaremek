@@ -1,5 +1,5 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     background-color: #cad2c5;
     color: #2f3e46;
     margin: 0;
@@ -23,6 +23,9 @@ form {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     max-width: 400px;
     width: 100%;
+    animation: fadeSlideIn 0.8s ease forwards;
+    opacity: 0;
+    transform: translateY(20px);
 }
 
 label {
@@ -91,9 +94,39 @@ p {
     25% { transform: translateX(-5px); }
     75% { transform: translateX(5px); }
 }
+@keyframes fadeSlideIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 
+/*  reszponzív stílusok  */
 @media (max-width: 480px) {
+    body {
+        padding: 20px;
+        height: auto;
+    }
+
     form {
         padding: 15px;
+        border-radius: 6px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+        font-size: 1.5em;
+    }
+
+    input[type="email"],
+    input[type="password"],
+    input[type="submit"] {
+        font-size: 15px;
+        padding: 8px;
+    }
+
+    .error-message {
+        font-size: 1em;
+        padding: 12px;
     }
 }

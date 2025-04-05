@@ -43,9 +43,10 @@ if (isset($_POST['submit'])) {
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
-<title>Admin Panel Login</title>
-<link href="../css/adminpanel.css" rel="stylesheet">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel Login</title>
+    <link href="../css/adminpanel.css" rel="stylesheet">
 </head>
 
 <body>
