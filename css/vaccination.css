@@ -1,11 +1,15 @@
 body {
     background-image: url('../cowPicture/ChatGPT\ Image\ 2025.\ ápr.\ 2.\ 10_04_31.png');
-    background-size: cover;
-    background-position: center;
     background-repeat: no-repeat;
-
-  
-    
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed; /* Fix háttérkép */
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    position: relative;
 }
 h1{
     color: white;
@@ -18,9 +22,8 @@ h1{
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    width: 60%;
-    margin: 25PX auto;
-    
+    width: 50%;
+    margin: 50px auto;
 }
 .vaccination-list {
     list-style: none;
@@ -28,6 +31,7 @@ h1{
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
+    justify-content:center;
 }
 
 .card {
@@ -57,3 +61,4 @@ h1{
     opacity: 0;
     transition: opacity 0.3s;
 }
+
