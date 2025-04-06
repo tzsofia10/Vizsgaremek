@@ -25,7 +25,7 @@ $newest_articles = mysqli_fetch_all($newest_result, MYSQLI_ASSOC);
 <html lang="hu"> 
 <?php
 $page_title = "Főoldal";
-$custom_js = ["../js/translate.js"];
+$custom_js = ["js/scroll.js"];
 $custom_css = ["https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css", "css/pages/indexpage.css"];
 include 'main/head.php';
 ?>
@@ -138,14 +138,26 @@ include 'main/head.php';
 
         </div>
     </div>
-    <script>
-        document.getElementById("playSound").addEventListener("mouseenter", function () {
-            document.getElementById("audio").play();
-        });
-    </script>
+    
+        
+
     <footer>
         <?php include 'main/footer.php'; ?>
     </footer>
+    <button id="scrollTopBtn" title="Ugrás a tetejére">⬆</button>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById("playSound").addEventListener("mouseenter", function () {
+            const audioElement = document.getElementById("audio");
+            if (audioElement) {
+                audioElement.play().catch(function (error) {
+                    console.error("Hiba az audio lejátszása közben:", error);
+                });
+            } else {
+                console.warn("Az audio elem nem található!");
+            }
+        });
+    </script>
 </body>
 </html>

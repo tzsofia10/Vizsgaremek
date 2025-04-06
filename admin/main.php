@@ -124,14 +124,13 @@ include '../main/head.php';
         }
     });
 
-    backToTopButton.addEventListener("click", function () {
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
+        backToTopButton.addEventListener("click", function () {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
         });
     });
-});
-
     </script>
     <footer>
         <?php include '../main/footer.php'; ?>
