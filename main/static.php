@@ -2,7 +2,7 @@
 <html lang="hu">
 
 <?php
-    $page_title = "Pusztulás Diagram";
+    $page_title = "Elhullás Diagram";
     $custom_js = ["https://cdn.jsdelivr.net/npm/chart.js"];
     $custom_css = ["../css/staticcss.css"];
     include 'head.php';
@@ -10,7 +10,7 @@
 <body>
     <?php include '../main/nav.php'; ?>
     
-    <h2>Szarvasmarhák Pusztulási Diagram</h2>
+    <h2>Szarvasmarhák Elhullási Diagram</h2>
    
     <div class="chart-container">
         <canvas id="deathChart"></canvas>
@@ -30,7 +30,7 @@
                     data: {
                         labels: labels,
                         datasets: [{
-                            label: 'Pusztulások száma',
+                            label: 'Elhullások száma',
                             data: counts,
                             backgroundColor: 'rgba(255, 99, 132, 0.5)',
                             borderColor: 'rgba(255, 99, 132, 1)',
