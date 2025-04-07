@@ -52,7 +52,8 @@ if (!$result) {
     $additional_head = "<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>"; 
     include '../main/head.php'; 
 ?>
-<body>
+<body >
+<div class="wrapper">
     <?php include '../main/nav.php'; ?>
     <h1>Foglalások</h1>
     <div class="card-container">
@@ -98,6 +99,7 @@ if (!$result) {
     <footer>
         <?php include '../main/footer.php'; ?>
     </footer>
+    </div>
 <script>
     const colorTranslations = {
     'Black': 'Fekete',
