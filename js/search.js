@@ -118,14 +118,20 @@ function myFunction() {
 // Törlés funkció módosítása SweetAlert használatával
 function deleteCow(cowId) {
     Swal.fire({
-        title: 'Biztos törölni szeretnéd?',
-        text: "Ezt a műveletet nem lehet visszavonni!",
+        title: 'Biztosan törölni szeretnéd?',
+        text: "A művelet nem visszafordítható!",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: 'rgba(16, 86, 82, 0.8)',
         cancelButtonColor: '#d33',
         confirmButtonText: 'Igen, törlöm!',
-        cancelButtonText: 'Mégse'
+        cancelButtonText: 'Mégsem',
+        background: '#fff',
+        customClass: {
+            popup: 'pagination-popup',
+            confirmButton: 'pagination-confirm',
+            cancelButton: 'pagination-cancel'
+        }
     }).then((result) => {
         if (result.isConfirmed) {
             fetch(`delete_cow.php?id=${cowId}`, {
@@ -141,9 +147,14 @@ function deleteCow(cowId) {
                         title: 'Törölve!',
                         text: 'A tehén sikeresen törölve lett.',
                         icon: 'success',
-                        confirmButtonColor: 'rgba(16, 86, 82, 0.8)'
+                        confirmButtonColor: 'rgba(16, 86, 82, 0.8)',
+                        background: '#fff',
+                        customClass: {
+                            popup: 'pagination-popup',
+                            confirmButton: 'pagination-confirm'
+                        }
                     }).then(() => {
-                        myFunction(); // Újratölti a keresési eredményeket
+                        location.reload(); // vagy frissítés / elem törlés JS-ből
                     });
                 } else {
                     throw new Error(data.message || 'Hiba történt a törlés során');
@@ -155,12 +166,18 @@ function deleteCow(cowId) {
                     title: 'Hiba!',
                     text: error.message || 'A törlés során hiba történt.',
                     icon: 'error',
-                    confirmButtonColor: '#d33'
+                    confirmButtonColor: '#d33',
+                    background: '#fff',
+                    customClass: {
+                        popup: 'pagination-popup',
+                        confirmButton: 'pagination-confirm'
+                    }
                 });
             });
         }
     });
 }
+
 
 // Debounce alkalmazása a keresésre
 const debouncedSearch = debounce(myFunction, 300);

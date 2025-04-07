@@ -7,9 +7,9 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
 
 require '../connect.php';
 
-$filter = isset($_GET['filter']) ? $_GET['filter'] : 'all';  // Alapértelmezett szűrő: 'all'
+$filter = isset($_GET['filter']) ? $_GET['filter'] : 'all';  
 
-$records_per_page = 5;  // Oldalanként megjelenő rekordok száma
+$records_per_page = 5;  
 
 $page = isset($_GET['page']) && is_numeric($_GET['page']) ? (int)$_GET['page'] : 1;
 $offset = ($page - 1) * $records_per_page;
