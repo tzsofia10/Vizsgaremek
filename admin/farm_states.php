@@ -137,7 +137,7 @@ $result = $dbconn->query($sql);
                             <td>" . htmlspecialchars($gender) . "</td>
                             <td>" . htmlspecialchars($row['mother_ear_tag']) . "</td>
                             <td class='color'>" . htmlspecialchars($color) . "</td>
-                            <td>" . htmlspecialchars($row['birthdate']) . "</td>";
+                            <td>" . htmlspecialchars($filter === 'dead' ? $row['death_date'] : $row['birthdate']) . "</td>";
                     
                         if ($filter === 'all') {
                             echo "<td class='" . $status_class . "'>" . $status . "</td>";

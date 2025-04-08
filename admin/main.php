@@ -8,7 +8,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
 require '../connect.php';
 
 // Szarvasmarhák számának lekérdezése
-$cows_count_query = "SELECT COUNT(*) as total FROM cows";
+$cows_count_query = "SELECT COUNT(*) as total FROM cows WHERE death_date IS NULL";
 $cows_count_result = $dbconn->query($cows_count_query);
 $cows_count = $cows_count_result->fetch_assoc()['total'];
 
