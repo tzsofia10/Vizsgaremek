@@ -54,6 +54,16 @@ main h1 {
 .borderRight a {
     text-decoration: none;
 }
+/*státusz*/
+.alive {
+    color: green;
+    font-weight: bold;
+}
+
+.dead {
+    color: red;
+    font-weight: bold;
+}
 
 /* Törlés gomb */
 .deleteButton {
