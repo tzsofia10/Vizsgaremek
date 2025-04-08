@@ -99,9 +99,8 @@ $dbconn->close();
             <br>
             
             <label for="death_date">Elhullás dátuma:</label>
-            <input type="date" id="death_date" name="death_date" value="<?php echo htmlspecialchars($cow['death_date'] ?? ''); ?>">
+            <input type="date" id="death_date" name="death_date" value="<?php echo htmlspecialchars($cow['death_date'] ?? ''); ?>" max="<?php echo date('Y-m-d'); ?>">
             <br>
-
 
             </select>
 
@@ -126,9 +125,10 @@ $dbconn->close();
             </select>
             <br>
     
-            <label for="birthdate">Szuletési Dátum:</label>
-            <input type="date" id="birthdate" name="birthdate" value="<?php echo htmlspecialchars($cow['birthdate']); ?>" required>
+            <label for="birthdate">Születési Dátum:</label>
+            <input type="date" id="birthdate" name="birthdate" value="<?php echo htmlspecialchars($cow['birthdate']); ?>" max="<?php echo date('Y-m-d'); ?>" required>
             <br>
+
     
             <button class="button" type="submit">Módosítás</button>
             <button class="button" type="submit"><a href="farm_states.php">Vissza a listához</a></button>

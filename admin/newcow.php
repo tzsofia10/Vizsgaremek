@@ -185,8 +185,8 @@ $dbconn->close();
             </select>
             <br>
     
-            <label for="birthdate">Születési dátum:</label>
-            <input type="date" id="birthdate" name="birthdate" required>
+            <label for="birthdate">Születési Dátum:</label>
+            <input type="date" id="birthdate" name="birthdate" value="<?php echo htmlspecialchars($cow['birthdate']); ?>" max="<?php echo date('Y-m-d'); ?>" required>
             <br>
     
             <label for="picture">Kép feltöltése (nem kötelező):</label>
