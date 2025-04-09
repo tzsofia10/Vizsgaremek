@@ -101,9 +101,12 @@ $result = $dbconn->query($sql);
         </div>
 
 
-    <div class="search-box">
-        <input type="text" id="myInput" onkeyup="myFunction()"  placeholder="Fülszám keresése...">
-    </div>
+        <?php if ($filter !== 'all'): ?>
+            <div class="search-box">
+                <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Fülszám keresése...">
+            </div>
+        <?php endif; ?>
+
         <?php
         if ($result->num_rows > 0) {
             echo "<table id='cowTable'>
