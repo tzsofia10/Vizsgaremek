@@ -38,39 +38,42 @@ if ($colorsResult->num_rows > 0) {
 }
 
 // Módosítás kezelése
+// Módosítás kezelése
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $ear_tag = $_POST['ear_tag'] ?? '';
     $gender = $_POST['gender'] ?? '';
     $mother_ear_tag = $_POST['mother_ear_tag'] ?? '';
-  
     $color_id = $_POST['color_id'] ?? '';
     $birthdate = $_POST['birthdate'] ?? '';
     $death_date = !empty($_POST['death_date']) ? $_POST['death_date'] : null;
 
-    
-    if ($death_date === null) {
-        $updateStmt = $dbconn->prepare(
-            "UPDATE cows SET ear_tag = ?, gender = ?, mother_ear_tag = ?, father_ear_tag = ?, color_id = ?, birthdate = ?, death_date = NULL WHERE id = ?"
-        );
-        $updateStmt->bind_param('ssssisi', $ear_tag, $gender, $mother_ear_tag, $father_ear_tag, $color_id, $birthdate, $cow_id);
+    // Ellenőrzés: ne lehessen a halálozás dátuma a születés előtt
+    if ($death_date !== null && strtotime($death_date) < strtotime($birthdate)) {
+        echo "<p style='color:red;'>Hiba: Az elhullás dátuma nem lehet korábbi a születés dátumánál.</p>";
     } else {
-        $updateStmt = $dbconn->prepare(
-            "UPDATE cows SET ear_tag = ?, gender = ?, mother_ear_tag = ?, father_ear_tag = ?, color_id = ?, birthdate = ?, death_date = ? WHERE id = ?"
-        );
-        $updateStmt->bind_param('ssssissi', $ear_tag, $gender, $mother_ear_tag, $father_ear_tag, $color_id, $birthdate, $death_date, $cow_id);
-    }
-    
-    if ($updateStmt->execute()) {
-        echo "<p>A tehén adatai sikeresen frissítve!</p>";
-    } else {
-        echo "<p>Hiba történt a módosítás közben: " . $dbconn->error . "</p>";
-    }
+        if ($death_date === null) {
+            $updateStmt = $dbconn->prepare(
+                "UPDATE cows SET ear_tag = ?, gender = ?, mother_ear_tag = ?, father_ear_tag = ?, color_id = ?, birthdate = ?, death_date = NULL WHERE id = ?"
+            );
+            $updateStmt->bind_param('ssssisi', $ear_tag, $gender, $mother_ear_tag, $father_ear_tag, $color_id, $birthdate, $cow_id);
+        } else {
+            $updateStmt = $dbconn->prepare(
+                "UPDATE cows SET ear_tag = ?, gender = ?, mother_ear_tag = ?, father_ear_tag = ?, color_id = ?, birthdate = ?, death_date = ? WHERE id = ?"
+            );
+            $updateStmt->bind_param('ssssissi', $ear_tag, $gender, $mother_ear_tag, $father_ear_tag, $color_id, $birthdate, $death_date, $cow_id);
+        }
 
-    $updateStmt->close();
-    // Frissített adatok újratöltése
-    header("Location: farm_states.php");
-    exit();
+        if ($updateStmt->execute()) {
+            header("Location: farm_states.php");
+            exit();
+        } else {
+            echo "<p>Hiba történt a módosítás közben: " . $dbconn->error . "</p>";
+        }
+
+        $updateStmt->close();
+    }
 }
+
 
 $dbconn->close();
 ?>
@@ -134,6 +137,23 @@ $dbconn->close();
             <button class="button" type="submit"><a href="farm_states.php">Vissza a listához</a></button>
         </form>
     </main>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const birthInput = document.getElementById("birthdate");
+            const deathInput = document.getElementById("death_date");
+
+            function updateDeathDateMin() {
+                if (birthInput.value) {
+                    deathInput.min = birthInput.value;
+                }
+            }
+
+            birthInput.addEventListener("change", updateDeathDateMin);
+
+            // Betöltéskor is fusson le
+            updateDeathDateMin();
+        });
+    </script>
 
     <footer>
         <?php include '../main/footer.php'; ?>
