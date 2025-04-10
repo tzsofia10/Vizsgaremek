@@ -134,14 +134,14 @@ $result = $dbconn->query($sql);
                         $status_class = $row['death_date'] ? 'dead' : 'alive';
                     
                         echo "<tr>
-                            <td>" . htmlspecialchars($row['cow_id']) . "</td>
-                            <td><img src='" . $picture . "' alt='Tehén Kép'></td>
-                            <td>" . htmlspecialchars($row['ear_tag']) . "</td>
-                            <td>" . htmlspecialchars($gender) . "</td>
-                            <td>" . htmlspecialchars($row['mother_ear_tag']) . "</td>
-                            <td class='color'>" . htmlspecialchars($color) . "</td>
-                            <td>" . htmlspecialchars($filter === 'dead' ? $row['death_date'] : $row['birthdate']) . "</td>";
-                    
+                                <td><img src='" . $picture . "' alt='Tehén Kép'></td>
+                                <td><a href='pdf.php?id=" . urlencode($row['cow_id']) . "' target='_blank'>" . htmlspecialchars($row['ear_tag']) . "</a></td>
+                                <td>" . htmlspecialchars($gender) . "</td>
+                                <td>" . htmlspecialchars($row['mother_ear_tag']) . "</td>
+                                <td class='color'>" . htmlspecialchars($color) . "</td>
+                                <td>" . htmlspecialchars($filter === 'dead' ? $row['death_date'] : $row['birthdate']) . "</td>
+                            ";
+                            
                         if ($filter === 'all') {
                             echo "<td class='" . $status_class . "'>" . $status . "</td>";
                         }
