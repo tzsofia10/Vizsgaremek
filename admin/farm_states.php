@@ -112,7 +112,6 @@ $result = $dbconn->query($sql);
             echo "<table id='cowTable'>
                     <thead>
                         <tr>
-                            <th>ID</th>
                             <th>Kép</th>
                             <th>Fülszám</th>
                             <th>Nem</th>
