@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Gép: 127.0.0.1
--- Létrehozás ideje: 2025. Már 18. 13:56
--- Kiszolgáló verziója: 10.4.28-MariaDB
--- PHP verzió: 8.2.4
+-- Host: 127.0.0.1
+-- Generation Time: Apr 13, 2025 at 02:41 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Adatbázis: `gazdanaplo`
+-- Database: `gazdanaplo`
 --
 
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `colors`
+-- Table structure for table `colors`
 --
 
 CREATE TABLE `colors` (
@@ -33,7 +33,7 @@ CREATE TABLE `colors` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- A tábla adatainak kiíratása `colors`
+-- Dumping data for table `colors`
 --
 
 INSERT INTO `colors` (`id`, `colors`) VALUES
@@ -45,7 +45,7 @@ INSERT INTO `colors` (`id`, `colors`) VALUES
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `cows`
+-- Table structure for table `cows`
 --
 
 CREATE TABLE `cows` (
@@ -61,7 +61,7 @@ CREATE TABLE `cows` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- A tábla adatainak kiíratása `cows`
+-- Dumping data for table `cows`
 --
 
 INSERT INTO `cows` (`id`, `ear_tag`, `gender`, `color_id`, `birthdate`, `death_date`, `mother_ear_tag`, `father_ear_tag`, `picture`) VALUES
@@ -101,12 +101,23 @@ INSERT INTO `cows` (`id`, `ear_tag`, `gender`, `color_id`, `birthdate`, `death_d
 (34, 'HU 35514 0108 9', 1, 2, '2024-03-15', NULL, 'HU 30688 1202 2', NULL, NULL),
 (35, 'HU 35514 0113 5', 1, 1, '2024-03-16', '2025-02-07', 'HU 30688 2464 7', NULL, NULL),
 (36, 'HU 35514 0120 5', 1, 1, '2024-03-22', '2025-02-07', 'HU 34314 0196 9', NULL, NULL),
-(87, '12345ABC', 0, 2, '2023-01-01', NULL, '54321DEF', 'undefined', NULL);
+(92, '12345ABC', 0, 2, '2023-01-01', '2025-04-01', '54321DEF', NULL, NULL),
+(93, 'HU 40000 0001 1', 0, 2, '2018-01-01', '2018-06-01', 'HU 30000 0001 1', NULL, NULL),
+(94, 'HU 40000 0002 8', 0, 3, '2018-01-02', '2018-06-02', 'HU 30000 0002 8', NULL, NULL),
+(95, 'HU 40000 0003 5', 0, 1, '2018-01-03', '2018-06-03', 'HU 30000 0003 5', NULL, NULL),
+(96, 'HU 40000 0004 2', 0, 3, '2018-01-04', '2018-06-04', 'HU 30000 0004 2', NULL, NULL),
+(97, 'HU 40000 0005 9', 0, 2, '2018-01-05', '2018-06-03', 'HU 30000 0005 9', NULL, NULL),
+(98, 'HU 40000 0006 6', 0, 1, '2018-01-06', '2018-06-06', 'HU 30000 0006 6', NULL, NULL),
+(99, 'HU 40000 0007 3', 0, 3, '2018-01-07', '2018-06-06', 'HU 30000 0007 3', NULL, NULL),
+(100, 'HU 40000 0008 0', 0, 3, '2018-01-08', '2018-06-06', 'HU 30000 0008 0', NULL, NULL),
+(101, 'HU 40000 0009 7', 0, 2, '2018-01-09', '2018-06-09', 'HU 30000 0009 7', NULL, NULL),
+(102, 'HU 40000 0010 3', 0, 1, '2018-01-10', '2018-06-10', 'HU 30000 0010 3', NULL, NULL),
+(103, 'HU 40000 0011 0', 0, 3, '2018-01-11', '2018-06-11', 'HU 30000 0011 0', NULL, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `cow_vaccinations`
+-- Table structure for table `cow_vaccinations`
 --
 
 CREATE TABLE `cow_vaccinations` (
@@ -117,7 +128,7 @@ CREATE TABLE `cow_vaccinations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- A tábla adatainak kiíratása `cow_vaccinations`
+-- Dumping data for table `cow_vaccinations`
 --
 
 INSERT INTO `cow_vaccinations` (`id`, `cows_id`, `vaccination_id`, `vaccination_date`) VALUES
@@ -135,7 +146,7 @@ INSERT INTO `cow_vaccinations` (`id`, `cows_id`, `vaccination_id`, `vaccination_
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `customer`
+-- Table structure for table `customer`
 --
 
 CREATE TABLE `customer` (
@@ -148,7 +159,7 @@ CREATE TABLE `customer` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- A tábla adatainak kiíratása `customer`
+-- Dumping data for table `customer`
 --
 
 INSERT INTO `customer` (`id`, `phone_number`, `name`, `settlements_id`, `street`, `house_number`) VALUES
@@ -160,12 +171,24 @@ INSERT INTO `customer` (`id`, `phone_number`, `name`, `settlements_id`, `street`
 (6, NULL, 'Kovács István', NULL, NULL, '55'),
 (7, NULL, 'Kovács István', NULL, NULL, '55'),
 (8, NULL, 'Zsófia', NULL, NULL, '23'),
-(9, '10612345678', 'Kovács István', 106, 'Rákóczi út', '55');
+(9, '10612345678', 'Kovács István', 106, 'Rákóczi út', '55'),
+(10, '10612345678', 'Kata', 108, 'Rákóczi út', '55'),
+(11, '10612345678', 'Kovács István', 106, 'Rákóczi út', '55'),
+(12, '10612345678', 'Kovács István', 106, 'Rákóczi út', '55'),
+(13, '10612345678', 'Kovács István', 106, 'Rákóczi út', '55'),
+(14, '10612345678', 'Kovács István', 106, 'Rákóczi út', '55'),
+(15, '10612345678', 'Kovács István', 106, 'Rákóczi út', '55'),
+(16, '10612345678', 'Kovács István', 106, 'Rákóczi út', '55'),
+(17, '10612345678', 'Kovács István', 106, 'Rákóczi út', '55'),
+(18, '10612345678', 'Kovács István', 106, 'Rákóczi út', '55'),
+(19, '10612345678', 'Kovács István', 106, 'Rákóczi út', '55'),
+(20, '10612345678', 'Kovács István', 106, 'Rákóczi út', '55'),
+(21, '10612345678', 'Kovács István', 106, 'Rákóczi út', '55');
 
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `news`
+-- Table structure for table `news`
 --
 
 CREATE TABLE `news` (
@@ -183,7 +206,7 @@ CREATE TABLE `news` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- A tábla adatainak kiíratása `news`
+-- Dumping data for table `news`
 --
 
 INSERT INTO `news` (`id`, `alias`, `ordering`, `nav_name`, `content`, `img`, `creation`, `updating`, `description`, `keywords`, `states`) VALUES
@@ -193,13 +216,12 @@ INSERT INTO `news` (`id`, `alias`, `ordering`, `nav_name`, `content`, `img`, `cr
 (5, 'uj-bika', 1, 'Új Charolais Tenyészbika került ', '<p>A Ferk&oacute; Gazdas&aacute;g ism&eacute;t fontos l&eacute;p&eacute;st tett a szarvasmarha-&aacute;llom&aacute;ny fejleszt&eacute;se &eacute;rdek&eacute;ben: &uacute;j Charolais teny&eacute;szbik&aacute;t szerezt&uuml;nk be a J&aacute;szd&oacute;zsai gazdas&aacute;gb&oacute;l, amely m&eacute;lt&aacute;n h&iacute;res kiv&aacute;l&oacute; genetikai h&aacute;tterű &aacute;llatair&oacute;l. A j&aacute;szd&oacute;zsai teny&eacute;szet &eacute;vek &oacute;ta kimagasl&oacute; eredm&eacute;nyeket &eacute;r el k&uuml;l&ouml;nf&eacute;le mezőgazdas&aacute;gi &eacute;s teny&eacute;sz&aacute;llat-ki&aacute;ll&iacute;t&aacute;sokon, ahol Charolais bik&aacute;ik t&ouml;bb d&iacute;jat is nyertek.</p>\r\n\r\n<p>A teny&eacute;szbika kiv&aacute;laszt&aacute;sakor sok gazdas&aacute;g a lehető legnagyobb, legrobosztusabb &aacute;llatot keresi, mi m&aacute;s megk&ouml;zel&iacute;t&eacute;st alkalmazunk. Sz&aacute;munkra az egyik legfontosabb c&eacute;l az, hogy az Angus &eacute;s Charolais tehenek k&ouml;nnyen, komplik&aacute;ci&oacute;mentesen vil&aacute;gra tudj&aacute;k hozni borjaikat.</p>\r\n\r\n<p>Ezt a c&eacute;lt azzal biztos&iacute;thatjuk, ha nem a legnagyobb testű, neh&eacute;z csontozat&uacute; bik&aacute;t v&aacute;lasztjuk, hanem egy olyan egyedet, amely kev&eacute;sb&eacute; robosztus testfel&eacute;p&iacute;t&eacute;sű, ami megk&ouml;nny&iacute;ti a borjak vil&aacute;gra j&ouml;tt&eacute;t, de ugyanakkor kiv&aacute;l&oacute; genetikai h&aacute;tt&eacute;rrel rendelkezik, biztos&iacute;tva a j&ouml;vőbeli &aacute;llom&aacute;ny eg&eacute;szs&eacute;g&eacute;t &eacute;s termel&eacute;kenys&eacute;g&eacute;t.</p>\r\n\r\n<p>A szarvasmarha-teny&eacute;szt&eacute;s egyik legkritikusabb szakasza az ell&eacute;s. A neh&eacute;zell&eacute;s nemcsak az &aacute;llatok eg&eacute;szs&eacute;g&eacute;t vesz&eacute;lyezteti, hanem komoly &aacute;llateg&eacute;szs&eacute;g&uuml;gyi beavatkoz&aacute;sokat is ig&eacute;nyelhet, ami hossz&uacute; t&aacute;von stresszt &eacute;s gazdas&aacute;gi vesztes&eacute;geket okozhat.</p>\r\n\r\n<p>Az &uacute;j teny&eacute;szbika &eacute;ppen ez&eacute;rt nem csup&aacute;n a k&uuml;llem&eacute;vel, hanem &ouml;r&ouml;k&iacute;thető tulajdons&aacute;gaival is hozz&aacute;j&aacute;rul ahhoz, hogy a Ferk&oacute; Gazdas&aacute;g &aacute;llat&aacute;llom&aacute;nya eg&eacute;szs&eacute;gesebb &eacute;s probl&eacute;mamentesebb legyen.</p>\r\n\r\n<p>A k&ouml;vetkező h&oacute;napokban figyelemmel k&iacute;s&eacute;rj&uuml;k, hogyan illeszkedik be az &uacute;j Charolais teny&eacute;szbika az &aacute;llom&aacute;nyba, &eacute;s b&iacute;zunk benne, hogy hamarosan eg&eacute;szs&eacute;ges &eacute;s kiv&aacute;l&oacute; genetikai adotts&aacute;gokkal rendelkező borjak sz&uuml;letnek tőle.</p>', NULL, '2025-02-24 11:59:21', NULL, 'Új Charolais Tenyészbika került idén is beszerzésre', 'Charolais, szarvasmarha, Charolais tenyészbika, gazdasági hatékonyság', 1),
 (6, 'biogazdalkodas', 4, 'Biogazdálkodás', '<p><strong>A Ferkó Gazdaság csatlakozott a Biogazdálkodási Programhoz</strong></p>\r\n<p>Az utóbbi években egyre nagyobb figyelmet kap Magyarországon a fenntartható mezőgazdaság és a biogazdálkodás, amely nemcsak a környezet védelmét, hanem az egészségesebb élelmiszerek előállítását is szolgálja. A Ferkó Gazdaság mindig is elkötelezett volt az innováció és a fenntartható fejlődés iránt, ezért csatlakozott az országos biogazdálkodási programhoz, amely néhány éve indult el hazánkban.</p>\r\n<p>A modern mezőgazdasági technológiák gyakran intenzív vegyszerhasználattal és ipari termelési módszerekkel járnak, amelyek hosszú távon kimeríthetik a talajt és csökkenthetik az élelmiszerek természetes minőségét. A Ferkó Gazdaság célja viszont az, hogy:</p>\r\n<ul>\r\n<li>Vegyszermentesen termesszünk takarmánynövényeket és gondozzuk állatállományunkat.</li>\r\n<li>Hosszú távon fenntartható módszereket alkalmazzunk, amelyek megőrzik a föld termőképességét.</li>\r\n<li>Természetes, egészségesebb élelmiszereket biztosítsunk a fogyasztók számára.</li>\r\n</ul>\r\n<p>A programhoz való csatlakozás egy átfogó átállási folyamatot jelentett számunkra. A biogazdálkodásra való áttérés szigorú ellenőrzési és tanúsítási folyamatot igényelt, amely biztosítja, hogy minden előírásnak megfelelően, valóban ökológiai módon gazdálkodjunk.</p>\r\n<p><strong>A biogazdálkodási program részeként bevezetett új szabályok és módszerek:</strong></p>\r\n<ol>\r\n<li><strong>Vegyszermentes földművelés</strong> – Nem használunk műtrágyát vagy szintetikus növényvédő szereket, helyette természetes trágyázási és növényvédelem technológiákat alkalmazunk.</li>\r\n<li><strong>Természetes állattartás</strong> – Az állatok takarmányozása ökológiai termesztésű takarmányból történik, és nagyobb figyelmet fordítunk a jóléti előírásokra.</li>\r\n<li><strong>Talajmegőrzési technikák</strong> – Vetésforgót, zöldtrágyázást és komposztálást alkalmazunk a talaj termőképességének hosszú távú megőrzése érdekében.</li>\r\n<li><strong>Fenntartható gazdálkodási eszközök</strong> – Minimalizáljuk a gépi beavatkozást, csökkentve a szén-dioxid-kibocsátást és az eróziót.</li>\r\n</ol>\r\n<p>A Ferkó Gazdaság számára ez az átállás egy új korszak kezdetét jelenti, amelyben a természetes termelési folyamatokat és az egészséges állattartást helyezzük előtérbe. Célunk, hogy hosszú távon is példát mutassunk, és bebizonyítsuk, hogy a fenntartható mezőgazdaság nemcsak környezetbarát, hanem gazdaságilag is életképes megoldás.</p>', 'farm.jpg', '2025-02-25 08:20:24', NULL, 'A Ferkó Gazdaság biogazdálkodási programhoz csatlakozása', 'biogazdálkodás, fenntarthatóság, természetes termelés', 1),
 (7, 'szuletesszabalyozas', 5, 'Születésszabályozás', '<p><strong>Születésszabályozás a Ferkó Gazdaságban</strong></p>\r\n<p>A Ferkó Gazdaságban a szarvasmarha-tenyésztés egyik legfontosabb stratégiai eleme a születések megfelelő időzítése. Nem mindegy, hogy a borjak melyik évszakban születnek, hiszen az időjárási körülmények közvetlen hatással vannak a borjak túlélési esélyeire, különösen ridegtartás esetén.</p>\r\n<p>A téli hónapok, különösen január és február, rendkívül zordak lehetnek, erős fagyokkal és csapadékkal. A ridegtartásban tartott állatok esetében ez kiemelkedően magas kockázatot jelent a borjak számára.</p>\r\n<ul>\r\n<li>❄ <strong>Erős fagy és hideg szél</strong> – A frissen született borjak hőháztartása még nem stabil, így a nagy hidegben könnyen kihűlhetnek, különösen, ha az ellés után nem tudnak azonnal megszáradni.</li>\r\n<li>❄ <strong>Nedves, csapadékos időjárás</strong> – A szél és a hó kombinációja tovább rontja a túlélési esélyeket. A legyengült borjak nehezebben állnak lábra, és fertőzésveszélynek is jobban ki vannak téve.</li>\r\n<li>❄ <strong>Korlátozott takarmányellátás</strong> – A téli időszakban a tehenek nem jutnak friss legelőhöz, ami hatással lehet a tejtermelésükre, és így az újszülött borjak fejlődésére is.</li>\r\n</ul>\r\n<p>A Ferkó Gazdaságban tudatos szaporítási stratégiával szabályozzuk a borjak világra jövetelét. Ennek érdekében:</p>\r\n<ul>\r\n<li>🐂 <strong>A tenyészbikát májusban helyezzük ki</strong> a tehenekhez, hogy az első fedezések a melegebb hónapokban történjenek.</li>\r\n<li>🐂 <strong>Ősszel, szeptember-októberben a bikát behajtjuk</strong> és elkülönítjük, ezzel biztosítva, hogy az ellések ne tolódjanak ki a téli időszakra.</li>\r\n<li>🐂 <strong>Célunk a február végi, március eleji születések</strong>, amikor az időjárás már kellemesebb, enyhébb, így a borjak könnyebben alkalmazkodnak a környezethez.</li>\r\n</ul>\r\n<p><strong>A megfelelő időzítés előnyei:</strong></p>\r\n<ul>\r\n<li>✔ <strong>Kisebb borjúelhullás</strong> – A tavaszi születésű borjak jobb túlélési eséllyel indulnak, mivel az időjárás kedvezőbb.</li>\r\n<li>✔ <strong>Erősebb fejlődés</strong> – A márciusi borjak korábban kikerülhetnek a friss legelőkre, így hamarabb erősödnek és gyorsabb növekedési ütemet érnek el.</li>\r\n<li>✔ <strong>Kevesebb egészségügyi kockázat</strong> – Az enyhébb időben az ellések kevesebb komplikációval járnak, és a borjak könnyebben szopnak és mozgékonyabbak.</li>\r\n</ul>\r\n<p>A születési időszak tudatos szabályozása nem csupán az állatok jólétére van hatással, hanem gazdasági szempontból is előnyös. Egy jól időzített borjúnevelési ciklus hatékonyabb tartást és jobb piaci értékesítést eredményez, hiszen a tavaszi születésű borjak megfelelő kondícióban érik el a választási kort.</p>\r\n<p>A Ferkó Gazdaság tehát továbbra is ragaszkodik a tenyésztési ciklus gondos megtervezéséhez, amely garantálja, hogy az állomány egészséges maradjon, a borjak erőteljes fejlődést mutassanak, és a gazdaság fenntartható módon működhessen a jövőben is.</p>', 'calf.jpg', '2025-02-25 08:26:46', NULL, 'A Ferkó Gazdaság születésszabályozási stratégiája', 'szarvasmarha, születésszabályozás, állattenyésztés', 1),
-(8, 'uj-borjak-erkezese', 4, 'Új Borjak Érkezése', '<p>A borjak sz&uuml;let&eacute;se a gazdas&aacute;g sz&aacute;m&aacute;ra mindig &ouml;r&ouml;mteli esem&eacute;ny, ugyanakkor sz&aacute;mos kih&iacute;v&aacute;st is rejt mag&aacute;ban. A sz&uuml;let&eacute;sszab&aacute;lyoz&aacute;snak k&ouml;sz&ouml;nhetően a tehenek gyakran febru&aacute;r v&eacute;g&eacute;től kezdenek elleni, &eacute;s b&aacute;r az ell&eacute;sek t&ouml;bbs&eacute;ge z&ouml;kkenőmentes, előfordulhat, hogy az &uacute;jsz&uuml;l&ouml;tt nem tud azonnal szopni az anyj&aacute;t&oacute;l. Ilyenkor a megfelelő elők&eacute;sz&uuml;letek &eacute;s az azonnali beavatkoz&aacute;s kulcsfontoss&aacute;g&uacute; az &eacute;letben marad&aacute;s &eacute;s a borj&uacute; eg&eacute;szs&eacute;ges fejlőd&eacute;se szempontj&aacute;b&oacute;l. Az anyatej első cseppje, a kolosztrum, olyan t&aacute;panyagokat &eacute;s immunol&oacute;giai &ouml;sszetevőket tartalmaz, amelyek elengedhetetlenek az &uacute;jsz&uuml;l&ouml;tt v&eacute;delm&eacute;hez &eacute;s n&ouml;veked&eacute;s&eacute;hez. Az ide&aacute;lis időablak az első 8&ndash;12 &oacute;ra, amikor a borj&uacute; szervezete a legfog&eacute;konyabb az immunanyagok felsz&iacute;v&aacute;s&aacute;ra. Ha ez az időszak elmarad, a fertőz&eacute;sekkel &eacute;s egy&eacute;b eg&eacute;szs&eacute;g&uuml;gyi komplik&aacute;ci&oacute;kkal szembeni v&eacute;delem jelentősen cs&ouml;kken, ami ak&aacute;r a hal&aacute;loz&aacute;shoz is vezethet. &Eacute;ppen ez&eacute;rt rendk&iacute;v&uuml;l fontos, hogy mindig legyen k&eacute;zn&eacute;l magas minős&eacute;gű, kolosztrum tartalm&uacute; tejpor, melyet nagyobb kiszerel&eacute;sben szok&aacute;s beszerezni, &iacute;gy felk&eacute;sz&uuml;lve arra az esetre, ha az anyatej nem &eacute;rhető el vagy iker ell&eacute;s eset&eacute;n sz&uuml;ks&eacute;g van a kieg&eacute;sz&iacute;t&eacute;sre. A piacon el&eacute;rhető sz&aacute;mos tejport&iacute;pus k&ouml;z&uuml;l a minős&eacute;g a legfontosabb szempont. A legmegb&iacute;zhat&oacute;bb m&aacute;rk&aacute;k biztos&iacute;tj&aacute;k azt a t&aacute;p&eacute;rt&eacute;ket, amely n&eacute;lk&uuml;l&ouml;zhetetlen az &uacute;jsz&uuml;l&ouml;tt borj&uacute; sz&aacute;m&aacute;ra. B&aacute;r ezek a pr&eacute;mium term&eacute;kek magasabb &aacute;ron &eacute;rhetők el, hossz&uacute; t&aacute;von a borj&uacute; t&uacute;l&eacute;l&eacute;s&eacute;t &eacute;s eg&eacute;szs&eacute;ges fejlőd&eacute;s&eacute;t tekintve megfizethetetlen &eacute;rt&eacute;ket k&eacute;pviselnek. Sp&oacute;rolni ilyenkor nem &eacute;rdemes, hiszen a nem megfelelő t&aacute;pszer az &eacute;letvesz&eacute;lyes komplik&aacute;ci&oacute;k egyik fő oka lehet. Az ell&eacute;s sor&aacute;n felmer&uuml;lő v&aacute;ratlan esem&eacute;nyekre is fel kell k&eacute;sz&uuml;ln&uuml;nk. Az egyik ilyen kulcsfontoss&aacute;g&uacute; int&eacute;zked&eacute;s a kalcium injekci&oacute;k beszerz&eacute;se. A kalcium szerepe kiemelkedően fontos a tehenek regener&aacute;ci&oacute;j&aacute;ban, k&uuml;l&ouml;n&ouml;sen akkor, ha az ell&eacute;s sor&aacute;n b&aacute;rmelyik anya megs&eacute;r&uuml;l, vagy hirtelen kalciumhi&aacute;ny alakul ki. &Eacute;ppen ez&eacute;rt a gazdas&aacute;g rakt&aacute;r&aacute;ban mindig legyenek k&eacute;szleten kalcium injekci&oacute;k, hogy sz&uuml;ks&eacute;g eset&eacute;n azonnal beavatkozhassunk. Ezen fel&uuml;l rendelkez&uuml;nk fertőtlen&iacute;tőszerekkel &eacute;s sebtapaszokkal is. Az ell&eacute;s ut&aacute;ni higi&eacute;niai int&eacute;zked&eacute;sek elengedhetetlenek a fertőz&eacute;sek megelőz&eacute;se &eacute;rdek&eacute;ben. Az ell&eacute;s sor&aacute;n a k&ouml;r&uuml;ltekintő fel&uuml;gyelet seg&iacute;t a korai beavatkoz&aacute;sban, ha b&aacute;rmilyen komplik&aacute;ci&oacute; ad&oacute;dna. Rendszeresen konzult&aacute;lunk a gazdas&aacute;g &aacute;llatorvos&aacute;val, aki biztos&iacute;tja sz&aacute;munka, hogy az alkalmazott m&oacute;dszereik megfeleljenek a leg&uacute;jabb szakmai ir&aacute;nyelveknek. A borjak eg&eacute;szs&eacute;ges &eacute;rkez&eacute;se nem csup&aacute;n az anyatejhez jut&aacute;s k&eacute;rd&eacute;se, hanem az &aacute;tfog&oacute;, j&oacute;l megtervezett elők&eacute;sz&uuml;letek eredm&eacute;nye. A legjobb minős&eacute;gű kolosztrum tartalm&uacute; tejpor, a sz&uuml;ks&eacute;ges higi&eacute;niai eszk&ouml;z&ouml;k, valamint a rakt&aacute;ron tartott kalcium injekci&oacute;k mind hozz&aacute;j&aacute;rulnak ahhoz, hogy az ell&eacute;s &eacute;s az &uacute;jsz&uuml;l&ouml;ttek ell&aacute;t&aacute;sa z&ouml;kkenőmentes legyen. A gondos elők&eacute;sz&uuml;letek seg&iacute;tenek megőrizni a gazdas&aacute;g siker&eacute;t &eacute;s biztos&iacute;tj&aacute;k, hogy a legfiatalabb gener&aacute;ci&oacute;k a lehető legjobb ell&aacute;t&aacute;sban r&eacute;szes&uuml;ljenek. Egy j&oacute;l szervezett ell&eacute;si folyamat hossz&uacute; t&aacute;von is megt&eacute;r&uuml;l, hiszen az eg&eacute;szs&eacute;ges borjak biztos&iacute;tj&aacute;k a gazdas&aacute;g j&ouml;vőj&eacute;t. Mindig a leg&uacute;jabb tudom&aacute;nyos eredm&eacute;nyeket &eacute;s szakmai tan&aacute;csokat igyeksz&uuml;nk k&ouml;vetni, hogy a lehető legoptim&aacute;lisabb k&ouml;r&uuml;lm&eacute;nyeket teremts&uuml;k meg az &uacute;j &eacute;let kezdet&eacute;hez.&nbsp;</p>', 'kolstrum.jpg', '2025-02-25 08:43:24', NULL, 'Az újszülött borjak egészséges fejlődésének támogatása kolosztrummal', 'borjak, kolosztrum, állattenyésztés, farm', 1),
-(11, 'uj-borjak-erkezese', 9, 'Új Borjak Érkezése', '<p>A borjak sz&uuml;let&eacute;se a gazdas&aacute;g sz&aacute;m&aacute;ra mindig &ouml;r&ouml;mteli esem&eacute;ny, ugyanakkor sz&aacute;mos kih&iacute;v&aacute;st is rejt mag&aacute;ban. A sz&uuml;let&eacute;sszab&aacute;lyoz&aacute;snak k&ouml;sz&ouml;nhetően a tehenek gyakran febru&aacute;r v&eacute;g&eacute;től kezdenek elleni, &eacute;s b&aacute;r az ell&eacute;sek t&ouml;bbs&eacute;ge z&ouml;kkenőmentes, előfordulhat, hogy az &uacute;jsz&uuml;l&ouml;tt nem tud azonnal szopni az anyj&aacute;t&oacute;l. Ilyenkor a megfelelő elők&eacute;sz&uuml;letek &eacute;s az azonnali beavatkoz&aacute;s kulcsfontoss&aacute;g&uacute; az &eacute;letben marad&aacute;s &eacute;s a borj&uacute; eg&eacute;szs&eacute;ges fejlőd&eacute;se szempontj&aacute;b&oacute;l.</p>\r\n\r\n<p>Az anyatej első cseppje, a kolosztrum, olyan t&aacute;panyagokat &eacute;s immunol&oacute;giai &ouml;sszetevőket tartalmaz, amelyek elengedhetetlenek az &uacute;jsz&uuml;l&ouml;tt v&eacute;delm&eacute;hez &eacute;s n&ouml;veked&eacute;s&eacute;hez. Az ide&aacute;lis időablak az első 8&ndash;12 &oacute;ra, amikor a borj&uacute; szervezete a legfog&eacute;konyabb az immunanyagok felsz&iacute;v&aacute;s&aacute;ra. Ha ez az időszak elmarad, a fertőz&eacute;sekkel &eacute;s egy&eacute;b eg&eacute;szs&eacute;g&uuml;gyi komplik&aacute;ci&oacute;kkal szembeni v&eacute;delem jelentősen cs&ouml;kken, ami ak&aacute;r a hal&aacute;loz&aacute;shoz is vezethet. &Eacute;ppen ez&eacute;rt rendk&iacute;v&uuml;l fontos, hogy mindig legyen k&eacute;zn&eacute;l magas minős&eacute;gű, kolosztrum tartalm&uacute; tejpor, melyet nagyobb kiszerel&eacute;sben szok&aacute;s beszerezni, &iacute;gy felk&eacute;sz&uuml;lve arra az esetre, ha az anyatej nem &eacute;rhető el vagy iker ell&eacute;s eset&eacute;n sz&uuml;ks&eacute;g van a kieg&eacute;sz&iacute;t&eacute;sre.</p>\r\n\r\n<p>A piacon el&eacute;rhető sz&aacute;mos tejport&iacute;pus k&ouml;z&uuml;l a minős&eacute;g a legfontosabb szempont. A legmegb&iacute;zhat&oacute;bb m&aacute;rk&aacute;k biztos&iacute;tj&aacute;k azt a t&aacute;p&eacute;rt&eacute;ket, amely n&eacute;lk&uuml;l&ouml;zhetetlen az &uacute;jsz&uuml;l&ouml;tt borj&uacute; sz&aacute;m&aacute;ra. B&aacute;r ezek a pr&eacute;mium term&eacute;kek magasabb &aacute;ron &eacute;rhetők el, hossz&uacute; t&aacute;von a borj&uacute; t&uacute;l&eacute;l&eacute;s&eacute;t &eacute;s eg&eacute;szs&eacute;ges fejlőd&eacute;s&eacute;t tekintve megfizethetetlen &eacute;rt&eacute;ket k&eacute;pviselnek. Sp&oacute;rolni ilyenkor nem &eacute;rdemes, hiszen a nem megfelelő t&aacute;pszer az &eacute;letvesz&eacute;lyes komplik&aacute;ci&oacute;k egyik fő oka lehet.</p>\r\n\r\n<p>Az ell&eacute;s sor&aacute;n felmer&uuml;lő v&aacute;ratlan esem&eacute;nyekre is fel kell k&eacute;sz&uuml;ln&uuml;nk. Az egyik ilyen kulcsfontoss&aacute;g&uacute; int&eacute;zked&eacute;s a kalcium injekci&oacute;k beszerz&eacute;se. A kalcium szerepe kiemelkedően fontos a tehenek regener&aacute;ci&oacute;j&aacute;ban, k&uuml;l&ouml;n&ouml;sen akkor, ha az ell&eacute;s sor&aacute;n b&aacute;rmelyik anya megs&eacute;r&uuml;l, vagy hirtelen kalciumhi&aacute;ny alakul ki. &Eacute;ppen ez&eacute;rt a gazdas&aacute;g rakt&aacute;r&aacute;ban mindig legyenek k&eacute;szleten kalcium injekci&oacute;k, hogy sz&uuml;ks&eacute;g eset&eacute;n azonnal beavatkozhassunk.</p>\r\n\r\n<p>Ezen fel&uuml;l rendelkez&uuml;nk fertőtlen&iacute;tőszerekkel &eacute;s sebtapaszokkal is. Az ell&eacute;s ut&aacute;ni higi&eacute;niai int&eacute;zked&eacute;sek elengedhetetlenek a fertőz&eacute;sek megelőz&eacute;se &eacute;rdek&eacute;ben. Az ell&eacute;s sor&aacute;n a k&ouml;r&uuml;ltekintő fel&uuml;gyelet seg&iacute;t a korai beavatkoz&aacute;sban, ha b&aacute;rmilyen komplik&aacute;ci&oacute; ad&oacute;dna. Rendszeresen konzult&aacute;lunk a gazdas&aacute;g &aacute;llatorvos&aacute;val, aki biztos&iacute;tja sz&aacute;munka, hogy az alkalmazott m&oacute;dszereik megfeleljenek a leg&uacute;jabb szakmai ir&aacute;nyelveknek.</p>\r\n\r\n<p>A borjak eg&eacute;szs&eacute;ges &eacute;rkez&eacute;se nem csup&aacute;n az anyatejhez jut&aacute;s k&eacute;rd&eacute;se, hanem az &aacute;tfog&oacute;, j&oacute;l megtervezett elők&eacute;sz&uuml;letek eredm&eacute;nye. A legjobb minős&eacute;gű kolosztrum tartalm&uacute; tejpor, a sz&uuml;ks&eacute;ges higi&eacute;niai eszk&ouml;z&ouml;k, valamint a rakt&aacute;ron tartott kalcium injekci&oacute;k mind hozz&aacute;j&aacute;rulnak ahhoz, hogy az ell&eacute;s &eacute;s az &uacute;jsz&uuml;l&ouml;ttek ell&aacute;t&aacute;sa z&ouml;kkenőmentes legyen. A gondos elők&eacute;sz&uuml;letek seg&iacute;tenek megőrizni a gazdas&aacute;g siker&eacute;t &eacute;s biztos&iacute;tj&aacute;k, hogy a legfiatalabb gener&aacute;ci&oacute;k a lehető legjobb ell&aacute;t&aacute;sban r&eacute;szes&uuml;ljenek.</p>\r\n\r\n<p>Egy j&oacute;l szervezett ell&eacute;si folyamat hossz&uacute; t&aacute;von is megt&eacute;r&uuml;l, hiszen az eg&eacute;szs&eacute;ges borjak biztos&iacute;tj&aacute;k a gazdas&aacute;g j&ouml;vőj&eacute;t. Mindig a leg&uacute;jabb tudom&aacute;nyos eredm&eacute;nyeket &eacute;s szakmai tan&aacute;csokat igyeksz&uuml;nk k&ouml;vetni, hogy a lehető legoptim&aacute;lisabb k&ouml;r&uuml;lm&eacute;nyeket teremts&uuml;k meg az &uacute;j &eacute;let kezdet&eacute;hez.</p>', 'kolstrum.jpg', '2025-02-25 08:53:09', NULL, 'Az újszülött borjak egészséges', 'borjak, kolosztrum, állattenyésztés, farm', 1);
+(8, 'uj-borjak-erkezese', 4, 'Új Borjak Érkezése', '<p>A borjak sz&uuml;let&eacute;se a gazdas&aacute;g sz&aacute;m&aacute;ra mindig &ouml;r&ouml;mteli esem&eacute;ny, ugyanakkor sz&aacute;mos kih&iacute;v&aacute;st is rejt mag&aacute;ban. A sz&uuml;let&eacute;sszab&aacute;lyoz&aacute;snak k&ouml;sz&ouml;nhetően a tehenek gyakran febru&aacute;r v&eacute;g&eacute;től kezdenek elleni, &eacute;s b&aacute;r az ell&eacute;sek t&ouml;bbs&eacute;ge z&ouml;kkenőmentes, előfordulhat, hogy az &uacute;jsz&uuml;l&ouml;tt nem tud azonnal szopni az anyj&aacute;t&oacute;l. Ilyenkor a megfelelő elők&eacute;sz&uuml;letek &eacute;s az azonnali beavatkoz&aacute;s kulcsfontoss&aacute;g&uacute; az &eacute;letben marad&aacute;s &eacute;s a borj&uacute; eg&eacute;szs&eacute;ges fejlőd&eacute;se szempontj&aacute;b&oacute;l. Az anyatej első cseppje, a kolosztrum, olyan t&aacute;panyagokat &eacute;s immunol&oacute;giai &ouml;sszetevőket tartalmaz, amelyek elengedhetetlenek az &uacute;jsz&uuml;l&ouml;tt v&eacute;delm&eacute;hez &eacute;s n&ouml;veked&eacute;s&eacute;hez. Az ide&aacute;lis időablak az első 8&ndash;12 &oacute;ra, amikor a borj&uacute; szervezete a legfog&eacute;konyabb az immunanyagok felsz&iacute;v&aacute;s&aacute;ra. Ha ez az időszak elmarad, a fertőz&eacute;sekkel &eacute;s egy&eacute;b eg&eacute;szs&eacute;g&uuml;gyi komplik&aacute;ci&oacute;kkal szembeni v&eacute;delem jelentősen cs&ouml;kken, ami ak&aacute;r a hal&aacute;loz&aacute;shoz is vezethet. &Eacute;ppen ez&eacute;rt rendk&iacute;v&uuml;l fontos, hogy mindig legyen k&eacute;zn&eacute;l magas minős&eacute;gű, kolosztrum tartalm&uacute; tejpor, melyet nagyobb kiszerel&eacute;sben szok&aacute;s beszerezni, &iacute;gy felk&eacute;sz&uuml;lve arra az esetre, ha az anyatej nem &eacute;rhető el vagy iker ell&eacute;s eset&eacute;n sz&uuml;ks&eacute;g van a kieg&eacute;sz&iacute;t&eacute;sre. A piacon el&eacute;rhető sz&aacute;mos tejport&iacute;pus k&ouml;z&uuml;l a minős&eacute;g a legfontosabb szempont. A legmegb&iacute;zhat&oacute;bb m&aacute;rk&aacute;k biztos&iacute;tj&aacute;k azt a t&aacute;p&eacute;rt&eacute;ket, amely n&eacute;lk&uuml;l&ouml;zhetetlen az &uacute;jsz&uuml;l&ouml;tt borj&uacute; sz&aacute;m&aacute;ra. B&aacute;r ezek a pr&eacute;mium term&eacute;kek magasabb &aacute;ron &eacute;rhetők el, hossz&uacute; t&aacute;von a borj&uacute; t&uacute;l&eacute;l&eacute;s&eacute;t &eacute;s eg&eacute;szs&eacute;ges fejlőd&eacute;s&eacute;t tekintve megfizethetetlen &eacute;rt&eacute;ket k&eacute;pviselnek. Sp&oacute;rolni ilyenkor nem &eacute;rdemes, hiszen a nem megfelelő t&aacute;pszer az &eacute;letvesz&eacute;lyes komplik&aacute;ci&oacute;k egyik fő oka lehet. Az ell&eacute;s sor&aacute;n felmer&uuml;lő v&aacute;ratlan esem&eacute;nyekre is fel kell k&eacute;sz&uuml;ln&uuml;nk. Az egyik ilyen kulcsfontoss&aacute;g&uacute; int&eacute;zked&eacute;s a kalcium injekci&oacute;k beszerz&eacute;se. A kalcium szerepe kiemelkedően fontos a tehenek regener&aacute;ci&oacute;j&aacute;ban, k&uuml;l&ouml;n&ouml;sen akkor, ha az ell&eacute;s sor&aacute;n b&aacute;rmelyik anya megs&eacute;r&uuml;l, vagy hirtelen kalciumhi&aacute;ny alakul ki. &Eacute;ppen ez&eacute;rt a gazdas&aacute;g rakt&aacute;r&aacute;ban mindig legyenek k&eacute;szleten kalcium injekci&oacute;k, hogy sz&uuml;ks&eacute;g eset&eacute;n azonnal beavatkozhassunk. Ezen fel&uuml;l rendelkez&uuml;nk fertőtlen&iacute;tőszerekkel &eacute;s sebtapaszokkal is. Az ell&eacute;s ut&aacute;ni higi&eacute;niai int&eacute;zked&eacute;sek elengedhetetlenek a fertőz&eacute;sek megelőz&eacute;se &eacute;rdek&eacute;ben. Az ell&eacute;s sor&aacute;n a k&ouml;r&uuml;ltekintő fel&uuml;gyelet seg&iacute;t a korai beavatkoz&aacute;sban, ha b&aacute;rmilyen komplik&aacute;ci&oacute; ad&oacute;dna. Rendszeresen konzult&aacute;lunk a gazdas&aacute;g &aacute;llatorvos&aacute;val, aki biztos&iacute;tja sz&aacute;munka, hogy az alkalmazott m&oacute;dszereik megfeleljenek a leg&uacute;jabb szakmai ir&aacute;nyelveknek. A borjak eg&eacute;szs&eacute;ges &eacute;rkez&eacute;se nem csup&aacute;n az anyatejhez jut&aacute;s k&eacute;rd&eacute;se, hanem az &aacute;tfog&oacute;, j&oacute;l megtervezett elők&eacute;sz&uuml;letek eredm&eacute;nye. A legjobb minős&eacute;gű kolosztrum tartalm&uacute; tejpor, a sz&uuml;ks&eacute;ges higi&eacute;niai eszk&ouml;z&ouml;k, valamint a rakt&aacute;ron tartott kalcium injekci&oacute;k mind hozz&aacute;j&aacute;rulnak ahhoz, hogy az ell&eacute;s &eacute;s az &uacute;jsz&uuml;l&ouml;ttek ell&aacute;t&aacute;sa z&ouml;kkenőmentes legyen. A gondos elők&eacute;sz&uuml;letek seg&iacute;tenek megőrizni a gazdas&aacute;g siker&eacute;t &eacute;s biztos&iacute;tj&aacute;k, hogy a legfiatalabb gener&aacute;ci&oacute;k a lehető legjobb ell&aacute;t&aacute;sban r&eacute;szes&uuml;ljenek. Egy j&oacute;l szervezett ell&eacute;si folyamat hossz&uacute; t&aacute;von is megt&eacute;r&uuml;l, hiszen az eg&eacute;szs&eacute;ges borjak biztos&iacute;tj&aacute;k a gazdas&aacute;g j&ouml;vőj&eacute;t. Mindig a leg&uacute;jabb tudom&aacute;nyos eredm&eacute;nyeket &eacute;s szakmai tan&aacute;csokat igyeksz&uuml;nk k&ouml;vetni, hogy a lehető legoptim&aacute;lisabb k&ouml;r&uuml;lm&eacute;nyeket teremts&uuml;k meg az &uacute;j &eacute;let kezdet&eacute;hez.&nbsp;</p>', 'kolstrum.jpg', '2025-02-25 08:43:24', NULL, 'Az újszülött borjak egészséges fejlődésének támogatása kolosztrummal', 'borjak, kolosztrum, állattenyésztés, farm', 1);
 
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `sales`
+-- Table structure for table `sales`
 --
 
 CREATE TABLE `sales` (
@@ -212,27 +234,27 @@ CREATE TABLE `sales` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- A tábla adatainak kiíratása `sales`
+-- Dumping data for table `sales`
 --
 
 INSERT INTO `sales` (`id`, `cows_id`, `customer_id`, `sales_date`, `price`, `sale_status`) VALUES
 (1, 2, 9, '2023-06-15', 400000.00, 1),
-(2, 5, 6, '2023-07-01', 420000.00, 0),
-(3, 10, 7, '2023-07-20', 390000.00, 0),
-(4, 17, 8, '2023-08-15', 410000.00, 0),
-(5, 22, 5, '2023-09-10', 395000.00, 0),
-(6, 25, 1, '2023-10-05', 400000.00, 0),
-(7, 30, 2, '2023-10-20', 405000.00, 0),
-(8, 19, 3, '2023-11-02', 398000.00, 0),
-(9, 28, 4, '2023-12-15', 415000.00, 0),
+(2, 5, 10, '2023-07-01', 420000.00, 1),
+(3, 10, 11, '2023-07-20', 390000.00, 1),
+(4, 17, 13, '2023-08-15', 410000.00, 1),
+(5, 22, 14, '2023-09-10', 395000.00, 1),
+(6, 25, 15, '2023-10-05', 400000.00, 1),
+(7, 30, 17, '2023-10-20', 405000.00, 1),
+(8, 19, 18, '2023-11-02', 398000.00, 1),
+(9, 28, 19, '2023-12-15', 415000.00, 1),
 (10, 35, 5, '2024-01-10', 400000.00, 0),
-(11, 12, 1, '2024-02-05', 410000.00, 0),
-(12, 7, 2, '2024-02-28', 390000.00, 0);
+(11, 12, 20, '2024-02-05', 410000.00, 1),
+(12, 7, 21, '2024-02-28', 390000.00, 1);
 
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `settlements`
+-- Table structure for table `settlements`
 --
 
 CREATE TABLE `settlements` (
@@ -242,7 +264,7 @@ CREATE TABLE `settlements` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- A tábla adatainak kiíratása `settlements`
+-- Dumping data for table `settlements`
 --
 
 INSERT INTO `settlements` (`id`, `postal_code`, `town`) VALUES
@@ -252,12 +274,13 @@ INSERT INTO `settlements` (`id`, `postal_code`, `town`) VALUES
 (104, '6720', 'Szeged'),
 (105, '7621', 'Pécs'),
 (106, NULL, 'Egyházasgerge'),
-(107, NULL, 'Balassagyarmat');
+(107, NULL, 'Balassagyarmat'),
+(108, NULL, 'házas');
 
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `user`
+-- Table structure for table `user`
 --
 
 CREATE TABLE `user` (
@@ -269,7 +292,7 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- A tábla adatainak kiíratása `user`
+-- Dumping data for table `user`
 --
 
 INSERT INTO `user` (`id`, `username`, `password`, `email`, `register_date`) VALUES
@@ -278,7 +301,7 @@ INSERT INTO `user` (`id`, `username`, `password`, `email`, `register_date`) VALU
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `vaccination_types`
+-- Table structure for table `vaccination_types`
 --
 
 CREATE TABLE `vaccination_types` (
@@ -288,7 +311,7 @@ CREATE TABLE `vaccination_types` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- A tábla adatainak kiíratása `vaccination_types`
+-- Dumping data for table `vaccination_types`
 --
 
 INSERT INTO `vaccination_types` (`id`, `name`, `description`) VALUES
@@ -302,24 +325,24 @@ INSERT INTO `vaccination_types` (`id`, `name`, `description`) VALUES
 (8, 'Szarvasmarha-pestis vakcina', 'Szarvasmarha-pestis elleni védelem');
 
 --
--- Indexek a kiírt táblákhoz
+-- Indexes for dumped tables
 --
 
 --
--- A tábla indexei `colors`
+-- Indexes for table `colors`
 --
 ALTER TABLE `colors`
   ADD PRIMARY KEY (`id`);
 
 --
--- A tábla indexei `cows`
+-- Indexes for table `cows`
 --
 ALTER TABLE `cows`
   ADD PRIMARY KEY (`id`),
   ADD KEY `color_id` (`color_id`);
 
 --
--- A tábla indexei `cow_vaccinations`
+-- Indexes for table `cow_vaccinations`
 --
 ALTER TABLE `cow_vaccinations`
   ADD PRIMARY KEY (`id`),
@@ -327,20 +350,20 @@ ALTER TABLE `cow_vaccinations`
   ADD KEY `vaccination_id` (`vaccination_id`);
 
 --
--- A tábla indexei `customer`
+-- Indexes for table `customer`
 --
 ALTER TABLE `customer`
   ADD PRIMARY KEY (`id`),
   ADD KEY `settlemets_id` (`settlements_id`);
 
 --
--- A tábla indexei `news`
+-- Indexes for table `news`
 --
 ALTER TABLE `news`
   ADD PRIMARY KEY (`id`);
 
 --
--- A tábla indexei `sales`
+-- Indexes for table `sales`
 --
 ALTER TABLE `sales`
   ADD PRIMARY KEY (`id`),
@@ -348,103 +371,106 @@ ALTER TABLE `sales`
   ADD KEY `customer_id` (`customer_id`);
 
 --
--- A tábla indexei `settlements`
+-- Indexes for table `settlements`
 --
 ALTER TABLE `settlements`
   ADD PRIMARY KEY (`id`);
 
 --
--- A tábla indexei `user`
+-- Indexes for table `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id`);
 
 --
--- A tábla indexei `vaccination_types`
+-- Indexes for table `vaccination_types`
 --
 ALTER TABLE `vaccination_types`
   ADD PRIMARY KEY (`id`);
 
 --
--- A kiírt táblák AUTO_INCREMENT értéke
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT a táblához `colors`
+-- AUTO_INCREMENT for table `colors`
 --
 ALTER TABLE `colors`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT a táblához `cows`
+-- AUTO_INCREMENT for table `cows`
 --
 ALTER TABLE `cows`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
 
 --
--- AUTO_INCREMENT a táblához `cow_vaccinations`
+-- AUTO_INCREMENT for table `cow_vaccinations`
 --
 ALTER TABLE `cow_vaccinations`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT a táblához `customer`
+-- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
--- AUTO_INCREMENT a táblához `news`
+-- AUTO_INCREMENT for table `news`
 --
 ALTER TABLE `news`
-  MODIFY `id` tinyint(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` tinyint(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
--- AUTO_INCREMENT a táblához `settlements`
+-- AUTO_INCREMENT for table `settlements`
 --
 ALTER TABLE `settlements`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=108;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=109;
 
 --
--- AUTO_INCREMENT a táblához `user`
+-- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT a táblához `vaccination_types`
+-- AUTO_INCREMENT for table `vaccination_types`
 --
 ALTER TABLE `vaccination_types`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- Megkötések a kiírt táblákhoz
+-- Constraints for dumped tables
 --
 
 --
--- Megkötések a táblához `cows`
+-- Constraints for table `cows`
 --
 ALTER TABLE `cows`
   ADD CONSTRAINT `cows_ibfk_1` FOREIGN KEY (`color_id`) REFERENCES `colors` (`id`) ON DELETE SET NULL;
 
 --
--- Megkötések a táblához `cow_vaccinations`
+-- Constraints for table `cow_vaccinations`
 --
 ALTER TABLE `cow_vaccinations`
   ADD CONSTRAINT `cow_vaccinations_ibfk_1` FOREIGN KEY (`cows_id`) REFERENCES `cows` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `cow_vaccinations_ibfk_2` FOREIGN KEY (`vaccination_id`) REFERENCES `vaccination_types` (`id`) ON DELETE CASCADE;
 
 --
--- Megkötések a táblához `customer`
+-- Constraints for table `customer`
 --
 ALTER TABLE `customer`
   ADD CONSTRAINT `customer_ibfk_1` FOREIGN KEY (`settlements_id`) REFERENCES `settlements` (`id`) ON DELETE CASCADE;
 
 --
--- Megkötések a táblához `sales`
+-- Constraints for table `sales`
 --
 ALTER TABLE `sales`
   ADD CONSTRAINT `sales_ibfk_1` FOREIGN KEY (`cows_id`) REFERENCES `cows` (`id`),
   ADD CONSTRAINT `sales_ibfk_2` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`);
 COMMIT;
 
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
