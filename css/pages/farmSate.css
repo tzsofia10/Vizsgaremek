@@ -64,6 +64,21 @@ main h1 {
     color: red;
     font-weight: bold;
 }
+/*pdf es gomb*/
+.pdf-download-all {
+    background-color: #4caf4f8e;
+    color: white;
+    padding: 8px 16px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.pdf-download-all:hover {
+    transition-duration: .3s;
+    background-color: #409244;
+}
+
 
 /* Törlés gomb */
 .deleteButton {

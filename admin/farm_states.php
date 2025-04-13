@@ -99,7 +99,11 @@ $result = $dbconn->query($sql);
                 <button type="submit" class="<?php echo $filter === 'dead' ? 'active' : ''; ?>">Elhullottak</button>
             </form>
         </div>
-
+        <div style="margin: 10px 0;">
+            <a href="pdf.php?filter=<?php echo $filter; ?>" target="_blank">
+                <button class="pdf-download-all">Összes tehén letöltése PDF-ben (<?php echo $filter === 'all' ? 'Összes' : ($filter === 'alive' ? 'Élők' : 'Elhullottak'); ?>)</button>
+            </a>
+        </div>
 
         <?php if ($filter !== 'all'): ?>
             <div class="search-box">
