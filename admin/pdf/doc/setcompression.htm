@@ -3,26 +3,25 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>SetCompression</title>
-<link type="text/css" rel="stylesheet" href="../fpdf.css">
+<link type="text/css" rel="stylesheet" href="fpdf.css">
 </head>
 <body>
 <h1>SetCompression</h1>
 <code>SetCompression(<b>boolean</b> compress)</code>
-<h2>Description</h2>
-Activates or deactivates page compression. When activated, the internal representation of
-each page is compressed, which leads to a compression ratio of about 2 for the resulting
-document.
+<h2>Leírás</h2>
+Be vagy kikapcsolja a dokumentum tömörítést. Bekapcsolva, az egyes oldalak megjelenése tömörítésre
+kerül, ami kész dokumentum körülbelüli fele akkora méretéhez vezet.
 <br>
-Compression is on by default.
+Alapértelmezettként a tömörítés be van kapcsolva.
 <br>
 <br>
-<strong>Note:</strong> the Zlib extension is required for this feature. If not present, compression
-will be turned off.
-<h2>Parameters</h2>
+<strong>Megjegyzés:</strong> a Zlib kiterjesztés feltétele ennek a jellemzőnek. Ha nincs jelen,
+a tömörítés kikapcsolásra kerül.
+<h2>Paraméterek</h2>
 <dl class="param">
 <dt><code>compress</code></dt>
 <dd>
-Boolean indicating if compression must be enabled.
+Logikai érték, ami a tömörítés be vagy kikapcsolt állapotát állítja be.
 </dd>
 </dl>
 <hr style="margin-top:1.5em">

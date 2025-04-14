@@ -101,7 +101,7 @@ $result = $dbconn->query($sql);
         </div>
         <div style="margin: 10px 0;">
             <a href="pdf.php?filter=<?php echo $filter; ?>" target="_blank">
-                <button class="pdf-download-all">Összes tehén letöltése PDF-ben (<?php echo $filter === 'all' ? 'Összes' : ($filter === 'alive' ? 'Élők' : 'Elhullottak'); ?>)</button>
+                <button class="pdf-download-all">Összes szarvasmarha letöltése PDF-ben (<?php echo $filter === 'all' ? 'Összes' : ($filter === 'alive' ? 'Élők' : 'Elhullottak'); ?>)</button>
             </a>
         </div>
 

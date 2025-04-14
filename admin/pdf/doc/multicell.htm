@@ -3,65 +3,65 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>MultiCell</title>
-<link type="text/css" rel="stylesheet" href="../fpdf.css">
+<link type="text/css" rel="stylesheet" href="fpdf.css">
 </head>
 <body>
 <h1>MultiCell</h1>
 <code>MultiCell(<b>float</b> w, <b>float</b> h, <b>string</b> txt [, <b>mixed</b> border [, <b>string</b> align [, <b>boolean</b> fill]]])</code>
-<h2>Description</h2>
-This method allows printing text with line breaks. They can be automatic (as soon as the
-text reaches the right border of the cell) or explicit (via the \n character). As many cells
-as necessary are output, one below the other.
+<h2>Leírás</h2>
+Ez a függvény szöveget jelenít meg sortöréssel. A sortörés lehet automatikus (amint a
+szöveg eléri a jobb keretét a cellának) vagy meghatározott ( \n megadásán keresztül).
+Amennyi cella szükséges, annyi kerül megjelenítésre egymás alatt.
 <br>
-Text can be aligned, centered or justified. The cell block can be framed and the background
-painted.
-<h2>Parameters</h2>
+A szöveg lehet igazított (balra, jobbra, középre) vagy sorkizárt. A cella blokk lehet keretezett és
+a háttér színes.
+<h2>Paraméterek</h2>
 <dl class="param">
 <dt><code>w</code></dt>
 <dd>
-Width of cells. If <code>0</code>, they extend up to the right margin of the page.
+Cellák szélessége. Ha értéke <code>0</code>, az oldal jobb margójáig terjed a mérete.
 </dd>
 <dt><code>h</code></dt>
 <dd>
-Height of cells.
+Cellák magassága.
 </dd>
 <dt><code>txt</code></dt>
 <dd>
-String to print.
+Megjelenítendő string.
 </dd>
 <dt><code>border</code></dt>
 <dd>
-Indicates if borders must be drawn around the cell block. The value can be either a number:
+A cella blokk körüli keretet jellemzi. Értéke lehet akár szám:
 <ul>
-<li><code>0</code>: no border</li>
-<li><code>1</code>: frame</li>
+<li><code>0</code>: nincs keret</li>
+<li><code>1</code>: van keret</li>
 </ul>
-or a string containing some or all of the following characters (in any order):
+vagy egy string, ami a következő karakterek bármelyikét tartalmazza (tetszőleges sorrendbe):
 <ul>
-<li><code>L</code>: left</li>
-<li><code>T</code>: top</li>
-<li><code>R</code>: right</li>
-<li><code>B</code>: bottom</li>
+<li><code>L</code>: bal</li>
+<li><code>T</code>: fent</li>
+<li><code>R</code>: jobb</li>
+<li><code>B</code>: alul</li>
 </ul>
-Default value: <code>0</code>.
+Alapérték: <code>0</code>.
 </dd>
 <dt><code>align</code></dt>
 <dd>
-Sets the text alignment. Possible values are:
+A szöveg igazítását állítja be. Lehetséges értékek:
 <ul>
-<li><code>L</code>: left alignment</li>
-<li><code>C</code>: center</li>
-<li><code>R</code>: right alignment</li>
-<li><code>J</code>: justification (default value)</li>
+<li><code>L</code>: balra igazított</li>
+<li><code>C</code>: középre igazított</li>
+<li><code>R</code>: jobbra igazított</li>
+<li><code>J</code>: sorkizárt (alapérték)</li>
 </ul>
 </dd>
 <dt><code>fill</code></dt>
 <dd>
-Indicates if the cell background must be painted (<code>true</code>) or transparent (<code>false</code>).
-Default value: <code>false</code>.
+A cella hátterét jellemzi, lehet színezett (<code>true</code>) vagy átlátszó (<code>false</code>).<br>
+Alapérték: <code>false</code>.
 </dd>
 </dl>
-<h2>See also</h2>
+<h2>Lásd még</h2>
 <a href="setfont.htm">SetFont</a>,
 <a href="setdrawcolor.htm">SetDrawColor</a>,
 <a href="setfillcolor.htm">SetFillColor</a>,

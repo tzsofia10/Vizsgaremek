@@ -3,43 +3,44 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>__construct</title>
-<link type="text/css" rel="stylesheet" href="../fpdf.css">
+<link type="text/css" rel="stylesheet" href="fpdf.css">
 </head>
 <body>
 <h1>__construct</h1>
 <code>__construct([<b>string</b> orientation [, <b>string</b> unit [, <b>mixed</b> size]]])</code>
-<h2>Description</h2>
-This is the class constructor. It allows to set up the page size, the orientation and the
-unit of measure used in all methods (except for font sizes).
-<h2>Parameters</h2>
+<h2>Leírás</h2>
+Ez az osztályvezérlő. Lehetőséget ad az oldal tájolásának, méretének
+megadására, illetve a méretek alapegységének deklarálására, ami az
+összes függvényben használva lesz (kivétel a betűméretnél).
+<h2>Paraméterek</h2>
 <dl class="param">
 <dt><code>orientation</code></dt>
 <dd>
-Default page orientation. Possible values are (case insensitive):
+Alapvető oldaltájolás. Lehetséges értékek (nem betűméret érzékeny):
 <ul>
-<li><code>P</code> or <code>Portrait</code></li>
-<li><code>L</code> or <code>Landscape</code></li>
+<li><code>P</code> vagy <code>Portrait</code> - álló tájolás</li>
+<li><code>L</code> vagy <code>Landscape</code> - fekvő tájolás</li>
 </ul>
-Default value is <code>P</code>.
+Alapérték <code>P</code>.
 </dd>
 <dt><code>unit</code></dt>
 <dd>
-User unit. Possible values are:
+Felhasználó mértékegysége. Lehetséges értékek:
 <ul>
-<li><code>pt</code>: point</li>
-<li><code>mm</code>: millimeter</li>
-<li><code>cm</code>: centimeter</li>
+<li><code>pt</code>: képpont</li>
+<li><code>mm</code>: milliméter</li>
+<li><code>cm</code>: centiméter</li>
 <li><code>in</code>: inch</li>
 </ul>
-A point equals 1/72 of inch, that is to say about 0.35 mm (an inch being 2.54 cm). This
-is a very common unit in typography; font sizes are expressed in that unit.
+Egy képpont egyenlő 1/72 inchel, ami kb. 0.35 mm (egy inch 2.54 cm). A képpont gyakran
+használt mértékegység a könyvnyomtatásban, a betűméretek ebben vannak kifejezve.
 <br>
 <br>
-Default value is <code>mm</code>.
+Alapérték <code>mm</code>.
 </dd>
 <dt><code>size</code></dt>
 <dd>
-The size used for pages. It can be either one of the following values (case insensitive):
+Oldal méret. A következő értékek valamelyikét veheti fel (nem betűméret érzékenyek):
 <ul>
 <li><code>A3</code></li>
 <li><code>A4</code></li>
@@ -47,15 +48,15 @@ The size used for pages. It can be either one of the following values (case inse
 <li><code>Letter</code></li>
 <li><code>Legal</code></li>
 </ul>
-or an array containing the width and the height (expressed in the unit given by <code>unit</code>).<br>
+vagy egy tömb, ami tartalmazza a szélességet és a magasságot (<code>unit</code> -ból kapott mértékegységében kifejezve).<br>
 <br>
-Default value is <code>A4</code>.
+Alapérték <code>A4</code>.
 </dd>
 </dl>
-<h2>Example</h2>
-Document with a custom 100x150 mm page size:
+<h2>Példa</h2>
+Egy egyéni 100x150 mm-es oldal méret:
 <div class="doc-source">
-<pre><code>$pdf = new FPDF('P', 'mm', array(100,150));</code></pre>
+<pre><code>$pdf = new FPDF('P','mm',array(100,150));</code></pre>
 </div>
 <hr style="margin-top:1.5em">
 <div style="text-align:center"><a href="index.htm">Index</a></div>

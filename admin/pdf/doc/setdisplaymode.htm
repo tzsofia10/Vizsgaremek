@@ -3,40 +3,39 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>SetDisplayMode</title>
-<link type="text/css" rel="stylesheet" href="../fpdf.css">
+<link type="text/css" rel="stylesheet" href="fpdf.css">
 </head>
 <body>
 <h1>SetDisplayMode</h1>
 <code>SetDisplayMode(<b>mixed</b> zoom [, <b>string</b> layout])</code>
-<h2>Description</h2>
-Defines the way the document is to be displayed by the viewer. The zoom level can be set: pages can be
-displayed entirely on screen, occupy the full width of the window, use real size, be scaled by a
-specific zooming factor or use viewer default (configured in the Preferences menu of Adobe Reader).
-The page layout can be specified too: single at once, continuous display, two columns or viewer
-default.
-<h2>Parameters</h2>
+<h2>Leírás</h2>
+Beállítja a módot, hogy a dokumentum hogyan jelenjen meg a képernyőn. A nagyítási szint beállítható:
+egész oldal; oldalszélességben; eredeti méretet használva; nagyítási szintet megadva;  használva a
+program alapértelmezését (beállítható az Adobe Reader Preferences menüjében). Az oldalak elrendezése is
+megadható: egyszerre csak egy; folyatólagos; két oszlopban; a program alapértelmezéseként.
+<h2>Paraméterek</h2>
 <dl class="param">
 <dt><code>zoom</code></dt>
 <dd>
-The zoom to use. It can be one of the following string values:
+A nagyítás mértéke. Az alábbi értékek valamelyikét veheti fel:
 <ul>
-<li><code>fullpage</code>: displays the entire page on screen</li>
-<li><code>fullwidth</code>: uses maximum width of window</li>
-<li><code>real</code>: uses real size (equivalent to 100% zoom)</li>
-<li><code>default</code>: uses viewer default mode</li>
+<li><code>fullpage</code>: az egész oldalt megjeleníti</li>
+<li><code>fullwidth</code>: oldalszélesség</li>
+<li><code>real</code>: eredeti méret (egyenlő a 100%-os nagyítással)</li>
+<li><code>default</code>: a program alapértelmezett értéke</li>
 </ul>
-or a number indicating the zooming factor to use.
+vagy a nagyítás mértékét megadó számmal is megadható.
 </dd>
 <dt><code>layout</code></dt>
 <dd>
-The page layout. Possible values are:
+Az oldalak elrendezése. Lehetséges értékek:
 <ul>
-<li><code>single</code>: displays one page at once</li>
-<li><code>continuous</code>: displays pages continuously</li>
-<li><code>two</code>: displays two pages on two columns</li>
-<li><code>default</code>: uses viewer default mode</li>
+<li><code>single</code>: egy oldalt jelenít meg</li>
+<li><code>continuous</code>: folytatólagosan jelennek meg az oldalak</li>
+<li><code>two</code>: két oldal két oszlopban jelenik meg</li>
+<li><code>default</code>: a program alapértelmezése</li>
 </ul>
-Default value is <code>default</code>.
+Alapértelmezés: <code>default</code>.
 </dd>
 </dl>
 <hr style="margin-top:1.5em">
