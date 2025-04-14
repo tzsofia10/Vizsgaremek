@@ -126,9 +126,8 @@ $result = $dbconn->query($sql);
                             <th colspan='2'>Műveletek</th>
                         </tr>
                     </thead>
+                    
                     <tbody>";
-        
-    
                     while ($row = $result->fetch_assoc()) {
                         $color = $row['color'] ?? 'N/A';
                         $gender = $row['gender'] == 1 ? "Hím" : "Nőstény";
