@@ -1,33 +1,22 @@
-<?php
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $email = $_POST['email'];
-    $cleanedEmail = filter_var($email, FILTER_SANITIZE_EMAIL);
-
-    // E-mail cím ellenőrzése
-    if (filter_var($cleanedEmail, FILTER_VALIDATE_EMAIL)) {
-        echo "Érvényes és tiszta e-mail cím: " . htmlspecialchars($cleanedEmail);
-    } else {
-        echo "Hibás e-mail cím.";
-    }
-}
-?>
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <div class="container">        
     <div class="contacts">
-    <h3>Elérhetőségek</h3>
+        <h3>Elérhetőségek</h3>
         <p>E-mail</p>
         <p><a href="mailto:zsiros.kata02@gmail.com">zsiros.kata02@gmail.com</a></p>
         <p><a href="mailto:tothzsofiaa2016@gmail.com">tothzsofiaa2016@gmail.com</a></p>
-        <p></p>
     </div>
-    <div class="newsletter">
-        <h4>Feliratkozz a hírlevélre!</h4>
-        <form method="post" action="">
-            <input type="email" name="email" placeholder="E-mail cím" required>
-            <input type="submit" value="Küldés">
-        </form>
 
+    <div class="social-media">
+        <h4>Kövess minket!</h4>
+        <a href="https://www.instagram.com" target="_blank" style="margin-right: 10px;">
+            <i class="fab fa-instagram fa-2x"></i>
+        </a>
+        <a href="https://www.facebook.com" target="_blank">
+            <i class="fab fa-facebook fa-2x"></i>
+        </a>
     </div>
+
     <p class="center">&copy; 2025 Gazdanapló.</p>
 </div>

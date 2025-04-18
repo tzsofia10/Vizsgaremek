@@ -56,46 +56,48 @@ if (!$result) {
 <div class="wrapper">
     <?php include '../main/nav.php'; ?>
     <h1>Foglalások</h1>
-    <div class="card-container">
-        <?php if ($result->num_rows > 0): ?>
-            <?php while ($row = $result->fetch_assoc()): ?>
-                <div class="cards">
-                <p><strong>Foglaló neve:</strong> <?php echo htmlspecialchars($row['customer_name'] ?? 'Ismeretlen'); ?></p>
-                <p><strong>Telefonszám:</strong> <?php echo htmlspecialchars($row['customer_phone'] ?? 'Nincs megadva'); ?></p>
-                <p><strong>Cím:</strong> 
-                <?php 
-                    echo htmlspecialchars($row['customer_postal_code'] ?? ''); 
-                    echo ' ';
-                    echo htmlspecialchars($row['customer_town'] ?? 'Nincs megadva'); 
-                    echo ', <br>';
-                    echo htmlspecialchars($row['customer_street'] ?? 'Nincs megadva'); 
-                    echo ' ';
-                    echo htmlspecialchars($row['customer_house_number'] ?? '');
-                ?>
-            </p>
-
-
-                    <h2><?php echo htmlspecialchars($row['ear_tag'] ?? 'Név nélküli tehén'); ?></h2>
-                    
+    <main>
+        <div class="card-container">
+            <?php if ($result->num_rows > 0): ?>
+                <?php while ($row = $result->fetch_assoc()): ?>
+                    <div class="cards">
+                    <p><strong>Foglaló neve:</strong> <?php echo htmlspecialchars($row['customer_name'] ?? 'Ismeretlen'); ?></p>
+                    <p><strong>Telefonszám:</strong> <?php echo htmlspecialchars($row['customer_phone'] ?? 'Nincs megadva'); ?></p>
+                    <p><strong>Cím:</strong> 
                     <?php 
-                    // Életkor kiszámítása
-                    if (!empty($row['birthdate'])) {
-                        $birthDateObj = new DateTime($row['birthdate']);
-                        $today = new DateTime();
-                        $age = $today->diff($birthDateObj)->y;
-                    } else {
-                        $age = "Ismeretlen";
-                    }
+                        echo htmlspecialchars($row['customer_postal_code'] ?? ''); 
+                        echo ' ';
+                        echo htmlspecialchars($row['customer_town'] ?? 'Nincs megadva'); 
+                        echo ', <br>';
+                        echo htmlspecialchars($row['customer_street'] ?? 'Nincs megadva'); 
+                        echo ' ';
+                        echo htmlspecialchars($row['customer_house_number'] ?? '');
                     ?>
-                    <p><strong>Kora:</strong> <?php echo $age; ?> év</p>
-                    <p><strong>Szín:</strong> <span class="color-name"><?php echo htmlspecialchars($row['color_name'] ?? 'Ismeretlen szín'); ?></span></p>
+                </p>
 
-                </div>
-            <?php endwhile; ?>
-        <?php else: ?>
-            <p>Nincsenek foglalt tehenek.</p>
-        <?php endif; ?>
-    </div>
+
+                        <h2><?php echo htmlspecialchars($row['ear_tag'] ?? 'Név nélküli tehén'); ?></h2>
+                        
+                        <?php 
+                        // Életkor kiszámítása
+                        if (!empty($row['birthdate'])) {
+                            $birthDateObj = new DateTime($row['birthdate']);
+                            $today = new DateTime();
+                            $age = $today->diff($birthDateObj)->y;
+                        } else {
+                            $age = "Ismeretlen";
+                        }
+                        ?>
+                        <p><strong>Kora:</strong> <?php echo $age; ?> év</p>
+                        <p><strong>Szín:</strong> <span class="color-name"><?php echo htmlspecialchars($row['color_name'] ?? 'Ismeretlen szín'); ?></span></p>
+
+                    </div>
+                <?php endwhile; ?>
+            <?php else: ?>
+                <p>Nincsenek foglalt tehenek.</p>
+            <?php endif; ?>
+        </div>
+    </main>
     <footer>
         <?php include '../main/footer.php'; ?>
     </footer>

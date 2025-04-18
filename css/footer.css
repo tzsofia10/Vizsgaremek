@@ -33,6 +33,20 @@ footer .center{
 }
 
 
+.social-media a {
+    color: #333; 
+    text-decoration: none;
+    margin-right: 10px;
+    transition: color 0.3s;
+}
+
+.social-media a:visited {
+    color: white; 
+}
+
+.social-media a:hover {
+    color: #888;
+}
 
 /* reszponzivitás */
 /* nagyobb képernyőre */
@@ -42,10 +56,9 @@ footer .center{
         grid-template-columns: repeat(2, 1fr);
     }
     footer .contacts{
-        padding-right: 20px;
         place-self: center;
     }
-    footer .newsletter{
+    footer .social-media{
         grid-column: 2;
         place-self: center;
     } 
@@ -55,8 +68,10 @@ footer .center{
 @media only screen and (max-width: 600px) {
     footer .contacts{
         grid-column: 1/3;
+        place-self: center;
+
     }
-    footer .newsletter{
+    footer .social-media{
         grid-column: 1/3;
         place-self: center;
     }

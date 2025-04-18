@@ -67,78 +67,79 @@ include 'main/head.php';
     </div>
 </div>
    <?php $alias = isset($_GET['alias']) ? $_GET['alias'] : null; ?>
-    <div class="container">
-        <div class="row">
-            <!-- Bal oldali menü és cikkek -->
-            <div class="col-3">
-                <div class="menu">
-                    <h5>Menü</h5>
-                    <?php foreach($menu_items as $item): ?>
-                        <a href="?alias=<?php echo htmlspecialchars($item['alias']); ?>" 
-                        class="<?php echo ($alias === $item['alias']) ? 'active-article' : ''; ?>">
-                            <?php echo htmlspecialchars($item['nav_name']); ?>
-                        </a>
-                    <?php endforeach; ?>
-                </div>
-            </div>
-            <!-- Középső tartalom -->
-            <div class="col-6">
-                <?php 
-                $alias = isset($_GET['alias']) ? $_GET['alias'] : null;
-                if ($alias) {
-                    $sql = "SELECT * FROM news WHERE alias = '" . mysqli_real_escape_string($dbconn, $alias) . "' AND states = 1 LIMIT 1";
-                    $result = mysqli_query($dbconn, $sql);
-                    $article = mysqli_fetch_assoc($result);
-                    
-                    if ($article): ?>
-                        <div class="article-card">
-                            <?php if(!empty($article['img'])): ?>
-                                <img src="uploads/<?php echo htmlspecialchars($article['img']); ?>" class="article-image" alt="<?php echo htmlspecialchars($article['nav_name']); ?>">
-                            <?php endif; ?>
-                            <h2><?php echo htmlspecialchars($article['nav_name']); ?></h2>
-                            <p><?php echo $article['content']; ?></p>
-                            <div class="text-muted mt-3">
-                                Létrehozva: <?php echo date('Y.m.d', strtotime($article['creation'])); ?>
-                            </div>
-                        </div>
-                    <?php endif;
-                } else {
-                    if (!empty($articles)): 
-                        $article = $articles[0]; ?>
-                        <div class="article-card">
-                            <?php if(!empty($article['img'])): ?>
-                                <img src="uploads/<?php echo htmlspecialchars($article['img']); ?>" class="article-image" alt="<?php echo htmlspecialchars($article['nav_name']); ?>">
-                            <?php endif; ?>
-                            <h2><?php echo htmlspecialchars($article['nav_name']); ?></h2>
-                            <p><?php echo $article['content']; ?></p>
-                            <div class="text-muted mt-3">
-                                Létrehozva: <?php echo date('Y.m.d', strtotime($article['creation'])); ?>
-                            </div>
-                        </div>
-                    <?php endif;
-                }
-                ?>
-            </div>
-
-            <!-- Jobb oldali sidebar -->
-            <div class="sidebar">
-                <div class="menu">
-                    <h5>Legújabb cikkek</h5>
-                    <ul>
-                        <?php foreach($newest_articles as $news): ?>
-                            <li>
-                                <a href="?alias=<?php echo htmlspecialchars($news['alias']); ?>" class="<?php echo ($alias === $news['alias']) ? 'active-article' : ''; ?>">
-                                    <?php echo htmlspecialchars($news['nav_name']); ?>
-                                </a>
-                            </li>
+   <main>
+        <div class="container">
+            <div class="row">
+                <!-- Bal oldali menü és cikkek -->
+                <div class="col-3">
+                    <div class="menu">
+                        <h5>Menü</h5>
+                        <?php foreach($menu_items as $item): ?>
+                            <a href="?alias=<?php echo htmlspecialchars($item['alias']); ?>" 
+                            class="<?php echo ($alias === $item['alias']) ? 'active-article' : ''; ?>">
+                                <?php echo htmlspecialchars($item['nav_name']); ?>
+                            </a>
                         <?php endforeach; ?>
-                    </ul>
+                    </div>
                 </div>
-            </div>
+                <!-- Középső tartalom -->
+                <div class="col-6">
+                    <?php 
+                    $alias = isset($_GET['alias']) ? $_GET['alias'] : null;
+                    if ($alias) {
+                        $sql = "SELECT * FROM news WHERE alias = '" . mysqli_real_escape_string($dbconn, $alias) . "' AND states = 1 LIMIT 1";
+                        $result = mysqli_query($dbconn, $sql);
+                        $article = mysqli_fetch_assoc($result);
+                        
+                        if ($article): ?>
+                            <div class="article-card">
+                                <?php if(!empty($article['img'])): ?>
+                                    <img src="uploads/<?php echo htmlspecialchars($article['img']); ?>" class="article-image" alt="<?php echo htmlspecialchars($article['nav_name']); ?>">
+                                <?php endif; ?>
+                                <h2><?php echo htmlspecialchars($article['nav_name']); ?></h2>
+                                <p><?php echo $article['content']; ?></p>
+                                <div class="text-muted mt-3">
+                                    Létrehozva: <?php echo date('Y.m.d', strtotime($article['creation'])); ?>
+                                </div>
+                            </div>
+                        <?php endif;
+                    } else {
+                        if (!empty($articles)): 
+                            $article = $articles[0]; ?>
+                            <div class="article-card">
+                                <?php if(!empty($article['img'])): ?>
+                                    <img src="uploads/<?php echo htmlspecialchars($article['img']); ?>" class="article-image" alt="<?php echo htmlspecialchars($article['nav_name']); ?>">
+                                <?php endif; ?>
+                                <h2><?php echo htmlspecialchars($article['nav_name']); ?></h2>
+                                <p><?php echo $article['content']; ?></p>
+                                <div class="text-muted mt-3">
+                                    Létrehozva: <?php echo date('Y.m.d', strtotime($article['creation'])); ?>
+                                </div>
+                            </div>
+                        <?php endif;
+                    }
+                    ?>
+                </div>
 
+                <!-- Jobb oldali sidebar -->
+                <div class="sidebar">
+                    <div class="menu">
+                        <h5>Legújabb cikkek</h5>
+                        <ul>
+                            <?php foreach($newest_articles as $news): ?>
+                                <li>
+                                    <a href="?alias=<?php echo htmlspecialchars($news['alias']); ?>" class="<?php echo ($alias === $news['alias']) ? 'active-article' : ''; ?>">
+                                        <?php echo htmlspecialchars($news['nav_name']); ?>
+                                    </a>
+                                </li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
         </div>
-    </div>
-    
+    </main>
         
 
     <footer>

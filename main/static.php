@@ -11,20 +11,18 @@
     <?php include '../main/nav.php'; ?>
     
     <h2>Szarvasmarhák Elhullási Diagram</h2>
-   
-    <div class="chart-container">
-        <canvas id="deathChart"></canvas>
-    </div>
-
+    <main>
+        <div class="chart-container">
+            <canvas id="deathChart"></canvas>
+        </div>
+    </main>
     <script>
-        // Fetch death data from PHP
         fetch('get_deaths.php')
             .then(response => response.json())
             .then(data => {
                 const labels = data.map(item => item.month);
                 const counts = data.map(item => item.count);
 
-                // Create chart
                 new Chart(document.getElementById('deathChart'), {
                     type: 'bar',
                     data: {

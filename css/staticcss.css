@@ -11,8 +11,3 @@ canvas {
     width: 100% !important; 
     height: 500px !important;
 }
-footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-}
