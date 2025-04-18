@@ -126,8 +126,9 @@ $output = $output ?? "";
 <?php 
     $page_title = "Cikk szerkesztése"; 
     $custom_css = ["../css/pages/edit.css"]; 
-    $custom_js = []; 
-    $additional_head = "<script src='https://cdn.ckeditor.com/4.20.0/standard/ckeditor.js'></script>";
+    $custom_js = ["https://cdn.ckeditor.com/4.20.0/standard/ckeditor.js"
+    ]; 
+
     include '../main/head.php'; 
 ?>
 <body>
@@ -142,7 +143,9 @@ $output = $output ?? "";
         <form method="post" action="" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="alias">Alias:*</label>
-                <input type="text" id="alias" name="alias" required pattern="^[a-z-_]+$" value="<?= $alias ?>">
+                <input type="text" id="alias" name="alias" required pattern="^[a-z_\-]+$" value="<?= $alias ?>">
+
+
             </div>
 
             <div class="form-group">
@@ -211,14 +214,19 @@ $output = $output ?? "";
         </form>
     </section>
 </div>
+<script src="https://cdn.ckeditor.com/4.20.0/standard/ckeditor.js"></script>
 
 <script>
-    function previewImage(input) {
+  function previewImage(input) {
         const fileName = input.files.length > 0 ? input.files[0].name : "Nincs kiválasztott kép";
         document.getElementById('file-name').textContent = fileName;
     }
+
+    // CKEditor példányosítása a tartalomhoz és leíráshoz
     CKEDITOR.replace('content');
+    CKEDITOR.replace('description'); 
 </script>
+
 
 </body>
 </html>

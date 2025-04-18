@@ -141,11 +141,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
 <?php 
     $page_title = "Új cikk"; 
     $custom_css = ["../css/pages/newArticle.css"]; 
-    $custom_js = []; 
-    $additional_head = "
-        <script src='https://cdn.ckeditor.com/4.20.0/standard/ckeditor.js'></script>
-        <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
-    "; 
+    $custom_js = ["https://cdn.jsdelivr.net/npm/sweetalert2@11"]; 
+
     include '../main/head.php'; 
 ?>
 <body>
@@ -237,6 +234,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
         unset($_SESSION['swal_message']);
     }
     ?>
+<script src="https://cdn.ckeditor.com/4.20.0/standard/ckeditor.js"></script>
 
 <script>
     // Frissíti a fájlnév megjelenítését, amikor egy fájl ki van választva
