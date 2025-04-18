@@ -3,51 +3,46 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Output</title>
-<link type="text/css" rel="stylesheet" href="../fpdf.css">
+<link type="text/css" rel="stylesheet" href="fpdf.css">
 </head>
 <body>
 <h1>Output</h1>
 <code><b>string</b> Output([<b>string</b> dest [, <b>string</b> name [, <b>boolean</b> isUTF8]]])</code>
-<h2>Description</h2>
-Send the document to a given destination: browser, file or string. In the case of a browser, the
-PDF viewer may be used or a download may be forced.
+<h2>Leírás</h2>
+Elküldi a dokumentumot a megadottak szerinti végcélba: böngészőbe, fájlba vagy srtingbe. A böngészőbe
+való küldés esetén a beépülő modul kerül használatra vagy a letöltés ("Mentés másként" ablak) lesz
+kikényszerítve.
 <br>
-The method first calls Close() if necessary to terminate the document.
-<h2>Parameters</h2>
+A függvény először a Close() -t hívja meg és ha szükséges lezárja a dokumentumot.
+<h2>Paraméterek</h2>
 <dl class="param">
 <dt><code>dest</code></dt>
 <dd>
-Destination where to send the document. It can be one of the following:
+Végcél ahová a dokumentum elküldésre kerül. Ezen értékek egyikét veheti fel:
 <ul>
-<li><code>I</code>: send the file inline to the browser. The PDF viewer is used if available.</li>
-<li><code>D</code>: send to the browser and force a file download with the name given by <code>name</code>.</li>
-<li><code>F</code>: save to a local file with the name given by <code>name</code> (may include a path).</li>
-<li><code>S</code>: return the document as a string.</li>
+<li><code>I</code>: egyenesen a böngészőbe küldi a dokumentumot. Beépülő modul lesz használva,
+amennyiben elérhető.</li>
+<li><code>D</code>: elküldi a dokumentumot a böngészőnek és kikényszeríti a letöltést. A letöltött fájlnevet
+a <code>name</code> adja meg.</li>
+<li><code>F</code>: elmenti a dokumentumot egy helyi fájlba a <code>name</code> névvel (tartalmazhat
+még elérési utat is a fájlnéven kívül).</li>
+<li><code>S</code>: a dokumentumot egy stingben adja vissza.</li>
 </ul>
-The default value is <code>I</code>.
+Alapértéke <code>I</code>.
 </dd>
 <dt><code>name</code></dt>
 <dd>
-The name of the file. It is ignored in case of destination <code>S</code>.<br>
-The default value is <code>doc.pdf</code>.
+A fájl neve. Átugrásra kerül, amennyiben a célállomás <code>S</code>.<br>
+Alapértéke <code>doc.pdf</code>.
 </dd>
 <dt><code>isUTF8</code></dt>
 <dd>
-Indicates if <code>name</code> is encoded in ISO-8859-1 (<code>false</code>) or UTF-8 (<code>true</code>).
-Only used for destinations <code>I</code> and <code>D</code>.<br>
-The default value is <code>false</code>.
+Beállítható, ha a név ISO-8859-1 (<code>false</code>) vagy UTF-8 (<code>true</code>) enkódolású.
+Kizárólag <code>I</code> és <code>D</code> célállomás esetén használható.<br>
+Alapértéke <code>false</code>.
 </dd>
 </dl>
-<h2>Example</h2>
-Save the document to a local directory:
-<div class="doc-source">
-<pre><code>$pdf-&gt;Output('F', 'reports/report.pdf');</code></pre>
-</div>
-Force a download:
-<div class="doc-source">
-<pre><code>$pdf-&gt;Output('D', 'report.pdf');</code></pre>
-</div>
-<h2>See also</h2>
+<h2>Lásd még</h2>
 <a href="close.htm">Close</a>
 <hr style="margin-top:1.5em">
 <div style="text-align:center"><a href="index.htm">Index</a></div>

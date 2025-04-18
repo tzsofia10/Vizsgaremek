@@ -3,95 +3,96 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Image</title>
-<link type="text/css" rel="stylesheet" href="../fpdf.css">
+<link type="text/css" rel="stylesheet" href="fpdf.css">
 </head>
 <body>
 <h1>Image</h1>
 <code>Image(<b>string</b> file [, <b>float</b> x [, <b>float</b> y [, <b>float</b> w [, <b>float</b> h [, <b>string</b> type [, <b>mixed</b> link]]]]]])</code>
-<h2>Description</h2>
-Puts an image. The size it will take on the page can be specified in different ways:
+<h2>Leírás</h2>
+Beszúr egy képet. A megjelenítendő mérete különböző módokon adható meg:
 <ul>
-<li>explicit width and height (expressed in user unit or dpi)</li>
-<li>one explicit dimension, the other being calculated automatically in order to keep the original proportions</li>
-<li>no explicit dimension, in which case the image is put at 96 dpi</li>
+<li>meghatározott szélesség és magasság (a felhasználó mértékegységében kifejezve vagy dpi-ben)</li>
+<li>egyik érték megadásával, ilyenkor a másik érték automatikus meghatározásra kerül és az eredeti képarány megmarad</li>
+<li>nincs megadva egyik érték sem, ebben az esetben a kép 96 dpi felbontásban jelenik meg</li>
 </ul>
-Supported formats are JPEG, PNG and GIF. The GD extension is required for GIF.
+Támogatott formátumok: JPEG, PNG és GIF. A GD kiterjesztés szükséges a GIF-hez.
 <br>
 <br>
-For JPEGs, all flavors are allowed:
+A JPEG-nek az összes sajátossága elérhető:
 <ul>
-<li>gray scales</li>
-<li>true colors (24 bits)</li>
-<li>CMYK (32 bits)</li>
+<li>szürkeárnyalatos</li>
+<li>true colors (24 bit)</li>
+<li>CMYK (32 bit)</li>
 </ul>
-For PNGs, are allowed:
+PNG-nél engedélyezett:
 <ul>
-<li>gray scales on at most 8 bits (256 levels)</li>
+<li>szürkeárnyalatos legfeljebb 8 bit</li>
 <li>indexed colors</li>
-<li>true colors (24 bits)</li>
+<li>true colors (24 bit)</li>
 </ul>
-For GIFs: in case of an animated GIF, only the first frame is displayed.<br>
+Gifeknél, amennyiben animált gif, csak az első képkocka jelenik meg.<br>
 <br>
-Transparency is supported.<br>
+Átlátszóság (transzparencia) támogatva.<br>
 <br>
-The format can be specified explicitly or inferred from the file extension.<br>
+A formátum megadható egyénileg vagy meghatározásra kerül a kiterjesztésből.<br>
 <br>
-It is possible to put a link on the image.<br>
+Hivatkozás megadása a képre szintén lehetséges.<br>
 <br>
-Remark: if an image is used several times, only one copy is embedded in the file.
-<h2>Parameters</h2>
+Megjegyzés: ha egy kép többször is be van illesztve, csak egy másolata lesz beleágyazva a dokumentumba.
+<h2>Paraméterek</h2>
 <dl class="param">
 <dt><code>file</code></dt>
 <dd>
-Path or URL of the image.
+Elérési út vagy URL a képhez.
 </dd>
 <dt><code>x</code></dt>
 <dd>
-Abscissa of the upper-left corner. If not specified or equal to <code>null</code>, the current abscissa
-is used.
+A bal felső sarok x koordinátája. Ha nincs megadva vagy értéke <code>null</code> -al egyenlő, az aktuális
+x pozíció kerül használatra.
 </dd>
 <dt><code>y</code></dt>
 <dd>
-Ordinate of the upper-left corner. If not specified or equal to <code>null</code>, the current ordinate
-is used; moreover, a page break is triggered first if necessary (in case automatic page breaking is enabled)
-and, after the call, the current ordinate is moved to the bottom of the image.
+A bal felső sarok y koordinátája. Ha nincs megadva vagy értéke <code>null</code> -al egyenlő, az aktuális
+y pozíció kerül használatra. Amennyiben szükséges oldaltörés, akkor bekövetkezik (illetve csak akkor ha az
+automatikus oldaltörés engedélyezve van), majd a függvény hívás után az aktuális y koordináta a kép aljára
+kerül át.
 </dd>
 <dt><code>w</code></dt>
 <dd>
-Width of the image in the page. There are three cases:
+A kép szélessége az oldalon. Három eset lehetséges:
 <ul>
-<li>If the value is positive, it represents the width in user unit</li>
-<li>If the value is negative, the absolute value represents the horizontal resolution in dpi</li>
-<li>If the value is not specified or equal to zero, it is automatically calculated</li>
+<li>Ha az érték pozitív, megadja a szélességet a felhasználó egységében.</li>
+<li>Ha az érték negatív, a tényleges érték a vízszintes felbontásnak megfelelően, dpi-ben kerül felhasználásra.</li>
+<li>Ha nem beállított vagy nullával egyenlő, automatikusan kerül kiszámításra</li>
 </ul>
 </dd>
 <dt><code>h</code></dt>
 <dd>
-Height of the image in the page. There are three cases:
+A kép magassága az oldalon. Három eset lehetséges:
 <ul>
-<li>If the value is positive, it represents the height in user unit</li>
-<li>If the value is negative, the absolute value represents the vertical resolution in dpi</li>
-<li>If the value is not specified or equal to zero, it is automatically calculated</li>
+<li>Ha az érték pozitív, megadja a magasságot a felhasználó egységében.</li>
+<li>Ha az érték negatív, a tényleges érték a függőleges felbontásnak megfelelően, dpi-ben kerül felhasználásra.</li>
+<li>Ha nem beállított vagy nullával egyenlő, automatikusan kerül kiszámításra</li>
 </ul>
 </dd>
 <dt><code>type</code></dt>
 <dd>
-Image format. Possible values are (case insensitive): <code>JPG</code>, <code>JPEG</code>, <code>PNG</code> and <code>GIF</code>.
-If not specified, the type is inferred from the file extension.
+Kép formátum. Lehetséges értékek (nem betűméret érzékeny): <code>JPG</code>, <code>JPEG</code>, <code>PNG</code> és <code>GIF</code>.
+Ha nincs megadva, a kiterjesztésből kerül meghatározásra.
 </dd>
 <dt><code>link</code></dt>
 <dd>
-URL or identifier returned by AddLink().
+URL vagy azonosító, amivel az AddLink() tér vissza.
 </dd>
 </dl>
-<h2>Example</h2>
+<h2>Példa</h2>
 <div class="doc-source">
-<pre><code>// Insert a logo in the top-left corner at 300 dpi
-$pdf-&gt;Image('logo.png', 10, 10, -300);
-// Insert a dynamic image from a URL
-$pdf-&gt;Image('http://chart.googleapis.com/chart?cht=p3&amp;chd=t:60,40&amp;chs=250x100&amp;chl=Hello|World', 60, 30, 90, 0, 'PNG');</code></pre>
+<pre><code>// Beilleszt egy logót a bal felső saroktól 300 dpi-re (vízszintesen)
+$pdf-&gt;Image('logo.png',10,10,-300);
+// Beilleszt egy dinamikus képet egy URL-ből
+$pdf-&gt;Image('http://chart.googleapis.com/chart?cht=p3&amp;chd=t:60,40&amp;chs=250x100&amp;chl=Hello|World',60,30,90,0,'PNG');</code></pre>
 </div>
-<h2>See also</h2>
+<h2>Lásd még</h2>
 <a href="addlink.htm">AddLink</a>
 <hr style="margin-top:1.5em">
 <div style="text-align:center"><a href="index.htm">Index</a></div>
