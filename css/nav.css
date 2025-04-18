@@ -4,15 +4,6 @@ body {
     padding-top: 80px;
 }
 
-main {
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    transform: translateY(0);
-}
-
-main.menu-open {
-    transform: translateY(320px);
-}
-
 nav {
     background-color: #606c38;
     display: grid;
@@ -301,10 +292,6 @@ nav button {
     main {
         transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         will-change: transform;
-    }
-
-    main.menu-open {
-        transform: translateY(320px);
     }
 }
 

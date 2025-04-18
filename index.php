@@ -159,6 +159,7 @@ include 'main/head.php';
                 console.warn("Az audio elem nem található!");
             }
         });
+        
     </script>
 </body>
 </html>
