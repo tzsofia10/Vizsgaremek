@@ -17,7 +17,7 @@ $pdf->Cell(0, 10, 'Szarvasmarha adatok', 0, 1, 'C');
 $pdf->Ln(10);
 
 
-// Ha egy konkrét ID van megadva
+// ha egy konkrét ID van megadva
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     $id = (int)$_GET['id'];
     $sql = "SELECT 
@@ -33,7 +33,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
             LEFT JOIN colors ON cows.color_id = colors.id
             WHERE cows.id = $id";
 } else {
-    // Szűrés: all, alive, dead
+    // szűrés
     $filter = $_GET['filter'] ?? 'all';
     if ($filter === 'alive') {
         $where = "WHERE cows.death_date IS NULL";
@@ -64,7 +64,7 @@ if ($result->num_rows === 0) {
     die("Nem található adat.");
 }
 
-// Több adat esetén mindegyiket belerakjuk
+// több adat esetén mindegyiket belerakjuk
 while ($row = $result->fetch_assoc()) {
     $gender_raw = $row['gender'] == 1 ? "Hím" : "Nőstény";
     $gender = $gender_raw;
@@ -94,10 +94,10 @@ while ($row = $result->fetch_assoc()) {
         $pdf->Cell(100, 10, $deathdate, 0, 1);
     }
 
-    $pdf->Ln(10); // Szóköz a tehenek között
+    $pdf->Ln(10); // szóköz a tehenek között
 }
 
-// Dinamikus fájlnév a szűrő alapján
+// dinamikus fájlnév a szűrő alapján
 $filename = 'szarvasmarha_lista' . ($filter ?? '_egyedi') . '.pdf';
 $pdf->Output('D', $filename);
 exit();
