@@ -92,26 +92,6 @@ $dbconn->close();
     include '../main/head.php'; 
 ?>
 
-<style>
-.error {
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    width: 320px;
-    padding: 12px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: start;
-    background: #EF665B;
-    border-radius: 8px;
-    box-shadow: 0px 0px 5px -3px #111;
-    margin: 10px;
-    position: fixed;
-    left: 20px;
-    top: 200px;
-    z-index: 1000;
-}
-
-</style>
 
 <?php include '../main/head.php'; ?>
 

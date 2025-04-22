@@ -6,14 +6,16 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
 }
 
 require '../connect.php';
-require 'pdf/fpdf.php';
+require 'pdf/tfpdf.php';
 
-$pdf = new FPDF();
+
+$pdf = new tFPDF();
 $pdf->AddPage();
-$pdf->SetFont('Arial', 'B', 16);
+$pdf->AddFont('DejaVu', '', 'DejaVuSansCondensed.ttf', true);
+$pdf->SetFont('DejaVu', '', 12);
 $pdf->Cell(0, 10, 'Szarvasmarha adatok', 0, 1, 'C');
 $pdf->Ln(10);
-$pdf->SetFont('Arial', '', 12);
+
 
 // Ha egy konkrét ID van megadva
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
@@ -65,21 +67,25 @@ if ($result->num_rows === 0) {
 // Több adat esetén mindegyiket belerakjuk
 while ($row = $result->fetch_assoc()) {
     $gender_raw = $row['gender'] == 1 ? "Hím" : "Nőstény";
-    $gender = utf8_decode($gender_raw);
+    $gender = $gender_raw;
     
     $birthdate = $row['birthdate'] ?? 'N/A';
     $deathdate = $row['death_date'] ?? 'Nincs adat';
     $color = $row['color'] ?? 'Nincs adat';
 
-    $pdf->Cell(50, 10, utf8_decode('Fülszám:'), 0, 0);
-    $pdf->Cell(100, 10, utf8_decode($row['ear_tag']), 0, 1);
+    $pdf->Cell(50, 10, 'Fülszám:', 0, 0);
+    $pdf->Cell(100, 10, $row['ear_tag'], 0, 1);
+
     $pdf->Cell(50, 10, 'Nem:', 0, 0);
     $pdf->Cell(100, 10, $gender, 0, 1);
-    $pdf->Cell(50, 10, utf8_decode('Anya fülszám:'), 0, 0);
+
+    $pdf->Cell(50, 10, 'Anya fülszám:', 0, 0);
     $pdf->Cell(100, 10, $row['mother_ear_tag'], 0, 1);
-    $pdf->Cell(50, 10, utf8_decode('Szín:'), 0, 0);
+
+    $pdf->Cell(50, 10, 'Szín:', 0, 0);
     $pdf->Cell(100, 10, $color, 0, 1);
-    $pdf->Cell(50, 10, utf8_decode('Születési dátum:'), 0, 0);
+
+    $pdf->Cell(50, 10, 'Születési dátum:', 0, 0);
     $pdf->Cell(100, 10, $birthdate, 0, 1);
 
     // Csak akkor jelenjen meg, ha nem élő szűrés van
