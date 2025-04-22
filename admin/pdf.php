@@ -90,7 +90,7 @@ while ($row = $result->fetch_assoc()) {
 
     // Csak akkor jelenjen meg, ha nem élő szűrés van
     if (!isset($filter) || $filter !== 'alive') {
-        $pdf->Cell(50, 10, utf8_decode('Elhullás dátuma:'), 0, 0);
+        $pdf->Cell(50, 10, 'Elhullás dátuma:', 0, 0);
         $pdf->Cell(100, 10, $deathdate, 0, 1);
     }
 
