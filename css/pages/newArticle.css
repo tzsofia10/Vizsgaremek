@@ -91,12 +91,13 @@ header h1 {
 }
 
 .actions input[type="submit"] {
-    background-color: #007BFF;
-    color: white;
+    background-color: #DCCCB6;
+    color: black;
 }
 
 .actions input[type="submit"]:hover {
-    background-color: #0056b3;
+    background-color: #a0512db4;
+    color: white;
 }
 
 .actions input[type="reset"] {

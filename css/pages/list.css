@@ -34,8 +34,8 @@ th, td {
 }
 
 th {
-    background-color: #007BFF;
-    color: white;
+    background-color: #DCCCB6;
+    color: black;
     font-weight: 600;
     border: none;
 }
@@ -46,7 +46,7 @@ tr:hover {
 
 td a {
     text-decoration: none;
-    color: #007BFF;
+    color: rgba(0, 0, 0, 0.932);
     font-weight: bold;
 }
 
@@ -62,8 +62,8 @@ h1 {
 #article {
     display: inline-block;
     padding: 10px 20px;
-    background-color: #007BFF;
-    color: white;
+    background-color: #DCCCB6;
+    color: black;
     text-decoration: none;
     border-radius: 4px;
     margin-top: 20px;
@@ -71,7 +71,8 @@ h1 {
 }
 
 #article:hover {
-    background-color: #0056b3;
+    background-color: #a0512db4;
+    color: white;
 }
 
 .page-container {
