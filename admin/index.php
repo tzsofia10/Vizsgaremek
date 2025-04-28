@@ -45,12 +45,12 @@ if (isset($_POST['submit'])) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Panel Login</title>
+    <title>Bejelentkezés</title>
     <link href="../css/adminpanel.css" rel="stylesheet">
 </head>
 
 <body>
-<h1>Login</h1>
+<h1>Bejelentkezés</h1>
 <form method="post" action="">
     <?php if (isset($error)) echo $error; ?>
     <p><label for="email">Email:</label><br>
