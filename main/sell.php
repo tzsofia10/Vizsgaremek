@@ -132,7 +132,11 @@
         cityInput.value = "Egyházasgerge";
         housenumberInput.value = 55;
         phoneInput.value = 10612345678;
-    
+        
+        phoneInput.addEventListener("input", function () {
+        // Csak számokat engedélyez és levágja a felesleget, ha több mint 11 karakter
+        this.value = this.value.replace(/\D/g, '').slice(0, 11);
+        });
 
        A user kizárólag csak számot tudjon beírni a telefonszá mezőbe ezért az értékeket \D = minden olyan karakter, ami nem számjegy (0-9 kivételével minden más karakter).
     g = globális mód, vagyis az összes találatot lecseréli, nemcsak az elsőt.
@@ -226,13 +230,9 @@
         event.preventDefault(); // Megakadályozza az esetleges form submit eseményt
     document.getElementById("checkout-container").style.display = "none";
     });
-    phoneInput.addEventListener("input", function () {
-    // Csak számokat engedélyez és levágja a felesleget, ha több mint 11 karakter
-    this.value = this.value.replace(/\D/g, '').slice(0, 11);
-});
-setTimeout(function() {
-  document.getElementById('confirmation-box').style.display = 'none';
-}, 3000); // Disappears after 3 seconds
+    setTimeout(function() {
+    document.getElementById('confirmation-box').style.display = 'none';
+    }, 3000); // Disappears after 3 seconds
 
 
     </script>

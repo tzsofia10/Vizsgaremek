@@ -5,12 +5,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     async function fetchCows(search = "", page = 1) {
         try {
-            const response = await fetch(`searchcow.php?search=${encodeURIComponent(search)}&page=${page}`);
+            const response = await fetch(`search_cow.php?search=${encodeURIComponent(search)}&page=${page}`);
             if (!response.ok) throw new Error("Hálózati hiba történt!");
 
             const data = await response.json();
-            updateTable(data.cows);
-            updatePagination(data.pagination, search);
+            //updateTable(data.cows);
+            //updatePagination(data.pagination, search);
         } catch (error) {
             console.error("Hiba történt:", error);
         }
@@ -37,18 +37,22 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Keresőmező animálása
-    searchInput.addEventListener("focus", function () {
-        this.classList.add("active");
-    });
-
-    searchInput.addEventListener("blur", function () {
-        this.classList.remove("active");
-    });
-
-    // Keresés indítása input változásakor
-    searchInput.addEventListener("input", function () {
-        fetchCows(this.value);
-    });
+    if (searchInput != null)
+    {
+        searchInput.addEventListener("focus", function () {
+            this.classList.add("active");
+        });
+    
+        searchInput.addEventListener("blur", function () {
+            this.classList.remove("active");
+        });
+    
+        // Keresés indítása input változásakor
+        searchInput.addEventListener("input", function () {
+            fetchCows(this.value);
+        });
+    
+    }
 
     // Alapértelmezett betöltés
     fetchCows();

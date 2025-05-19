@@ -12,8 +12,8 @@
     ?>
 
     <!-- favicon -->
-    <link rel="icon" href="/vizsgaremek/cowPicture/cowfavicon.png" type="image/png">
-    <link rel="shortcut icon" href="/vizsgaremek/cowPicture/cowfavicon.png" type="image/png">
+    <link rel="icon" href="/cowPicture/cowfavicon.png" type="image/png">
+    <link rel="shortcut icon" href="/cowPicture/cowfavicon.png" type="image/png">
 
     
     <!-- alap css fájlok betöltése -->

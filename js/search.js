@@ -183,7 +183,8 @@ function deleteCow(cowId) {
 const debouncedSearch = debounce(myFunction, 300);
 
 // Event listener hozzáadása
-document.getElementById("myInput").addEventListener("input", debouncedSearch);
+let myInput = document.getElementById("myInput");
+if (myInput != null) myInput.addEventListener("input", debouncedSearch);
 // CSS a lapozóhoz
 const style = document.createElement('style');
 style.textContent = `

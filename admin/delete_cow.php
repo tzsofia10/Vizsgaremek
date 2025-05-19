@@ -25,19 +25,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'DELETE' || isset($_GET['id'])) {
     $stmt_delete = $dbconn->prepare($sql_delete);
     $stmt_delete->bind_param('i', $id);
     
-    if ($stmt_delete->execute()) {
-        // Ha van kép és nem az alapértelmezett, akkor töröljük
-        if ($cow && $cow['picture'] && $cow['picture'] != '../cowPicture/nopicture.jpg') {
-            if (file_exists($cow['picture'])) {
-                unlink($cow['picture']);
+    try {
+        if ($stmt_delete->execute()) {
+            // Ha van kép és nem az alapértelmezett, akkor töröljük
+            if ($cow && $cow['picture'] && $cow['picture'] != '../cowPicture/nopicture.jpg') {
+                if (file_exists($cow['picture'])) {
+                    unlink($cow['picture']);
+                }
             }
+            
+            header('Content-Type: application/json');
+            echo json_encode(['success' => true, 'message' => 'Sikeres törlés']);
         }
-        
+    } catch (Exception $e)  {
         header('Content-Type: application/json');
-        echo json_encode(['success' => true, 'message' => 'Sikeres törlés']);
-    } else {
-        header('Content-Type: application/json');
-        echo json_encode(['success' => false, 'message' => 'Hiba történt a törlés során']);
+        echo json_encode(['success' => false, 'message' => 'Eladó szarvasmarhát nem lehet törölni!']);
     }
     
     $stmt_select->close();

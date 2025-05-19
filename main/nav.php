@@ -1,7 +1,7 @@
 <nav>
     <div class="logo-container">
         <?php
-            echo '<img src="/vizsgaremek/cowPicture/logo.png" alt="Logo">';
+            echo '<img src="/cowPicture/logo.png" alt="Logo">';
         ?>
     </div>
     <div class="nav-links">
@@ -9,9 +9,9 @@
             <?php
             if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === false) {
                 // Ha nincs bejelentkezve, jelenjenek meg a linkek
-                echo '<a href="/vizsgaremek/index.php">Főoldal</a>';
-                echo '<a href="/vizsgaremek/main/static.php">Statisztikák</a>';
-                echo '<a href="/vizsgaremek/main/sell.php">Foglalás</a>';
+                echo '<a href="/index.php">Főoldal</a>';
+                echo '<a href="/main/static.php">Statisztikák</a>';
+                echo '<a href="/main/sell.php">Foglalás</a>';
             } else {
                 echo '<a href="main.php">Főoldal</a>';
                 echo '<a href="list.php">Cikkek</a>';
@@ -28,7 +28,7 @@
                 echo '<button><a href="logout.php">Kijelentkezés</a></button>';
             } else {
                 // Ha nincs bejelentkezve, jelenjen meg a "Bejelentkezés" gomb
-                echo '<button><a href="/vizsgaremek/admin/index.php">Bejelentkezés</a>
+                echo '<button><a href="/admin/index.php">Bejelentkezés</a>
                     <div class="arrow-wrapper">
                         <div class="arrow"></div>
                     </div>
