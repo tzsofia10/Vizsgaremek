@@ -71,7 +71,6 @@ function myFunction() {
             data.cows.forEach(cow => {
                 const row = document.createElement("tr");
                 row.innerHTML = `
-                <td>${cow.cow_id}</td>
                 <td><img src="${cow.picture}" alt="Tehén Kép"></td>
                 <td>${cow.ear_tag}</td>
                 <td>${cow.gender}</td>

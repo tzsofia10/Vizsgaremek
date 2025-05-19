@@ -23,7 +23,7 @@ if (!$result) {
 <html lang="hu">
 <?php 
     $page_title = "Cikkek"; 
-    $custom_css = ["../css/pages/editcow.css", "../css/pages/list.css", "../css/.css", "../css/footer.css"]; 
+    $custom_css = ["../css/pages/editcow.css", "../css/pages/list.css", "../css/footer.css"]; 
     $custom_js = ["../js/translate2.js" ]; 
     $additional_head = "<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>";
     include '../main/head.php'; 
