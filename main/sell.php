@@ -113,6 +113,7 @@
 </div>
 
     <script>
+       
     document.addEventListener("DOMContentLoaded", function () {
         const purchaseButtons = document.querySelectorAll(".purchase-button");
         const checkoutBtn = document.querySelector(".checkout-btn");
@@ -124,7 +125,7 @@
         const phoneInput = document.getElementById("phone");
         const saleIdInput = document.getElementById("sale-id");
         console.log("city:",cityInput,"telefon:", phoneInput)
-        
+          /* 
         //kitöltés teszt adatokkal
         nameInput.value = "Kovács István";
         addressInput.value = "Rákóczi út";
@@ -133,7 +134,7 @@
         phoneInput.value = 10612345678;
     
 
-        /* A user kizárólag csak számot tudjon beírni a telefonszá mezőbe ezért az értékeket \D = minden olyan karakter, ami nem számjegy (0-9 kivételével minden más karakter).
+       A user kizárólag csak számot tudjon beírni a telefonszá mezőbe ezért az értékeket \D = minden olyan karakter, ami nem számjegy (0-9 kivételével minden más karakter).
     g = globális mód, vagyis az összes találatot lecseréli, nemcsak az elsőt.
     '' (üres string) – A talált nem számjegy karaktereket törli. 
     phoneInput.addEventListener("input", function () {

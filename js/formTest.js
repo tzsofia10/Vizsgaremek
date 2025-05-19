@@ -5,6 +5,7 @@ window.onload = function() {
 }
 
 // Az űrlap mezőinek automatikus kitöltésére szolgáló függvény
+/*
 function autoFillForm() {
     // Mintául szolgáló adatok (ezeket tetszés szerint módosíthatod)
     const sampleData = {
@@ -27,4 +28,4 @@ function autoFillForm() {
     if (sampleData.picture) {
         document.getElementById('picture').value = sampleData.picture; 
     }
-}
+}*/
